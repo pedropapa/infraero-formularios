@@ -1,0 +1,211 @@
+[#--Contrato: Despacho analise economico financeira--]
+
+[#assign _texto=""  /]
+[#assign _tipo_autoridade=""  /]
+[#assign _genero=""  /]
+[#assign _vocativo=""  /]
+[#assign _enderecamento_dest=""  /]
+[#assign _nome_dest=""  /]
+[#assign _cargo_dest=""  /]
+[#assign _orgao_dest=""  /]
+[#assign _endereco_dest=""  /]
+[#assign _tamanho_letra=""  /]
+[#assign _autoridade={}  /]
+[#assign _tipo="DESPACHO"  /]
+[#assign _tiposigilo="" /]
+[#assign _fecho=""  /]
+
+[#if _autoridade?size > 0]
+    [#assign _vocativo=_autoridade.vocativo /]
+    [#assign _enderecamento_dest=_autoridade.enderecamento /]
+    [#assign _nome_dest=_autoridade.nome /]
+    [#assign _cargo_dest=_autoridade.cargo /]
+    [#assign _orgao_dest=_autoridade.orgao /]
+    [#assign _endereco_dest=_autoridade.endereco /]
+        <br/><br/>
+[/#if]
+
+[@entrevista]
+    [@grupo]
+        [@texto titulo="Assunto" var="texto_assunto" largura=50 /]
+        [@texto titulo="Referência" var="texto_ref" largura=50 /]
+    [/@grupo]
+
+
+
+
+
+    [@grupo titulo="Dados do destinatário" esconder=(_enderecamento_dest!="" && _nome_dest!="" && _cargo_dest!="" && _orgao_dest!="" && _endereco_dest!="")]
+                <!-- Tratamento -->
+        [#if _enderecamento_dest != ""]
+            [@oculto var="enderecamento_dest" valor=_enderecamento_dest /]
+        [#else]
+            [#if tratamento??]
+                [@grupo]
+                    [@checkbox titulo="Especificar manualmente a forma de endereçamento" var="especificarEnderecamento" reler=true /]
+                [/@grupo]
+            [/#if]
+            [#if !tratamento?? || (especificarEnderecamento?? && especificarEnderecamento == 'Sim')]
+                [@grupo]
+                    [@texto titulo="Forma de endereçamento" var="enderecamento_dest" largura="45" /]
+                [/@grupo]
+            [#else]
+                [@oculto var="enderecamento_dest" valor="${(tratamento.formaDeEnderecamento)!}" /]
+            [/#if]
+        [/#if]
+
+    [/@grupo]
+    [@grupo]
+        [@grupo]
+            [@texto titulo="Subitem do edital" var="subitem_edital" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Numero do pregao" var="nu_pregao" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Nome da empresa" var="nome_empresa" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="CNPJ" var="cnpj" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Subitem SICAF" var="subitem_sicaf" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Liquidez geral" var="liquidez_geral" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Solvencia geral" var="solvencia_geral" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Liquidez corrente" var="liquidez_corrente" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Item da nota" var="item_nota" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Nota" var="nota" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Subitem do ata convocatorio" var="subitem_ato_convocatorio" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Itens do documento" var="itens_documentos" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Subitem do documento" var="subitem_documento" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Nota do subitem" var="nota_subitem" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Valor arrematado" var="valor_arrematado" largura="50" /]
+        [/@grupo]
+    [/@grupo]
+
+    [@grupo titulo="Outras informacoes necessarias"]
+        [@grupo]
+            [@editor titulo="" var="outras_informacoes_necessarias" /]
+        [/@grupo]
+    [/@grupo]
+    [#if _tamanho_letra != ""]
+        [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
+    [#else]
+        [@selecao titulo="Tamanho da letra" var="tamanhoLetra" opcoes="Normal;Pequeno;Grande" /]
+    [/#if]
+[/@entrevista]
+
+[@documento margemDireita="3cm"]
+    [#if tamanhoLetra! == "Normal"]
+        [#assign tl = "10pt" /]
+    [#elseif tamanhoLetra! == "Pequeno"]
+        [#assign tl = "9pt" /]
+    [#elseif tamanhoLetra! == "Grande"]
+        [#assign tl = "13pt" /]
+    [#else]
+        [#assign tl = "11pt"]
+    [/#if]
+
+    [#if !(func.contains(fecho!'','.')) && !(func.contains(fecho!'',','))]
+        [#assign virgula ="," /]
+    [/#if]
+
+
+    [#if _tiposigilo! == "1"]
+        [#assign _reservado = true /]
+    [#elseif _tiposigilo! == "2"]
+        [#assign _sigiloso = true /]
+    [#elseif _tiposigilo! == "3"]
+        [#assign _secreto = true /]
+    [/#if]
+
+    [@estiloBrasaoEsquerdaOficio tipo=_tipo tamanhoLetra=tl formatarOrgao=true]
+             <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+                 <tr>
+                     <td align="left">
+                         <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0">
+                             <tr><td>[@letra tamanho=tl]<p>${enderecamento_dest!}</p>[/@letra]</td></tr>
+                             <tr><td>[@letra tamanho=tl]<p>${nome_dest!}</p>[/@letra]</td></tr>
+                            [#if cargo_dest??]
+                                <tr><td>[@letra tamanho=tl]<p>${cargo_dest!}</p>[/@letra]</td></tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if orgao_dest??]
+                             <tr><td>[@letra tamanho=tl]<p>${orgao_dest!}</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                            [#if endereco_dest??]
+                                <tr><td>[@letra tamanho=tl]<p>[@fixcrlf var=endereco_dest! /]</p>[/@letra]</td></tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if (doc.exClassificacao.descrClassificacao)??]
+                             <tr><td>[@letra tamanho=tl]<p><br/>Assunto: ${(doc.exClassificacao.descrClassificacao)!}</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                         </table>
+                     </td>
+                 </tr>
+             </table>
+        [@mioloDJE]
+                <p align="left">
+                    <br>
+                    Assunto: ${texto_assunto!}
+                    [#if texto_ref??]
+                        <br/>Ref.: ${texto_ref!}
+                    [/#if]
+
+                </p>
+                <p> <br> </p>
+                <div style="font-family: Times New Roman; font-size: 10pt;">
+                [@corpoBIE]
+
+                    <!-- INICIO - Tagmeta -->
+                    <!-- Inicio - Corpo do conteudo -->
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Em atendimento ao subitem ${subitem_edital!} do Edital do Pregão Eletrônico N. ${nu_pregao!}, para subsidiar a análise financeira e econômica da arrematante ${nome_empresa!} foram verificados os documentos acima referenciados. Assim, registramos as informações elencadas abaixo: </p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Para atendimento do subitem ${subitem_sicaf!} foi realizada consulta ao SICAF, e constatamos que os índices de Liquidez Geral (LG= ${liquidez_geral!}), Solvência Geral (SG= ${solvencia_geral!}) e Liquidez Corrente (LC= ${liquidez_corrente!}) da empresa são maiores que 1 (um inteiro), atendendo assim ao previsto no item ${item_nota!} da NOTA ${nota!} do subitem ${subitem_ato_convocatorio!} do Ato Convocatório.<p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Para atendimento dos itens ${itens_documentos!}, do subitem ${subitem_documento!} foram apresentados os documentos pertinentes, os quais, conforme demonstrado na Memória de Cálculo anexa, comprovam o exigido na NOTA ${nota_subitem!} do mesmo subitem.</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Quanto à planilha de custos e formação de preços, no valor global de R$ ${valor_arrematado!} registramos que também atende ao previsto no Edital da licitação em referência.</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Por todo o exposto, considerando as atribuições desta equipe de apoio, decidimos pela HABILITAÇÃO a empresa ${nome_empresa!}, especificamente quanto ao cumprimento dos subitens acima mencionados. </p>
+
+                    <p style="text-align: justify;">6. ${outras_informacoes_necessarias}</p>
+
+
+                    <!-- Fim - Corpo do conteudo -->
+
+                    <!-- FIM - Tagmeta -->
+
+
+                [/@corpoBIE]
+                [#if fecho??]<p style="font-size: ${tl}; TEXT-INDENT: 2.5cm">[@fechoBIE]${fecho!}${virgula!}[/@fechoBIE][/#if]</p>
+
+                </div>
+        [/@mioloDJE]
+    [/@estiloBrasaoEsquerdaOficio]
+    [#if _tiposigilo! == "2"]
+        [@acessoRestrito /]
+    [/#if]
+[/@documento]
