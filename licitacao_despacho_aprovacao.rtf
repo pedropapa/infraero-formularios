@@ -1,0 +1,194 @@
+
+[#assign _texto=""  /]
+[#assign _tipo_autoridade=""  /]
+[#assign _genero=""  /]
+[#assign _vocativo=""  /]
+[#assign _enderecamento_dest=""  /]
+[#assign _nome_dest=""  /]
+[#assign _cargo_dest=""  /]
+[#assign _orgao_dest=""  /]
+[#assign _endereco_dest=""  /]
+[#assign _tamanho_letra=""  /]
+[#assign _autoridade={}  /]
+[#assign _tipo="DESPACHO"  /]
+[#assign _tiposigilo="" /]
+[#assign _fecho=""  /]
+
+[#if _autoridade?size > 0]
+    [#assign _vocativo=_autoridade.vocativo /]
+    [#assign _enderecamento_dest=_autoridade.enderecamento /]
+    [#assign _nome_dest=_autoridade.nome /]
+    [#assign _cargo_dest=_autoridade.cargo /]
+    [#assign _orgao_dest=_autoridade.orgao /]
+    [#assign _endereco_dest=_autoridade.endereco /]
+        <br/><br/>
+[/#if]
+
+[@entrevista]
+    [@grupo]
+        [@texto titulo="Número pregão eletrônico" var="numero_pregao_eletronico" largura=50 /]
+        [@texto titulo="Referência" var="texto_ref" largura=50 /]
+    [/@grupo]
+
+
+    [@grupo titulo="Dados do destinatário" esconder=(_enderecamento_dest!="" && _nome_dest!="" && _cargo_dest!="" && _orgao_dest!="" && _endereco_dest!="")]
+                <!-- Tratamento -->
+        [#if _enderecamento_dest != ""]
+            [@oculto var="enderecamento_dest" valor=_enderecamento_dest /]
+        [#else]
+            [#if tratamento??]
+                [@grupo]
+                    [@checkbox titulo="Especificar manualmente a forma de endereçamento" var="especificarEnderecamento" reler=true /]
+                [/@grupo]
+            [/#if]
+            [#if !tratamento?? || (especificarEnderecamento?? && especificarEnderecamento == 'Sim')]
+                [@grupo]
+                    [@texto titulo="Forma de endereçamento" var="enderecamento_dest" largura="45" /]
+                [/@grupo]
+            [#else]
+                [@oculto var="enderecamento_dest" valor="${(tratamento.formaDeEnderecamento)!}" /]
+            [/#if]
+        [/#if]
+
+    [/@grupo]
+    [@grupo]
+        [@grupo]
+            [@texto titulo="Objeto instauração" var="objeto_instauracao" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Esclarecimentos solicitados" var="esclarecimento_solicitado" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Número licitação" var="numero_licitacao" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Endereço edital" var="endereco_edital" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Número ato administrativo" var="numero_ato_administrativo" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Data ato administrativo" var="data_ato_administrativo" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Termos" var="termo" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="NI" var="ni" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Data termo NI" var="data_termo_ni" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Citada NI" var="citada_ni" largura="50" /]
+        [/@grupo]
+    [/@grupo]
+
+    [@grupo titulo="Outras informacoes necessarias"]
+        [@grupo]
+            [@editor titulo="" var="outras_informacoes_necessarias" /]
+        [/@grupo]
+    [/@grupo]
+    [#if _tamanho_letra != ""]
+        [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
+    [#else]
+        [@selecao titulo="Tamanho da letra" var="tamanhoLetra" opcoes="Normal;Pequeno;Grande" /]
+    [/#if]
+[/@entrevista]
+
+[@documento margemDireita="3cm"]
+    [#if tamanhoLetra! == "Normal"]
+        [#assign tl = "10pt" /]
+    [#elseif tamanhoLetra! == "Pequeno"]
+        [#assign tl = "9pt" /]
+    [#elseif tamanhoLetra! == "Grande"]
+        [#assign tl = "13pt" /]
+    [#else]
+        [#assign tl = "11pt"]
+    [/#if]
+
+    [#if !(func.contains(fecho!'','.')) && !(func.contains(fecho!'',','))]
+        [#assign virgula ="," /]
+    [/#if]
+
+
+    [#if _tiposigilo! == "1"]
+        [#assign _reservado = true /]
+    [#elseif _tiposigilo! == "2"]
+        [#assign _sigiloso = true /]
+    [#elseif _tiposigilo! == "3"]
+        [#assign _secreto = true /]
+    [/#if]
+
+    [@estiloBrasaoEsquerdaOficio tipo=_tipo tamanhoLetra=tl formatarOrgao=true]
+             <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+                 <tr>
+                     <td align="left">
+                         <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0">
+                             <tr><td>[@letra tamanho=tl]<p>${enderecamento_dest!}</p>[/@letra]</td></tr>
+                             <tr><td>[@letra tamanho=tl]<p>${nome_dest!}</p>[/@letra]</td></tr>
+                            [#if cargo_dest??]
+                                <tr><td>[@letra tamanho=tl]<p>${cargo_dest!}</p>[/@letra]</td></tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if orgao_dest??]
+                             <tr><td>[@letra tamanho=tl]<p>${orgao_dest!}</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                            [#if endereco_dest??]
+                                <tr><td>[@letra tamanho=tl]<p>[@fixcrlf var=endereco_dest! /]</p>[/@letra]</td></tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if (doc.exClassificacao.descrClassificacao)??]
+                             <tr><td>[@letra tamanho=tl]<p><br/>Assunto: ${(doc.exClassificacao.descrClassificacao)!}</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                         </table>
+                     </td>
+                 </tr>
+             </table>
+        [@mioloDJE]
+                <p align="left">
+                    <br>
+                    Assunto: Pregão Eletrônico nº ${numero_pregao_eletronico!} - Aprovação da minuta do Edital
+                    [#if texto_ref??]
+                        <br/>Ref.: ${texto_ref!}
+                    [/#if]
+
+                </p>
+                <p> <br> </p>
+                <div style="font-family: Times New Roman; font-size: 10pt;">
+                [@corpoBIE]
+                    
+                    <!-- INICIO - Tagmeta -->
+                    <!-- Inicio - Corpo do conteudo -->
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Trata-se de solicitação para instauração de que tem por objeto a “${objeto_instauracao!}”.</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cumpre-nos registrar que coube a Gerência de Licitações, por intermédio da Coordenação de Licitação de Serviços em Geral e de Registro de Preços/LALI-3, atuar no sentido restrito da instauração do procedimento licitatório, de acordo com o arcabouço normativo da INFRAERO, especialmente o RLCI e o Capítulo II da NI 6.01/F (LCT), de 16/05/2016, dentre os quais a elaboração da minuta do edital, na qual está refletida a utilização dos aplicativos legais e normativos atinentes ao tema, cabendo à área requisitante a responsabilidade pelas informações técnicas, financeiras e orçamentárias inseridas no Edital, pelas justificativas de sua aplicabilidade, as quais insertas no dossiê do processo, bem como pela responsabilidade de pareceres futuros em função de eventuais petições atinentes as exigências formuladas.<p>
+                    
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No que tange a análise prévia realizada por esta área de licitações, a área requisitante apresentou os esclarecimentos solicitados em ${esclarecimento_solicitado!}</p>
+                    
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O Edital utilizado está disponível na rede no seguinte endereço: ${endereco_edital!}, com as adaptações/atualizações necessárias.</p>
+                     
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O Ato Administrativo n. ${numero_ato_administrativo!}, de ${data_ato_administrativo!}, que nomeia o Pregoeiro e sua Equipe de Apoio, encontra-se apenso aos autos.</p>
+                      
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">6. ${outras_informacoes_necessarias!}</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">7.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Assim, nos termos d(o) (a) ${termo!} da NI ${ni!}, de ${data_termo_ni!}, encaminhamos o presente procedimento licitatório à essa área Jurídica, para proceder ao exame, aprovação e rubrica na minuta do Edital e seus anexos, se for o caso, conforme dispõe o ${citada_ni!} da citada NI.</p>
+                    
+                    
+                    <!-- Fim - Corpo do conteudo -->
+                    
+                    <!-- FIM - Tagmeta -->
+
+
+                [/@corpoBIE]
+                [#if fecho??]<p style="font-size: ${tl}; TEXT-INDENT: 2.5cm">[@fechoBIE]${fecho!}${virgula!}[/@fechoBIE][/#if]</p>
+
+                </div>
+        [/@mioloDJE]
+    [/@estiloBrasaoEsquerdaOficio]
+    [#if _tiposigilo! == "2"]
+        [@acessoRestrito /]
+    [/#if]
+[/@documento]
