@@ -1,0 +1,283 @@
+
+[#assign _texto=""  /]
+[#assign _tipo_autoridade=""  /]
+[#assign _genero=""  /]
+[#assign _vocativo=""  /]
+[#assign _enderecamento_dest=""  /]
+[#assign _nome_dest=""  /]
+[#assign _cargo_dest=""  /]
+[#assign _orgao_dest=""  /]
+[#assign _endereco_dest=""  /]
+[#assign _tamanho_letra=""  /]
+[#assign _autoridade={}  /]
+[#assign _tipo="DESPACHO"  /]
+[#assign _tiposigilo="" /]
+[#assign _fecho=""  /]
+
+[#if _autoridade?size > 0]
+    [#assign _vocativo=_autoridade.vocativo /]
+    [#assign _enderecamento_dest=_autoridade.enderecamento /]
+    [#assign _nome_dest=_autoridade.nome /]
+    [#assign _cargo_dest=_autoridade.cargo /]
+    [#assign _orgao_dest=_autoridade.orgao /]
+    [#assign _endereco_dest=_autoridade.endereco /]
+        <br/><br/>
+[/#if]
+
+[@entrevista]
+    [@grupo]
+        [@texto titulo="Assunto" var="texto_assunto" largura=50 /]
+        [@texto titulo="Referência" var="texto_ref" largura=50 /]
+    [/@grupo]
+    [@grupo]
+        [@grupo]
+            [@texto titulo="Destinatario" var="destinatario" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Objeto da contratação" var="objeto_contratacao" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Número do TC atual" var="nu_tc_atual" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Item da NI" var="item_ni" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="NI" var="ni" largura="50" /]
+        [/@grupo]
+        [@grupo titulo="Informações complementares"]
+            [@grupo]
+                [@texto titulo="Área requisitante" var="area_requisitante" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Responsável pela demanda" var="responsavel_demanda" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Email" var="email" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Telefone" var="telefone" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Justificativa da necessidade de contratação do serviço" var="justificativa_necessidade" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Quantidade de serviço a ser contratada (escopo)" var="qtd_servicos" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Conta Orçamentária" var="conta_orcamentaria" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Previsão de data em que deve ser iniciada a prestação dos serviços" var="previsao_data" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Indicação do membro que irá compor a equipe de planejamento" var="indicacao_membro" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Nome Elaborador da Demanda" var="nome_elaborador" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Cargo Elaborador da Demanda" var="cargo_elaborador" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Função Elaborador da Demanda" var="funcao_elaborador" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Matrícula Elaborador da Demanda" var="matricula_elaborador" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Nome Validador da Demanda" var="nome_validador" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Cargo Validador da Demanda" var="cargo_validador" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Função Validador da Demanda" var="funcao_validador" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Matrícula Validador da Demanda" var="matricula_validador" largura="50" /]
+            [/@grupo]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Item da NI 2" var="item_ni_2" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="NI 2" var="ni_2" largura="50" /]
+        [/@grupo]
+    [/@grupo]
+
+    [@grupo titulo="Outras informacoes necessarias"]
+        [@grupo]
+            [@editor titulo="" var="outras_informacoes_necessarias" /]
+        [/@grupo]
+    [/@grupo]
+    [#if _tamanho_letra != ""]
+        [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
+    [#else]
+        [@selecao titulo="Tamanho da letra" var="tamanhoLetra" opcoes="Normal;Pequeno;Grande" /]
+    [/#if]
+[/@entrevista]
+
+[@documento margemDireita="3cm"]
+    [#if tamanhoLetra! == "Normal"]
+        [#assign tl = "10pt" /]
+    [#elseif tamanhoLetra! == "Pequeno"]
+        [#assign tl = "9pt" /]
+    [#elseif tamanhoLetra! == "Grande"]
+        [#assign tl = "13pt" /]
+    [#else]
+        [#assign tl = "11pt"]
+    [/#if]
+
+    [#if !(func.contains(fecho!'','.')) && !(func.contains(fecho!'',','))]
+        [#assign virgula ="," /]
+    [/#if]
+
+
+    [#if _tiposigilo! == "1"]
+        [#assign _reservado = true /]
+    [#elseif _tiposigilo! == "2"]
+        [#assign _sigiloso = true /]
+    [#elseif _tiposigilo! == "3"]
+        [#assign _secreto = true /]
+    [/#if]
+
+    [@estiloBrasaoEsquerdaOficio tipo=_tipo tamanhoLetra=tl formatarOrgao=true]
+             <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+                 <tr>
+                     <td align="left">
+                         <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0">
+                             <tr><td>[@letra tamanho=tl]<p>Senhor ${destinatario!}</p>[/@letra]</td></tr>
+                            [#if cargo_dest??]
+                                <tr><td>[@letra tamanho=tl]<p>${cargo_dest!}</p>[/@letra]</td></tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if orgao_dest??]
+                             <tr><td>[@letra tamanho=tl]<p>${orgao_dest!}</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                            [#if endereco_dest??]
+                                <tr><td>[@letra tamanho=tl]<p>[@fixcrlf var=endereco_dest! /]</p>[/@letra]</td></tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if (doc.exClassificacao.descrClassificacao)??]
+                             <tr><td>[@letra tamanho=tl]<p><br/>Assunto: ${(doc.exClassificacao.descrClassificacao)!}</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                         </table>
+                     </td>
+                 </tr>
+             </table>
+        [@mioloDJE]
+                <p align="left">
+                    <br>
+                    Assunto: Planejamento dos serviços ${objeto_contratacao!}
+                    [#if texto_ref??]
+                        <br/>Ref.: ${texto_ref!}
+                    [/#if]
+
+                </p>
+                <p> <br> </p>
+                <div style="font-family: Times New Roman; font-size: 10pt;">
+                [@corpoBIE]
+
+                    <!-- INICIO - Tagmeta -->
+                    <!-- Inicio - Corpo do conteudo -->
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Solicitamos que seja instaurado planejamento para nova contratação dos serviços em epígrafe, a qual substituirá o contrato n ${nu_tc_atual!}</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nos termos do item ${item_ni!} da NI ${ni!} segue em anexo minuta do Termo de Referência elaborado por essa área para embasar o preenchimento da planilha de custos e formação de preços no sistema corporativo e demais tratativas.<p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Abaixo seguem informações complementares:</p>
+
+				<table  width="100%"  bgcolor="#000000" style="border-spacing: 0.5px;">
+                    <col width="50%"></col>
+                    <col width="50%"></col>
+                    <tbody>
+                    <tr>
+                        <td width="50%" bgcolor="#FFFFFF" align="left" valign="center" style="margin-left:4px; font-size: 10pt; border-width: 1px 0px 0px 1px; border-style: solid">
+                            <p>&nbsp;Área Requisitante</p>
+                            <p>&nbsp;${area_requisitante!}</p>
+                        </td>
+                        <td width="50%" bgcolor="#FFFFFF" align="left" valign="center" style="margin-left:4px; font-size: 10pt; border-width: 1px 1px 0px 0px; border-style: solid"> </td>
+                    </tr>
+                    <tr>
+                        <td width="50%" bgcolor="#FFFFFF" align="left" valign="center" style="margin-left:4px; font-size: 10pt; border-width: 1px 0px 0px 1px; border-style: solid">
+                            <p>&nbsp;Responsável pela Demanda</p>
+                            <p>&nbsp;${responsavel_demanda!}</p>
+                        </td>
+                        <td width="50%" bgcolor="#FFFFFF" align="left" valign="center" style="margin-left:4px; font-size: 10pt; border-width: 1px 1px 0px 0px; border-style: solid"> </td>
+                    </tr>
+                    <tr>
+                        <td width="50%" bgcolor="#FFFFFF" align="left" valign="center" style="margin-left:4px; font-size: 10pt; border-width: 1px 1px 0px 1px; border-style: solid">
+                            <p>&nbsp;Email</p>
+                            <p>&nbsp;${email!}</p>
+                        </td>
+                        <td width="50%" bgcolor="#FFFFFF" align="left" valign="center" style="margin-left:4px; font-size: 10pt; border-width: 1px 1px 0px 0px; border-style: solid">
+                            <p>&nbsp;Telefone</p>
+                            <p>&nbsp;${telefone!}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%" bgcolor="#FFFFFF" align="left" valign="center" style="margin-left:4px; font-size: 10pt; border-width: 1px 0px 0px 1px; border-style: solid">
+                            <p>&nbsp;1. Justificativa da necessidade de contratação do serviço</p>
+                            <p>&nbsp;${justificativa_necessidade!}</p>
+                        </td>
+                        <td width="50%" bgcolor="#FFFFFF" align="left" valign="center" style="margin-left:4px; font-size: 10pt; border-width: 1px 1px 0px 0px; border-style: solid"> </td>
+                    </tr>
+                    <tr>
+                        <td width="50%" bgcolor="#FFFFFF" align="left" valign="center" style="margin-left:4px; font-size: 10pt; border-width: 1px 0px 0px 1px; border-style: solid">
+                            <p>&nbsp;2. Quantidade de serviço a ser contratada (escopo)</p>
+                            <p>&nbsp;${qtd_servicos!}</p>
+                        </td>
+                        <td width="50%" bgcolor="#FFFFFF" align="left" valign="center" style="margin-left:4px; font-size: 10pt; border-width: 1px 1px 0px 0px; border-style: solid"> </td>
+                    </tr>
+                    <tr>
+                        <td width="50%" bgcolor="#FFFFFF" align="left" valign="center" style="margin-left:4px; font-size: 10pt; border-width: 1px 0px 0px 1px; border-style: solid">
+                            <p>&nbsp;3. Conta Orçamentária</p>
+                            <p>&nbsp;${conta_orcamentaria!}</p>
+                        </td>
+                        <td width="50%" bgcolor="#FFFFFF" align="left" valign="center" style="margin-left:4px; font-size: 10pt; border-width: 1px 1px 0px 0px; border-style: solid"> </td>
+                    </tr>
+                    <tr>
+                        <td width="50%" bgcolor="#FFFFFF" align="left" valign="center" style="margin-left:4px; font-size: 10pt; border-width: 1px 0px 0px 1px; border-style: solid">
+                            <p>&nbsp;4. Previsão de data em que deve ser iniciada a prestação dos serviços</p>
+                            <p>&nbsp;${previsao_data!}</p>
+                        </td>
+                        <td width="50%" bgcolor="#FFFFFF" align="left" valign="center" style="margin-left:4px; font-size: 10pt; border-width: 1px 1px 0px 0px; border-style: solid"> </td>
+                    </tr>
+                    <tr>
+                        <td width="50%" bgcolor="#FFFFFF" align="left" valign="center" style="margin-left:4px; font-size: 10pt; border-width: 1px 0px 0px 1px; border-style: solid">
+                            <p>&nbsp;5. Indicação do membro que irá compor a equipe de planejamento</p>
+                            <p>&nbsp;${indicacao_membro!}</p>
+                        </td>
+                        <td width="50%" bgcolor="#FFFFFF" align="left" valign="center" style="margin-left:4px; font-size: 10pt; border-width: 1px 1px 0px 0px; border-style: solid"> </td>
+                    </tr>
+                    <tr>
+                        <td width="50%" bgcolor="#FFFFFF" align="left" valign="center" style="margin-left:4px; font-size: 10pt; border-width: 1px 1px 1px 1px; border-style: solid">&nbsp;teste
+                        </td>
+                        <td width="50%" bgcolor="#FFFFFF" align="left" valign="center" style="margin-left:4px; font-size: 10pt; border-width: 1px 1px 1px 0px; border-style: solid">&nbsp;teste
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Em atenção ao item ${item_ni_2!} da NI ${ni_2!} informamos que a minuta do TR em anexo foi submetida a área de SST, a qual emitiu o parecer anexo.</p>
+
+                    <p style="text-align: justify;">5. ${outras_informacoes_necessarias}</p>
+
+
+                    <!-- Fim - Corpo do conteudo -->
+
+                    <!-- FIM - Tagmeta -->
+
+
+                [/@corpoBIE]
+                [#if fecho??]<p style="font-size: ${tl}; TEXT-INDENT: 2.5cm">[@fechoBIE]${fecho!}${virgula!}[/@fechoBIE][/#if]</p>
+
+                </div>
+        [/@mioloDJE]
+    [/@estiloBrasaoEsquerdaOficio]
+    [#if _tiposigilo! == "2"]
+        [@acessoRestrito /]
+    [/#if]
+[/@documento]
