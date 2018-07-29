@@ -13,6 +13,7 @@
 [#assign _tipo="DESPACHO"  /]
 [#assign _tiposigilo="" /]
 [#assign _fecho=""  /]
+[#assign aDateTime = .now /]
 
 [#if _autoridade?size > 0]
     [#assign _vocativo=_autoridade.vocativo /]
@@ -82,6 +83,15 @@
         [@grupo]
             [@texto titulo="Citada NI" var="citada_ni" largura="50" /]
         [/@grupo]
+        [@grupo]
+            [@texto titulo="Citada NI" var="citada_ni" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Sigla área Licitações" var="area_licitacoes" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Sigla área Jurídica" var="area_juridica" largura="50" /]
+        [/@grupo]
     [/@grupo]
 
     [@grupo titulo="Outras informacoes necessarias"]
@@ -148,14 +158,16 @@
                  </tr>
              </table>
         [@mioloDJE]
-                <p align="left">
-                    <br>
-                    Assunto: Pregão Eletrônico nº ${numero_pregao_eletronico!} - Aprovação da minuta do Edital
-                    [#if texto_ref??]
+                <p align="right">${doc.getEditor().getOrgaoUsuario().getMunicipioOrgaoUsu()}, ${aDateTime?string["dd"]} de ${aDateTime?string["MMMM"]} de ${aDateTime?string["yyyy"]}</p>
+                <br>
+                <br>
+                Senhor Destinatário<br>
+                <br>
+                <br>
+                    Assunto: Pregão Eletrônico nº ${numero_pregao_eletronico!} - Aprovação da minuta do Edital.
+            [#if texto_ref??]
                         <br/>Ref.: ${texto_ref!}
-                    [/#if]
-
-                </p>
+            [/#if]
                 <p> <br> </p>
                 <div style="font-family: Times New Roman; font-size: 10pt;">
                 [@corpoBIE]
@@ -171,10 +183,10 @@
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O Edital utilizado está disponível na rede no seguinte endereço: ${endereco_edital!}, com as adaptações/atualizações necessárias.</p>
                      
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O Ato Administrativo n. ${numero_ato_administrativo!}, de ${data_ato_administrativo!}, que nomeia o Pregoeiro e sua Equipe de Apoio, encontra-se apenso aos autos.</p>
-                      
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">6. ${outras_informacoes_necessarias!}</p>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">7.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Assim, nos termos d(o) (a) ${termo!} da NI ${ni!}, de ${data_termo_ni!}, encaminhamos o presente procedimento licitatório à essa área Jurídica, para proceder ao exame, aprovação e rubrica na minuta do Edital e seus anexos, se for o caso, conforme dispõe o ${citada_ni!} da citada NI.</p>
+                    [#if outras_informacoes_necessarias??]<p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">6. ${outras_informacoes_necessarias!}</p>[/#if]
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">[#if outras_informacoes_necessarias??]7[#else]6[/#if].&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Assim, nos termos d(o) (a) ${termo!} da NI ${ni!}, de ${data_termo_ni!}, encaminhamos o presente procedimento licitatório à essa área Jurídica, para proceder ao exame, aprovação e rubrica na minuta do Edital e seus anexos, se for o caso, conforme dispõe o ${citada_ni!} da citada NI.</p>
                     
                     
                     <!-- Fim - Corpo do conteudo -->
@@ -191,4 +203,43 @@
     [#if _tiposigilo! == "2"]
         [@acessoRestrito /]
     [/#if]
+      
+      <p style="page-break-before: always;">
+      
+      <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">De acordo. Encaminhe-se à ${area_licitacoes!}.</p>
+      <br /><br /><br />
+      <p align="center" style="font-family: Times New Roman; font-size: 10pt">
+          SIGNATÁRIO<br>
+          Coordenador da Área de Licitações<br>
+      </p>
+      <br>
+      <br>
+      <br>
+      <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">Ciente. Encaminhe-se à ${area_juridica!}.</p><br>
+      <br>
+      <br>
+      <br>
+      <p align="center" style="font-family: Times New Roman; font-size: 10pt">
+          SIGNATÁRIO<br>
+          Gerente de Licitações<br>
+      </p>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      Código Classificação
+      </p>
 [/@documento]
