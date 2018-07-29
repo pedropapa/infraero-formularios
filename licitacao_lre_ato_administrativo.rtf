@@ -1,0 +1,302 @@
+
+[#assign _texto=""  /]
+[#assign _tipo_autoridade=""  /]
+[#assign _genero=""  /]
+[#assign _vocativo=""  /]
+[#assign _enderecamento_dest=""  /]
+[#assign _nome_dest=""  /]
+[#assign _cargo_dest=""  /]
+[#assign _orgao_dest=""  /]
+[#assign _endereco_dest=""  /]
+[#assign _tamanho_letra=""  /]
+[#assign _autoridade={}  /]
+[#assign _tipo="DESPACHO"  /]
+[#assign _tiposigilo="" /]
+[#assign _fecho=""  /]
+[#assign aDateTime = .now /]
+
+[#if _autoridade?size > 0]
+    [#assign _vocativo=_autoridade.vocativo /]
+    [#assign _enderecamento_dest=_autoridade.enderecamento /]
+    [#assign _nome_dest=_autoridade.nome /]
+    [#assign _cargo_dest=_autoridade.cargo /]
+    [#assign _orgao_dest=_autoridade.orgao /]
+    [#assign _endereco_dest=_autoridade.endereco /]
+        <br/><br/>
+[/#if]
+
+[@entrevista]
+    [@grupo]
+        [@texto titulo="Número pregão eletrônico" var="numero_pregao_eletronico" largura=50 /]
+        [@texto titulo="Referência" var="texto_ref" largura=50 /]
+    [/@grupo]
+
+    [@grupo]
+        [@grupo]
+            [@texto titulo="Equipe Modalidade" var="equipe_modalidade" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Número Modalidade" var="numero_modalidade" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Objeto instauração" var="objeto_instauracao" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Nome Presidente Titular" var="nome_presidente_titular" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Cargo Presidente Titular" var="cargo_presidente_titular" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Matrícula Presidente Titular" var="matricula_presidente_titular" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Lotação Presidente Titular" var="lotacao_presidente_titular" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Nome Presidente Suplente 1" var="nome_presidente_suplente_1" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Cargo Presidente Suplente 1" var="cargo_presidente_suplente_1" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Matrícula Presidente Suplente 1" var="matricula_presidente_suplente_1" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Lotação Presidente Suplente 1" var="lotacao_presidente_suplente_1" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Nome Presidente Suplente 2" var="nome_presidente_suplente_2" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Cargo Presidente Suplente 2" var="cargo_presidente_suplente_2" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Matrícula Presidente Suplente 2" var="matricula_presidente_suplente_2" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Lotação Presidente Suplente 2" var="lotacao_presidente_suplente_2" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Nome Presidente Suplente 3" var="nome_presidente_suplente_3" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Cargo Presidente Suplente 3" var="cargo_presidente_suplente_3" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Matrícula Presidente Suplente 3" var="matricula_presidente_suplente_3" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Lotação Presidente Suplente 3" var="lotacao_presidente_suplente_3" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Nome Equipe Apoio Titular 1" var="nome_equipe_apoio_titular_1" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Cargo Equipe Apoio Titular 1" var="cargo_equipe_apoio_titular_1" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Matrícula Equipe Apoio Titular 1" var="matricula_equipe_apoio_titular_1" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Lotação Equipe Apoio Titular 1" var="lotacao_equipe_apoio_titular_1" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Nome Equipe Apoio Titular 2" var="nome_equipe_apoio_titular_2" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Cargo Equipe Apoio Titular 2" var="cargo_equipe_apoio_titular_2" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Matrícula Equipe Apoio Titular 2" var="matricula_equipe_apoio_titular_2" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Lotação Equipe Apoio Titular 2" var="lotacao_equipe_apoio_titular_2" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Nome Equipe Apoio Titular 3" var="nome_equipe_apoio_titular_3" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Cargo Equipe Apoio Titular 3" var="cargo_equipe_apoio_titular_3" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Matrícula Equipe Apoio Titular 3" var="matricula_equipe_apoio_titular_3" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Lotação Equipe Apoio Titular 3" var="lotacao_equipe_apoio_titular_3" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Nome Equipe Apoio Suplente 1" var="nome_equipe_apoio_suplente_1" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Cargo Equipe Apoio Suplente 1" var="cargo_equipe_apoio_suplente_1" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Matrícula Equipe Apoio Suplente 1" var="matricula_equipe_apoio_suplente_1" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Lotação Equipe Apoio Suplente 1" var="lotacao_equipe_apoio_suplente_1" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Nome Equipe Apoio Suplente 2" var="nome_equipe_apoio_suplente_2" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Cargo Equipe Apoio Suplente 2" var="cargo_equipe_apoio_suplente_2" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Matrícula Equipe Apoio Suplente 2" var="matricula_equipe_apoio_suplente_2" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Lotação Equipe Apoio Suplente 2" var="lotacao_equipe_apoio_suplente_2" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Nome Membro Administrativo Titular" var="nome_membro_administrativo_titular" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Cargo Membro Administrativo Titular" var="cargo_membro_administrativo_titular" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Matrícula Membro Administrativo Titular" var="matricula_membro_administrativo_titular" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Lotação Membro Administrativo Titular" var="lotacao_membro_administrativo_titular" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Nome Membro Administrativo Suplente" var="nome_membro_administrativo_suplente" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Cargo Membro Administrativo Suplente" var="cargo_membro_administrativo_suplente" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Matrícula Membro Administrativo Suplente" var="matricula_membro_administrativo_suplente" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Lotação Membro Administrativo Suplente" var="lotacao_membro_administrativo_suplente" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Nome Secretário" var="nome_secretario" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Cargo Secretário" var="cargo_secretario" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Matrícula Secretário" var="matricula_secretario" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Lotação Secretário" var="lotacao_secretario" largura="50" /]
+        [/@grupo]
+    [/@grupo]
+
+    [#if _tamanho_letra != ""]
+        [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
+    [#else]
+        [@selecao titulo="Tamanho da letra" var="tamanhoLetra" opcoes="Normal;Pequeno;Grande" /]
+    [/#if]
+[/@entrevista]
+
+[@documento margemDireita="3cm"]
+    [#if tamanhoLetra! == "Normal"]
+        [#assign tl = "10pt" /]
+    [#elseif tamanhoLetra! == "Pequeno"]
+        [#assign tl = "9pt" /]
+    [#elseif tamanhoLetra! == "Grande"]
+        [#assign tl = "13pt" /]
+    [#else]
+        [#assign tl = "11pt"]
+    [/#if]
+
+    [#if !(func.contains(fecho!'','.')) && !(func.contains(fecho!'',','))]
+        [#assign virgula ="," /]
+    [/#if]
+
+
+    [#if _tiposigilo! == "1"]
+        [#assign _reservado = true /]
+    [#elseif _tiposigilo! == "2"]
+        [#assign _sigiloso = true /]
+    [#elseif _tiposigilo! == "3"]
+        [#assign _secreto = true /]
+    [/#if]
+
+    [@estiloBrasaoEsquerdaOficio tipo=_tipo tamanhoLetra=tl formatarOrgao=true]
+             <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+                 <tr>
+                     <td align="left">
+                         <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0">
+                             <tr><td>[@letra tamanho=tl]<p>${enderecamento_dest!}</p>[/@letra]</td></tr>
+                             <tr><td>[@letra tamanho=tl]<p>${nome_dest!}</p>[/@letra]</td></tr>
+                            [#if cargo_dest??]
+                                <tr><td>[@letra tamanho=tl]<p>${cargo_dest!}</p>[/@letra]</td></tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if orgao_dest??]
+                             <tr><td>[@letra tamanho=tl]<p>${orgao_dest!}</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                            [#if endereco_dest??]
+                                <tr><td>[@letra tamanho=tl]<p>[@fixcrlf var=endereco_dest! /]</p>[/@letra]</td></tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if (doc.exClassificacao.descrClassificacao)??]
+                             <tr><td>[@letra tamanho=tl]<p><br/>Assunto: ${(doc.exClassificacao.descrClassificacao)!}</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                         </table>
+                     </td>
+                 </tr>
+             </table>
+        [@mioloDJE]
+                <p align="left">Ato administrativo n. SIGLA/${aDateTime?string["yyyy"]}</p>
+                <p align="right">${doc.getEditor().getOrgaoUsuario().getMunicipioOrgaoUsu()}, ${aDateTime?string["dd"]} de ${aDateTime?string["MMMM"]} de ${aDateTime?string["yyyy"]}</p>
+                <br>
+                <br>
+                R E S O L V E<br>
+                <br>
+                <br>
+                <div style="font-family: Times New Roman; font-size: 10pt;">
+                [@corpoBIE]
+
+                    <!-- INICIO - Tagmeta -->
+                    <!-- Inicio - Corpo do conteudo -->
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Constituir a Equipe, abaixo indicada, para processar e julgar a licitação a ser realizada na modalidade de ${equipe_modalidade!}, na forma eletrônica, sob n. ${numero_modalidade!}, que terá por objeto a “${objeto_instauracao!}.”</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">Presidente Titular: ${nome_presidente_titular!}, ${cargo_presidente_titular!}, matrícula n. ${matricula_presidente_titular!}, lotad(a)(a) na ${lotacao_presidente_titular!}.<p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">Presidente(s)<br> Suplente(s): ${nome_presidente_suplente_1!}, ${cargo_presidente_suplente_1!}, matrícula n. ${matricula_presidente_suplente_1!}, lotad(a)(a) na ${lotacao_presidente_suplente_1!}.<p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${nome_presidente_suplente_2!}, ${cargo_presidente_suplente_2!}, matrícula n. ${matricula_presidente_suplente_2!}, lotad(a)(a) na ${lotacao_presidente_suplente_2!}.<p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${nome_presidente_suplente_3!}, ${cargo_presidente_suplente_3!}, matrícula n. ${matricula_presidente_suplente_3!}, lotad(a)(a) na ${lotacao_presidente_suplente_3!}.<p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">Equipe de Apoio:</p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">Titulares: ${nome_equipe_apoio_titular_1!}, ${cargo_equipe_apoio_titular_1!}, matrícula n. ${matricula_equipe_apoio_titular_1!}, lotad(a)(a) na ${lotacao_equipe_apoio_titular_1!}.<p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${nome_equipe_apoio_titular_2!}, ${cargo_equipe_apoio_titular_2!}, matrícula n. ${matricula_equipe_apoio_titular_2!}, lotad(a)(a) na ${lotacao_equipe_apoio_titular_2!}.<p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${nome_equipe_apoio_titular_3!}, ${cargo_equipe_apoio_titular_3!}, matrícula n. ${matricula_equipe_apoio_titular_3!}, lotad(a)(a) na ${lotacao_equipe_apoio_titular_3!}.<p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">Suplentes: ${nome_equipe_apoio_suplente_1!}, ${cargo_equipe_apoio_suplente_1!}, matrícula n. ${matricula_equipe_apoio_suplente_1!}, lotad(a)(a) na ${lotacao_equipe_apoio_suplente_1!}.<p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${nome_equipe_apoio_suplente_2!}, ${cargo_equipe_apoio_suplente_2!}, matrícula n. ${matricula_equipe_apoio_suplente_2!}, lotad(a)(a) na ${lotacao_equipe_apoio_suplente_2!}.<p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">Membro<br>Administrativo<br>Titular: ${nome_membro_administrativo_titular!}, ${cargo_membro_administrativo_titular!}, matrícula n. ${matricula_membro_administrativo_titular!}, lotad(a)(a) na ${lotacao_membro_administrativo_titular!}.<p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">Membro<br>Administrativo<br>Suplente: ${nome_membro_administrativo_suplente!}, ${cargo_membro_administrativo_suplente!}, matrícula n. ${matricula_membro_administrativo_suplente!}, lotad(a)(a) na ${lotacao_membro_administrativo_suplente!}.<p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">Secretário: ${nome_secretario!}, ${cargo_secretario!}, matrícula n. ${matricula_secretario!}, lotad(a)(a) na ${lotacao_secretario!}.<p><br>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Este Ato entra em vigor na data de sua divulgação no endereço eletrônico www.infranet.gov.br, no campo Atos Administrativos da Infraero.</p>
+                    <!-- Fim - Corpo do conteudo -->
+
+                    <!-- FIM - Tagmeta -->
+
+
+                [/@corpoBIE]
+                [#if fecho??]<p style="font-size: ${tl}; TEXT-INDENT: 2.5cm">[@fechoBIE]${fecho!}${virgula!}[/@fechoBIE][/#if]</p>
+
+                </div>
+        [/@mioloDJE]
+    [/@estiloBrasaoEsquerdaOficio]
+    [#if _tiposigilo! == "2"]
+        [@acessoRestrito /]
+    [/#if]
+
+      <br>
+      <br>
+      <br>
+      <br>
+      Código Classificação
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+[/@documento]
