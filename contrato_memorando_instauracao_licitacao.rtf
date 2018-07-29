@@ -1,0 +1,428 @@
+[#assign _texto=""  /]
+[#assign _tipo_autoridade=""  /]
+[#assign _genero=""  /]
+[#assign _vocativo=""  /]
+[#assign _enderecamento_dest=""  /]
+[#assign _nome_dest=""  /]
+[#assign _cargo_dest=""  /]
+[#assign _orgao_dest=""  /]
+[#assign _endereco_dest=""  /]
+[#assign _tamanho_letra=""  /]
+[#assign _autoridade={}  /]
+[#assign _tipo="DESPACHO"  /]
+[#assign _tiposigilo="" /]
+[#assign _fecho=""  /]
+[#assign aDateTime = .now /]
+
+[#if _autoridade?size > 0]
+    [#assign _vocativo=_autoridade.vocativo /]
+    [#assign _enderecamento_dest=_autoridade.enderecamento /]
+    [#assign _nome_dest=_autoridade.nome /]
+    [#assign _cargo_dest=_autoridade.cargo /]
+    [#assign _orgao_dest=_autoridade.orgao /]
+    [#assign _endereco_dest=_autoridade.endereco /]
+        <br/><br/>
+[/#if]
+
+[@entrevista]
+    [@grupo]
+        [@texto titulo="Número pregão eletrônico" var="numero_pregao_eletronico" largura=50 /]
+        [@texto titulo="Referência" var="texto_ref" largura=50 /]
+    [/@grupo]
+    [@grupo titulo="Dados gerais"]
+        [@grupo]
+            [@texto titulo="Nome destinatário" var="nome_destinatario" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Referência objeto" var="referencia_objeto" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Objeto instauração" var="objeto_instauracao" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Justificativa necessidade contratação" var="justificativa_necessidade_contratacao" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@numero titulo="Prazo vigência (meses)" var="prazo_vigencia?number" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@checkbox titulo="Orçamento Sigiloso" var="orcamento_sigiloso" reler=true /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Justificativa Valor Estimado" var="justificativa_valor_estimado" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@selecao titulo="Tipo de Orçamento" var="tipo_orcamento" opcoes="Aberto;Fechado" reler=true /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Justificativa Tipo Orçamento" var="justificativa_tipo_orcamento" obrigatorio="sim" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@editor titulo="Indicação Fonte de Recursos" var="indicacao_fonte_recursos" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Tipo de Licitação" var="tipo_licitacao" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Critério de Julgamento" var="criterio_julgamento" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Local execução objeto" var="local_execucao_objeto" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@selecao titulo="Forma Fornecimento ou Prestação Serviços" var="forma_fornecimento_prestacao_servicos" opcoes="Parcelada;Total;Contínua" reler=true /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Forma Pagamento" var="forma_pagamento" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Critério Reajuste/Revisão/Reequilíbrio/Repactuação" var="criterio_reajuste" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@editor titulo="Membros Equipe Técnica" var="membros_equipe_tecnica" /]
+        [/@grupo]
+        [@grupo]
+            [@checkbox titulo="Visita obrigatória" var="visita_obrigatoria" reler=true /]
+        [/@grupo]
+        [@grupo]
+            [@checkbox titulo="Possui Limpeza" var="possui_limpeza" reler=true /]
+        [/@grupo]
+        [@grupo]
+            [@checkbox titulo="Exigir Atestado de Capacidade Técnico-Profissional" var="exigir_atestado_capacidade_tecnico_profissional" reler=true /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Justificativa da exigência dos atestados de capacidade" var="justificativa_exigencia_atestado_capacidade" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@editor titulo="Parcelas Subcontratação" var="parcelas_subcontratacao" /]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo="Justificativa do Prazo de Vigência Contratual" ]
+        [@grupo]
+            [@texto titulo="Documento Fundamentação" var="documento_fundamentacao" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@data titulo="Data documento fundamentação" var="data_documento_fundamentacao" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Número Ato Administrativo" var="numero_ato_administrativo" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@data titulo="Data Ato Administrativo" var="data_ato_administrativo" /]
+        [/@grupo]
+    [/@grupo]
+    [#if orcamento_sigiloso?? && orcamento_sigiloso == "Sim"]
+        [@grupo titulo="Orçamento" ]
+            [@grupo]
+                [@texto titulo="Valor mensal Licitação" var="valor_licitacao" obrigatorio="sim" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Meses do período global" var="meses_periodo_global" obrigatorio="sim" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Valor período global" var="valor_periodo_global" obrigatorio="sim" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Valor adicional I" var="valor_adicional_i" obrigatorio="sim"largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Valor estimado adicional II" var="valor_adicional_ii" obrigatorio="sim" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Taxa Encargos Sociais valor orçado" var="taxa_encargos_sociais_valor_orcado" obrigatorio="sim" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Taxa Margem Contribuição valor orçado" var="taxa_margem_contribuicao_valor_orcado" obrigatorio="sim" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Taxa Encargos Tributários valor orçado" var="taxa_encargos_tributarios_valor_orcado" obrigatorio="sim" largura="50" /]
+            [/@grupo]
+        [/@grupo]
+    [/#if]
+    [#if forma_fornecimento_prestacao_servicos?? && forma_fornecimento_prestacao_servicos == "Parcelada"]
+        [@grupo titulo="Cronograma de entrega/execução" ]
+            [@grupo]
+                [@editor titulo="Cronograma de entrega/execução" var="cronograma_entrega_execucao" /]
+            [/@grupo]
+        [/@grupo]
+    [/#if]
+    [@grupo titulo="Dados Visita Técnica" ]
+        [@grupo]
+            [@texto titulo="Nome contato" var="nome_visita_contato" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Endereço contato" var="endereco_visita_contato" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Telefone contato" var="telefone_visita_contato" largura="50" /]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo="Justificativa visita técnica (caso obrigatória)"]
+        [@grupo]
+            [@texto titulo="Justificativa" var="justificativa_visita" largura="50" /]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo="Limpeza por área (caso necessário)"]
+        [@grupo]
+            [@texto titulo="Área interna mínima edifícios comerciais (m²)" var="area_interna_edificios_comerciais" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Área externa mínima edifícios comerciais (m²)" var="area_externa_edificios_comerciais" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Área esquadrias/fachadas mínima (m²)" var="area_esquadrias_fachadas" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Área edificada total(m²)" var="area_edificada_total" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Área não edificada total(m²)" var="area_nao_edificada_total" largura="50" /]
+        [/@grupo]
+    [/@grupo]
+
+    [#if _tamanho_letra != ""]
+        [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
+    [#else]
+        [@selecao titulo="Tamanho da letra" var="tamanhoLetra" opcoes="Normal;Pequeno;Grande" /]
+    [/#if]
+[/@entrevista]
+
+[@documento margemDireita="3cm"]
+    [#if tamanhoLetra! == "Normal"]
+        [#assign tl = "10pt" /]
+    [#elseif tamanhoLetra! == "Pequeno"]
+        [#assign tl = "9pt" /]
+    [#elseif tamanhoLetra! == "Grande"]
+        [#assign tl = "13pt" /]
+    [#else]
+        [#assign tl = "11pt"]
+    [/#if]
+
+    [#if !(func.contains(fecho!'','.')) && !(func.contains(fecho!'',','))]
+        [#assign virgula ="," /]
+    [/#if]
+
+
+    [#if _tiposigilo! == "1"]
+        [#assign _reservado = true /]
+    [#elseif _tiposigilo! == "2"]
+        [#assign _sigiloso = true /]
+    [#elseif _tiposigilo! == "3"]
+        [#assign _secreto = true /]
+    [/#if]
+
+    [@estiloBrasaoEsquerdaOficio tipo=_tipo tamanhoLetra=tl formatarOrgao=true]
+             <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+                 <tr>
+                     <td align="left">
+                         <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0">
+                             <tr>
+                                 <td>[@letra tamanho=tl]<p>${enderecamento_dest!}</p>[/@letra]</td>
+                             </tr>
+                             <tr>
+                                 <td>[@letra tamanho=tl]<p>${nome_dest!}</p>[/@letra]</td>
+                             </tr>
+                            [#if cargo_dest??]
+                                <tr>
+                                    <td>[@letra tamanho=tl]<p>${cargo_dest!}</p>[/@letra]</td>
+                                </tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if orgao_dest??]
+                             <tr><td>[@letra tamanho=tl]<p>${orgao_dest!}</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                            [#if endereco_dest??]
+                                <tr>
+                                    <td>[@letra tamanho=tl]<p>[@fixcrlf var=endereco_dest! /]</p>[/@letra]</td>
+                                </tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if (doc.exClassificacao.descrClassificacao)??]
+                             <tr><td>[@letra tamanho=tl]<p><br/>Assunto: ${(doc.exClassificacao.descrClassificacao)!}</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                         </table>
+                     </td>
+                 </tr>
+             </table>
+        [@mioloDJE]
+                <p align="right">${doc.getEditor().getOrgaoUsuario().getMunicipioOrgaoUsu()}, ${aDateTime?string["dd"]}
+                    de ${aDateTime?string["MMMM"]} de ${aDateTime?string["yyyy"]}</p>
+                <br>
+                <br>
+                Senhor ${nome_destinatario!}<br>
+                <br>
+                <br>
+                Assunto: Abertura de Processo Licitatório
+            [#if texto_ref??]
+                        <br/>Ref.: ${texto_ref!}
+            [/#if]
+                <p><br></p>
+                <div style="font-family: Times New Roman; font-size: 10pt;">
+                [@corpoBIE]
+
+                    <!-- INICIO - Tagmeta -->
+                    <!-- Inicio - Corpo do conteudo -->
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">1. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Solicitamos abertura de processo licitatório, conforme especificações abaixo:</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">a) &nbsp;&nbsp; <b>OBJETO:</b> ${objeto_instauracao!}
+                    </p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">b) &nbsp;&nbsp; <b>JUSTIFICATIVA
+                        DA NECESSIDADE DA CONTRATAÇÃO:</b> ${justificativa_necessidade_contratacao!}</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">c) &nbsp;&nbsp; <b>PRAZO
+                        DE VIGÊNCIA CONTRATUAL:</b> o prazo inicial será de ${prazo_vigencia!} meses, podendo ser
+                        prorrogado por até 60 (sessenta) meses;</p>
+
+                    [#if prazo_vigencia?? && prazo_vigencia > 12]
+                        <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">d) &nbsp;&nbsp; <b>JUSTIFICATIVA
+                            DO PRAZO DE VIGÊNCIA CONTRATUAL:</b> : Conforme previsto no ${documento_fundamentacao!},
+                            de ${data_documento_fundamentacao!}, e Ato Administrativo n. ${numero_ato_administrativo!},
+                            de ${data_ato_administrativo!}, a contratação de serviços contínuos pode ser feita por prazo
+                            inicial superior a 12 meses, “devendo o gestor do processo apresentar justificativa, na
+                            razão direta do interesse do serviço, demonstrando as vantagens técnicas, econômicas e
+                            financeiras da contratação”.</p>
+                    [/#if]
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                        e[#else]d[/#if]) &nbsp;&nbsp; <b>VALOR ESTIMADO DA CONTRATAÇÃO:</b>
+                        [#if orcamento_sigiloso?? && orcamento_sigiloso == "Sim"]orçamento sigiloso[#else]o valor mensal máximo estimado para esta
+                            licitação é de ${valor_licitacao!} e o global para o período de ${meses_periodo_global!}
+                            meses é de ${valor_periodo_global!}, já incluído o valor de ${valor_adicional_i!} referente
+                            ao adicional I e o valor estimado de ${valor_adicional_ii!}, correspondente ao adicional II.
+                            No valor orçado foram consideradas as seguintes
+                            taxas: ${taxa_encargos_sociais_valor_orcado!}% de Encargos
+                            Sociais, ${taxa_margem_contribuicao_valor_orcado!}% Margem de Contribuição
+                            e ${taxa_encargos_tributarios_valor_orcado!}% de Encargos Tributários, conforme estabelecido
+                            na Planilha de Custos e Formação de Preços.[/#if]</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                        f[#else]e[/#if]) &nbsp;&nbsp; <b>JUSTIFICATIVA DO VALOR
+                        ESTIMADO:</b> ${justificativa_valor_estimado!}</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                        g[#else]f[/#if]) &nbsp;&nbsp; <b>TIPO DE ORÇAMENTO:</b> ${tipo_orcamento!}</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                        h[#else]g[/#if]) &nbsp;&nbsp; <b>JUSTIFICATIVA DO TIPO DE
+                        ORÇAMENTO:</b> ${justificativa_tipo_orcamento!}</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                        i[#else]h[/#if]) &nbsp;&nbsp; <b>INDICAÇÃO DA FONTE DE
+                        RECURSOS:</b> ${indicacao_fonte_recursos!}</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                        j[#else]i[/#if]) &nbsp;&nbsp; <b>TIPO DE LICITAÇÃO:</b> ${tipo_licitacao!}</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                        k[#else]j[/#if]) &nbsp;&nbsp; <b>CRITÉRIO DE JULGAMENTO:</b> ${criterio_julgamento!}</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                        l[#else]k[/#if]) &nbsp;&nbsp; <b>LOCAL DA EXECUÇÃO DO OBJETO:</b> ${local_execucao_objeto!}</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                        m[#else]l[/#if]) &nbsp;&nbsp; <b>FORMA DE FORNECIMENTO OU DA PRESTAÇÃO DOS
+                        SERVIÇOS:</b> ${forma_fornecimento_prestacao_servicos!}[#if forma_fornecimento_prestacao_servicos?? && forma_fornecimento_prestacao_servicos == "Parcelada" ] ${cronograma_entrega_execucao!}[/#if]
+                        .</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                        n[#else]m[/#if]) &nbsp;&nbsp; <b>FORMA DE
+                        PAGAMENTO:</b> [#if forma_pagamento??]${forma_pagamento}[#else]Sistemática padrão[/#if].</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                        o[#else]n[/#if]) &nbsp;&nbsp; <b style="text-align: justify">CRITÉRIO DE
+                        REAJUSTE/REVISÃO/REEQUILÍBRIO/REPACTUAÇÃO:</b> conforme minuta do Termo de
+                        Contrato. [#if criterio_reajuste??]${criterio_reajuste}[#else]Sistemática padrão[/#if].</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                        p[#else]o[/#if]) &nbsp;&nbsp; <b>INDICAÇÃO DOS MEMBROS DA EQUIPE
+                        TÉCNICA:</b> ${membros_equipe_tecnica!}</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                        q[#else]p[/#if]) &nbsp;&nbsp; <b>VISITA TÉCNICA:</b> atestado de visita passado pela INFRAERO,
+                        em nome da licitante, de que esta, por intermédio de seu representante, vistoriou as instalações
+                        e os equipamentos que serão disponibilizados para a execução dos serviços objeto desta
+                        licitação, tomando conhecimento de todos os aspectos que possam influir direta ou indiretamente
+                        na execução dos mesmos;</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        1 &nbsp;&nbsp; para agendar a vistoria às instalações e aos equipamentos, a licitante deverá
+                        contatar, até o dia útil anterior à data de abertura do certame, no horário de expediente normal
+                        da INFRAERO, o(a) Sr(a) ${nome_visita_contato!}, no seguinte
+                        endereço ${endereco_visita_contato!}, pelo telefone n. ${telefone_visita_contato!};</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        2 &nbsp;&nbsp; a empresa licitante, a seu critério, poderá declinar da visita, sendo, neste
+                        caso, necessário apresentar declaração assumindo, incondicionalmente, a RESPONSABILIDADE de
+                        executar os serviços em conformidade com todas as condições e exigências estabelecidas nesta
+                        licitação.</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        3 &nbsp;&nbsp; ${justificativa_visita!}</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                        r[#else]q[/#if]) &nbsp;&nbsp; <b>EXIGÊNCIA DE ATESTADO(S) DE CAPACIDADE TÉCNICO-PROFISSIONAL
+                        E/OU OPERACIONAL:</b> [#if exigir_atestado_capacidade_tecnico_profissional?? && exigir_atestado_capacidade_tecnico_profissional == "Sim" ]Há
+                        necessidade[#else]Não há necessidade.[/#if]</p>
+
+                    [#if possui_limpeza?? && possui_limpeza == "Sim" ]
+                        <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            1 &nbsp;&nbsp; Atestado(s) de capacidade técnica que comprove(m) ter a licitante executado,
+                            a contento, para órgãos ou entidades da Administração Pública Direta ou Indireta, Federal,
+                            Estadual, Municipal ou do Distrito Federal, ou ainda, para empresa privada, serviços de
+                            limpeza e conservação, que comprove(m):</p>
+
+                        <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            1.1 &nbsp;&nbsp; parcela de maior relevância correspondente a edifícios comerciais com
+                            grande fluxo de pessoas com área interna de mínimo ${area_interna_edificios_comerciais!} m²,
+                            área externa de ${area_externa_edificios_comerciais!} m² e esquadrias/fachadas de no
+                            mínimo ${area_esquadrias_fachadas!} m²</p>
+
+                        <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <b>NOTA:</b> A título informativo, esclarecemos que a METRAGEM TOTAL de áreas edificadas
+                            desta Dependência é de ${area_edificada_total!} m2 e de não edificadas é
+                            de ${area_nao_edificada_total!} m2.</p>
+                    [/#if]
+
+                    [#if exigir_atestado_capacidade_tecnico_profissional??]
+                        <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                            s[#else]r[/#if]) &nbsp;&nbsp; <b>JUSTIFICATIVA DA EXIGÊNCIA DOS ATESTADOS DE
+                            CAPACIDADE:</b> [#if exigir_atestado_capacidade_tecnico_profissional??]Há necessidade[#else]
+                            Não há necessidade.[/#if]</p>
+                    [/#if]
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                        t[#else]s[/#if]) &nbsp;&nbsp; <b>PARCELAS DE SUBCONTRATAÇÃO:</b> ${parcelas_subcontratacao!}</p>
+
+                    <!-- Fim - Corpo do conteudo -->
+
+                    <!-- FIM - Tagmeta -->
+
+
+                [/@corpoBIE]
+                [#if fecho??]<p
+                        style="font-size: ${tl}; TEXT-INDENT: 2.5cm">[@fechoBIE]${fecho!}${virgula!}[/@fechoBIE][/#if]</p>
+
+                </div>
+        [/@mioloDJE]
+    [/@estiloBrasaoEsquerdaOficio]
+    [#if _tiposigilo! == "2"]
+        [@acessoRestrito /]
+    [/#if]
+
+      </p>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      Código Classificação
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+[/@documento]
