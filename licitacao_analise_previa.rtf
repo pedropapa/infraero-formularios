@@ -1,0 +1,848 @@
+[#assign _texto=""  /]
+[#assign _tipo_autoridade=""  /]
+[#assign _genero=""  /]
+[#assign _vocativo=""  /]
+[#assign _enderecamento_dest=""  /]
+[#assign _nome_dest=""  /]
+[#assign _cargo_dest=""  /]
+[#assign _orgao_dest=""  /]
+[#assign _endereco_dest=""  /]
+[#assign _tamanho_letra=""  /]
+[#assign _autoridade={}  /]
+[#assign _tipo="DESPACHO"  /]
+[#assign _tiposigilo="" /]
+[#assign _fecho=""  /]
+[#assign aDateTime = .now /]
+
+[#if _autoridade?size > 0]
+    [#assign _vocativo=_autoridade.vocativo /]
+    [#assign _enderecamento_dest=_autoridade.enderecamento /]
+    [#assign _nome_dest=_autoridade.nome /]
+    [#assign _cargo_dest=_autoridade.cargo /]
+    [#assign _orgao_dest=_autoridade.orgao /]
+    [#assign _endereco_dest=_autoridade.endereco /]
+        <br/><br/>
+[/#if]
+
+[@entrevista]
+    [@grupo]
+        [@texto titulo="Número pregão eletrônico" var="numero_pregao_eletronico" largura=50 /]
+        [@texto titulo="Referência" var="texto_ref" largura=50 /]
+    [/@grupo]
+
+    [#if _tamanho_letra != ""]
+        [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
+    [#else]
+        [@selecao titulo="Tamanho da letra" var="tamanhoLetra" opcoes="Normal;Pequeno;Grande" /]
+    [/#if]
+[/@entrevista]
+
+[@documento margemDireita="3cm"]
+    [#if tamanhoLetra! == "Normal"]
+        [#assign tl = "10pt" /]
+    [#elseif tamanhoLetra! == "Pequeno"]
+        [#assign tl = "9pt" /]
+    [#elseif tamanhoLetra! == "Grande"]
+        [#assign tl = "13pt" /]
+    [#else]
+        [#assign tl = "11pt"]
+    [/#if]
+
+    [#if !(func.contains(fecho!'','.')) && !(func.contains(fecho!'',','))]
+        [#assign virgula ="," /]
+    [/#if]
+
+
+    [#if _tiposigilo! == "1"]
+        [#assign _reservado = true /]
+    [#elseif _tiposigilo! == "2"]
+        [#assign _sigiloso = true /]
+    [#elseif _tiposigilo! == "3"]
+        [#assign _secreto = true /]
+    [/#if]
+
+    [@estiloBrasaoEsquerdaOficio tipo=_tipo tamanhoLetra=tl formatarOrgao=true]
+             <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+                 <tr>
+                     <td align="left">
+                         <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0">
+                             <tr>
+                                 <td>[@letra tamanho=tl]<p>${enderecamento_dest!}</p>[/@letra]</td>
+                             </tr>
+                             <tr>
+                                 <td>[@letra tamanho=tl]<p>${nome_dest!}</p>[/@letra]</td>
+                             </tr>
+                            [#if cargo_dest??]
+                                <tr>
+                                    <td>[@letra tamanho=tl]<p>${cargo_dest!}</p>[/@letra]</td>
+                                </tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if orgao_dest??]
+                             <tr><td>[@letra tamanho=tl]<p>${orgao_dest!}</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                            [#if endereco_dest??]
+                                <tr>
+                                    <td>[@letra tamanho=tl]<p>[@fixcrlf var=endereco_dest! /]</p>[/@letra]</td>
+                                </tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if (doc.exClassificacao.descrClassificacao)??]
+                             <tr><td>[@letra tamanho=tl]<p><br/>Assunto: ${(doc.exClassificacao.descrClassificacao)!}</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                         </table>
+                     </td>
+                 </tr>
+             </table>
+        [@mioloDJE]
+                <div style="font-family: Calibri; font-size: 11pt;">
+                [@corpoBIE]
+
+                    <!-- INICIO - Tagmeta -->
+                    <!-- Inicio - Corpo do conteudo -->
+                    <p style="text-align: justify;font-family: Calibri; font-size: 12pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <b><u>ANÁLISE PRÉVIA:</u></b></p>
+
+					<table width="100%" border="1" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+                        <tr>
+                            <td align="left" width="50%">
+                                &nbsp;&nbsp;&nbsp;&nbsp;<b>ITEM 15 DA NI 6.01/F (LCT)</b>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td align="center"><b>RESSALVAS</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="border-top: 1px solid black;" width="100%"
+                                                   cellspacing="0" cellpadding="1">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>Não</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>Sim</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">Não<br>Aplicável</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b>Detalhamento</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    a) indicação da aplicabilidade e enquadramento legal, quando for adotado o RDC;
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    b) descrição clara, precisa e suficiente do objeto a ser contratado, contemplando a definição da sua natureza, se comum ou não;
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    c) justificativa da necessidade da contratação, especificando a sua vantagem, utilidade, oportunidade, conveniência, os objetivos e resultados a serem alcançados, a economicidade e o melhor aproveitamento dos recursos humanos, materiais ou financeiros disponíveis;
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    d) prazo de entrega ou da execução do objeto pretendido e, ainda, o prazo de vigência da ARP, se for o caso, e do contrato;
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    e) preço estimado;
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    f) justificativa do preço estimado, com a demonstração de sua razoabilidade e as informações relativas às fontes de pesquisas;
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    g) critério de julgamento que pode ser global, por item ou por lote, conforme o caso;
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    h) indicação da fonte de recursos, observadas as instruções da área financeira nos normativos internos e o número do item do plano de ação de investimento, caso existente;
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    i) tipo de licitação, indicando os respectivos critérios de pontuação e os fatores de ponderação com a devida motivação, quando se tratar de melhor técnica ou técnica e preço;
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    j) regime de contratação;
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    k) regime de execução e o critério de julgamento, no caso de adoção do RDC, conforme arts. 8º e 18 da Lei nº 12.462, de 2011;
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    l) critério de aceitabilidade de preços unitários, totais e globais;
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    m) local, endereço completo de entrega do bem, da prestação do serviço, da execução da obra ou da concessão de uso da área;
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    n) forma de fornecimento, se total ou parcelada;
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    o) forma de pagamento, se por etapa parcelada, total ou mensal, conforme cronograma físico-financeiro, quando se tratar de obras ou serviços, inclusive de engenharia;
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    p) necessidade de exigência de garantia para manutenção de proposta, cumprimento das obrigações contratuais e seguro de serviços (risco de engenharia e responsabilidade civil);
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    q) critério de reajuste, revisão ou repactuação de preços, com indicação do índice, coluna, ou revista, conforme o caso, observando, ainda, a legislação e os modelos de editais previamente aprovados pelo órgão jurídico de consultoria do Centro Corporativo;
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    r) indicação do nome completo, matrícula, cargo e função, lotação e telefone dos membros técnicos indicados para compor a comissão de licitação ou equipe de apoio do pregoeiro, bem como do responsável para agendamento de visita técnica ao local de execução do objeto, quando admitida;
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    s)	possibilidade de participação de pessoas jurídicas organizadas em consórcio e, caso permitido, o número máximo de integrantes por consórcio;
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    t) necessidade de exigências de qualificação técnica;
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    u) justificativa da exigência de qualificação técnica, evidenciando que são indispensáveis para garantir a execução do objeto da contratação, sem comprometer a amplitude do rol de interessados em participar da licitação;
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    v) indicação da parcela dos serviços, obras ou fornecimento que pode ser subcontratada;
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    <p>w) documentação técnica, conforme a seguir, com nível de precisão adequada para caracterizar o objeto pretendido:</p>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;1. anteprojeto de engenharia,</p>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;2. projeto básico e executivo, quando for o caso,</p>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;3. termo de referência, e </p>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;4. outros elementos necessários e suficientes.</p>
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    x) planilha orçamentária com a estimativa detalhada dos custos, compatíveis com os quantitativos e demais elementos da documentação técnica, observadas as disposições dos manuais de procedimentos específicos e do Decreto nº 7.983, de 2013;
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    y) autorização da autoridade competente, observado o Ato Administrativo que estabelece os níveis hierárquicos e os limites de competência no âmbito da Infraero, devidamente identificada, preferencialmente no próprio corpo do documento de solicitação;
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" width="50%">
+                                <div style="padding: 5px; margin-left: 15px">
+                                    Outros.
+                                </div>
+                            </td>
+                            <td width="25%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
+                                                </td>
+                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="center" width="25%">
+                                <b></b>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <!-- Fim - Corpo do conteudo -->
+
+                    <!-- FIM - Tagmeta -->
+
+
+                [/@corpoBIE]
+                [#if fecho??]<p
+                        style="font-size: ${tl}; TEXT-INDENT: 2.5cm">[@fechoBIE]${fecho!}${virgula!}[/@fechoBIE][/#if]</p>
+
+                </div>
+        [/@mioloDJE]
+    [/@estiloBrasaoEsquerdaOficio]
+    [#if _tiposigilo! == "2"]
+        [@acessoRestrito /]
+    [/#if]
+
+      </p>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      Código Classificação
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+[/@documento]
