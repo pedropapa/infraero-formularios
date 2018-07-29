@@ -1,0 +1,184 @@
+[#assign _texto=""  /]
+[#assign _tipo_autoridade=""  /]
+[#assign _genero=""  /]
+[#assign _vocativo=""  /]
+[#assign _enderecamento_dest=""  /]
+[#assign _nome_dest=""  /]
+[#assign _cargo_dest=""  /]
+[#assign _orgao_dest=""  /]
+[#assign _endereco_dest=""  /]
+[#assign _tamanho_letra=""  /]
+[#assign _autoridade={}  /]
+[#assign _tipo="DESPACHO"  /]
+[#assign _tiposigilo="" /]
+[#assign _fecho=""  /]
+[#assign aDateTime = .now /]
+
+[#if _autoridade?size > 0]
+    [#assign _vocativo=_autoridade.vocativo /]
+    [#assign _enderecamento_dest=_autoridade.enderecamento /]
+    [#assign _nome_dest=_autoridade.nome /]
+    [#assign _cargo_dest=_autoridade.cargo /]
+    [#assign _orgao_dest=_autoridade.orgao /]
+    [#assign _endereco_dest=_autoridade.endereco /]
+        <br/><br/>
+[/#if]
+
+[@entrevista]
+    [@grupo]
+        [@texto titulo="Número pregão eletrônico" var="numero_pregao_eletronico" largura=50 /]
+        [@texto titulo="Referência" var="texto_ref" largura=50 /]
+    [/@grupo]
+
+    [@grupo titulo="Dados gerais"]
+        [@grupo]
+            [@texto titulo="Número Termo Apostilamento" var="termo_apostilamento_numero" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Número Termo Contrato" var="termo_contrato_numero" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Número AP" var="ap_numero" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Nome subitem" var="subitem_nome" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Valor contrato" var="contrato_valor" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo="Dados da Contratada"]
+        [@grupo]
+            [@texto titulo="Nome Responsável" var="contratada_nome_responsavel" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Razão Social" var="contratada_razao_social" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Endereço" var="contratada_endereco" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="E-mail" var="contratada_email" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo="Dados da Coordenação"]
+        [@grupo]
+            [@texto titulo="Telefone Coordenação" var="coordenacao_telefone" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="E-mail Coordenação" var="coordenacao_email" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+    [/@grupo]
+
+    [#if _tamanho_letra != ""]
+        [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
+    [#else]
+        [@selecao titulo="Tamanho da letra" var="tamanhoLetra" opcoes="Normal;Pequeno;Grande" /]
+    [/#if]
+[/@entrevista]
+
+[@documento margemDireita="3cm"]
+    [#if tamanhoLetra! == "Normal"]
+        [#assign tl = "10pt" /]
+    [#elseif tamanhoLetra! == "Pequeno"]
+        [#assign tl = "9pt" /]
+    [#elseif tamanhoLetra! == "Grande"]
+        [#assign tl = "13pt" /]
+    [#else]
+        [#assign tl = "11pt"]
+    [/#if]
+
+    [#if !(func.contains(fecho!'','.')) && !(func.contains(fecho!'',','))]
+        [#assign virgula ="," /]
+    [/#if]
+
+
+    [#if _tiposigilo! == "1"]
+        [#assign _reservado = true /]
+    [#elseif _tiposigilo! == "2"]
+        [#assign _sigiloso = true /]
+    [#elseif _tiposigilo! == "3"]
+        [#assign _secreto = true /]
+    [/#if]
+
+    [@estiloBrasaoEsquerdaOficio tipo=_tipo tamanhoLetra=tl formatarOrgao=true]
+             <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+                 <tr>
+                     <td align="left">
+                         <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0">
+                             <tr><td>[@letra tamanho=tl]<p>${enderecamento_dest!}</p>[/@letra]</td></tr>
+                             <tr><td>[@letra tamanho=tl]<p>${nome_dest!}</p>[/@letra]</td></tr>
+                            [#if cargo_dest??]
+                                <tr><td>[@letra tamanho=tl]<p>${cargo_dest!}</p>[/@letra]</td></tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if orgao_dest??]
+                             <tr><td>[@letra tamanho=tl]<p>${orgao_dest!}</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                            [#if endereco_dest??]
+                                <tr><td>[@letra tamanho=tl]<p>[@fixcrlf var=endereco_dest! /]</p>[/@letra]</td></tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if (doc.exClassificacao.descrClassificacao)??]
+                             <tr><td>[@letra tamanho=tl]<p><br/>Assunto: Encaminhamento de processo para abertura de PEC de Gestão de ARP</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                         </table>
+                     </td>
+                 </tr>
+             </table>
+        [@mioloDJE]
+                <p align="right">${doc.getEditor().getOrgaoUsuario().getMunicipioOrgaoUsu()}, ${aDateTime?string["dd"]} de ${aDateTime?string["MMMM"]} de ${aDateTime?string["yyyy"]}</p>
+                <br>
+                <br>
+                Ao Senhor ${contratada_nome_responsavel!}<br>
+            ${contratada_razao_social!}<br>
+            ${contratada_endereco!}<br>
+            ${contratada_email!}<br>
+                <br>
+                <br>
+                Assunto: Encaminha Termo de Apostilamento n. ${termo_apostilamento_numero!} assinado e solicita apresentação de garantia de execução do contrato.
+                <p> <br> </p>
+                <div style="font-family: Times New Roman; font-size: 12pt;">
+                [@corpoBIE]
+
+                    <!-- INICIO - Tagmeta -->
+                    <!-- Inicio - Corpo do conteudo -->
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Senhor ${contratada_nome_responsavel!},</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comunicamos a V.Sa. a formalização do ${termo_apostilamento_numero!}º Termo de Apostilamento ao TC n. ${termo_contrato_numero!}, AP n. ${ap_numero!} e encaminhamos o documento para conhecimento da Contratada.</p>
+
+                   	<p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Em atendimento ao subitem ${subitem_nome!}, <i>a contratada deverá apresentar no prazo de 15 (quinze) dias consecutivos após a assinatura do presente instrumento, garantia complementar de execução de contrato no valor de R$ ${contrato_valor!} correspondente a 5% do valor deste Apostilamento, somado ao aviso prévio anterior.</i></p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Por fim, informamos que eventuais dúvidas a respeito do teor deste Ofício poderão ser dirimidas diretamente com esta Coordenação, através do telefone n. ${coordenacao_telefone!}, e-mail ${coordenacao_email!}.</p>
+
+					<p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Atenciosamente,</p>
+                    <!-- Fim - Corpo do conteudo -->
+
+                    <!-- FIM - Tagmeta -->
+
+
+                [/@corpoBIE]
+                [#if fecho??]<p style="font-size: ${tl}; TEXT-INDENT: 2.5cm">[@fechoBIE]${fecho!}${virgula!}[/@fechoBIE][/#if]</p>
+
+                </div>
+        [/@mioloDJE]
+    [/@estiloBrasaoEsquerdaOficio]
+    [#if _tiposigilo! == "2"]
+        [@acessoRestrito /]
+    [/#if]
+
+      </p>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      Código Classificação
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+[/@documento]

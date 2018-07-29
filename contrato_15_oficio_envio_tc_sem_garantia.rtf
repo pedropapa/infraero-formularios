@@ -1,0 +1,186 @@
+[#assign _texto=""  /]
+[#assign _tipo_autoridade=""  /]
+[#assign _genero=""  /]
+[#assign _vocativo=""  /]
+[#assign _enderecamento_dest=""  /]
+[#assign _nome_dest=""  /]
+[#assign _cargo_dest=""  /]
+[#assign _orgao_dest=""  /]
+[#assign _endereco_dest=""  /]
+[#assign _tamanho_letra=""  /]
+[#assign _autoridade={}  /]
+[#assign _tipo="DESPACHO"  /]
+[#assign _tiposigilo="" /]
+[#assign _fecho=""  /]
+[#assign aDateTime = .now /]
+
+[#if _autoridade?size > 0]
+    [#assign _vocativo=_autoridade.vocativo /]
+    [#assign _enderecamento_dest=_autoridade.enderecamento /]
+    [#assign _nome_dest=_autoridade.nome /]
+    [#assign _cargo_dest=_autoridade.cargo /]
+    [#assign _orgao_dest=_autoridade.orgao /]
+    [#assign _endereco_dest=_autoridade.endereco /]
+        <br/><br/>
+[/#if]
+
+[@entrevista]
+    [@grupo]
+        [@texto titulo="Número pregão eletrônico" var="numero_pregao_eletronico" largura=50 /]
+        [@texto titulo="Referência" var="texto_ref" largura=50 /]
+    [/@grupo]
+
+    [@grupo titulo="Dados gerais"]
+        [@grupo]
+            [@texto titulo="Número Termo Contrato" var="termo_contrato_numero" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@numero titulo="Número Licitação" var="numero_licitacao" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Nome empresa contratada" var="nome_empresa_contratada" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Objeto empresa contratada" var="objeto_empresa_contratada" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Endereço da Sede/Unidade Apoio/Dependência" var="endereco_sede" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo="Dados da Contratada"]
+        [@grupo]
+            [@texto titulo="Nome Responsável" var="contratada_nome_responsavel" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Razão Social" var="contratada_razao_social" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Endereço" var="contratada_endereco" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="E-mail" var="contratada_email" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo="Dados da Coordenação"]
+        [@grupo]
+            [@texto titulo="Telefone Coordenação" var="coordenacao_telefone" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="E-mail Coordenação" var="coordenacao_email" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+    [/@grupo]
+
+    [#if _tamanho_letra != ""]
+        [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
+    [#else]
+        [@selecao titulo="Tamanho da letra" var="tamanhoLetra" opcoes="Normal;Pequeno;Grande" /]
+    [/#if]
+[/@entrevista]
+
+[@documento margemDireita="3cm"]
+    [#if tamanhoLetra! == "Normal"]
+        [#assign tl = "10pt" /]
+    [#elseif tamanhoLetra! == "Pequeno"]
+        [#assign tl = "9pt" /]
+    [#elseif tamanhoLetra! == "Grande"]
+        [#assign tl = "13pt" /]
+    [#else]
+        [#assign tl = "11pt"]
+    [/#if]
+
+    [#if !(func.contains(fecho!'','.')) && !(func.contains(fecho!'',','))]
+        [#assign virgula ="," /]
+    [/#if]
+
+
+    [#if _tiposigilo! == "1"]
+        [#assign _reservado = true /]
+    [#elseif _tiposigilo! == "2"]
+        [#assign _sigiloso = true /]
+    [#elseif _tiposigilo! == "3"]
+        [#assign _secreto = true /]
+    [/#if]
+
+    [@estiloBrasaoEsquerdaOficio tipo=_tipo tamanhoLetra=tl formatarOrgao=true]
+             <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+                 <tr>
+                     <td align="left">
+                         <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0">
+                             <tr><td>[@letra tamanho=tl]<p>${enderecamento_dest!}</p>[/@letra]</td></tr>
+                             <tr><td>[@letra tamanho=tl]<p>${nome_dest!}</p>[/@letra]</td></tr>
+                            [#if cargo_dest??]
+                                <tr><td>[@letra tamanho=tl]<p>${cargo_dest!}</p>[/@letra]</td></tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if orgao_dest??]
+                             <tr><td>[@letra tamanho=tl]<p>${orgao_dest!}</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                            [#if endereco_dest??]
+                                <tr><td>[@letra tamanho=tl]<p>[@fixcrlf var=endereco_dest! /]</p>[/@letra]</td></tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if (doc.exClassificacao.descrClassificacao)??]
+                             <tr><td>[@letra tamanho=tl]<p><br/>Assunto: Encaminhamento de processo para abertura de PEC de Gestão de ARP</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                         </table>
+                     </td>
+                 </tr>
+             </table>
+        [@mioloDJE]
+                <p align="right">${doc.getEditor().getOrgaoUsuario().getMunicipioOrgaoUsu()}, ${aDateTime?string["dd"]} de ${aDateTime?string["MMMM"]} de ${aDateTime?string["yyyy"]}</p>
+                <br>
+                <br>
+                Ao Senhor ${contratada_nome_responsavel!}<br>
+            ${contratada_razao_social!}<br>
+            ${contratada_endereco!}<br>
+            ${contratada_email!}<br>
+                <br>
+                <br>
+                Assunto: Envio de Contrato para assinatura
+                <p> <br> </p>
+                <div style="font-family: Times New Roman; font-size: 12pt;">
+                [@corpoBIE]
+
+                    <!-- INICIO - Tagmeta -->
+                    <!-- Inicio - Corpo do conteudo -->
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Senhor ${contratada_nome_responsavel!},</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Encontra-se em fase de processamento nesta Empresa a formalização do Termo de Contrato n. ${termo_contrato_numero!}, decorrente da licitação n. ${numero_licitacao!}, a ser firmado entre a INFRAERO e a empresa ${nome_empresa_contratada!} e que tem como objeto a “${objeto_empresa_contratada!}”</p>
+
+                  	<p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sendo assim, encaminhamos anexa a minuta do Instrumento Contratual, para impressão em 02 (duas) vias e assinatura do representante legal da Contratada na primeira (Folha de Rosto) e última folha (Condições Contratuais), bem como rubrica nas demais, seguido, também, de assinatura de uma testemunha na primeira e última página. Após a coleta das assinaturas por parte dessa contratada, as vias deverão ser encaminhadas à Infraero (endereço abaixo), para assinatura do seu Representante. <u>O documento não está datado e assim deverá retornar à Infraero.</u></p>
+
+                  	<p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${endereco_sede!}</p>
+
+                  	<p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Por fim, informamos que eventuais dúvidas a respeito do teor deste ofício poderão ser dirimidas diretamente com esta Coordenação, através do telefone n. ${coordenacao_telefone!}, e-mail ${coordenacao_email!}.</p>
+
+					<p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Atenciosamente,</p>
+                    <!-- Fim - Corpo do conteudo -->
+
+                    <!-- FIM - Tagmeta -->
+
+
+                [/@corpoBIE]
+                [#if fecho??]<p style="font-size: ${tl}; TEXT-INDENT: 2.5cm">[@fechoBIE]${fecho!}${virgula!}[/@fechoBIE][/#if]</p>
+
+                </div>
+        [/@mioloDJE]
+    [/@estiloBrasaoEsquerdaOficio]
+    [#if _tiposigilo! == "2"]
+        [@acessoRestrito /]
+    [/#if]
+
+      </p>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      Código Classificação
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+[/@documento]

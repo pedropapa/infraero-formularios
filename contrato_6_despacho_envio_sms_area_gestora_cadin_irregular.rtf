@@ -1,0 +1,168 @@
+[#assign _texto=""  /]
+[#assign _tipo_autoridade=""  /]
+[#assign _genero=""  /]
+[#assign _vocativo=""  /]
+[#assign _enderecamento_dest=""  /]
+[#assign _nome_dest=""  /]
+[#assign _cargo_dest=""  /]
+[#assign _orgao_dest=""  /]
+[#assign _endereco_dest=""  /]
+[#assign _tamanho_letra=""  /]
+[#assign _autoridade={}  /]
+[#assign _tipo="DESPACHO"  /]
+[#assign _tiposigilo="" /]
+[#assign _fecho=""  /]
+[#assign aDateTime = .now /]
+
+[#if _autoridade?size > 0]
+    [#assign _vocativo=_autoridade.vocativo /]
+    [#assign _enderecamento_dest=_autoridade.enderecamento /]
+    [#assign _nome_dest=_autoridade.nome /]
+    [#assign _cargo_dest=_autoridade.cargo /]
+    [#assign _orgao_dest=_autoridade.orgao /]
+    [#assign _endereco_dest=_autoridade.endereco /]
+        <br/><br/>
+[/#if]
+
+[@entrevista]
+    [@grupo]
+        [@texto titulo="Número pregão eletrônico" var="numero_pregao_eletronico" largura=50 /]
+        [@texto titulo="Referência" var="texto_ref" largura=50 /]
+    [/@grupo]
+
+    [@grupo titulo="Dados gerais"]
+        [@grupo]
+            [@texto titulo="Área gestora ARP" var="area_gestora" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Expediente" var="expediente" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@numero titulo="Número Expediente" var="numero_expediente" /]
+        [/@grupo]
+        [@grupo]
+            [@selecao titulo="Artigo Instrumento Fundamentação" var="artigo_instrumento_fundamentacao" opcoes="na;no" reler=true /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Instrumento Fundamentação" var="instrumento_fundamentacao" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@numero titulo="Número SMS" var="numero_sms" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Empresa Favorecida" var="empresa_favorecida" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Receitas irregulares" var="receitas_irregulares" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Documento" var="doc_documento" largura="50" obrigatorio="sim" /]
+        [/@grupo]
+    [/@grupo]
+
+    [#if _tamanho_letra != ""]
+        [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
+    [#else]
+        [@selecao titulo="Tamanho da letra" var="tamanhoLetra" opcoes="Normal;Pequeno;Grande" /]
+    [/#if]
+[/@entrevista]
+
+[@documento margemDireita="3cm"]
+    [#if tamanhoLetra! == "Normal"]
+        [#assign tl = "10pt" /]
+    [#elseif tamanhoLetra! == "Pequeno"]
+        [#assign tl = "9pt" /]
+    [#elseif tamanhoLetra! == "Grande"]
+        [#assign tl = "13pt" /]
+    [#else]
+        [#assign tl = "11pt"]
+    [/#if]
+
+    [#if !(func.contains(fecho!'','.')) && !(func.contains(fecho!'',','))]
+        [#assign virgula ="," /]
+    [/#if]
+
+
+    [#if _tiposigilo! == "1"]
+        [#assign _reservado = true /]
+    [#elseif _tiposigilo! == "2"]
+        [#assign _sigiloso = true /]
+    [#elseif _tiposigilo! == "3"]
+        [#assign _secreto = true /]
+    [/#if]
+
+    [@estiloBrasaoEsquerdaOficio tipo=_tipo tamanhoLetra=tl formatarOrgao=true]
+             <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+                 <tr>
+                     <td align="left">
+                         <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0">
+                             <tr><td>[@letra tamanho=tl]<p>${enderecamento_dest!}</p>[/@letra]</td></tr>
+                             <tr><td>[@letra tamanho=tl]<p>${nome_dest!}</p>[/@letra]</td></tr>
+                            [#if cargo_dest??]
+                                <tr><td>[@letra tamanho=tl]<p>${cargo_dest!}</p>[/@letra]</td></tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if orgao_dest??]
+                             <tr><td>[@letra tamanho=tl]<p>${orgao_dest!}</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                            [#if endereco_dest??]
+                                <tr><td>[@letra tamanho=tl]<p>[@fixcrlf var=endereco_dest! /]</p>[/@letra]</td></tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if (doc.exClassificacao.descrClassificacao)??]
+                             <tr><td>[@letra tamanho=tl]<p><br/>Assunto: Encaminhamento de processo para abertura de PEC de Gestão de ARP</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                         </table>
+                     </td>
+                 </tr>
+             </table>
+        [@mioloDJE]
+                <p align="right">${doc.getEditor().getOrgaoUsuario().getMunicipioOrgaoUsu()}, ${aDateTime?string["dd"]} de ${aDateTime?string["MMMM"]} de ${aDateTime?string["yyyy"]}</p>
+                <br>
+                <br>
+                Senhor Destinatário ${area_gestora!}<br>
+                <br>
+                <br>
+                Assunto: Formalização de Solicitação de Materiais e Serviços - SMS
+                <br/>
+				Ref.: ARP n. ${texto_ref!}
+                <p> <br> </p>
+                <div style="font-family: Times New Roman; font-size: 12pt;">
+                [@corpoBIE]
+
+                    <!-- INICIO - Tagmeta -->
+                    <!-- Inicio - Corpo do conteudo -->
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Em atenção ao ${expediente!} (citar o expediente) n. ${numero_expediente!}, bem como ao previsto ${artigo_instrumento_fundamentacao!} ${instrumento_fundamentacao!}, elaboramos a Solicitação de Material e Serviços – SMS n. ${numero_sms!}, nas quantidades requeridas, em favor da empresa ${empresa_favorecida!}.</p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Em atendimento ao disposto no Edital que deu origem à ARP, para confecção da SMS, emitimos a Declaração do SICAF e CADIN, anexadas a este processo. Quanto ao SICAF, verifica-se que o <b>fornecedor encontra-se com situação irregular junto às Receitas, ${receitas_irregulares!} fato que impede a contratação.</b> Quanto ao CADIN, o fornecedor encontra-se em situação regular.</p>
+					<p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Desta forma, caberá a Área Gestora da ARP notificar o fornecedor das mencionadas irregularidades fiscais e solicitar a devida regularização das certidões vencidas no SICAF, antes de dar prosseguimento à contratação. Por força legal, <b>somente após essa regularização, a SMS em anexo poderá ser assinada pela Autoridade Competente</b>, conforme ${instrumento_fundamentacao!}, <b>e enviada para o fornecedor para providenciar a entrega do produto/execução dos serviços.</b></p>
+					<p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cumpre-nos ressaltar que de acordo com o item 44, alínea “f” da NI 6.01/F (LCT), <i>“Cabe a área interessada, controlar os quantitativos registrados, exceto dos órgãos e entidades participantes assim como das outras dependências”</i>, cabendo a esta ${doc_documento!} tão somente, a emissão da SMS de acordo com a solicitação proposta.</p>
+                    <!-- Fim - Corpo do conteudo -->
+
+                    <!-- FIM - Tagmeta -->
+
+
+                [/@corpoBIE]
+                [#if fecho??]<p style="font-size: ${tl}; TEXT-INDENT: 2.5cm">[@fechoBIE]${fecho!}${virgula!}[/@fechoBIE][/#if]</p>
+
+                </div>
+        [/@mioloDJE]
+    [/@estiloBrasaoEsquerdaOficio]
+    [#if _tiposigilo! == "2"]
+        [@acessoRestrito /]
+    [/#if]
+
+      </p>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      Código Classificação
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+[/@documento]
