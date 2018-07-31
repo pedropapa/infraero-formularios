@@ -1,4 +1,3 @@
-
 [#assign _texto=""  /]
 [#assign _tipo_autoridade=""  /]
 [#assign _genero=""  /]
@@ -10,7 +9,7 @@
 [#assign _endereco_dest=""  /]
 [#assign _tamanho_letra=""  /]
 [#assign _autoridade={}  /]
-[#assign _tipo="DESPACHO"  /]
+[#assign _tipo="Ato Administrativo"  /]
 [#assign _tiposigilo="" /]
 [#assign _fecho=""  /]
 [#assign aDateTime = .now /]
@@ -246,7 +245,6 @@
                  </tr>
              </table>
         [@mioloDJE]
-                <p align="left">Ato administrativo n. SIGLA/${aDateTime?string["yyyy"]}</p>
                 <p align="right">${doc.getEditor().getOrgaoUsuario().getMunicipioOrgaoUsu()}, ${aDateTime?string["dd"]} de ${aDateTime?string["MMMM"]} de ${aDateTime?string["yyyy"]}</p>
                 <br>
                 <br>
@@ -288,15 +286,4 @@
     [#if _tiposigilo! == "2"]
         [@acessoRestrito /]
     [/#if]
-
-      <br>
-      <br>
-      <br>
-      <br>
-      Código Classificação
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
 [/@documento]

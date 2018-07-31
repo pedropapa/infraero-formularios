@@ -9,7 +9,7 @@
 [#assign _endereco_dest=""  /]
 [#assign _tamanho_letra=""  /]
 [#assign _autoridade={}  /]
-[#assign _tipo="DESPACHO"  /]
+[#assign _tipo=""  /]
 [#assign _tiposigilo="" /]
 [#assign _fecho=""  /]
 [#assign aDateTime = .now /]
@@ -25,11 +25,214 @@
 [/#if]
 
 [@entrevista]
-    [@grupo]
-        [@texto titulo="Número pregão eletrônico" var="numero_pregao_eletronico" largura=50 /]
-        [@texto titulo="Referência" var="texto_ref" largura=50 /]
+    [@grupo titulo = "Item A"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_a" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_a" largura=50 /]
+        [/#if]
     [/@grupo]
-
+    [@grupo titulo = "Item B"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_b" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_b" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Item C"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_c" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_c" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Item D"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_d" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_d" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Item E"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_e" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_e" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Item F"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_f" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_f" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Item G"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_g" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_g" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Item H"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_h" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_h" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Item I"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_i" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_i" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Item J"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_j" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_j" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Item K"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_k" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_k" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Item L"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_l" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_l" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Item M"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_m" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_m" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Item N"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_n" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_n" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Item O"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_o" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_o" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Item P"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_p" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_o" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Item Q"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_q" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_q" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Item R"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_r" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_r" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Item S"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_s" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_s" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Item T"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_t" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_t" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Item U"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_u" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_u" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Item V"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_v" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_v" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Item W"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_w" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_w" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Item X"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_x" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_x" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Item Y"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_y" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_y" largura=50 /]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Outros"]
+        [@grupo]
+            [@selecao titulo="Ressalvas" var="ressalvas_outros" opcoes="Não;Sim;Não aplicável" reler=true /]
+        [/@grupo]
+        [#if ressalvas_a?? && ressalvas_a == "Sim"]
+            [@texto titulo="Detalhamento" var="detalhamento_outros" largura=50 /]
+        [/#if]
+    [/@grupo]
     [#if _tamanho_letra != ""]
         [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
     [#else]
@@ -105,33 +308,27 @@
                     <p style="text-align: justify;font-family: Calibri; font-size: 12pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <b><u>ANÁLISE PRÉVIA:</u></b></p>
 
-					<table width="100%" border="1" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+					<table width="100%" border="1" cellpadding="0" borderColor=#000 cellspacing="0" bgcolor="#FFFFFF">
                         <tr>
-                            <td align="left" width="50%">
-                                &nbsp;&nbsp;&nbsp;&nbsp;<b>ITEM 15 DA NI 6.01/F (LCT)</b>
+                            <td rowspan="2" width="277" style="padding: 15px;">
+                                <p><strong>ITEM 15 DA NI 6.01/F (LCT)</strong></p>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td align="center"><b>RESSALVAS</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="border-top: 1px solid black;" width="100%"
-                                                   cellspacing="0" cellpadding="1">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>Não</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>Sim</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">Não<br>Aplicável</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td colspan="3" width="134" align="center">
+                                <p><strong>RESSALVAS</strong></p>
                             </td>
-                            <td align="center" width="25%">
-                                <b>Detalhamento</b>
+                            <td rowspan="2" width="135" align="center">
+                                <p><strong>Detalhamento</strong></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="44" align="center" style="padding: 6px;">
+                                <p><strong>N&atilde;o</strong></p>
+                            </td>
+                            <td width="44" align="center" style="padding: 6px;">
+                                <p><strong>Sim</strong></p>
+                            </td>
+                            <td width="44" align="center" style="padding: 6px;">
+                                <p><strong>N&atilde;o aplic&aacute;vel</strong></p>
                             </td>
                         </tr>
                         <tr>
@@ -140,102 +337,79 @@
                                     a) indicação da aplicabilidade e enquadramento legal, quando for adotado o RDC;
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_a?? && ressalvas_a == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_a?? && ressalvas_a == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_a?? && ressalvas_a == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_a?? && ressalvas_a != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_a?? && ressalvas_a != "Sim"]&nbsp;[#else]${detalhamento_a!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
                             <td align="left" width="50%">
                                 <div style="padding: 5px; margin-left: 15px">
-                                    b) descrição clara, precisa e suficiente do objeto a ser contratado, contemplando a definição da sua natureza, se comum ou não;
+                                    b) descrição clara, precisa e suficiente do objeto a ser contratado, contemplando a
+                                    definição da sua natureza, se comum ou não;
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_b?? && ressalvas_b == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_b?? && ressalvas_b == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_b?? && ressalvas_b == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_b?? && ressalvas_b != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_b?? && ressalvas_b != "Sim"]&nbsp;[#else]${detalhamento_b!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
                             <td align="left" width="50%">
                                 <div style="padding: 5px; margin-left: 15px">
-                                    c) justificativa da necessidade da contratação, especificando a sua vantagem, utilidade, oportunidade, conveniência, os objetivos e resultados a serem alcançados, a economicidade e o melhor aproveitamento dos recursos humanos, materiais ou financeiros disponíveis;
+                                    c) justificativa da necessidade da contratação, especificando a sua vantagem,
+                                    utilidade, oportunidade, conveniência, os objetivos e resultados a serem alcançados,
+                                    a economicidade e o melhor aproveitamento dos recursos humanos, materiais ou
+                                    financeiros disponíveis;
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_c?? && ressalvas_c == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_c?? && ressalvas_c == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_c?? && ressalvas_c == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_c?? && ressalvas_c != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_c?? && ressalvas_c != "Sim"]&nbsp;[#else]${detalhamento_c!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
                             <td align="left" width="50%">
                                 <div style="padding: 5px; margin-left: 15px">
-                                    d) prazo de entrega ou da execução do objeto pretendido e, ainda, o prazo de vigência da ARP, se for o caso, e do contrato;
+                                    d) prazo de entrega ou da execução do objeto pretendido e, ainda, o prazo de
+                                    vigência da ARP, se for o caso, e do contrato;
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_d?? && ressalvas_d == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_d?? && ressalvas_d == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_d?? && ressalvas_d == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_d?? && ressalvas_d != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_d?? && ressalvas_d != "Sim"]&nbsp;[#else]${detalhamento_d!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
@@ -244,128 +418,99 @@
                                     e) preço estimado;
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_e?? && ressalvas_e == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_e?? && ressalvas_e == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_e?? && ressalvas_e == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_e?? && ressalvas_e != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_e?? && ressalvas_e != "Sim"]&nbsp;[#else]${detalhamento_e!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
                             <td align="left" width="50%">
                                 <div style="padding: 5px; margin-left: 15px">
-                                    f) justificativa do preço estimado, com a demonstração de sua razoabilidade e as informações relativas às fontes de pesquisas;
+                                    f) justificativa do preço estimado, com a demonstração de sua razoabilidade e as
+                                    informações relativas às fontes de pesquisas;
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_f?? && ressalvas_f == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_f?? && ressalvas_f == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_f?? && ressalvas_f == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_f?? && ressalvas_f != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_f?? && ressalvas_f != "Sim"]&nbsp;[#else]${detalhamento_f!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
                             <td align="left" width="50%">
                                 <div style="padding: 5px; margin-left: 15px">
-                                    g) critério de julgamento que pode ser global, por item ou por lote, conforme o caso;
+                                    g) critério de julgamento que pode ser global, por item ou por lote, conforme o
+                                    caso;
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_g?? && ressalvas_g == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_g?? && ressalvas_g == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_g?? && ressalvas_g == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_g?? && ressalvas_g != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_g?? && ressalvas_g != "Sim"]&nbsp;[#else]${detalhamento_g!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
                             <td align="left" width="50%">
                                 <div style="padding: 5px; margin-left: 15px">
-                                    h) indicação da fonte de recursos, observadas as instruções da área financeira nos normativos internos e o número do item do plano de ação de investimento, caso existente;
+                                    h) indicação da fonte de recursos, observadas as instruções da área financeira nos
+                                    normativos internos e o número do item do plano de ação de investimento, caso
+                                    existente;
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_h?? && ressalvas_h == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_h?? && ressalvas_h == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_h?? && ressalvas_h == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_h?? && ressalvas_h != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_h?? && ressalvas_h != "Sim"]&nbsp;[#else]${detalhamento_h!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
                             <td align="left" width="50%">
                                 <div style="padding: 5px; margin-left: 15px">
-                                    i) tipo de licitação, indicando os respectivos critérios de pontuação e os fatores de ponderação com a devida motivação, quando se tratar de melhor técnica ou técnica e preço;
+                                    i) tipo de licitação, indicando os respectivos critérios de pontuação e os fatores
+                                    de ponderação com a devida motivação, quando se tratar de melhor técnica ou técnica
+                                    e preço;
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_i?? && ressalvas_i == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_i?? && ressalvas_i == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_i?? && ressalvas_i == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_i?? && ressalvas_i != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_i?? && ressalvas_i != "Sim"]&nbsp;[#else]${detalhamento_i!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
@@ -374,50 +519,37 @@
                                     j) regime de contratação;
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_j?? && ressalvas_j == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_j?? && ressalvas_j == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_j?? && ressalvas_j == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_j?? && ressalvas_j != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_j?? && ressalvas_j != "Sim"]&nbsp;[#else]${detalhamento_j!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
                             <td align="left" width="50%">
                                 <div style="padding: 5px; margin-left: 15px">
-                                    k) regime de execução e o critério de julgamento, no caso de adoção do RDC, conforme arts. 8º e 18 da Lei nº 12.462, de 2011;
+                                    k) regime de execução e o critério de julgamento, no caso de adoção do RDC, conforme
+                                    arts. 8º e 18 da Lei nº 12.462, de 2011;
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_k?? && ressalvas_k == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_k?? && ressalvas_k == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_k?? && ressalvas_k == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_k?? && ressalvas_k != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_k?? && ressalvas_k != "Sim"]&nbsp;[#else]${detalhamento_k!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
@@ -426,50 +558,37 @@
                                     l) critério de aceitabilidade de preços unitários, totais e globais;
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_l?? && ressalvas_l == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_l?? && ressalvas_l == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_l?? && ressalvas_l == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_l?? && ressalvas_l != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_l?? && ressalvas_l != "Sim"]&nbsp;[#else]${detalhamento_l!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
                             <td align="left" width="50%">
                                 <div style="padding: 5px; margin-left: 15px">
-                                    m) local, endereço completo de entrega do bem, da prestação do serviço, da execução da obra ou da concessão de uso da área;
+                                    m) local, endereço completo de entrega do bem, da prestação do serviço, da execução
+                                    da obra ou da concessão de uso da área;
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_m?? && ressalvas_m == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_m?? && ressalvas_m == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_m?? && ressalvas_m == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_m?? && ressalvas_m != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_m?? && ressalvas_m != "Sim"]&nbsp;[#else]${detalhamento_m!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
@@ -478,154 +597,122 @@
                                     n) forma de fornecimento, se total ou parcelada;
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_n?? && ressalvas_n == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_n?? && ressalvas_n == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_n?? && ressalvas_n == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_n?? && ressalvas_n != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_n?? && ressalvas_n != "Sim"]&nbsp;[#else]${detalhamento_n!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
                             <td align="left" width="50%">
                                 <div style="padding: 5px; margin-left: 15px">
-                                    o) forma de pagamento, se por etapa parcelada, total ou mensal, conforme cronograma físico-financeiro, quando se tratar de obras ou serviços, inclusive de engenharia;
+                                    o) forma de pagamento, se por etapa parcelada, total ou mensal, conforme cronograma
+                                    físico-financeiro, quando se tratar de obras ou serviços, inclusive de engenharia;
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_o?? && ressalvas_o == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_o?? && ressalvas_o == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_o?? && ressalvas_o == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_o?? && ressalvas_o != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_o?? && ressalvas_o != "Sim"]&nbsp;[#else]${detalhamento_o!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
                             <td align="left" width="50%">
                                 <div style="padding: 5px; margin-left: 15px">
-                                    p) necessidade de exigência de garantia para manutenção de proposta, cumprimento das obrigações contratuais e seguro de serviços (risco de engenharia e responsabilidade civil);
+                                    p) necessidade de exigência de garantia para manutenção de proposta, cumprimento das
+                                    obrigações contratuais e seguro de serviços (risco de engenharia e responsabilidade
+                                    civil);
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_p?? && ressalvas_p == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_p?? && ressalvas_p == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_p?? && ressalvas_p == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_p?? && ressalvas_p != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_p?? && ressalvas_p != "Sim"]&nbsp;[#else]${detalhamento_p!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
                             <td align="left" width="50%">
                                 <div style="padding: 5px; margin-left: 15px">
-                                    q) critério de reajuste, revisão ou repactuação de preços, com indicação do índice, coluna, ou revista, conforme o caso, observando, ainda, a legislação e os modelos de editais previamente aprovados pelo órgão jurídico de consultoria do Centro Corporativo;
+                                    q) critério de reajuste, revisão ou repactuação de preços, com indicação do índice,
+                                    coluna, ou revista, conforme o caso, observando, ainda, a legislação e os modelos de
+                                    editais previamente aprovados pelo órgão jurídico de consultoria do Centro
+                                    Corporativo;
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_q?? && ressalvas_q == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_q?? && ressalvas_q == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_q?? && ressalvas_q == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_q?? && ressalvas_q != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_q?? && ressalvas_q != "Sim"]&nbsp;[#else]${detalhamento_q!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
                             <td align="left" width="50%">
                                 <div style="padding: 5px; margin-left: 15px">
-                                    r) indicação do nome completo, matrícula, cargo e função, lotação e telefone dos membros técnicos indicados para compor a comissão de licitação ou equipe de apoio do pregoeiro, bem como do responsável para agendamento de visita técnica ao local de execução do objeto, quando admitida;
+                                    r) indicação do nome completo, matrícula, cargo e função, lotação e telefone dos
+                                    membros técnicos indicados para compor a comissão de licitação ou equipe de apoio do
+                                    pregoeiro, bem como do responsável para agendamento de visita técnica ao local de
+                                    execução do objeto, quando admitida;
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_r?? && ressalvas_r == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_r?? && ressalvas_r == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_r?? && ressalvas_r == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_r?? && ressalvas_r != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_r?? && ressalvas_r != "Sim"]&nbsp;[#else]${detalhamento_r!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
                             <td align="left" width="50%">
                                 <div style="padding: 5px; margin-left: 15px">
-                                    s)	possibilidade de participação de pessoas jurídicas organizadas em consórcio e, caso permitido, o número máximo de integrantes por consórcio;
+                                    s) possibilidade de participação de pessoas jurídicas organizadas em consórcio e,
+                                    caso permitido, o número máximo de integrantes por consórcio;
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_s?? && ressalvas_s == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_s?? && ressalvas_s == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_s?? && ressalvas_s == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_s?? && ressalvas_s != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_s?? && ressalvas_s != "Sim"]&nbsp;[#else]${detalhamento_s!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
@@ -634,158 +721,125 @@
                                     t) necessidade de exigências de qualificação técnica;
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_t?? && ressalvas_t == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_t?? && ressalvas_t == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_t?? && ressalvas_t == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_t?? && ressalvas_t != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_t?? && ressalvas_t != "Sim"]&nbsp;[#else]${detalhamento_t!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
                             <td align="left" width="50%">
                                 <div style="padding: 5px; margin-left: 15px">
-                                    u) justificativa da exigência de qualificação técnica, evidenciando que são indispensáveis para garantir a execução do objeto da contratação, sem comprometer a amplitude do rol de interessados em participar da licitação;
+                                    u) justificativa da exigência de qualificação técnica, evidenciando que são
+                                    indispensáveis para garantir a execução do objeto da contratação, sem comprometer a
+                                    amplitude do rol de interessados em participar da licitação;
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_u?? && ressalvas_u == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_u?? && ressalvas_u == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_u?? && ressalvas_u == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_u?? && ressalvas_u != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_u?? && ressalvas_u != "Sim"]&nbsp;[#else]${detalhamento_u!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
                             <td align="left" width="50%">
                                 <div style="padding: 5px; margin-left: 15px">
-                                    v) indicação da parcela dos serviços, obras ou fornecimento que pode ser subcontratada;
+                                    v) indicação da parcela dos serviços, obras ou fornecimento que pode ser
+                                    subcontratada;
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_v?? && ressalvas_v == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_v?? && ressalvas_v == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_v?? && ressalvas_v == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_v?? && ressalvas_v != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_v?? && ressalvas_v != "Sim"]&nbsp;[#else]${detalhamento_v!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
                             <td align="left" width="50%">
                                 <div style="padding: 5px; margin-left: 15px">
-                                    <p>w) documentação técnica, conforme a seguir, com nível de precisão adequada para caracterizar o objeto pretendido:</p>
+                                    <p>w) documentação técnica, conforme a seguir, com nível de precisão adequada para
+                                        caracterizar o objeto pretendido:</p>
                                     <p>&nbsp;&nbsp;&nbsp;&nbsp;1. anteprojeto de engenharia,</p>
                                     <p>&nbsp;&nbsp;&nbsp;&nbsp;2. projeto básico e executivo, quando for o caso,</p>
                                     <p>&nbsp;&nbsp;&nbsp;&nbsp;3. termo de referência, e </p>
                                     <p>&nbsp;&nbsp;&nbsp;&nbsp;4. outros elementos necessários e suficientes.</p>
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_w?? && ressalvas_w == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_w?? && ressalvas_w == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_w?? && ressalvas_w == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_w?? && ressalvas_w != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_w?? && ressalvas_w != "Sim"]&nbsp;[#else]${detalhamento_w!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
                             <td align="left" width="50%">
                                 <div style="padding: 5px; margin-left: 15px">
-                                    x) planilha orçamentária com a estimativa detalhada dos custos, compatíveis com os quantitativos e demais elementos da documentação técnica, observadas as disposições dos manuais de procedimentos específicos e do Decreto nº 7.983, de 2013;
+                                    x) planilha orçamentária com a estimativa detalhada dos custos, compatíveis com os
+                                    quantitativos e demais elementos da documentação técnica, observadas as disposições
+                                    dos manuais de procedimentos específicos e do Decreto nº 7.983, de 2013;
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_x?? && ressalvas_x == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_x?? && ressalvas_x == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_x?? && ressalvas_x == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_x?? && ressalvas_x != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_x?? && ressalvas_x != "Sim"]&nbsp;[#else]${detalhamento_x!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
                             <td align="left" width="50%">
                                 <div style="padding: 5px; margin-left: 15px">
-                                    y) autorização da autoridade competente, observado o Ato Administrativo que estabelece os níveis hierárquicos e os limites de competência no âmbito da Infraero, devidamente identificada, preferencialmente no próprio corpo do documento de solicitação;
+                                    y) autorização da autoridade competente, observado o Ato Administrativo que
+                                    estabelece os níveis hierárquicos e os limites de competência no âmbito da Infraero,
+                                    devidamente identificada, preferencialmente no próprio corpo do documento de
+                                    solicitação;
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_y?? && ressalvas_y == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_y?? && ressalvas_y == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_y?? && ressalvas_y == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_y?? && ressalvas_y != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_y?? && ressalvas_y != "Sim"]&nbsp;[#else]${detalhamento_y!}[/#if]</p>
                             </td>
                         </tr>
                         <tr>
@@ -794,24 +848,17 @@
                                     Outros.
                                 </div>
                             </td>
-                            <td width="25%">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td>
-                                            <table border="0" style="" width="100%" cellspacing="0" cellpadding="0">
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%" style="border-right: 1px solid black"><b>&nbsp;</b>
-                                                </td>
-                                                <td align="center" width="33%"><b style="font-size: 9pt;">&nbsp;</b>
-                                                </td>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td width="43" [#if ressalvas_outros?? && ressalvas_outros == "Não"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
                             </td>
-                            <td align="center" width="25%">
-                                <b></b>
+                            <td width="43" [#if ressalvas_outros?? && ressalvas_outros == "Sim"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="49" [#if ressalvas_outros?? && ressalvas_outros == "Não Aplicável"]style="background-color: black"[/#if]>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="135" [#if ressalvas_outros?? && ressalvas_outros != "Sim"]style="background-color: black"[#else]style="padding: 15px;"[/#if]>
+                                <p>[#if ressalvas_outros?? && ressalvas_outros != "Sim"]&nbsp;[#else]${detalhamento_outros!}[/#if]</p>
                             </td>
                         </tr>
 
@@ -834,15 +881,4 @@
     [/#if]
 
       </p>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      Código Classificação
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
 [/@documento]

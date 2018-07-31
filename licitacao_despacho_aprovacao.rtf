@@ -1,4 +1,3 @@
-
 [#assign _texto=""  /]
 [#assign _tipo_autoridade=""  /]
 [#assign _genero=""  /]
@@ -31,6 +30,14 @@
         [@texto titulo="Referência" var="texto_ref" largura=50 /]
     [/@grupo]
 
+    [@grupo titulo = "Dados Signatário"]
+        [@grupo]
+            [@texto titulo="Nome Coordenador Licitações" var="coordenador_licitacoes_nome" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Nome Gerente Licitações" var="gerente_licitacoes_nome" largura=50 /]
+        [/@grupo]
+    [/@grupo]
 
     [@grupo titulo="Dados do destinatário" esconder=(_enderecamento_dest!="" && _nome_dest!="" && _cargo_dest!="" && _orgao_dest!="" && _endereco_dest!="")]
                 <!-- Tratamento -->
@@ -130,7 +137,7 @@
         [#assign _secreto = true /]
     [/#if]
 
-    [@estiloBrasaoEsquerdaOficio tipo=_tipo tamanhoLetra=tl formatarOrgao=true]
+    [@estiloBrasaoAEsquerda tipo=_tipo tamanhoLetra=tl formatarOrgao=true]
              <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
                  <tr>
                      <td align="left">
@@ -171,26 +178,26 @@
                 <p> <br> </p>
                 <div style="font-family: Times New Roman; font-size: 10pt;">
                 [@corpoBIE]
-                    
+
                     <!-- INICIO - Tagmeta -->
                     <!-- Inicio - Corpo do conteudo -->
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Trata-se de solicitação para instauração de que tem por objeto a “${objeto_instauracao!}”.</p>
 
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cumpre-nos registrar que coube a Gerência de Licitações, por intermédio da Coordenação de Licitação de Serviços em Geral e de Registro de Preços/LALI-3, atuar no sentido restrito da instauração do procedimento licitatório, de acordo com o arcabouço normativo da INFRAERO, especialmente o RLCI e o Capítulo II da NI 6.01/F (LCT), de 16/05/2016, dentre os quais a elaboração da minuta do edital, na qual está refletida a utilização dos aplicativos legais e normativos atinentes ao tema, cabendo à área requisitante a responsabilidade pelas informações técnicas, financeiras e orçamentárias inseridas no Edital, pelas justificativas de sua aplicabilidade, as quais insertas no dossiê do processo, bem como pela responsabilidade de pareceres futuros em função de eventuais petições atinentes as exigências formuladas.<p>
-                    
+
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No que tange a análise prévia realizada por esta área de licitações, a área requisitante apresentou os esclarecimentos solicitados em ${esclarecimento_solicitado!}</p>
-                    
+
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O Edital utilizado está disponível na rede no seguinte endereço: ${endereco_edital!}, com as adaptações/atualizações necessárias.</p>
-                     
+
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O Ato Administrativo n. ${numero_ato_administrativo!}, de ${data_ato_administrativo!}, que nomeia o Pregoeiro e sua Equipe de Apoio, encontra-se apenso aos autos.</p>
 
                     [#if outras_informacoes_necessarias??]<p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">6. ${outras_informacoes_necessarias!}</p>[/#if]
 
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">[#if outras_informacoes_necessarias??]7[#else]6[/#if].&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Assim, nos termos d(o) (a) ${termo!} da NI ${ni!}, de ${data_termo_ni!}, encaminhamos o presente procedimento licitatório à essa área Jurídica, para proceder ao exame, aprovação e rubrica na minuta do Edital e seus anexos, se for o caso, conforme dispõe o ${citada_ni!} da citada NI.</p>
-                    
-                    
+
+
                     <!-- Fim - Corpo do conteudo -->
-                    
+
                     <!-- FIM - Tagmeta -->
 
 
@@ -199,47 +206,10 @@
 
                 </div>
         [/@mioloDJE]
-    [/@estiloBrasaoEsquerdaOficio]
+    [/@estiloBrasaoAEsquerda]
     [#if _tiposigilo! == "2"]
         [@acessoRestrito /]
     [/#if]
-      
-      <p style="page-break-before: always;">
-      
-      <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">De acordo. Encaminhe-se à ${area_licitacoes!}.</p>
-      <br /><br /><br />
-      <p align="center" style="font-family: Times New Roman; font-size: 10pt">
-          SIGNATÁRIO<br>
-          Coordenador da Área de Licitações<br>
-      </p>
-      <br>
-      <br>
-      <br>
-      <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">Ciente. Encaminhe-se à ${area_juridica!}.</p><br>
-      <br>
-      <br>
-      <br>
-      <p align="center" style="font-family: Times New Roman; font-size: 10pt">
-          SIGNATÁRIO<br>
-          Gerente de Licitações<br>
-      </p>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      Código Classificação
-      </p>
+
+    [@signatarioLicitacoes/]
 [/@documento]

@@ -1,4 +1,3 @@
-
 [#assign _texto=""  /]
 [#assign _tipo_autoridade=""  /]
 [#assign _genero=""  /]
@@ -30,8 +29,15 @@
         [@texto titulo="Número pregão eletrônico" var="numero_pregao_eletronico" largura=50 /]
         [@texto titulo="Referência" var="texto_ref" largura=50 /]
     [/@grupo]
-
-    [@grupo]
+    [@grupo titulo = "Dados Signatário"]
+        [@grupo]
+            [@texto titulo="Nome Coordenador Licitações" var="coordenador_licitacoes_nome" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Nome Gerente Licitações" var="gerente_licitacoes_nome" largura=50 /]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo = "Dados Gerais"]
         [@grupo]
             [@texto titulo="Objeto instauração" var="objeto_instauracao" largura="50" /]
         [/@grupo]
@@ -97,7 +103,7 @@
         [#assign _secreto = true /]
     [/#if]
 
-    [@estiloBrasaoEsquerdaOficio tipo=_tipo tamanhoLetra=tl formatarOrgao=true]
+    [@estiloBrasaoAEsquerda tipo=_tipo tamanhoLetra=tl formatarOrgao=true]
              <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
                  <tr>
                      <td align="left">
@@ -174,39 +180,10 @@
 
                 </div>
         [/@mioloDJE]
-    [/@estiloBrasaoEsquerdaOficio]
+    [/@estiloBrasaoAEsquerda]
     [#if _tiposigilo! == "2"]
         [@acessoRestrito /]
     [/#if]
 
-      <p style="page-break-before: always;">
-
-      <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">De acordo. Encaminhe-se à ${area_licitacoes!}.</p>
-      <br /><br /><br />
-      <p align="center" style="font-family: Times New Roman; font-size: 10pt">
-          SIGNATÁRIO<br>
-          Coordenador da Área de Licitações<br>
-      </p>
-      <br>
-      <br>
-      <br>
-      <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">Ciente. Encaminhe-se à ${area_juridica!}.</p><br>
-      <br>
-      <br>
-      <br>
-      <p align="center" style="font-family: Times New Roman; font-size: 10pt">
-          SIGNATÁRIO<br>
-          Gerente de Licitações<br>
-      </p>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      Código Classificação
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
+    [@signatarioLicitacoes/]
 [/@documento]
