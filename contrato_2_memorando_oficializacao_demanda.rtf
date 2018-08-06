@@ -1,0 +1,275 @@
+[#assign _texto=""  /]
+[#assign _tipo_autoridade=""  /]
+[#assign _genero=""  /]
+[#assign _vocativo=""  /]
+[#assign _enderecamento_dest=""  /]
+[#assign _nome_dest=""  /]
+[#assign _cargo_dest=""  /]
+[#assign _orgao_dest=""  /]
+[#assign _endereco_dest=""  /]
+[#assign _tamanho_letra=""  /]
+[#assign _autoridade={}  /]
+[#assign _tipo=""  /]
+[#assign _tiposigilo="" /]
+[#assign _fecho=""  /]
+[#assign aDateTime = .now /]
+
+[#if _autoridade?size > 0]
+    [#assign _vocativo=_autoridade.vocativo /]
+    [#assign _enderecamento_dest=_autoridade.enderecamento /]
+    [#assign _nome_dest=_autoridade.nome /]
+    [#assign _cargo_dest=_autoridade.cargo /]
+    [#assign _orgao_dest=_autoridade.orgao /]
+    [#assign _endereco_dest=_autoridade.endereco /]
+        <br/><br/>
+[/#if]
+
+[@entrevista]
+    [@grupo titulo="Dados do destinatário" esconder=(_enderecamento_dest!="" && _nome_dest!="" && _cargo_dest!="" && _orgao_dest!="" && _endereco_dest!="")]
+                <!-- Tratamento -->
+        [#if _enderecamento_dest != ""]
+            [@oculto var="enderecamento_dest" valor=_enderecamento_dest /]
+        [#else]
+            [#if tratamento??]
+                [@grupo]
+                    [@checkbox titulo="Especificar manualmente a forma de endereçamento" var="especificarEnderecamento" reler=true /]
+                [/@grupo]
+            [/#if]
+            [#if !tratamento?? || (especificarEnderecamento?? && especificarEnderecamento == 'Sim')]
+                [@grupo]
+                    [@texto titulo="Forma de endereçamento" var="enderecamento_dest" largura="45" /]
+                [/@grupo]
+            [#else]
+                [@oculto var="enderecamento_dest" valor="${(tratamento.formaDeEnderecamento)!}" /]
+            [/#if]
+        [/#if]
+
+    [/@grupo]
+    [@grupo titulo = "Cabeçalho"]
+        [@grupo]
+            [@numero titulo="Nome destinatário" var="nome_destinatario" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Objeto Contratação" var="objeto_contratacao" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Referencia" var="referencia" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Nº Termo Contrato" var="numero_termo_contrato" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Termo Item" var="termo_item" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="NI" var="ni" largura=50 /]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo = "Informações complementares"]
+        [@grupo]
+            [@numero titulo="Informações elaborador da demanda" var="informacoes_elaborador" /]
+        [/@grupo]
+        [@grupo]
+            [@numero titulo="Informações validador da demanda" var="informacoes_validador" /]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo="Outras informacoes necessarias"]
+        [@grupo]
+            [@editor titulo="" var="outras_informacoes_necessarias" /]
+        [/@grupo]
+    [/@grupo]
+
+    [#if _tamanho_letra != ""]
+        [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
+    [#else]
+        [@selecao titulo="Tamanho da letra" var="tamanhoLetra" opcoes="Normal;Pequeno;Grande" /]
+    [/#if]
+[/@entrevista]
+
+[@documento margemDireita="3cm"]
+    [#if tamanhoLetra! == "Normal"]
+        [#assign tl = "10pt" /]
+    [#elseif tamanhoLetra! == "Pequeno"]
+        [#assign tl = "9pt" /]
+    [#elseif tamanhoLetra! == "Grande"]
+        [#assign tl = "13pt" /]
+    [#else]
+        [#assign tl = "11pt"]
+    [/#if]
+
+    [#if !(func.contains(fecho!'','.')) && !(func.contains(fecho!'',','))]
+        [#assign virgula ="," /]
+    [/#if]
+
+
+    [#if _tiposigilo! == "1"]
+        [#assign _reservado = true /]
+    [#elseif _tiposigilo! == "2"]
+        [#assign _sigiloso = true /]
+    [#elseif _tiposigilo! == "3"]
+        [#assign _secreto = true /]
+    [/#if]
+
+    [@estiloBrasaoAEsquerda tipo=_tipo tamanhoLetra=tl formatarOrgao=true omitirCodigo=true]
+             <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+                 <tr>
+                     <td align="left">
+                         <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0">
+                             <tr>
+                                 <td>[@letra tamanho=tl]<p>${enderecamento_dest!}</p>[/@letra]</td>
+                             </tr>
+                             <tr>
+                                 <td>[@letra tamanho=tl]<p>${nome_dest!}</p>[/@letra]</td>
+                             </tr>
+                            [#if cargo_dest??]
+                                <tr>
+                                    <td>[@letra tamanho=tl]<p>${cargo_dest!}</p>[/@letra]</td>
+                                </tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if orgao_dest??]
+                             <tr><td>[@letra tamanho=tl]<p>${orgao_dest!}</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                            [#if endereco_dest??]
+                                <tr>
+                                    <td>[@letra tamanho=tl]<p>[@fixcrlf var=endereco_dest! /]</p>[/@letra]</td>
+                                </tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if (doc.exClassificacao.descrClassificacao)??]
+                             <tr><td>[@letra tamanho=tl]<p><br/>Assunto: ${(doc.exClassificacao.descrClassificacao)!}</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                         </table>
+                     </td>
+                 </tr>
+             </table>
+        [@mioloDJE]
+                <p align="right">${doc.getEditor().getOrgaoUsuario().getMunicipioOrgaoUsu()}, ${aDateTime?string["dd"]} de ${aDateTime?string["MMMM"]} de ${aDateTime?string["yyyy"]}</p>
+                <br>
+                <br>
+                Senhor Destinatário ${nome_destinatario!}<br>
+                <br>
+                <br>
+                Assunto: Planejamento dos serviços ${objeto_contratacao!}
+                <br/>
+				Ref.: ARP n. ${referencia!}
+                <p> <br> </p>
+                <div style="font-family: Times New Roman; font-size: 12pt;">
+                [@corpoBIE]
+
+                    <!-- INICIO - Tagmeta -->
+                    <!-- Inicio - Corpo do conteudo -->
+                    <ol>
+                        <li>Solicitamos que seja instaurado planejamento para nova contrata&ccedil;&atilde;o dos servi&ccedil;os em ep&iacute;grafe,
+                            a qual substituir&aacute; o contrato n. ${numero_termo_contrato!}
+                        </li>
+                    </ol>
+                    <p>&nbsp;</p>
+                    <ol start="2">
+                        <li>Nos termos do item ${termo_item!} da NI ${ni!} segue em anexo minuta do Termo de Refer&ecirc;ncia elaborado por essa
+                            &aacute;rea para embasar o preenchimento da planilha de custos e forma&ccedil;&atilde;o de pre&ccedil;os no
+                            sistema corporativo e demais tratativas.
+                        </li>
+                    </ol>
+                    <p>&nbsp;</p>
+                    <ol start="3">
+                        <li>Abaixo seguem informa&ccedil;&otilde;es complementares:</li>
+                    </ol>
+                    <p>&nbsp;</p>
+                    <table border=1 borderColor=#000 style="text-align: center" cellpadding=5 cellspacing=0 width=100%>
+                        <tbody>
+                        <tr>
+                            <td colspan="2" width="467">
+                                <p><strong>&Aacute;rea Requisitante:</strong></p>
+                                <p>&nbsp;</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" width="467">
+                                <p><strong>Respons&aacute;vel pela Demanda:</strong></p>
+                                <p><strong>&nbsp;</strong></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="234">
+                                <p><strong>E-mail:</strong></p>
+                                <p><strong>&nbsp;</strong></p>
+                            </td>
+                            <td width="234">
+                                <p><strong>Telefone: </strong></p>
+                                <p><strong>&nbsp;</strong></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" width="467">
+                                <p><strong>1.&nbsp;&nbsp; </strong><strong>Justificativa da necessidade de contrata&ccedil;&atilde;o do
+                                    servi&ccedil;o</strong></p>
+                                <p><strong>&nbsp;</strong></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" width="467">
+                                <p><strong>2.&nbsp;&nbsp; </strong><strong>Quantidade de servi&ccedil;o a ser contratada (escopo)</strong>
+                                </p>
+                                <p><strong>&nbsp;</strong></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" width="467">
+                                <p><strong>3.&nbsp;&nbsp; </strong><strong>Conta Or&ccedil;ament&aacute;ria</strong></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" width="467">
+                                <p><strong>4.&nbsp;&nbsp; </strong><strong>Previs&atilde;o de data em que deve ser <u>iniciada</u> a presta&ccedil;&atilde;o
+                                    dos servi&ccedil;os</strong></p>
+                                <p><strong>&nbsp;</strong></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" width="467">
+                                <p><strong>5.&nbsp;&nbsp; </strong><strong>Indica&ccedil;&atilde;o do membro que ir&aacute; compor a equipe
+                                    de planejamento</strong></p>
+                                <p><strong>&nbsp;</strong></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="234">
+                                <p><strong>&nbsp;</strong></p>
+                                <p><strong>${informacoes_elaborador!}</strong></p>
+                                <p><strong>Nome/Cargo/Fun&ccedil;&atilde;o/Matr&iacute;cula</strong></p>
+                                <p><strong>Elaborador da Demanda</strong></p>
+                            </td>
+                            <td width="234">
+                                <p><strong>&nbsp;</strong></p>
+                                <p><strong>${informacoes_validador!}</strong></p>
+                                <p><strong>Nome/Cargo/Fun&ccedil;&atilde;o/Matr&iacute;cula</strong></p>
+                                <p><strong>Validador da Demanda</strong></p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <p>&nbsp;</p>
+                    <ol start="4">
+                        <li>Em aten&ccedil;&atilde;o ao item ${termo_item!} da NI ${ni!} informamos que a minuta do TR em anexo foi submetida a &aacute;rea
+                            de SST, a qual emitiu o parecer anexo.
+                        </li>
+                    </ol>
+                    <p>&nbsp;</p>
+                    ${outras_informacoes_necessarias!}
+                    <!-- Fim - Corpo do conteudo -->
+                    <!-- FIM - Tagmeta -->
+                [/@corpoBIE]
+                [#if fecho??]<p
+                        style="font-size: ${tl}; TEXT-INDENT: 2.5cm">[@fechoBIE]${fecho!}${virgula!}[/@fechoBIE][/#if]</p>
+
+                </div>
+        [/@mioloDJE]
+    [/@estiloBrasaoAEsquerda]
+
+    [#if _tiposigilo! == "2"]
+        [@acessoRestrito /]
+    [/#if]
+[/@documento]

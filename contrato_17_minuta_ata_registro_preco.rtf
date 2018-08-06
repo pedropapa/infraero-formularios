@@ -1,0 +1,429 @@
+[#assign _texto=""  /]
+[#assign _tipo_autoridade=""  /]
+[#assign _genero=""  /]
+[#assign _vocativo=""  /]
+[#assign _enderecamento_dest=""  /]
+[#assign _nome_dest=""  /]
+[#assign _cargo_dest=""  /]
+[#assign _orgao_dest=""  /]
+[#assign _endereco_dest=""  /]
+[#assign _tamanho_letra=""  /]
+[#assign _autoridade={}  /]
+[#assign _tipo=""  /]
+[#assign _tiposigilo="" /]
+[#assign _fecho=""  /]
+[#assign aDateTime = .now /]
+
+[#if _autoridade?size > 0]
+    [#assign _vocativo=_autoridade.vocativo /]
+    [#assign _enderecamento_dest=_autoridade.enderecamento /]
+    [#assign _nome_dest=_autoridade.nome /]
+    [#assign _cargo_dest=_autoridade.cargo /]
+    [#assign _orgao_dest=_autoridade.orgao /]
+    [#assign _endereco_dest=_autoridade.endereco /]
+        <br/><br/>
+[/#if]
+
+[@entrevista]
+    [@grupo titulo="Dados do destinatário" esconder=(_enderecamento_dest!="" && _nome_dest!="" && _cargo_dest!="" && _orgao_dest!="" && _endereco_dest!="")]
+                <!-- Tratamento -->
+        [#if _enderecamento_dest != ""]
+            [@oculto var="enderecamento_dest" valor=_enderecamento_dest /]
+        [#else]
+            [#if tratamento??]
+                [@grupo]
+                    [@checkbox titulo="Especificar manualmente a forma de endereçamento" var="especificarEnderecamento" reler=true /]
+                [/@grupo]
+            [/#if]
+            [#if !tratamento?? || (especificarEnderecamento?? && especificarEnderecamento == 'Sim')]
+                [@grupo]
+                    [@texto titulo="Forma de endereçamento" var="enderecamento_dest" largura="45" /]
+                [/@grupo]
+            [#else]
+                [@oculto var="enderecamento_dest" valor="${(tratamento.formaDeEnderecamento)!}" /]
+            [/#if]
+        [/#if]
+
+    [/@grupo]
+    [@grupo titulo = "Dados Gerais"]
+        [@grupo]
+            [@numero titulo="Número da Ata" var="ata_numero" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Itens referentes" var="itens_referentes" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Número pregão eletrônico" var="numero_pregao_eletronico" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@numero titulo="Validade (meses)" var="validade" /]
+        [/@grupo]
+        [@grupo]
+            [@numero titulo="Dias Documento" var="dias" /]
+        [/@grupo]
+        [@grupo]
+            [@numero titulo="Mês Documento" var="meses" /]
+        [/@grupo]
+        [@grupo]
+            [@numero titulo="Ano Documento" var="ano" /]
+        [/@grupo]
+        [@grupo]
+            [@numero titulo="CNPJ empresa" var="cnpj" /]
+        [/@grupo]
+        [@grupo]
+            [@numero titulo="Endereço empresa" var="endereco" /]
+        [/@grupo]
+        [@grupo]
+            [@numero titulo="Autoridade Competente" var="autoridade_competente" /]
+        [/@grupo]
+        [@grupo]
+            [@numero titulo="CPF Autoridade Competente" var="cpf_autoridade_competente" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Empresas vencedoras" var="empresas_vencedoras" largura=100 /]
+        [/@grupo]
+        [@grupo]
+            [@numero titulo="Item edital" var="item_edital" /]
+        [/@grupo]
+        [@grupo]
+            [@numero titulo="Dia homologação" var="dia_homologacao" /]
+        [/@grupo]
+        [@grupo]
+            [@numero titulo="Mês homologação" var="mes_homologacao" /]
+        [/@grupo]
+        [@grupo]
+            [@numero titulo="Ano homologação" var="ano_homologacao" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Objeto Edital" var="objeto_edital" largura=50 /]
+        [/@grupo]
+
+        [@grupo titulo = "Quadro de Valores"]
+            [@grupo]
+                [@texto titulo="Lote" var="lote" largura=50 /]
+            [/@grupo]
+            [@grupo titulo = "Item 1"]
+                [@grupo]
+                    [@texto titulo="Nome" var="item_1_nome" largura=50 /]
+                [/@grupo]
+                [@grupo]
+                    [@texto titulo="Descrição" var="item_1_descricao" largura=50 /]
+                [/@grupo]
+                [@grupo]
+                    [@texto titulo="Unidade" var="item_1_unidade" largura=50 /]
+                [/@grupo]
+                [@grupo]
+                    [@texto titulo="Pedido mínimo" var="item_1_pedido_minimo" largura=50 /]
+                [/@grupo]
+                [@grupo]
+                    [@texto titulo="Preço Unitário" var="item_1_preco_unitario" largura=50 /]
+                [/@grupo]
+                [@grupo]
+                    [@texto titulo="Preço Total" var="item_1_preco_total" largura=50 /]
+                [/@grupo]
+            [/@grupo]
+            [@grupo titulo = "Item 2"]
+                [@grupo]
+                    [@texto titulo="Nome" var="item_2_nome" largura=50 /]
+                [/@grupo]
+                [@grupo]
+                    [@texto titulo="Descrição" var="item_2_descricao" largura=50 /]
+                [/@grupo]
+                [@grupo]
+                    [@texto titulo="Unidade" var="item_2_unidade" largura=50 /]
+                [/@grupo]
+                [@grupo]
+                    [@texto titulo="Pedido mínimo" var="item_2_pedido_minimo" largura=50 /]
+                [/@grupo]
+                [@grupo]
+                    [@texto titulo="Preço Unitário" var="item_2_preco_unitario" largura=50 /]
+                [/@grupo]
+                [@grupo]
+                    [@texto titulo="Preço Total" var="item_2_preco_total" largura=50 /]
+                [/@grupo]
+            [/@grupo]
+            [@grupo titulo = "Item 3"]
+                [@grupo]
+                    [@texto titulo="Nome" var="item_3_nome" largura=50 /]
+                [/@grupo]
+                [@grupo]
+                    [@texto titulo="Descrição" var="item_3_descricao" largura=50 /]
+                [/@grupo]
+                [@grupo]
+                    [@texto titulo="Unidade" var="item_3_unidade" largura=50 /]
+                [/@grupo]
+                [@grupo]
+                    [@texto titulo="Pedido mínimo" var="item_3_pedido_minimo" largura=50 /]
+                [/@grupo]
+                [@grupo]
+                    [@texto titulo="Preço Unitário" var="item_3_preco_unitario" largura=50 /]
+                [/@grupo]
+                [@grupo]
+                    [@texto titulo="Preço Total" var="item_3_preco_total" largura=50 /]
+                [/@grupo]
+            [/@grupo]
+        [/@grupo]
+
+        [@grupo]
+            [@texto titulo="Prazo fornecimento" var="prazo_fornecimento" largura=100 /]
+        [/@grupo]
+
+        [@grupo titulo = "Empresas que aceitaram reduzir seus custos"]
+            [@grupo]
+                [@texto titulo="Empresa A" var="nome_empresa_a" largura=100 /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Empresa B" var="nome_empresa_b" largura=100 /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Empresa C" var="nome_empresa_c" largura=100 /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Empresa D" var="nome_empresa_d" largura=100 /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Empresa E" var="nome_empresa_e" largura=100 /]
+            [/@grupo]
+        [/@grupo]
+
+        [@grupo titulo = "Data/Local Assinatura"]
+            [@grupo]
+                [@texto titulo="Local" var="local" largura=100 /]
+            [/@grupo]
+            [@grupo]
+                [@numero titulo="Dia" var="local_dia" /]
+            [/@grupo]
+            [@grupo]
+                [@numero titulo="Mês" var="local_mes" /]
+            [/@grupo]
+            [@grupo]
+                [@numero titulo="Ano" var="local_ano" /]
+            [/@grupo]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo = "Dados Signatário"]
+        [@grupo]
+            [@texto titulo="Dados Signatário" var="dados_signatario" largura=50 /]
+        [/@grupo]
+    [/@grupo]
+
+    [#if _tamanho_letra != ""]
+        [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
+    [#else]
+        [@selecao titulo="Tamanho da letra" var="tamanhoLetra" opcoes="Normal;Pequeno;Grande" /]
+    [/#if]
+[/@entrevista]
+
+[@documento margemDireita="3cm"]
+    [#if tamanhoLetra! == "Normal"]
+        [#assign tl = "10pt" /]
+    [#elseif tamanhoLetra! == "Pequeno"]
+        [#assign tl = "9pt" /]
+    [#elseif tamanhoLetra! == "Grande"]
+        [#assign tl = "13pt" /]
+    [#else]
+        [#assign tl = "11pt"]
+    [/#if]
+
+    [#if !(func.contains(fecho!'','.')) && !(func.contains(fecho!'',','))]
+        [#assign virgula ="," /]
+    [/#if]
+
+
+    [#if _tiposigilo! == "1"]
+        [#assign _reservado = true /]
+    [#elseif _tiposigilo! == "2"]
+        [#assign _sigiloso = true /]
+    [#elseif _tiposigilo! == "3"]
+        [#assign _secreto = true /]
+    [/#if]
+
+    [@estiloBrasaoAEsquerda tipo=_tipo tamanhoLetra=tl formatarOrgao=true omitirCodigo=true]
+             <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+                 <tr>
+                     <td align="left">
+                         <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0">
+                             <tr><td>[@letra tamanho=tl]<p>${enderecamento_dest!}</p>[/@letra]</td></tr>
+                             <tr><td>[@letra tamanho=tl]<p>${nome_dest!}</p>[/@letra]</td></tr>
+                            [#if cargo_dest??]
+                                <tr><td>[@letra tamanho=tl]<p>${cargo_dest!}</p>[/@letra]</td></tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if orgao_dest??]
+                             <tr><td>[@letra tamanho=tl]<p>${orgao_dest!}</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                            [#if endereco_dest??]
+                                <tr><td>[@letra tamanho=tl]<p>[@fixcrlf var=endereco_dest! /]</p>[/@letra]</td></tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if (doc.exClassificacao.descrClassificacao)??]
+                             <tr><td>[@letra tamanho=tl]<p><br/>Assunto: ${(doc.exClassificacao.descrClassificacao)!}</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                         </table>
+                     </td>
+                 </tr>
+             </table>
+        [@mioloDJE]
+                <div style="font-family: Times New Roman; font-size: 12pt;">
+                [@corpoBIE]
+
+                    <!-- INICIO - Tagmeta -->
+                    <!-- Inicio - Corpo do conteudo -->
+                    <p style="text-align: center;"><strong><u>ATA DE REGISTRO DE PRE&Ccedil;OS N.</u></strong> ${ata_numero!}</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p style="text-align: center;">Referente ao(s) item(ns) ${itens_referentes!} (indicar o n. do item por extenso)</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p style="text-align: center;"><strong>PREG&Atilde;O-e N.</strong> <strong>${numero_pregao_eletronico!}</strong></p>
+                    <p><strong>&nbsp;</strong></p>
+                    <p><strong>&nbsp;</strong></p>
+                    <p style="text-align: center;"><strong>VALIDADE:</strong> ${validade!} meses a contar da data de publica&ccedil;&atilde;o no DOU</p>
+                    <p>&nbsp;</p>
+                    <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Aos dias ${dias!} do m&ecirc;s ${meses!} de ${ano!}, a Empresa Brasileira de Infraestrutura Aeroportu&aacute;ria &ndash; INFRAERO, CNPJ N. ${cnpj!}, localizada ${endereco!} (indicar a depend&ecirc;ncia), representada pelo(s) ${autoridade_competente!}, CPF N. ${cpf_autoridade_competente!} e a(s) empresa(s) ${empresas_vencedoras!}, vencedora(s) do(s) item(ns) n(s) ${item_edital!}; nos termos do Edital, do Regulamento Interno de Licita&ccedil;&otilde;es e Contratos da Infraero, de 31 de janeiro de 2017, institu&iacute;do pelo Ato Normativo n. 122/PRESI/DF/DJ/2017, de 31 de janeiro de 2017, pelas Leis n&ordm;<sup>s</sup> 10.520, de 17 de julho de 2002 e Lei Complementar n&ordm; 123, de 14 de dezembro de 2006, pelos Decretos n&ordm;<sup>s</sup> 5.450, de 31 de maio de 2005, 8.538, de 06 de outubro de 2015 e 7.892, de 23 de janeiro de 2013, sujeitando-se, no que couber, &agrave;s disposi&ccedil;&otilde;es da Lei n&ordm; 13.303, de 30 de junho de 2016 e altera&ccedil;&otilde;es posteriores, face a classifica&ccedil;&atilde;o da(s) proposta(s) apresentada(s) no PREG&Atilde;O-e acima identificado para REGISTRO DE PRE&Ccedil;OS, homologado em ${dia_homologacao!} de ${mes_homologacao!} de ${ano_homologacao!}, RESOLVE REGISTRAR OS PRE&Ccedil;OS da(s) licitante(s) classificada(s) em primeiro lugar, nas condi&ccedil;&otilde;es do Edital e seus anexos e das cl&aacute;usulas que se seguem:</p>
+                    <p>&nbsp;</p>
+                    <p>I - &nbsp;O Edital do Preg&atilde;o e a proposta de pre&ccedil;os apresentada integram esta Ata de Registro de Pre&ccedil;os que tem por objeto os ${objeto_edital!}, independentemente de transcri&ccedil;&atilde;o, ficando registrados os valores constantes do quadro a seguir:</p>
+                    <p>&nbsp;</p>
+                    <div style="page-break-after: always;">
+                        <table width="100%" border="1" borderColor=#000 cellpadding=1 cellspacing=0>
+                            <tbody>
+                            <tr>
+                                <td colspan="6" width="56" style="padding: 15px;">
+                                    <p>LOTE ${lote!}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="39" style="text-align: center; background-color: rgb(163, 194, 226)">
+                                    <p>Item</p>
+                                </td>
+                                <td width="115" style="text-align: center; background-color: rgb(163, 194, 226)">
+                                    <p>Descri&ccedil;&atilde;o</p>
+                                </td>
+                                <td width="72" style="text-align: center; background-color: rgb(163, 194, 226)">
+                                    <p>Unidade</p>
+                                </td>
+                                <td width="78" style="text-align: center; background-color: rgb(163, 194, 226)">
+                                    <p>Pedido M&iacute;nimo por Fornecimento/Servi&ccedil;o</p>
+                                </td>
+                                <td width="60" style="text-align: center; background-color: rgb(163, 194, 226)">
+                                    <p>&nbsp;</p>
+                                    <p>Pre&ccedil;o Unit&aacute;rio</p>
+                                    <p>&nbsp;</p>
+                                </td>
+                                <td width="81" style="text-align: center; background-color: rgb(163, 194, 226)">
+                                    <p>Pre&ccedil;o Total</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="39">
+                                    <p>&nbsp;${item_1_nome!}</p>
+                                </td>
+                                <td width="115">
+                                    <p>&nbsp;${item_1_descricao!}</p>
+                                </td>
+                                <td width="72">
+                                    <p>&nbsp;${item_1_unidade!}</p>
+                                </td>
+                                <td width="78">
+                                    <p>&nbsp;${item_1_pedido_minimo!}</p>
+                                </td>
+                                <td width="60">
+                                    <p>&nbsp;${item_1_preco_unitario!}</p>
+                                </td>
+                                <td width="81">
+                                    <p>&nbsp;${item_1_preco_total!}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="39">
+                                    <p>&nbsp;${item_2_nome!}</p>
+                                </td>
+                                <td width="115">
+                                    <p>&nbsp;${item_2_descricao!}</p>
+                                </td>
+                                <td width="72">
+                                    <p>&nbsp;${item_2_unidade!}</p>
+                                </td>
+                                <td width="78">
+                                    <p>&nbsp;${item_2_pedido_minimo!}</p>
+                                </td>
+                                <td width="60">
+                                    <p>&nbsp;${item_2_preco_unitario!}</p>
+                                </td>
+                                <td width="81">
+                                    <p>&nbsp;${item_2_preco_total!}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="39">
+                                    <p>&nbsp;${item_3_nome!}</p>
+                                </td>
+                                <td width="115">
+                                    <p>&nbsp;${item_3_descricao!}</p>
+                                </td>
+                                <td width="72">
+                                    <p>&nbsp;${item_3_unidade!}</p>
+                                </td>
+                                <td width="78">
+                                    <p>&nbsp;${item_3_pedido_minimo!}</p>
+                                </td>
+                                <td width="60">
+                                    <p>&nbsp;${item_3_preco_unitario!}</p>
+                                </td>
+                                <td width="81">
+                                    <p>&nbsp;${item_3_preco_total!}</p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; I.I - A presente Ata de Registro de Pre&ccedil;os viger&aacute; por 12 (doze) meses, improrrog&aacute;veis, ou ent&atilde;o at&eacute; o esgotamento do quantitativo nela registrado, se este ocorrer primeiro.</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; I.II - As quantidades registradas previstas no quadro acima representam os quantitativos m&aacute;ximos a serem adquiridos/contratados.</p>
+                    <p>&nbsp;</p>
+                    <p>II - O fornecimento do produto/execu&ccedil;&atilde;o do servi&ccedil;o ocorrer&aacute; no prazo de ${prazo_fornecimento!} mediante celebra&ccedil;&atilde;o do Termo de Contrato e expedi&ccedil;&atilde;o da Ordem de Fornecimento que ocorrer&aacute; ap&oacute;s a publica&ccedil;&atilde;o do extrato do Contrato no Di&aacute;rio Oficial da Uni&atilde;o.</p>
+                    <p>&nbsp;</p>
+                    <p>Para o item III h&aacute; duas possibilidades de escolha, ao selecionar a primeira a segunda ser&aacute; exclu&iacute;da e vice-versa.</p>
+                    <p>&nbsp;</p>
+                    <p>III &ndash; Conforme inc. II do art.11 do Decreto n&ordm; 7892, de 23 de janeiro de 2013, participam desta Ata de Registro de Pre&ccedil;os, como cadastro de reserva, as seguintes empresas que aceitaram reduzir seu(s) pre&ccedil;o(s) ao valor da proposta mais bem classificada:</p>
+                    <ol type="a">
+                        <li>${nome_empresa_a!}</li>
+                        <li>${nome_empresa_b!}</li>
+                        <li>${nome_empresa_c!}</li>
+                        <li>${nome_empresa_d!}</li>
+                        <li>${nome_empresa_e!}</li>
+                    </ol>
+                    <p><u>&nbsp;</u></p>
+                    <p>&nbsp;</p>
+                    <p>III &ndash; N&atilde;o h&aacute; cadastro de reserva para esta Ata de Registro de Pre&ccedil;os.</p>
+                    <p>&nbsp;</p>
+                    <p>IV &ndash; Para dirimir quaisquer d&uacute;vidas ou quest&otilde;es relacionadas com esta&nbsp; Ata de Registro de Pre&ccedil;os&nbsp; a contratada dever&aacute; se subordinar ao foro da Justi&ccedil;a Federal, Se&ccedil;&atilde;o Judici&aacute;ria do Distrito federal, em Bras&iacute;lia, com exclus&atilde;o de qualquer outro foro, por mais privilegiado que seja.</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; E, por se acharem justos e compromissados, assinam as partes o presente instrumento.</p>
+                    <p>&nbsp;</p>
+                    <p style="text-align: center;">${local!} / ${local_dia!}, de ${local_mes!}, de ${local_ano!}</p>
+                    <p>&nbsp;</p>
+                    <p>Pela INFRAERO:</p>
+                    <!-- Fim - Corpo do conteudo -->
+                    <!-- FIM - Tagmeta -->
+
+
+                [/@corpoBIE]
+                [#if fecho??]<p style="font-size: ${tl}; TEXT-INDENT: 2.5cm">[@fechoBIE]${fecho!}${virgula!}[/@fechoBIE][/#if]</p>
+
+                </div>
+        [/@mioloDJE]
+    [/@estiloBrasaoAEsquerda]
+
+    <p>Pelo Fornecedor:</p>
+    <p>&nbsp;</p>
+    <p>${dados_signatario!}</p>
+
+    [#if _tiposigilo! == "2"]
+        [@acessoRestrito /]
+    [/#if]
+[/@documento]
