@@ -1,0 +1,487 @@
+[#assign _texto=""  /]
+[#assign _tipo_autoridade=""  /]
+[#assign _genero=""  /]
+[#assign _vocativo=""  /]
+[#assign _enderecamento_dest=""  /]
+[#assign _nome_dest=""  /]
+[#assign _cargo_dest=""  /]
+[#assign _orgao_dest=""  /]
+[#assign _endereco_dest=""  /]
+[#assign _tamanho_letra=""  /]
+[#assign _autoridade={}  /]
+[#assign _tipo=""  /]
+[#assign _tiposigilo="" /]
+[#assign _fecho=""  /]
+[#assign aDateTime = .now /]
+
+[#if _autoridade?size > 0]
+    [#assign _vocativo=_autoridade.vocativo /]
+    [#assign _enderecamento_dest=_autoridade.enderecamento /]
+    [#assign _nome_dest=_autoridade.nome /]
+    [#assign _cargo_dest=_autoridade.cargo /]
+    [#assign _orgao_dest=_autoridade.orgao /]
+    [#assign _endereco_dest=_autoridade.endereco /]
+        <br/><br/>
+[/#if]
+
+[@entrevista]
+    [@grupo titulo="Dados do destinatário" esconder=(_enderecamento_dest!="" && _nome_dest!="" && _cargo_dest!="" && _orgao_dest!="" && _endereco_dest!="")]
+                <!-- Tratamento -->
+        [#if _enderecamento_dest != ""]
+            [@oculto var="enderecamento_dest" valor=_enderecamento_dest /]
+        [#else]
+            [#if tratamento??]
+                [@grupo]
+                    [@checkbox titulo="Especificar manualmente a forma de endereçamento" var="especificarEnderecamento" reler=true /]
+                [/@grupo]
+            [/#if]
+            [#if !tratamento?? || (especificarEnderecamento?? && especificarEnderecamento == 'Sim')]
+                [@grupo]
+                    [@texto titulo="Forma de endereçamento" var="enderecamento_dest" largura="45" /]
+                [/@grupo]
+            [#else]
+                [@oculto var="enderecamento_dest" valor="${(tratamento.formaDeEnderecamento)!}" /]
+            [/#if]
+        [/#if]
+
+    [/@grupo]
+    [@grupo titulo = "Dados Gerais"]
+        [@grupo]
+            [@numero titulo="Número termo apostilamento" var="numero_termpo" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Ordem do Termo (Primeiro/Seguro/outro)" var="termo_ordem" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Número contrato" var="numero_contrato" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Empresa contratada" var="empresa_contratada" largura=50 /]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo = "Dados Infraero"]
+        [@grupo]
+            [@texto titulo="Nome da Dependência" var="nome_dependencia" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Cidade do local" var="cidade_dependencia" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="CNPJ" var="cnpj" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Cargo Representante" var="cargo_representante" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Nome Representante" var="nome_representante" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Matrícula Representante" var="matricula_representante" largura=50 /]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo = "Cláusula Primeira - 1.1"]
+        [@grupo]
+            [@texto titulo="Cláusula" var="clausula" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Prazo Prorrogação" var="prazo_prorrogacao" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@data titulo="Inicio Prorrogação" var="inicio_prorrogacao" /]
+        [/@grupo]
+        [@grupo]
+            [@data titulo="Término Prorrogação" var="termino_prorrogacao" /]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo = "Cláusula Primeira - 1.2"]
+        [@grupo]
+            [@selecao titulo="Tipo de alteração" var="tipo_alteracao" opcoes="Conta Orçamentária;CNPJ;Conta Orçamentária e CNPJ" reler=true /]
+        [/@grupo]
+        [#if tipo_alteracao?? && (tipo_alteracao == "Conta Orçamentária" || tipo_alteracao == "Conta Orçamentária e CNPJ")]
+            [@grupo titulo = "Dados Conta Orçamentária"]
+                [@grupo]
+                    [@texto titulo="Número conta atual" var="numero_conta_atual" largura=50 /]
+                [/@grupo]
+                [@grupo]
+                    [@texto titulo="Número conta novo" var="numero_conta_novo" largura=50 /]
+                [/@grupo]
+            [/@grupo]
+        [/#if]
+        [#if tipo_alteracao?? && (tipo_alteracao == "CNPJ" || tipo_alteracao == "Conta Orçamentária e CNPJ")]
+            [@grupo titulo = "Dados CNPJ"]
+                [@grupo]
+                    [@texto titulo="Número CNPJ atual" var="numero_cnpj_atual" largura=50 /]
+                [/@grupo]
+                [@grupo]
+                    [@texto titulo="Empresa referenciada" var="empresa_referenciada" largura=50 /]
+                [/@grupo]
+                [@grupo]
+                    [@texto titulo="Endereço empresa" var="endereco_empresa" largura=50 /]
+                [/@grupo]
+                [@grupo]
+                    [@texto titulo="Número CNPJ novo" var="numero_cnpj_novo" largura=50 /]
+                [/@grupo]
+            [/@grupo]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Cláusula Primeira - 1.3"]
+        [@grupo]
+            [@texto titulo="Ordem termo aditivo" var="termo_aditivo" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Número termo aditivo" var="numero_termo_aditivo" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Cláusula" var="clausula" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Item" var="item" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@editor titulo="Onde se lê" var="onde_le" /]
+        [/@grupo]
+        [@grupo]
+            [@editor titulo="Leia-se" var="leia_se" /]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo = "Cláusula Segunda - 2.1"]
+        [@grupo]
+            [@texto titulo="Detalhe prorrogação" var="detalhe_prorrogacao" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Valor total apostilamento" var="valor_total_apostilamento" largura=50 /]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo = "Cláusula Segunda - 2.2"]
+        [@grupo]
+            [@checkbox titulo="Possui Adicional II?" var="possui_adicional_2" reler=true /]
+        [/@grupo]
+        [#if possui_adicional_2?? && possui_adicional_2 == 'Sim']
+            [@grupo]
+                [@texto titulo="Valor adicional II" var="valor_adicional_ii" largura=50/]
+            [/@grupo]
+        [/#if]
+        [@grupo]
+            [@texto titulo="Valor adicional I" var="valor_adicional_i" largura=50/]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo = "Cláusula Segunda - 2.3"]
+        [@grupo]
+            [@texto titulo="Valor global contrato anterior" var="valor_global_contrato_anterior" largura=50/]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Valor global contrato novo" var="valor_global_contrato_novo" largura=50/]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo = "Cláusula Segunda - 2.4"]
+        [@grupo]
+            [@texto titulo="Valor exercício 1" var="valor_exercicio_1" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Valor exercício 2" var="valor_exercicio_2" largura=50 /]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo = "Cláusula Segunda - 2.5"]
+        [@grupo]
+            [@texto titulo="Número código orçamentário" var="numero_codigo_orcamentario" largura=50 /]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo = "Cláusula Terceira"]
+        [@grupo]
+            [@texto titulo="Valor garantia" var="valor_garantia" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Subitem do Termo Contratual" var="termo_subitem" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@selecao titulo="Possui cláusula multas" var="possui_clausula_multa" opcoes="Sim;Não" reler=true /]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo = "Cláusula Quinta"]
+        [@grupo]
+            [@texto titulo="Subitem do Termo Contrato" var="subitem_termo_contrato" largura=50 /]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo = "Assinatura"]
+        [@grupo]
+            [@texto titulo="Cidade" var="assinatura_cidade" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Dia" var="assinatura_dia" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Mês" var="assinatura_mes" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Ano" var="assinatura_ano" largura=50 /]
+        [/@grupo]
+    [/@grupo]
+
+    [#if _tamanho_letra != ""]
+        [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
+    [#else]
+        [@selecao titulo="Tamanho da letra" var="tamanhoLetra" opcoes="Normal;Pequeno;Grande" /]
+    [/#if]
+[/@entrevista]
+
+[@documento margemDireita="3cm" capa=true]
+    [#if tamanhoLetra! == "Normal"]
+        [#assign tl = "10pt" /]
+    [#elseif tamanhoLetra! == "Pequeno"]
+        [#assign tl = "9pt" /]
+    [#elseif tamanhoLetra! == "Grande"]
+        [#assign tl = "13pt" /]
+    [#else]
+        [#assign tl = "11pt"]
+    [/#if]
+
+    [#if !(func.contains(fecho!'','.')) && !(func.contains(fecho!'',','))]
+        [#assign virgula ="," /]
+    [/#if]
+
+
+    [#if _tiposigilo! == "1"]
+        [#assign _reservado = true /]
+    [#elseif _tiposigilo! == "2"]
+        [#assign _sigiloso = true /]
+    [#elseif _tiposigilo! == "3"]
+        [#assign _secreto = true /]
+    [/#if]
+
+    [@estiloBrasaoAEsquerda tipo=_tipo tamanhoLetra=tl formatarOrgao=true omitirCodigo=true]
+             <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+                 <tr>
+                     <td align="left">
+                         <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0">
+                             <tr>
+                                 <td>[@letra tamanho=tl]<p>${enderecamento_dest!}</p>[/@letra]</td>
+                             </tr>
+                             <tr>
+                                 <td>[@letra tamanho=tl]<p>${nome_dest!}</p>[/@letra]</td>
+                             </tr>
+                            [#if cargo_dest??]
+                                <tr>
+                                    <td>[@letra tamanho=tl]<p>${cargo_dest!}</p>[/@letra]</td>
+                                </tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if orgao_dest??]
+                             <tr><td>[@letra tamanho=tl]<p>${orgao_dest!}</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                            [#if endereco_dest??]
+                                <tr>
+                                    <td>[@letra tamanho=tl]<p>[@fixcrlf var=endereco_dest! /]</p>[/@letra]</td>
+                                </tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if (doc.exClassificacao.descrClassificacao)??]
+                             <tr><td>[@letra tamanho=tl]<p><br/>Assunto: ${(doc.exClassificacao.descrClassificacao)!}</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                         </table>
+                     </td>
+                 </tr>
+             </table>
+        [@mioloDJE]
+                <div style="font-family: Times New Roman; font-size: 12pt;">
+                [@corpoBIE]
+
+                    <!-- INICIO - Tagmeta -->
+                    <!-- Inicio - Corpo do conteudo -->
+                    <br><br><br>
+                    <table border=1 cellpadding=5 cellspacing=0 style="text-align: right; margin: 0 0; float: right;"
+                           borderColor=#000>
+                        <tr>
+                            <td><span style="font-family: Times New Roman; font-size: 16pt; font-weight: bold;">PRORROGAÇÃO E REPACTUAÇÃO</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- Fim - Corpo do conteudo -->
+                    <!-- FIM - Tagmeta -->
+                    <p><strong>&nbsp;</strong></p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <div style="width: 250px; float: right; text-align: justify;">
+                        <p><u><b>TERMO DE APOSTILAMENTO N. </b></u></p>
+                        <p>${numero_termpo!}</p>
+                        <p>&nbsp;</p>
+                        <p>${termo_ordem!} TERMO DE APOSTILAMENTO AO TERMO DE CONTRATO N. ${numero_contrato!}, FIRMADO
+                            ENTRE A EMPRESA BRASILEIRA DE INFRAESTRUTURA AEROPORTU&Aacute;RIA -
+                            <strong>INFRAERO</strong>
+                            E A EMPRESA ${empresa_contratada!}, NA FORMA A SEGUIR:</p>
+                    </div>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                    <div style="width: 250px; float: right; text-align: justify;">
+                        <p>TERMO DE APOSTILAMENTO</p>
+                        <p>&nbsp;</p>
+                        <p><strong>${termo_ordem!} TERMO DE APOSTILAMENTO AO
+                            TERMO DE CONTRATO N. ${numero_contrato!}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,
+                            FIRMADO ENTRE A EMPRESA BRASILEIRA DE INFRAESTRUTURA AEROPORTU&Aacute;RIA - INFRAERO E A
+                            EMPRESA
+                            ${empresa_contratada!}. &nbsp;</strong>
+                        </p>
+                    </div>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <div style="text-align: justify;">
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            A<strong> EMPRESA BRASILEIRA DE INFRAESTRUTURA AEROPORTU&Aacute;RIA - INFRAERO</strong>,
+                            Empresa P&uacute;blica
+                            Federal, criada nos termos da Lei n. 5.862, de 12 de dezembro de 1972, CNPJ/MF n.
+                            00.352.294/0001-10, com Sede em
+                            Bras&iacute;lia-DF, na Estrada do Aeroporto, Setor de Concession&aacute;rias e Locadoras,
+                            Lote 5 &ndash; Edif&iacute;cio
+                            Sede, CEP 71608-050 &ndash; Bras&iacute;lia &ndash; DF &ndash; Brasil, e depend&ecirc;ncia
+                            aeroportu&aacute;ria no
+                            <strong>${nome_dependencia!}</strong>, em <strong>${cidade_dependencia!}</strong>, CNPJ N.
+                            <strong>${cnpj!}</strong>, neste ato representada pelo seu
+                            <strong>${cargo_representante!}</strong>, <strong>${nome_representante!} </strong>, portador
+                            da matr&iacute;cula n.
+                            <strong>${matricula_representante!}</strong>, registra por meio deste Termo de Apostilamento
+                            as cl&aacute;usulas e condi&ccedil;&otilde;es
+                            seguintes:
+                        </p>
+                    </div>
+                    <p><strong>CL&Aacute;USULA PRIMEIRA </strong></p>
+                    <p><strong>&nbsp;</strong></p>
+                    <ul>
+                        <li>Nos termos da cl&aacute;usula <strong>${clausula!}</strong> do Termo Contratual supracitado, o primeiro objeto do presente apostilamento &eacute; a prorroga&ccedil;&atilde;o do seu prazo de vig&ecirc;ncia por mais <strong>${prazo_prorrogacao!}</strong> meses com in&iacute;cio em <strong>${inicio_prorrogacao!}</strong> e t&eacute;rmino previsto para <strong>${termino_prorrogacao!} &nbsp; </strong>.</li>
+                    </ul>
+                    <p>&nbsp;</p>
+                    [#if tipo_alteracao == "Conta Orçamentária"]
+                        <ul>
+                            <li>Tamb&eacute;m &eacute; objeto do presente Termo de Apostilamento a altera&ccedil;&atilde;o da conta or&ccedil;ament&aacute;ria <strong>${numero_conta_atual!}</strong> para a conta <strong>${numero_conta_novo!}</strong>.</li>
+                        </ul>
+                        <p>&nbsp;</p>
+                    [/#if]
+                    [#if tipo_alteracao == "CNPJ"]
+                        <ul>
+                            <li>Tamb&eacute;m &eacute; objeto do presente Termo de Apostilamento a altera&ccedil;&atilde;o do CNPJ n.&nbsp; <strong>${numero_cnpj_atual!}</strong>, referente &agrave; empresa <strong>${empresa_referenciada!}</strong>, situada &agrave;: <strong>${endereco_empresa!}</strong>, para o CNPJ n. <strong>${numero_cnpj_novo!} </strong>.</li>
+                        </ul>
+                        <p>&nbsp;</p>
+                    [/#if]
+                    [#if tipo_alteracao == "Conta Orçamentária e CNPJ"]
+                        <ul>
+                            <li>Tamb&eacute;m &eacute; objeto do presente apostilamento a altera&ccedil;&atilde;o da conta or&ccedil;ament&aacute;ria <strong>${numero_conta_atual!}</strong> para a conta <strong>${numero_conta_novo!} </strong> e do CNPJ n. <strong>${numero_cnpj_atual!}</strong>, referente &agrave; empresa <strong>${empresa_referenciada!},</strong> situada &agrave; <strong>${endereco_empresa!} </strong>, para o CNPJ n. <strong>${numero_cnpj_novo!}</strong>.</li>
+                        </ul>
+                        <p>&nbsp;</p>
+                    [/#if]
+                    <ul>
+                        <li>O terceiro objeto do presente apostilamento &eacute; a retifica&ccedil;&atilde;o no <strong>${termo_aditivo!} </strong> n. <strong>${numero_termo_aditivo!}</strong>, em fun&ccedil;&atilde;o de erro material, conforme segue:</li>
+                    </ul>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.3.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Na cl&aacute;usula <strong>${clausula!} </strong>, item <strong>${item!} </strong>:</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <u>Onde se l&ecirc;:</u> &ldquo;<strong>${onde_le!} </strong>;</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <u>Leia-se:</u> &ldquo;<strong>${leia_se!} </strong>.</p>
+                    <p><strong>CL&Aacute;USULA SEGUNDA </strong></p>
+                    <p><strong><em>&nbsp;</em></strong></p>
+                    <ul>
+                        <li>Em decorr&ecirc;ncia da prorroga&ccedil;&atilde;o de prazo, <strong>${detalhe_prorrogacao!}</strong> de que trata a cl&aacute;usula anterior, o valor total do presente apostilamento &eacute; de <strong>${valor_total_apostilamento!} </strong>.</li>
+                    </ul>
+                    <p>&nbsp;</p>
+                    <ul>
+                        <li>O valor mensal, do Aviso Pr&eacute;vio de final de contrato <strong>${possui_adicional_2!} </strong> permanecem inalterados na ordem de <strong>${valor_adicional_ii!}</strong>, respectivamente.</li>
+                    </ul>
+                    <p>&nbsp;</p>
+                    <ul>
+                        <li>O valor global acumulado do contrato passa de R$ <strong>${valor_global_contrato_anterior!}</strong>, para R$ <strong>${valor_global_contrato_novo!}</strong>, j&aacute; inclu&iacute;do o valor do Adicional I[#if possui_adicional_2?? && possui_adicional_2 == "Sim"] e do Adicional II[/#if].</li>
+                    </ul>
+                    <p>&nbsp;</p>
+                    <ul>
+                        <li>O cronograma anual de desembolso estimado deste contrato, incluindo o presente apostilamento, para o exerc&iacute;cio corrente e subsequente (s), &eacute;:</li>
+                    </ul>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Exerc&iacute;cio de <strong>${valor_exercicio_1!} </strong></p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Exerc&iacute;cio de <strong>${valor_exercicio_2!}</strong></p>
+                    <p>&nbsp;</p>
+                    <ul>
+                        <li>Tem-se como fonte de recurso, para atender o presente Apostilamento, o c&oacute;digo or&ccedil;ament&aacute;rio de n.<strong> ${numero_codigo_orcamentario!}</strong>.</li>
+                    </ul>
+                    <p>&nbsp;</p>
+                    <h4>CL&Aacute;USULA TERCEIRA</h4>
+                    <p>&nbsp;</p>
+                    <p>3.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A CONTRATADA dever&aacute; apresentar, no ato da assinatura deste Termo de Apostilamento, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; garantia complementar de execu&ccedil;&atilde;o de contrato no valor de <strong>${valor_garantia!} </strong>, correspondente a 5% do valor deste aditamento, conforme subitem <strong>${termo_subitem!} </strong> do Termo Contratual.</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                    [#if possui_adicional_2?? && possui_adicional_2 == "Sim"]
+                        <p>&nbsp;</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3.1.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Considerando a prorroga&ccedil;&atilde;o de prazo de que trata a cl&aacute;usula primeira e a n&atilde;o utiliza&ccedil;&atilde;o do Aviso Pr&eacute;vio Final de Contrato na vig&ecirc;ncia anterior, o valor referente ao mencionado adicional dever&aacute; compor a base de c&aacute;lculo da garantia de execu&ccedil;&atilde;o de contrato.</p>
+                        <p>&nbsp;</p>
+                    [#else]
+                        <p>&nbsp;</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3.1.1. &nbsp;&nbsp;&nbsp; Considerando a prorroga&ccedil;&atilde;o de prazo de que trata a cl&aacute;usula primeira e a n&atilde;o utiliza&ccedil;&atilde;o tanto do Aviso Pr&eacute;vio Final de Contrato, quanto do Adicional II na vig&ecirc;ncia anterior, o valor referente aos mencionados adicionais dever&atilde;o compor a base de c&aacute;lculo da garantia de execu&ccedil;&atilde;o de contrato.</p>
+                        <p>&nbsp;</p>
+                    [/#if]
+                    [#if possui_clausula_multa?? && possui_clausula_multa == "Sim"]
+                        <p>&nbsp;</p>
+                        <p>3.2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A inobserv&acirc;ncia do prazo fixado para apresenta&ccedil;&atilde;o da garantia, na situa&ccedil;&atilde;o prevista no subitem &nbsp;&nbsp;&nbsp; precedente, acarretar&aacute; a aplica&ccedil;&atilde;o de multa de 0,1% (um d&eacute;cimo por cento) do valor do contrato por dia de atraso, limitado at&eacute; o m&aacute;ximo de 2,5% (dois e meio por cento), conforme f&oacute;rmula &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; abaixo:</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; M = V<sub>C</sub> x 0,1% x T</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sendo:</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; M = Valor da Multa por descumprimento de apresenta&ccedil;&atilde;o das garantias;</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; V<sub>C </sub>= Valor do contrato;</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; T = Tempo em dias</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3.2.1 &nbsp;&nbsp;&nbsp;&nbsp; O atraso superior a 15 (quinze) dias autoriza a Administra&ccedil;&atilde;o a promover a rescis&atilde;o do contrato, por descumprimento ou cumprimento irregular das cl&aacute;usulas deste contrato, conforme disp&otilde;em os incisos I e II do art. 78 da Lei n. 8.666/93.</p>
+                        <p>&nbsp;</p>
+                    [/#if]
+                    <p><strong>CL&Aacute;USULA QUARTA</strong></p>
+                    <p><strong>&nbsp;</strong></p>
+                    <p>4.1. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Este Instrumento tem respaldo legal no inciso II, do art. 57, da Lei 8.666, de 21 de junho de 1993, combinado com o artigo 65 do Regulamento Interno de Licita&ccedil;&otilde;es e Contratos da INFRAERO &ndash; RILC.</p>
+                    <p>&nbsp;</p>
+                    <p>4.2. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A contratada d&aacute; plena e rasa quita&ccedil;&atilde;o de todo e qualquer d&eacute;bito referente ao contrato ora &nbsp;&nbsp; prorrogado.</p>
+                    <p>&nbsp;</p>
+                    <p><strong>CL&Aacute;USULA QUINTA</strong></p>
+                    <p><strong>&nbsp;</strong></p>
+                    <p>5.1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Fica resguardado, &agrave; contratante, o direito &agrave; an&aacute;lise do pedido de repactua&ccedil;&atilde;o, com base no subitem <strong>${subitem_termo_contrato!}</strong> do Termo de Contrato.</p>
+                    <p>&nbsp;</p>
+                    <p><strong>CL&Aacute;USULA SEXTA</strong></p>
+                    <p><strong>&nbsp;</strong></p>
+                    <p>6.1&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; O presente apostilamento n&atilde;o altera as demais condi&ccedil;&otilde;es contratuais pactuadas.</p>
+                    <p>&nbsp;</p>
+                    <p style="text-align: right;"><strong>${assinatura_cidade!} </strong>,
+                        <strong>${assinatura_dia!}</strong> de <strong>${assinatura_mes!}</strong> de 20
+                        <strong>${assinatura_ano!}</strong>.</p>
+                    <p>&nbsp;</p>
+
+                [/@corpoBIE]
+                [#if fecho??]<p
+                        style="font-size: ${tl}; TEXT-INDENT: 2.5cm">[@fechoBIE]${fecho!}${virgula!}[/@fechoBIE][/#if]</p>
+
+                </div>
+        [/@mioloDJE]
+    [/@estiloBrasaoAEsquerda]
+
+    [#if _tiposigilo! == "2"]
+        [@acessoRestrito /]
+    [/#if]
+[/@documento]

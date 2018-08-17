@@ -1,0 +1,329 @@
+[#assign _texto=""  /]
+[#assign _tipo_autoridade=""  /]
+[#assign _genero=""  /]
+[#assign _vocativo=""  /]
+[#assign _enderecamento_dest=""  /]
+[#assign _nome_dest=""  /]
+[#assign _cargo_dest=""  /]
+[#assign _orgao_dest=""  /]
+[#assign _endereco_dest=""  /]
+[#assign _tamanho_letra=""  /]
+[#assign _autoridade={}  /]
+[#assign _tipo=""  /]
+[#assign _tiposigilo="" /]
+[#assign _fecho=""  /]
+[#assign aDateTime = .now /]
+
+[#if _autoridade?size > 0]
+    [#assign _vocativo=_autoridade.vocativo /]
+    [#assign _enderecamento_dest=_autoridade.enderecamento /]
+    [#assign _nome_dest=_autoridade.nome /]
+    [#assign _cargo_dest=_autoridade.cargo /]
+    [#assign _orgao_dest=_autoridade.orgao /]
+    [#assign _endereco_dest=_autoridade.endereco /]
+        <br/><br/>
+[/#if]
+
+[@entrevista]
+    [@grupo titulo="Dados do destinatário" esconder=(_enderecamento_dest!="" && _nome_dest!="" && _cargo_dest!="" && _orgao_dest!="" && _endereco_dest!="")]
+                <!-- Tratamento -->
+        [#if _enderecamento_dest != ""]
+            [@oculto var="enderecamento_dest" valor=_enderecamento_dest /]
+        [#else]
+            [#if tratamento??]
+                [@grupo]
+                    [@checkbox titulo="Especificar manualmente a forma de endereçamento" var="especificarEnderecamento" reler=true /]
+                [/@grupo]
+            [/#if]
+            [#if !tratamento?? || (especificarEnderecamento?? && especificarEnderecamento == 'Sim')]
+                [@grupo]
+                    [@texto titulo="Forma de endereçamento" var="enderecamento_dest" largura="45" /]
+                [/@grupo]
+            [#else]
+                [@oculto var="enderecamento_dest" valor="${(tratamento.formaDeEnderecamento)!}" /]
+            [/#if]
+        [/#if]
+    [/@grupo]
+    [@grupo titulo = "Dados Gerais"]
+        [@grupo]
+            [@numero titulo="Infraero CNPJ" var="infraero_cnpj" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Infraero Endereço" var="infraero_endereco" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@numero titulo="Número SMS" var="numero_sms" /]
+        [/@grupo]
+        [@grupo]
+            [@numero titulo="Número RC/CI" var="numero_rcci" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Valor NP" var="valor_np" largura=50/]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Fornecedor" var="fornecedor" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Orçamento" var="orcamento" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Fornecedor Endereço" var="fornecedor_endereco" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Número Compromisso" var="numero_compromisso" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Documento Condições" var="documento_condicoes" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Conta-Subconta" var="conta_subconta" largura=50 /]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo = "Informações do produto ou execução"]
+        [@grupo]
+            [@numero titulo="Quantidade" var="produto_quantidade"/]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Unidade" var="produto_unidade" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Especificação" var="produto_especificacao" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Valor Unitário" var="produto_valor_unitario" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Valor Total" var="produto_valor_total" largura=50 /]
+        [/@grupo]
+    [/@grupo]
+
+    [#if _tamanho_letra != ""]
+        [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
+    [#else]
+        [@selecao titulo="Tamanho da letra" var="tamanhoLetra" opcoes="Normal;Pequeno;Grande" /]
+    [/#if]
+[/@entrevista]
+
+[@documento margemDireita="3cm"]
+    [#if tamanhoLetra! == "Normal"]
+        [#assign tl = "10pt" /]
+    [#elseif tamanhoLetra! == "Pequeno"]
+        [#assign tl = "9pt" /]
+    [#elseif tamanhoLetra! == "Grande"]
+        [#assign tl = "13pt" /]
+    [#else]
+        [#assign tl = "11pt"]
+    [/#if]
+
+    [#if !(func.contains(fecho!'','.')) && !(func.contains(fecho!'',','))]
+        [#assign virgula ="," /]
+    [/#if]
+
+
+    [#if _tiposigilo! == "1"]
+        [#assign _reservado = true /]
+    [#elseif _tiposigilo! == "2"]
+        [#assign _sigiloso = true /]
+    [#elseif _tiposigilo! == "3"]
+        [#assign _secreto = true /]
+    [/#if]
+
+    [@estiloBrasaoAEsquerda tipo=_tipo tamanhoLetra=tl formatarOrgao=true omitirCodigo=true]
+             <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+                 <tr>
+                     <td align="left">
+                         <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0">
+                             <tr><td>[@letra tamanho=tl]<p>${enderecamento_dest!}</p>[/@letra]</td></tr>
+                             <tr><td>[@letra tamanho=tl]<p>${nome_dest!}</p>[/@letra]</td></tr>
+                            [#if cargo_dest??]
+                                <tr><td>[@letra tamanho=tl]<p>${cargo_dest!}</p>[/@letra]</td></tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if orgao_dest??]
+                             <tr><td>[@letra tamanho=tl]<p>${orgao_dest!}</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                            [#if endereco_dest??]
+                                <tr><td>[@letra tamanho=tl]<p>[@fixcrlf var=endereco_dest! /]</p>[/@letra]</td></tr>
+                            [/#if]
+                         [#-- COMENTARIO
+                         [#if (doc.exClassificacao.descrClassificacao)??]
+                             <tr><td>[@letra tamanho=tl]<p><br/>Assunto: ${(doc.exClassificacao.descrClassificacao)!}</p>[/@letra]</td></tr>
+                         [/#if]
+                         --]
+                         </table>
+                     </td>
+                 </tr>
+             </table>
+        [@mioloDJE]
+                <div style="font-family: Times New Roman; font-size: 10pt;">
+                [@corpoBIE]
+
+                    <!-- INICIO - Tagmeta -->
+                    <!-- Inicio - Corpo do conteudo -->
+                    <p><strong>&nbsp;&nbsp; </strong></p>
+                    <p style="text-align: center"><strong><u>&nbsp; </u></strong><strong><u>SMS/EMPENHO</u></strong></p>
+                    <br>
+                    <table width="100%" border="1" borderColor="#000" cellpadding=4 cellspacing=0>
+                        <tbody>
+                        <tr>
+                            <td colspan="3" width="181" style="text-align: center">
+                                <p>SOLICITA&Ccedil;&Atilde;O DE MATERIAL E SERVI&Ccedil;OS- SMS</p>
+                            </td>
+                            <td colspan="3" width="323">
+                                <p>INFRAERO</p>
+                                <p>C.N.P.J ${infraero_cnpj!}</p>
+                                <p>ENDERE&Ccedil;O ${infraero_endereco!}</p>
+                            </td>
+                            <td colspan="2" width="65" style="text-align: center; vertical-align: top">
+                                <p><sup>SMS N.</sup></p>
+                                <p>${numero_sms!}</p>
+                            </td>
+                            <td colspan="3" width="80" style="text-align: center; vertical-align: top">
+                                <p><sup>RC/CI N.</sup></p>
+                                <h1>${numero_rcci!}</h1>
+                            </td>
+                            <td width="118" style="text-align: center; vertical-align: top">
+                                <p><sup>NP</sup></p>
+                                <h1>${valor_np!}</h1>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="9" width="613">
+                                <p><sup>FORNECEDOR</sup></p>
+                                <p>${fornecedor!}</p>
+                            </td>
+                            <td colspan="3" width="154">
+                                <p><sup>OR&Ccedil;AMENTO</sup></p>
+                                <p>${orcamento!}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="9" width="613">
+                                <p><sup>ENDERE&Ccedil;O</sup></p>
+                                <p>${fornecedor_endereco!}</p>
+                            </td>
+                            <td colspan="3" width="154">
+                                <p><sup>N. COMPROMISSO</sup></p>
+                                <p>${numero_compromisso!}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="9" width="613">
+                                <p>Solicitamos o fornecimento do produto ou a execu&ccedil;&atilde;o do servi&ccedil;o abaixo especificado, respeitadas as condi&ccedil;&otilde;es contidas no(a) ${documento_condicoes!} e aceitas em sua proposta</p>
+                            </td>
+                            <td colspan="3" width="154">
+                                <p><sup>CONTA-SUBCONTA</sup></p>
+                                <p>${conta_subconta!}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" width="44">
+                                <p>QUANT</p>
+                            </td>
+                            <td rowspan="2" width="35">
+                                <p>UNID.</p>
+                            </td>
+                            <td colspan="5" rowspan="2" width="475">
+                                <p>ESPECIFICA&Ccedil;&Atilde;O</p>
+                            </td>
+                            <td colspan="5" width="212" style="text-align: center">
+                                <p>VALOR</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" width="80">
+                                <p>UNIT&Aacute;RIO</p>
+                            </td>
+                            <td colspan="2" width="133">
+                                <p>TOTAL</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="44">
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                                <p>${produto_quantidade!}</p>
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td width="35">
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                                <p>${produto_unidade!}</p>
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td colspan="5" width="475">
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                                <p>${produto_especificacao!}</p>
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td colspan="3" width="80">
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                                <p>${produto_valor_unitario!}</p>
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                            </td>
+                            <td colspan="2" width="133">
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                                <p>${produto_valor_total!}</p>
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" width="333">
+                                <p>NOTAS:</p>
+                                <p>1 &ndash; DEVOLVER ESTE ORIGINAL ANEXO &Agrave; NOTA FISCAL OU DOCUMENTO EQUIVALENTE.</p>
+                                <p>2 &ndash;&nbsp;&nbsp;&nbsp; O PAGAMENTO SER&Aacute; EFETUADO SOMENTE ATRAV&Eacute;S DE OPB -ORDEM DE PAGAMENTO BANC&Aacute;RIA, INFORMAR NO DOCUMENTO DE COBRAN&Ccedil;A:&nbsp; BANCO/N. AG&Ecirc;NCIA/N. C/CORRENTE.</p>
+                            </td>
+                            <td width="135">
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                                <p>Local e Data</p>
+                            </td>
+                            <td colspan="4" width="145">
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                                <p>Assinatura/Carimbo - Gestor do Programa</p>
+                            </td>
+                            <td colspan="3" width="154">
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                                <p>&nbsp;</p>
+                                <p>____________________________</p>
+                                <p>Assinatura e Carimbo</p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!-- Fim - Corpo do conteudo -->
+
+                    <!-- FIM - Tagmeta -->
+
+
+                [/@corpoBIE]
+                [#if fecho??]<p style="font-size: ${tl}; TEXT-INDENT: 2.5cm">[@fechoBIE]${fecho!}${virgula!}[/@fechoBIE][/#if]</p>
+
+                </div>
+        [/@mioloDJE]
+    [/@estiloBrasaoAEsquerda]
+
+    [#if _tiposigilo! == "2"]
+        [@acessoRestrito /]
+    [/#if]
+[/@documento]
