@@ -1,4 +1,4 @@
-[#macro documento formato="A4" orientacao="retrato" margemEsquerda="2,5cm" margemDireita="1,5cm" margemSuperior="2cm" margemInferior="1,8cm" capa=false]
+[#macro documento formato="A4" orientacao="retrato" margemEsquerda="2,5cm" margemDireita="1,5cm" margemSuperior="2cm" margemInferior="1,8cm"]
     [#if !gerar_entrevista!false || gerar_finalizacao!false || gerar_assinatura!false]
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
         <head>
@@ -8,16 +8,11 @@
                     margin-right: ${margemDireita};
                     margin-top: ${margemSuperior};
                     margin-bottom: ${margemInferior};
-
-
                 }
             </style>
         </head>
-        <body [#if capa]style="border: 1px solid black; margin: 10px; padding: 10px;"[/#if]>
-            	[#if capa]
-            		<div style="position: absolute; background-color: white; top: 1px; padding: 0 6px; right: 40px;">INFRAERO</div>
-                [/#if]
-              	[#nested]
+        <body>
+                [#nested]
         </body>
         </html>
     [/#if]
