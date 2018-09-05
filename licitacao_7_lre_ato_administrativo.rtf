@@ -25,12 +25,7 @@
 [/#if]
 
 [@entrevista]
-    [@grupo]
-        [@texto titulo="Número pregão eletrônico" var="numero_pregao_eletronico" largura=50 /]
-        [@texto titulo="Referência" var="texto_ref" largura=50 /]
-    [/@grupo]
-
-    [@grupo]
+    [@grupo titulo = "Dados do formulário"]
         [@grupo]
             [@texto titulo="Equipe Modalidade" var="equipe_modalidade" largura="50" /]
         [/@grupo]
@@ -186,14 +181,10 @@
         [/@grupo]
     [/@grupo]
 
-    [#if _tamanho_letra != ""]
-        [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
-    [#else]
-        [@selecao titulo="Tamanho da letra" var="tamanhoLetra" opcoes="Normal;Pequeno;Grande" /]
-    [/#if]
+    [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
 [/@entrevista]
 
-[@documento margemDireita="3cm"]
+[@documento ]
     [#if tamanhoLetra! == "Normal"]
         [#assign tl = "10pt" /]
     [#elseif tamanhoLetra! == "Pequeno"]
@@ -217,7 +208,7 @@
         [#assign _secreto = true /]
     [/#if]
 
-    [@estiloBrasaoEsquerdaOficio tipo=_tipo tamanhoLetra=tl formatarOrgao=true]
+    [@estiloBrasaoAEsquerda tipo=_tipo tamanhoLetra=tl formatarOrgao=true]
              <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
                  <tr>
                      <td align="left">
@@ -245,8 +236,6 @@
                  </tr>
              </table>
         [@mioloDJE]
-                <p align="right">${doc.getEditor().getOrgaoUsuario().getMunicipioOrgaoUsu()}, ${aDateTime?string["dd"]} de ${aDateTime?string["MMMM"]} de ${aDateTime?string["yyyy"]}</p>
-                <br>
                 <br>
                 R E S O L V E<br>
                 <br>
@@ -282,7 +271,7 @@
 
                 </div>
         [/@mioloDJE]
-    [/@estiloBrasaoEsquerdaOficio]
+    [/@estiloBrasaoAEsquerda]
     [#if _tiposigilo! == "2"]
         [@acessoRestrito /]
     [/#if]

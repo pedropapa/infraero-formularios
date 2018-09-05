@@ -25,11 +25,14 @@
 [/#if]
 
 [@entrevista]
-    [@grupo]
-        [@texto titulo="Número pregão eletrônico" var="numero_pregao_eletronico" largura=50 /]
-        [@texto titulo="Referência" var="texto_ref" largura=50 /]
+    [@grupo titulo = "Dados do pregão"]
+        [@grupo]
+            [@texto titulo="Número pregão eletrônico" var="numero_pregao_eletronico" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Referência" var="texto_ref" largura=50 /]
+        [/@grupo]
     [/@grupo]
-
     [@grupo titulo = "Dados Signatário"]
         [@grupo]
             [@texto titulo="Nome Coordenador Licitações" var="coordenador_licitacoes_nome" largura=50 /]
@@ -38,60 +41,27 @@
             [@texto titulo="Nome Gerente Licitações" var="gerente_licitacoes_nome" largura=50 /]
         [/@grupo]
     [/@grupo]
-
-    [@grupo titulo="Dados do destinatário" esconder=(_enderecamento_dest!="" && _nome_dest!="" && _cargo_dest!="" && _orgao_dest!="" && _endereco_dest!="")]
-                <!-- Tratamento -->
-        [#if _enderecamento_dest != ""]
-            [@oculto var="enderecamento_dest" valor=_enderecamento_dest /]
-        [#else]
-            [#if tratamento??]
-                [@grupo]
-                    [@checkbox titulo="Especificar manualmente a forma de endereçamento" var="especificarEnderecamento" reler=true /]
-                [/@grupo]
-            [/#if]
-            [#if !tratamento?? || (especificarEnderecamento?? && especificarEnderecamento == 'Sim')]
-                [@grupo]
-                    [@texto titulo="Forma de endereçamento" var="enderecamento_dest" largura="45" /]
-                [/@grupo]
-            [#else]
-                [@oculto var="enderecamento_dest" valor="${(tratamento.formaDeEnderecamento)!}" /]
-            [/#if]
-        [/#if]
-
-    [/@grupo]
-    [@grupo]
+    [@grupo titulo = "Dados Gerais"]
         [@grupo]
             [@texto titulo="Objeto instauração" var="objeto_instauracao" largura="50" /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Esclarecimentos solicitados" var="esclarecimento_solicitado" largura="50" /]
+            [@texto titulo="Número PEC Planejamento" var="nr_pec_planejamento" largura="50" /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Número licitação" var="numero_licitacao" largura="50" /]
+            [@texto titulo="Número PEC Licitação" var="nr_pec_licitacao" largura="50" /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Endereço edital" var="endereco_edital" largura="50" /]
+            [@data titulo="Data solicitação esclarecimentos" var="dt_solicitacao_esclarecimentos" /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Número ato administrativo" var="numero_ato_administrativo" largura="50" /]
+            [@texto titulo="URL Edital" var="url_edital" largura="50" /]
         [/@grupo]
         [@grupo]
-            [@data titulo="Data ato administrativo" var="data_ato_administrativo" /]
+            [@texto titulo="Número Ato Administrativo" var="nr_ato_administrativo" largura="50" /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Termos" var="termo" largura="50" /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="NI" var="ni" largura="50" /]
-        [/@grupo]
-        [@grupo]
-            [@data titulo="Data termo NI" var="data_termo_ni" /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Citada NI" var="citada_ni" largura="50" /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Citada NI" var="citada_ni" largura="50" /]
+            [@data titulo="Data Ato Administrativo" var="dt_ato_administrativo" /]
         [/@grupo]
         [@grupo]
             [@texto titulo="Sigla área Licitações" var="area_licitacoes" largura="50" /]
@@ -106,14 +76,11 @@
             [@editor titulo="" var="outras_informacoes_necessarias" /]
         [/@grupo]
     [/@grupo]
-    [#if _tamanho_letra != ""]
-        [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
-    [#else]
-        [@selecao titulo="Tamanho da letra" var="tamanhoLetra" opcoes="Normal;Pequeno;Grande" /]
-    [/#if]
+
+    [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
 [/@entrevista]
 
-[@documento margemDireita="3cm"]
+[@documento ]
     [#if tamanhoLetra! == "Normal"]
         [#assign tl = "10pt" /]
     [#elseif tamanhoLetra! == "Pequeno"]
@@ -165,10 +132,19 @@
                  </tr>
              </table>
         [@mioloDJE]
-                <p align="right">${doc.getEditor().getOrgaoUsuario().getMunicipioOrgaoUsu()}, ${aDateTime?string["dd"]} de ${aDateTime?string["MMMM"]} de ${aDateTime?string["yyyy"]}</p>
-                <br>
-                <br>
-                Senhor Destinatário<br>
+            [#if doc.destinatario??]
+                    	Senhor (a) ${doc.destinatario.nomePessoa} <br/> ${doc.lotaDestinatario.descricao}
+            [#elseif doc.lotaDestinatario??]
+                ${doc.lotaDestinatario.descricao}
+            [#elseif doc.orgaoExternoDestinatario??]
+                ${doc.orgaoExternoDestinatario.nmOrgao}
+            [#elseif doc.nmOrgaoExterno??]
+                ${doc.nmOrgaoExterno}
+            [#elseif doc.nmDestinatario??]
+                ${doc.nmDestinatario}
+            [#else]
+                DESTINATÁRIO NÃO SELECIONADO
+            [/#if]
                 <br>
                 <br>
                     Assunto: Pregão Eletrônico nº ${numero_pregao_eletronico!} - Aprovação da minuta do Edital.
@@ -185,15 +161,23 @@
 
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cumpre-nos registrar que coube a Gerência de Licitações, por intermédio da Coordenação de Licitação de Serviços em Geral e de Registro de Preços/LALI-3, atuar no sentido restrito da instauração do procedimento licitatório, de acordo com o arcabouço normativo da INFRAERO, especialmente o RLCI e o Capítulo II da NI 6.01/F (LCT), de 16/05/2016, dentre os quais a elaboração da minuta do edital, na qual está refletida a utilização dos aplicativos legais e normativos atinentes ao tema, cabendo à área requisitante a responsabilidade pelas informações técnicas, financeiras e orçamentárias inseridas no Edital, pelas justificativas de sua aplicabilidade, as quais insertas no dossiê do processo, bem como pela responsabilidade de pareceres futuros em função de eventuais petições atinentes as exigências formuladas.<p>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No que tange a análise prévia realizada por esta área de licitações, a área requisitante apresentou os esclarecimentos solicitados em ${esclarecimento_solicitado!}</p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Registra-se que os documentos identificados abaixo foram extraídos, em cópia, da PEC de Planejamento nº ${nr_pec_planejamento!} para a composição da PEC de Licitação nº ${nr_pec_licitacao!}:</p>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O Edital utilizado está disponível na rede no seguinte endereço: ${endereco_edital!}, com as adaptações/atualizações necessárias.</p>
+                    <br>
+                    <br>
+                    <br>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O Ato Administrativo n. ${numero_ato_administrativo!}, de ${data_ato_administrativo!}, que nomeia o Pregoeiro e sua Equipe de Apoio, encontra-se apenso aos autos.</p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No que tange a análise prévia realizada por esta área de licitações, a área requisitante apresentou os esclarecimentos solicitados em ${dt_solicitacao_esclarecimentos!}.</p>
 
-                    [#if outras_informacoes_necessarias??]<p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">6. ${outras_informacoes_necessarias!}</p>[/#if]
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Em face do que dispõe o item 5 da NI – 6.01/F (LCT), não realizamos a análise de mérito dos elementos técnicos constantes do Termo de Referência, visto ser atribuição do Órgão de Contratos.</p>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">[#if outras_informacoes_necessarias??]7[#else]6[/#if].&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Assim, nos termos d(o) (a) ${termo!} da NI ${ni!}, de ${data_termo_ni!}, encaminhamos o presente procedimento licitatório à essa área Jurídica, para proceder ao exame, aprovação e rubrica na minuta do Edital e seus anexos, se for o caso, conforme dispõe o ${citada_ni!} da citada NI.</p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">6.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O Edital utilizado está disponível na rede no seguinte endereço: ${url_edital!}, com as adaptações/atualizações necessárias.</p>
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">7.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O Ato Administrativo nº ${nr_ato_administrativo!}, de ${dt_ato_administrativo!}, que nomeia o Pregoeiro e sua Equipe de Apoio, encontra-se apenso aos autos.</p>
+
+                    [#if outras_informacoes_necessarias??]<p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">8. ${outras_informacoes_necessarias!}</p>[/#if]
+
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">[#if outras_informacoes_necessarias??]9[#else]8[/#if].&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Assim, nos termos da alínea “f”, do subitem 16 da NI-6.01/F (LCT), de 16/5/2016, encaminhamos o presente procedimento licitatório à essa área Jurídica, para proceder ao exame, aprovação e rubrica na minuta do Edital e seus anexos, se for o caso, conforme dispõe o subitem 17.1 da citada NI</p>
 
 
                     <!-- Fim - Corpo do conteudo -->

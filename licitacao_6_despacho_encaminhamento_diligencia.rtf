@@ -25,18 +25,27 @@
 [/#if]
 
 [@entrevista]
-    [@grupo]
-        [@texto titulo="Número pregão eletrônico" var="numero_pregao_eletronico" largura=50 /]
-        [@texto titulo="Referência" var="texto_ref" largura=50 /]
+    [@grupo titulo = "Dados do pregão"]
+        [@grupo]
+            [@texto titulo="Número pregão eletrônico" var="numero_pregao_eletronico" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Referência" var="texto_ref" largura=50 /]
+        [/@grupo]
     [/@grupo]
-    [#if _tamanho_letra != ""]
-        [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
-    [#else]
-        [@selecao titulo="Tamanho da letra" var="tamanhoLetra" opcoes="Normal;Pequeno;Grande" /]
-    [/#if]
+    [@grupo titulo = "Dados Signatário"]
+        [@grupo]
+            [@texto titulo="Nome Coordenador Licitações" var="coordenador_licitacoes_nome" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Sigla área Licitações" var="area_licitacoes" largura="50" /]
+        [/@grupo]
+    [/@grupo]
+
+    [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
 [/@entrevista]
 
-[@documento margemDireita="3cm"]
+[@documento ]
     [#if tamanhoLetra! == "Normal"]
         [#assign tl = "10pt" /]
     [#elseif tamanhoLetra! == "Pequeno"]
@@ -88,13 +97,22 @@
                  </tr>
              </table>
         [@mioloDJE]
-                <p align="right">${doc.getEditor().getOrgaoUsuario().getMunicipioOrgaoUsu()}, ${aDateTime?string["dd"]} de ${aDateTime?string["MMMM"]} de ${aDateTime?string["yyyy"]}</p>
+            [#if doc.destinatario??]
+                    	Senhor (a) ${doc.destinatario.nomePessoa} <br/> ${doc.lotaDestinatario.descricao}
+            [#elseif doc.lotaDestinatario??]
+                ${doc.lotaDestinatario.descricao}
+            [#elseif doc.orgaoExternoDestinatario??]
+                ${doc.orgaoExternoDestinatario.nmOrgao}
+            [#elseif doc.nmOrgaoExterno??]
+                ${doc.nmOrgaoExterno}
+            [#elseif doc.nmDestinatario??]
+                ${doc.nmDestinatario}
+            [#else]
+                DESTINATÁRIO NÃO SELECIONADO
+            [/#if]
                 <br>
                 <br>
-                Senhor Destinatário<br>
-                <br>
-                <br>
-                    Assunto: Pregão Eletrônico nº ${numero_pregao_eletronico!} - Comprovação de orçamento.
+                    Assunto: Pregão Eletrônico nº ${numero_pregao_eletronico!} - Atendimento Diligências Jurídica.
             [#if texto_ref??]
                         <br/>Ref.: ${texto_ref!}
             [/#if]
@@ -104,9 +122,9 @@
 
                     <!-- INICIO - Tagmeta -->
                     <!-- Inicio - Corpo do conteudo -->
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Informamos que o Edital do processo em epígrafe foi devidamente aprovado pela área Jurídica, por meio do documento de referência, estando a publicidade da licitação condicionada à respectiva comprovação da disponibilidade orçamentária nos termos da legislação e da NI 6.01, vigente.</p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Trata-se de apontamentos feitos pela área Jurídica, por meio do documento de referência, os quais requerem a devida apreciação e atendimento por parte dessa área demandante.</p>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Diante do exposto, aguardamos o envio da comprovação orçamentária para as tratativas atinentes à publicação da licitação.<p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Após as devidas tratativas aos questionamentos, o processo deverá ser remetido a esta área de licitações para as providências subsequentes.<p>
 
 
                     <!-- Fim - Corpo do conteudo -->
@@ -123,5 +141,14 @@
     [#if _tiposigilo! == "2"]
         [@acessoRestrito /]
     [/#if]
+
+      <p style="page-break-before: always;">
+
+      <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">De acordo. Encaminhe-se à ${area_licitacoes!}.</p>
+      <br /><br /><br />
+      <p align="center" style="font-family: Times New Roman; font-size: 10pt">
+          ${coordenador_licitacoes_nome!}<br>
+          Coordenador da Área de Licitações<br>
+      </p>
 
 [/@documento]

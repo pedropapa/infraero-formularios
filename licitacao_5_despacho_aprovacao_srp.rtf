@@ -25,9 +25,13 @@
 [/#if]
 
 [@entrevista]
-    [@grupo]
-        [@texto titulo="Número pregão eletrônico" var="numero_pregao_eletronico" largura=50 /]
-        [@texto titulo="Referência" var="texto_ref" largura=50 /]
+    [@grupo titulo = "Dados do pregão"]
+        [@grupo]
+            [@texto titulo="Número pregão eletrônico" var="numero_pregao_eletronico" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Referência" var="texto_ref" largura=50 /]
+        [/@grupo]
     [/@grupo]
     [@grupo titulo = "Dados Signatário"]
         [@grupo]
@@ -59,7 +63,7 @@
     [/@grupo]
     [@grupo]
         [@grupo]
-            [@texto titulo="Objeto instauração" var="objeto_instauracao" largura="50" /]
+            [@memo colunas=50 linhas=5 titulo="Objeto instauração" var="objeto_instauracao" /]
         [/@grupo]
         [@grupo]
             [@texto titulo="Área Responsável Atuação" var="area_responsavel_atuacao" largura="50" /]
@@ -116,14 +120,11 @@
             [@editor titulo="" var="outras_informacoes_necessarias" /]
         [/@grupo]
     [/@grupo]
-    [#if _tamanho_letra != ""]
-        [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
-    [#else]
-        [@selecao titulo="Tamanho da letra" var="tamanhoLetra" opcoes="Normal;Pequeno;Grande" /]
-    [/#if]
+
+    [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
 [/@entrevista]
 
-[@documento margemDireita="3cm"]
+[@documento ]
     [#if tamanhoLetra! == "Normal"]
         [#assign tl = "10pt" /]
     [#elseif tamanhoLetra! == "Pequeno"]
@@ -175,10 +176,19 @@
                  </tr>
              </table>
         [@mioloDJE]
-                <p align="right">${doc.getEditor().getOrgaoUsuario().getMunicipioOrgaoUsu()}, ${aDateTime?string["dd"]} de ${aDateTime?string["MMMM"]} de ${aDateTime?string["yyyy"]}</p>
-                <br>
-                <br>
-                Senhor Destinatário<br>
+            [#if doc.destinatario??]
+                    	Senhor (a) ${doc.destinatario.nomePessoa} <br/> ${doc.lotaDestinatario.descricao}
+            [#elseif doc.lotaDestinatario??]
+                ${doc.lotaDestinatario.descricao}
+            [#elseif doc.orgaoExternoDestinatario??]
+                ${doc.orgaoExternoDestinatario.nmOrgao}
+            [#elseif doc.nmOrgaoExterno??]
+                ${doc.nmOrgaoExterno}
+            [#elseif doc.nmDestinatario??]
+                ${doc.nmDestinatario}
+            [#else]
+                DESTINATÁRIO NÃO SELECIONADO
+            [/#if]
                 <br>
                 <br>
                     Assunto: Pregão Eletrônico nº ${numero_pregao_eletronico!} - Aprovação da minuta do Edital.
