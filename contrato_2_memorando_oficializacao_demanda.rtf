@@ -47,9 +47,6 @@
     [/@grupo]
     [@grupo titulo = "Cabeçalho"]
         [@grupo]
-            [@numero titulo="Nome destinatário" var="nome_destinatario" /]
-        [/@grupo]
-        [@grupo]
             [@texto titulo="Objeto Contratação" var="objeto_contratacao" largura=50 /]
         [/@grupo]
         [@grupo]
@@ -146,10 +143,19 @@
                  </tr>
              </table>
         [@mioloDJE]
-                <p align="right">${doc.getEditor().getOrgaoUsuario().getMunicipioOrgaoUsu()}, ${aDateTime?string["dd"]} de ${aDateTime?string["MMMM"]} de ${aDateTime?string["yyyy"]}</p>
-                <br>
-                <br>
-                Senhor Destinatário ${nome_destinatario!}<br>
+            [#if doc.destinatario??]
+                    	Senhor (a) ${doc.destinatario.nomePessoa} <br/> ${doc.lotaDestinatario.descricao}
+            [#elseif doc.lotaDestinatario??]
+                ${doc.lotaDestinatario.descricao}
+            [#elseif doc.orgaoExternoDestinatario??]
+                ${doc.orgaoExternoDestinatario.nmOrgao}
+            [#elseif doc.nmOrgaoExterno??]
+                ${doc.nmOrgaoExterno}
+            [#elseif doc.nmDestinatario??]
+                ${doc.nmDestinatario}
+            [#else]
+                DESTINATÁRIO NÃO SELECIONADO
+            [/#if]
                 <br>
                 <br>
                 Assunto: Planejamento dos serviços ${objeto_contratacao!}

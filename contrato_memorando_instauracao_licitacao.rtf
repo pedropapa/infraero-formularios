@@ -31,9 +31,6 @@
     [/@grupo]
     [@grupo titulo="Dados gerais"]
         [@grupo]
-            [@texto titulo="Nome destinatário" var="nome_destinatario" largura="50" obrigatorio="sim" /]
-        [/@grupo]
-        [@grupo]
             [@texto titulo="Referência objeto" var="referencia_objeto" largura="50" obrigatorio="sim" /]
         [/@grupo]
         [@grupo]
@@ -247,11 +244,19 @@
                  </tr>
              </table>
         [@mioloDJE]
-                <p align="right">${doc.getEditor().getOrgaoUsuario().getMunicipioOrgaoUsu()}, ${aDateTime?string["dd"]}
-                    de ${aDateTime?string["MMMM"]} de ${aDateTime?string["yyyy"]}</p>
-                <br>
-                <br>
-                Senhor ${nome_destinatario!}<br>
+            [#if doc.destinatario??]
+                    	Senhor (a) ${doc.destinatario.nomePessoa} <br/> ${doc.lotaDestinatario.descricao}
+            [#elseif doc.lotaDestinatario??]
+                ${doc.lotaDestinatario.descricao}
+            [#elseif doc.orgaoExternoDestinatario??]
+                ${doc.orgaoExternoDestinatario.nmOrgao}
+            [#elseif doc.nmOrgaoExterno??]
+                ${doc.nmOrgaoExterno}
+            [#elseif doc.nmDestinatario??]
+                ${doc.nmDestinatario}
+            [#else]
+                DESTINATÁRIO NÃO SELECIONADO
+            [/#if]
                 <br>
                 <br>
                 Assunto: Abertura de Processo Licitatório
