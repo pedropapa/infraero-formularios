@@ -51,6 +51,9 @@
         [@grupo]
             [@texto titulo="Número PEC Licitação" var="nr_pec_licitacao" largura="50" /]
         [/@grupo]
+        [@grupo titulo="Descrição do item 3"]
+            [@editor titulo="" var="descricao_item_3" /]
+        [/@grupo]
         [@grupo]
             [@data titulo="Data solicitação esclarecimentos" var="dt_solicitacao_esclarecimentos" /]
         [/@grupo]
@@ -163,9 +166,7 @@
 
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Registra-se que os documentos identificados abaixo foram extraídos, em cópia, da PEC de Planejamento nº ${nr_pec_planejamento!} para a composição da PEC de Licitação nº ${nr_pec_licitacao!}:</p>
 
-                    <br>
-                    <br>
-                    <br>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">${descricao_item_3}</p>
 
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No que tange a análise prévia realizada por esta área de licitações, a área requisitante apresentou os esclarecimentos solicitados em ${dt_solicitacao_esclarecimentos!}.</p>
 
