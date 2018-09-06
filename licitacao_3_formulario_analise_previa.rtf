@@ -150,7 +150,7 @@
             [@selecao titulo="Ressalvas" var="ressalvas_p" opcoes="Não;Sim;Não aplicável" reler=true /]
         [/@grupo]
         [#if ressalvas_p?? && ressalvas_p == "Sim"]
-            [@texto titulo="Detalhamento" var="detalhamento_o" largura=50 /]
+            [@texto titulo="Detalhamento" var="detalhamento_p" largura=50 /]
         [/#if]
     [/@grupo]
     [@grupo titulo = "Item Q"]
@@ -351,7 +351,7 @@
                                 [#if ressalvas_a?? && ressalvas_a == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_a?? && ressalvas_a == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_a?? && ressalvas_a == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_a?? && ressalvas_a == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_a?? && ressalvas_a != "Sim"]&nbsp;[#else]${detalhamento_a!}[/#if]</p>
@@ -371,7 +371,7 @@
                                 [#if ressalvas_b?? && ressalvas_b == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_b?? && ressalvas_b == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_b?? && ressalvas_b == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_b?? && ressalvas_b == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_b?? && ressalvas_b != "Sim"]&nbsp;[#else]${detalhamento_b!}[/#if]</p>
@@ -393,7 +393,7 @@
                                 [#if ressalvas_c?? && ressalvas_c == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_c?? && ressalvas_c == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_c?? && ressalvas_c == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_c?? && ressalvas_c == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_c?? && ressalvas_c != "Sim"]&nbsp;[#else]${detalhamento_c!}[/#if]</p>
@@ -413,7 +413,7 @@
                                 [#if ressalvas_d?? && ressalvas_d == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_d?? && ressalvas_d == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_d?? && ressalvas_d == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_d?? && ressalvas_d == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_d?? && ressalvas_d != "Sim"]&nbsp;[#else]${detalhamento_d!}[/#if]</p>
@@ -432,7 +432,7 @@
                                 [#if ressalvas_e?? && ressalvas_e == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_e?? && ressalvas_e == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_e?? && ressalvas_e == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_e?? && ressalvas_e == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_e?? && ressalvas_e != "Sim"]&nbsp;[#else]${detalhamento_e!}[/#if]</p>
@@ -452,7 +452,7 @@
                                 [#if ressalvas_f?? && ressalvas_f == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_f?? && ressalvas_f == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_f?? && ressalvas_f == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_f?? && ressalvas_f == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_f?? && ressalvas_f != "Sim"]&nbsp;[#else]${detalhamento_f!}[/#if]</p>
@@ -472,7 +472,7 @@
                                 [#if ressalvas_g?? && ressalvas_g == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_g?? && ressalvas_g == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_g?? && ressalvas_g == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_g?? && ressalvas_g == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_g?? && ressalvas_g != "Sim"]&nbsp;[#else]${detalhamento_g!}[/#if]</p>
@@ -493,7 +493,7 @@
                                 [#if ressalvas_h?? && ressalvas_h == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_h?? && ressalvas_h == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_h?? && ressalvas_h == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_h?? && ressalvas_h == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_h?? && ressalvas_h != "Sim"]&nbsp;[#else]${detalhamento_h!}[/#if]</p>
@@ -514,7 +514,7 @@
                                 [#if ressalvas_i?? && ressalvas_i == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_i?? && ressalvas_i == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_i?? && ressalvas_i == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_i?? && ressalvas_i == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_i?? && ressalvas_i != "Sim"]&nbsp;[#else]${detalhamento_i!}[/#if]</p>
@@ -533,7 +533,7 @@
                                 [#if ressalvas_j?? && ressalvas_j == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_j?? && ressalvas_j == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_j?? && ressalvas_j == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_j?? && ressalvas_j == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_j?? && ressalvas_j != "Sim"]&nbsp;[#else]${detalhamento_j!}[/#if]</p>
@@ -553,7 +553,7 @@
                                 [#if ressalvas_k?? && ressalvas_k == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_k?? && ressalvas_k == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_k?? && ressalvas_k == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_k?? && ressalvas_k == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_k?? && ressalvas_k != "Sim"]&nbsp;[#else]${detalhamento_k!}[/#if]</p>
@@ -572,7 +572,7 @@
                                 [#if ressalvas_l?? && ressalvas_l == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_l?? && ressalvas_l == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_l?? && ressalvas_l == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_l?? && ressalvas_l == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_l?? && ressalvas_l != "Sim"]&nbsp;[#else]${detalhamento_l!}[/#if]</p>
@@ -592,7 +592,7 @@
                                 [#if ressalvas_m?? && ressalvas_m == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_m?? && ressalvas_m == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_m?? && ressalvas_m == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_m?? && ressalvas_m == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_m?? && ressalvas_m != "Sim"]&nbsp;[#else]${detalhamento_m!}[/#if]</p>
@@ -611,7 +611,7 @@
                                 [#if ressalvas_n?? && ressalvas_n == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_n?? && ressalvas_n == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_n?? && ressalvas_n == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_n?? && ressalvas_n == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_n?? && ressalvas_n != "Sim"]&nbsp;[#else]${detalhamento_n!}[/#if]</p>
@@ -631,7 +631,7 @@
                                 [#if ressalvas_o?? && ressalvas_o == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_o?? && ressalvas_o == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_o?? && ressalvas_o == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_o?? && ressalvas_o == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_o?? && ressalvas_o != "Sim"]&nbsp;[#else]${detalhamento_o!}[/#if]</p>
@@ -652,7 +652,7 @@
                                 [#if ressalvas_p?? && ressalvas_p == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_p?? && ressalvas_p == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_p?? && ressalvas_p == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_p?? && ressalvas_p == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_p?? && ressalvas_p != "Sim"]&nbsp;[#else]${detalhamento_p!}[/#if]</p>
@@ -674,7 +674,7 @@
                                 [#if ressalvas_q?? && ressalvas_q == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_q?? && ressalvas_q == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_q?? && ressalvas_q == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_q?? && ressalvas_q == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_q?? && ressalvas_q != "Sim"]&nbsp;[#else]${detalhamento_q!}[/#if]</p>
@@ -696,7 +696,7 @@
                                 [#if ressalvas_r?? && ressalvas_r == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_r?? && ressalvas_r == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_r?? && ressalvas_r == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_r?? && ressalvas_r == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_r?? && ressalvas_r != "Sim"]&nbsp;[#else]${detalhamento_r!}[/#if]</p>
@@ -716,7 +716,7 @@
                                 [#if ressalvas_s?? && ressalvas_s == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_s?? && ressalvas_s == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_s?? && ressalvas_s == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_s?? && ressalvas_s == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_s?? && ressalvas_s != "Sim"]&nbsp;[#else]${detalhamento_s!}[/#if]</p>
@@ -735,7 +735,7 @@
                                 [#if ressalvas_t?? && ressalvas_t == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_t?? && ressalvas_t == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_t?? && ressalvas_t == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_t?? && ressalvas_t == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_t?? && ressalvas_t != "Sim"]&nbsp;[#else]${detalhamento_t!}[/#if]</p>
@@ -756,7 +756,7 @@
                                 [#if ressalvas_u?? && ressalvas_u == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_u?? && ressalvas_u == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_u?? && ressalvas_u == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_u?? && ressalvas_u == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_u?? && ressalvas_u != "Sim"]&nbsp;[#else]${detalhamento_u!}[/#if]</p>
@@ -776,7 +776,7 @@
                                 [#if ressalvas_v?? && ressalvas_v == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_v?? && ressalvas_v == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_v?? && ressalvas_v == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_v?? && ressalvas_v == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_v?? && ressalvas_v != "Sim"]&nbsp;[#else]${detalhamento_v!}[/#if]</p>
@@ -800,7 +800,7 @@
                                 [#if ressalvas_w?? && ressalvas_w == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_w?? && ressalvas_w == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_w?? && ressalvas_w == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_w?? && ressalvas_w == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_w?? && ressalvas_w != "Sim"]&nbsp;[#else]${detalhamento_w!}[/#if]</p>
@@ -821,7 +821,7 @@
                                 [#if ressalvas_x?? && ressalvas_x == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_x?? && ressalvas_x == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_x?? && ressalvas_x == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_x?? && ressalvas_x == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_x?? && ressalvas_x != "Sim"]&nbsp;[#else]${detalhamento_x!}[/#if]</p>
@@ -843,7 +843,7 @@
                                 [#if ressalvas_y?? && ressalvas_y == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_y?? && ressalvas_y == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_y?? && ressalvas_y == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_y?? && ressalvas_y == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_y?? && ressalvas_y != "Sim"]&nbsp;[#else]${detalhamento_y!}[/#if]</p>
@@ -862,7 +862,7 @@
                                 [#if ressalvas_outros?? && ressalvas_outros == "Sim"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="49" valign="middle" align="center">
-                                [#if ressalvas_outros?? && ressalvas_outros == "Não Aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
+                                [#if ressalvas_outros?? && ressalvas_outros == "Não aplicável"]<span style="font-size: 40pt">X</span>[#else]<p>&nbsp;</p>[/#if]
                             </td>
                             <td width="135" [#if ressalvas_outros?? && ressalvas_outros == "Sim"]style="padding: 15px;"[/#if]>
                                 <p>[#if ressalvas_outros?? && ressalvas_outros != "Sim"]&nbsp;[#else]${detalhamento_outros!}[/#if]</p>
