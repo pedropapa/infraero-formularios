@@ -245,7 +245,20 @@
                     </table>
 
                     <br>
-                    [#if outras_informacoes_necessarias?? && outras_informacoes_necessarias?length > 0]<p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">6. ${outras_informacoes_necessarias!}</p>[/#if]
+
+                    <table>
+                        <tr>
+                            <td width="50px" valign="top">
+                                <br>
+                                  [#if outras_informacoes_necessarias?? && outras_informacoes_necessarias?length > 0]<p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">6.[/#if]
+                                <br>
+                            </td>
+                        </tr>
+                    </table>
+
+                    [#if outras_informacoes_necessarias?? && outras_informacoes_necessarias?length > 0]<p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">${outras_informacoes_necessarias!}[/#if]
+
+
                     <br>
 
                     <table>
@@ -267,10 +280,12 @@
 
                 </div>
         [/@mioloDJE]
-    [/@estiloBrasaoAEsquerda]
-    [#if _tiposigilo! == "2"]
-        [@acessoRestrito /]
-    [/#if]
 
-    [@signatarioLicitacoes/]
+        [#if _tiposigilo! == "2"]
+            [@acessoRestrito /]
+        [/#if]
+        [#--[@signatarioLicitacoes/]--]
+    [/@estiloBrasaoAEsquerda]
+
+    [#--[@signatarioLicitacoes/]--]
 [/@documento]

@@ -26,13 +26,14 @@
 [/#if]
 
 [@entrevista]
-    [@grupo]
-        [@texto titulo="Assunto" var="texto_assunto" largura=50 /]
-        [@texto titulo="Referência" var="texto_ref" largura=50 /]
+    [@grupo titulo="Dados básicos"]
+        [@grupo]
+            [@texto titulo="Assunto" var="texto_assunto" largura=50 /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Referência" var="texto_ref" largura=50 /]
+        [/@grupo]
     [/@grupo]
-
-
-
 
 
     [@grupo titulo="Dados do destinatário" esconder=(_enderecamento_dest!="" && _nome_dest!="" && _cargo_dest!="" && _orgao_dest!="" && _endereco_dest!="")]
@@ -181,18 +182,59 @@
 
                     <!-- INICIO - Tagmeta -->
                     <!-- Inicio - Corpo do conteudo -->
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Em atendimento ao subitem ${subitem_edital!} do Edital do Pregão Eletrônico N. ${nu_pregao!}, para subsidiar a análise financeira e econômica da arrematante ${nome_empresa!} foram verificados os documentos acima referenciados. Assim, registramos as informações elencadas abaixo: </p>
+                <table>
+                    <tr>
+                        <td width="50px" valign="top">1.</td>
+                        <td>
+                            <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt;"> Em atendimento ao subitem ${subitem_edital!} do Edital do Pregão Eletrônico N. ${nu_pregao!}, para subsidiar a análise financeira e econômica da arrematante ${nome_empresa!} foram verificados os documentos acima referenciados. Assim, registramos as informações elencadas abaixo: </p>
+                        </td>
+                    </tr>
+                </table>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Para atendimento do subitem ${subitem_sicaf!} foi realizada consulta ao SICAF, e constatamos que os índices de Liquidez Geral (LG= ${liquidez_geral!}), Solvência Geral (SG= ${solvencia_geral!}) e Liquidez Corrente (LC= ${liquidez_corrente!}) da empresa são maiores que 1 (um inteiro), atendendo assim ao previsto no item ${item_nota!} da NOTA ${nota!} do subitem ${subitem_ato_convocatorio!} do Ato Convocatório.<p>
+                <table>
+                    <tr>
+                        <td width="50px" valign="top">2.</td>
+                        <td>
+                            <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt;"> Para atendimento do subitem ${subitem_sicaf!} foi realizada consulta ao SICAF, e constatamos que os índices de Liquidez Geral (LG= ${liquidez_geral!}), Solvência Geral (SG= ${solvencia_geral!}) e Liquidez Corrente (LC= ${liquidez_corrente!}) da empresa são maiores que 1 (um inteiro), atendendo assim ao previsto no item ${item_nota!} da NOTA ${nota!} do subitem ${subitem_ato_convocatorio!} do Ato Convocatório.</p>
+                        </td>
+                    </tr>
+                </table>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Para atendimento dos itens ${itens_documentos!}, do subitem ${subitem_documento!} foram apresentados os documentos pertinentes, os quais, conforme demonstrado na Memória de Cálculo anexa, comprovam o exigido na NOTA ${nota_subitem!} do mesmo subitem.</p>
+                <table>
+                    <tr>
+                        <td width="50px" valign="top">3.</td>
+                        <td>
+                            <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt;"> Para atendimento dos itens ${itens_documentos!}, do subitem ${subitem_documento!} foram apresentados os documentos pertinentes, os quais, conforme demonstrado na Memória de Cálculo anexa, comprovam o exigido na NOTA ${nota_subitem!} do mesmo subitem.</p>
+                        </td>
+                    </tr>
+                </table>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Quanto à planilha de custos e formação de preços, no valor global de R$ ${valor_arrematado!} registramos que também atende ao previsto no Edital da licitação em referência.</p>
+                <table>
+                    <tr>
+                        <td width="50px" valign="top">4.</td>
+                        <td>
+                            <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt;"> Quanto à planilha de custos e formação de preços, no valor global de R$ ${valor_arrematado!} registramos que também atende ao previsto no Edital da licitação em referência.</p>
+                        </td>
+                    </tr>
+                </table>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Por todo o exposto, considerando as atribuições desta equipe de apoio, decidimos pela HABILITAÇÃO a empresa ${nome_empresa!}, especificamente quanto ao cumprimento dos subitens acima mencionados. </p>
+                <table>
+                    <tr>
+                        <td width="50px" valign="top">5.</td>
+                        <td>
+                            <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt;"> Por todo o exposto, considerando as atribuições desta equipe de apoio, decidimos pela HABILITAÇÃO a empresa ${nome_empresa!}, especificamente quanto ao cumprimento dos subitens acima mencionados. </p>
+                        </td>
+                    </tr>
+                </table>
 
-                    <p style="text-align: justify;">6. ${outras_informacoes_necessarias}</p>
-
+                <table>
+                    <tr>
+                        <td width="50px" valign="top">6.</td>
+                        <td>
+                            <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt;"> ${outras_informacoes_necessarias}</p>
+                        </td>
+                    </tr>
+                </table>
 
                     <!-- Fim - Corpo do conteudo -->
 
