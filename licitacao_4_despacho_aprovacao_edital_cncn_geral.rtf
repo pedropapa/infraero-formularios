@@ -33,36 +33,37 @@
             [@texto titulo="Referência" var="texto_ref" largura=50 /]
         [/@grupo]
     [/@grupo]
-
-    [@grupo titulo = "Dados Signatário"]
+    [@grupo titulo = "Área autora"]
         [@grupo]
-            [@texto titulo="Nome Coordenador Licitações" var="coordenador_licitacoes_nome" largura=50 /]
+            [@texto titulo="Nome da área autora" var="nome_area_autora" largura="50" /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Nome Gerente Licitações" var="gerente_licitacoes_nome" largura=50 /]
+            [@texto titulo="Área intermediária" var="area_intermediaria" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Referência NI" var="referencia_ni" largura="50" /]
         [/@grupo]
     [/@grupo]
+    [#--[@grupo titulo="Dados do destinatário" esconder=(_enderecamento_dest!="" && _nome_dest!="" && _cargo_dest!="" && _orgao_dest!="" && _endereco_dest!="")]--]
+                [#--<!-- Tratamento -->--]
+        [#--[#if _enderecamento_dest != ""]--]
+            [#--[@oculto var="enderecamento_dest" valor=_enderecamento_dest /]--]
+        [#--[#else]--]
+            [#--[#if tratamento??]--]
+                [#--[@grupo]--]
+                    [#--[@checkbox titulo="Especificar manualmente a forma de endereçamento" var="especificarEnderecamento" reler=true /]--]
+                [#--[/@grupo]--]
+            [#--[/#if]--]
+            [#--[#if !tratamento?? || (especificarEnderecamento?? && especificarEnderecamento == 'Sim')]--]
+                [#--[@grupo]--]
+                    [#--[@texto titulo="Forma de endereçamento" var="enderecamento_dest" largura="45" /]--]
+                [#--[/@grupo]--]
+            [#--[#else]--]
+                [#--[@oculto var="enderecamento_dest" valor="${(tratamento.formaDeEnderecamento)!}" /]--]
+            [#--[/#if]--]
+        [#--[/#if]--]
 
-    [@grupo titulo="Dados do destinatário" esconder=(_enderecamento_dest!="" && _nome_dest!="" && _cargo_dest!="" && _orgao_dest!="" && _endereco_dest!="")]
-                <!-- Tratamento -->
-        [#if _enderecamento_dest != ""]
-            [@oculto var="enderecamento_dest" valor=_enderecamento_dest /]
-        [#else]
-            [#if tratamento??]
-                [@grupo]
-                    [@checkbox titulo="Especificar manualmente a forma de endereçamento" var="especificarEnderecamento" reler=true /]
-                [/@grupo]
-            [/#if]
-            [#if !tratamento?? || (especificarEnderecamento?? && especificarEnderecamento == 'Sim')]
-                [@grupo]
-                    [@texto titulo="Forma de endereçamento" var="enderecamento_dest" largura="45" /]
-                [/@grupo]
-            [#else]
-                [@oculto var="enderecamento_dest" valor="${(tratamento.formaDeEnderecamento)!}" /]
-            [/#if]
-        [/#if]
-
-    [/@grupo]
+    [#--[/@grupo]--]
     [@grupo]
         [@grupo]
             [@memo colunas=50 linhas=5 titulo="Objeto instauração" var="objeto_instauracao" /]
@@ -83,25 +84,7 @@
             [@data titulo="Data ato administrativo" var="data_ato_administrativo" /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Termos" var="termo" largura="50" /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="NI" var="ni" largura="50" /]
-        [/@grupo]
-        [@grupo]
-            [@data titulo="Data termo NI" var="data_termo_ni" /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Citada NI" var="citada_ni" largura="50" /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Citada NI" var="citada_ni" largura="50" /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Sigla área Licitações" var="area_licitacoes" largura="50" /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Sigla área Jurídica" var="area_juridica" largura="50" /]
+            [@data titulo="Termos" var="termos" /]
         [/@grupo]
     [/@grupo]
 
@@ -195,7 +178,7 @@
                         <tr>
                             <td width="50px">1.</td>
                             <td>
-                                <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt;"> Trata-se de solicitação para instauração de que tem por objeto a “${objeto_instauracao!}”.</p>
+                                <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt;"> Trata-se de solicitação para instauração de licitação que tem por objeto a “${objeto_instauracao!}”.</p>
                             </td>
                         </tr>
                     </table>
@@ -206,7 +189,7 @@
                         <tr>
                             <td width="50px" valign="top">2.</td>
                             <td>
-                                <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt;"> Cumpre-nos registrar que coube a Gerência de Licitações, por intermédio da Coordenação de Licitação de Serviços em Geral e de Registro de Preços/LALI-3, atuar no sentido restrito da instauração do procedimento licitatório, de acordo com o arcabouço normativo da INFRAERO, especialmente o RLCI e o Capítulo II da NI 6.01/F (LCT), de 16/05/2016, dentre os quais a elaboração da minuta do edital, na qual está refletida a utilização dos aplicativos legais e normativos atinentes ao tema, cabendo à área requisitante a responsabilidade pelas informações técnicas, financeiras e orçamentárias inseridas no Edital, pelas justificativas de sua aplicabilidade, as quais insertas no dossiê do processo, bem como pela responsabilidade de pareceres futuros em função de eventuais petições atinentes as exigências formuladas.</p>
+                                <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt;"> Cumpre-nos registrar que coube a ${nome_area_autora!}, por intermédio da ${area_intermediaria!}, atuar no sentido restrito da instauração do procedimento licitatório, de acordo com o arcabouço normativo da INFRAERO, especialmente o RLCI${referencia_ni!}, dentre os quais a elaboração da minuta do edital, na qual está refletida a utilização dos aplicativos legais e normativos atinentes ao tema, cabendo à área requisitante a responsabilidade pelas informações técnicas, financeiras e orçamentárias inseridas no Edital, pelas justificativas de sua aplicabilidade, as quais insertas no dossiê do processo, bem como pela responsabilidade de pareceres futuros em função de eventuais petições atinentes as exigências formuladas.</p>
                             </td>
                         </tr>
                     </table>
@@ -265,7 +248,7 @@
                         <tr>
                             <td width="50px" valign="top">[#if outras_informacoes_necessarias?? && outras_informacoes_necessarias?length > 0]7[#else]6[/#if].</td>
                             <td>
-                                <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt;"> Assim, nos termos d(o) (a) ${termo!} da NI ${ni!}, de ${data_termo_ni!}, encaminhamos o presente procedimento licitatório à essa área Jurídica, para proceder ao exame, aprovação e rubrica na minuta do Edital e seus anexos, se for o caso, conforme dispõe o ${citada_ni!} da citada NI.</p>
+                                <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt;"> Assim, nos termos ${termos!}, encaminhamos o presente procedimento licitatório à essa área Jurídica, para proceder ao exame, aprovação e rubrica na minuta do Edital e seus anexos, se for o caso, conforme dispõe o ${citada_ni!} da citada NI.</p>
                             </td>
                         </tr>
                     </table>

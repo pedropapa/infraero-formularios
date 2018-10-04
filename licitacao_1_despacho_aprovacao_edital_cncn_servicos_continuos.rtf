@@ -33,12 +33,15 @@
             [@texto titulo="Referência" var="texto_ref" largura=50 /]
         [/@grupo]
     [/@grupo]
-    [@grupo titulo = "Dados Signatário"]
+    [@grupo titulo = "Área autora"]
         [@grupo]
-            [@texto titulo="Nome Coordenador Licitações" var="coordenador_licitacoes_nome" largura=50 /]
+            [@texto titulo="Nome da área autora" var="nome_area_autora" largura="50" /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Nome Gerente Licitações" var="gerente_licitacoes_nome" largura=50 /]
+            [@texto titulo="Área intermediária" var="area_intermediaria" largura="50" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Referência NI" var="referencia_ni" largura="50" /]
         [/@grupo]
     [/@grupo]
     [@grupo titulo = "Dados Gerais"]
@@ -46,16 +49,19 @@
             [@texto titulo="Objeto instauração" var="objeto_instauracao" largura="50" /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Número PEC Planejamento" var="nr_pec_planejamento" largura="50" /]
+            [@texto titulo="Número Processo Administrativo de Planejamento" var="nr_pec_planejamento" largura="50" /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Número PEC Licitação" var="nr_pec_licitacao" largura="50" /]
+            [@texto titulo="Número Processo Administrativo de Licitação" var="nr_pec_licitacao" largura="50" /]
         [/@grupo]
         [@grupo titulo="Descrição do item 3"]
             [@editor titulo="" var="descricao_item_3" /]
         [/@grupo]
         [@grupo]
             [@data titulo="Data solicitação esclarecimentos" var="dt_solicitacao_esclarecimentos" /]
+        [/@grupo]
+        [@grupo]
+            [@data titulo="Item referência" var="item_referencia" /]
         [/@grupo]
         [@grupo]
             [@texto titulo="URL Edital" var="url_edital" largura="50" /]
@@ -67,10 +73,7 @@
             [@data titulo="Data Ato Administrativo" var="dt_ato_administrativo" /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Sigla área Licitações" var="area_licitacoes" largura="50" /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Sigla área Jurídica" var="area_juridica" largura="50" /]
+            [@data titulo="Termos" var="termos" /]
         [/@grupo]
     [/@grupo]
 
@@ -160,17 +163,17 @@
 
                     <!-- INICIO - Tagmeta -->
                     <!-- Inicio - Corpo do conteudo -->
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Trata-se de solicitação para instauração de que tem por objeto a “${objeto_instauracao!}”.</p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Trata-se de solicitação para instauração de licitação que tem por objeto a “${objeto_instauracao!}”.</p>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cumpre-nos registrar que coube a Gerência de Licitações, por intermédio da Coordenação de Licitação de Serviços em Geral e de Registro de Preços/LALI-3, atuar no sentido restrito da instauração do procedimento licitatório, de acordo com o arcabouço normativo da INFRAERO, especialmente o RLCI e o Capítulo II da NI 6.01/F (LCT), de 16/05/2016, dentre os quais a elaboração da minuta do edital, na qual está refletida a utilização dos aplicativos legais e normativos atinentes ao tema, cabendo à área requisitante a responsabilidade pelas informações técnicas, financeiras e orçamentárias inseridas no Edital, pelas justificativas de sua aplicabilidade, as quais insertas no dossiê do processo, bem como pela responsabilidade de pareceres futuros em função de eventuais petições atinentes as exigências formuladas.<p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cumpre-nos registrar que coube a ${nome_area_autora!}, por intermédio da ${area_intermediaria!}, atuar no sentido restrito da instauração do procedimento licitatório, de acordo com o arcabouço normativo da INFRAERO, especialmente o RLCI${referencia_ni!}, dentre os quais a elaboração da minuta do edital, na qual está refletida a utilização dos aplicativos legais e normativos atinentes ao tema, cabendo à área requisitante a responsabilidade pelas informações técnicas, financeiras e orçamentárias inseridas no Edital, pelas justificativas de sua aplicabilidade, as quais insertas no dossiê do processo, bem como pela responsabilidade de pareceres futuros em função de eventuais petições atinentes as exigências formuladas.<p>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Registra-se que os documentos identificados abaixo foram extraídos, em cópia, da PEC de Planejamento nº ${nr_pec_planejamento!} para a composição da PEC de Licitação nº ${nr_pec_licitacao!}:</p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Registra-se que os documentos identificados abaixo foram extraídos, em cópia, do Processo Administrativo de Planejamento nº ${nr_pec_planejamento!} para a composição do Processo Administrativo de Licitação nº ${nr_pec_licitacao!}:</p>
 
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">${descricao_item_3!}</p>
 
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No que tange a análise prévia realizada por esta área de licitações, a área requisitante apresentou os esclarecimentos solicitados em ${dt_solicitacao_esclarecimentos!}.</p>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Em face do que dispõe o item 5 da NI – 6.01/F (LCT), não realizamos a análise de mérito dos elementos técnicos constantes do Termo de Referência, visto ser atribuição do Órgão de Contratos.</p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Em face do que dispõe o ${item_referencia!}, não realizamos a análise de mérito dos elementos técnicos constantes do Termo de Referência, visto ser atribuição do Órgão de Contratos.</p>
 
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">6.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O Edital utilizado está disponível na rede no seguinte endereço: ${url_edital!}, com as adaptações/atualizações necessárias.</p>
 
@@ -178,7 +181,7 @@
 
                     [#if outras_informacoes_necessarias??]<p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">8. ${outras_informacoes_necessarias!}</p>[/#if]
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">[#if outras_informacoes_necessarias??]9[#else]8[/#if].&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Assim, nos termos da alínea “f”, do subitem 16 da NI-6.01/F (LCT), de 16/5/2016, encaminhamos o presente procedimento licitatório à essa área Jurídica, para proceder ao exame, aprovação e rubrica na minuta do Edital e seus anexos, se for o caso, conforme dispõe o subitem 17.1 da citada NI</p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">[#if outras_informacoes_necessarias??]9[#else]8[/#if].&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Assim, nos termos ${termos!}, encaminhamos o presente procedimento licitatório à essa área Jurídica, para proceder ao exame, aprovação e rubrica na minuta do Edital e seus anexos, se for o caso, conforme dispõe o subitem 17.1 da citada NI</p>
 
 
                     <!-- Fim - Corpo do conteudo -->

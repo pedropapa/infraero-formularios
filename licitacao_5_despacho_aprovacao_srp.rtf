@@ -33,34 +33,26 @@
             [@texto titulo="Referência" var="texto_ref" largura=50 /]
         [/@grupo]
     [/@grupo]
-    [@grupo titulo = "Dados Signatário"]
-        [@grupo]
-            [@texto titulo="Nome Coordenador Licitações" var="coordenador_licitacoes_nome" largura=50 /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Nome Gerente Licitações" var="gerente_licitacoes_nome" largura=50 /]
-        [/@grupo]
-    [/@grupo]
-    [@grupo titulo="Dados do destinatário" esconder=(_enderecamento_dest!="" && _nome_dest!="" && _cargo_dest!="" && _orgao_dest!="" && _endereco_dest!="")]
-                <!-- Tratamento -->
-        [#if _enderecamento_dest != ""]
-            [@oculto var="enderecamento_dest" valor=_enderecamento_dest /]
-        [#else]
-            [#if tratamento??]
-                [@grupo]
-                    [@checkbox titulo="Especificar manualmente a forma de endereçamento" var="especificarEnderecamento" reler=true /]
-                [/@grupo]
-            [/#if]
-            [#if !tratamento?? || (especificarEnderecamento?? && especificarEnderecamento == 'Sim')]
-                [@grupo]
-                    [@texto titulo="Forma de endereçamento" var="enderecamento_dest" largura="45" /]
-                [/@grupo]
-            [#else]
-                [@oculto var="enderecamento_dest" valor="${(tratamento.formaDeEnderecamento)!}" /]
-            [/#if]
-        [/#if]
+    [#--[@grupo titulo="Dados do destinatário" esconder=(_enderecamento_dest!="" && _nome_dest!="" && _cargo_dest!="" && _orgao_dest!="" && _endereco_dest!="")]--]
+                [#--<!-- Tratamento -->--]
+        [#--[#if _enderecamento_dest != ""]--]
+            [#--[@oculto var="enderecamento_dest" valor=_enderecamento_dest /]--]
+        [#--[#else]--]
+            [#--[#if tratamento??]--]
+                [#--[@grupo]--]
+                    [#--[@checkbox titulo="Especificar manualmente a forma de endereçamento" var="especificarEnderecamento" reler=true /]--]
+                [#--[/@grupo]--]
+            [#--[/#if]--]
+            [#--[#if !tratamento?? || (especificarEnderecamento?? && especificarEnderecamento == 'Sim')]--]
+                [#--[@grupo]--]
+                    [#--[@texto titulo="Forma de endereçamento" var="enderecamento_dest" largura="45" /]--]
+                [#--[/@grupo]--]
+            [#--[#else]--]
+                [#--[@oculto var="enderecamento_dest" valor="${(tratamento.formaDeEnderecamento)!}" /]--]
+            [#--[/#if]--]
+        [#--[/#if]--]
 
-    [/@grupo]
+    [#--[/@grupo]--]
     [@grupo]
         [@grupo]
             [@memo colunas=50 linhas=5 titulo="Objeto instauração" var="objeto_instauracao" /]
@@ -75,12 +67,6 @@
             [@texto titulo="Arcabouço Capítulo" var="arbacouco_capitulo" largura="50" /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="NI" var="ni" largura="50" /]
-        [/@grupo]
-        [@grupo]
-            [@data titulo="Data NI" var="data_ni" /]
-        [/@grupo]
-        [@grupo]
             [@texto titulo="Esclarecimentos solicitados" var="esclarecimento_solicitado" largura="50" /]
         [/@grupo]
         [@grupo]
@@ -93,25 +79,13 @@
             [@data titulo="Data Ato Administrativo" var="dt_ato_administrativo" /]
         [/@grupo]
         [@grupo]
+            [@checkbox titulo="Aberto para recebimento de intenções" var="aberto_intencoes" /]
+        [/@grupo]
+        [@grupo]
             [@checkbox titulo="Houve registro de interessados" var="registro_interessados" reler=true /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Documento Termos" var="documento_termos" largura="50" /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Termo NI" var="termo_ni" largura="50" /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Termo NI Data" var="termo_ni_data" largura="50" /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Artigo NI" var="artigo_ni" largura="50" /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Sigla área Licitações" var="area_licitacoes" largura="50" /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Sigla área Jurídica" var="area_juridica" largura="50" /]
+            [@data titulo="Termos" var="termos" /]
         [/@grupo]
     [/@grupo]
 
@@ -201,9 +175,9 @@
 
                     <!-- INICIO - Tagmeta -->
                     <!-- Inicio - Corpo do conteudo -->
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Trata-se de solicitação para instauração de que tem por objeto a “${objeto_instauracao!}”.</p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Trata-se de solicitação para instauração de licitação que tem por objeto a “${objeto_instauracao!}”.</p>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cumpre-nos registrar que coube a ${area_responsavel_atuacao!}, por intermédio da ${area_responsavel_intermedio!}), atuar no sentido restrito da instauração do procedimento licitatório, de acordo com o arcabouço normativo da INFRAERO, especialmente o RLCI e o Capítulo ${arbacouco_capitulo!} da NI ${ni!}, de ${data_ni!}, dentre os quais a elaboração da minuta do edital, na qual está refletida a utilização dos aplicativos legais e normativos atinentes ao tema, cabendo à área requisitante a responsabilidade pelas informações técnicas, financeiras e orçamentárias inseridas no Edital, pelas justificativas de sua aplicabilidade, as quais insertas no dossiê do processo, bem como pela responsabilidade de pareceres futuros em função de eventuais petições atinentes às exigências formuladas.<p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cumpre-nos registrar que coube a ${area_responsavel_atuacao!}, por intermédio da ${area_responsavel_intermedio!}), atuar no sentido restrito da instauração do procedimento licitatório, de acordo com o arcabouço normativo da INFRAERO, especialmente o RLCI e o ${arbacouco_capitulo!}, dentre os quais a elaboração da minuta do edital, na qual está refletida a utilização dos aplicativos legais e normativos atinentes ao tema, cabendo à área requisitante a responsabilidade pelas informações técnicas, financeiras e orçamentárias inseridas no Edital, pelas justificativas de sua aplicabilidade, as quais insertas no dossiê do processo, bem como pela responsabilidade de pareceres futuros em função de eventuais petições atinentes às exigências formuladas.<p>
 
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No que tange a análise prévia realizada por esta área de licitações, a área requisitante apresentou os esclarecimentos solicitados em ${esclarecimento_solicitado!}.</p>
 
@@ -211,11 +185,11 @@
 
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O Ato Administrativo n. ${nr_ato_administrativo!}, de ${dt_ato_administrativo!}, que nomeia o Pregoeiro e sua Equipe de Apoio, encontra-se apenso aos autos.</p>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">6.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Na oportunidade, em atendimento às orientações constantes do Memorando Circular nº 1121/DALC(LCNS)/2014 c/c Memorando Circular nº 1123/LCNS(LCNS-2)/2014, informamos que incluímos no Portal de Licitações da Infraero a IRP nº ___/___/___/___ que ficou aberta para recebimento de intenções do período de ___/___ a ___/___/____, [#if registro_interessados?? && registro_interessados == 'Sim']havendo registro de interessados[#else]não havendo registro de interessados[/#if].</p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">6.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Na oportunidade, em atendimento às orientações constantes do Memorando Circular nº 1121/DALC(LCNS)/2014 c/c Memorando Circular nº 1123/LCNS(LCNS-2)/2014, informamos que incluímos no Portal de Licitações da Infraero a IRP nº ___/___/___/___ que [#if aberto_intencoes??]ficará aberta no período de ___/___ a ___/___/____[#else]ficou aberta para recebimento de intenções do período de ___/___ a ___/___/____[/#if], [#if  registro_interessados?? && registro_interessados == 'Sim']havendo registro de interessados[#else]não havendo registro de interessados[/#if].</p>
 
                     [#if outras_informacoes_necessarias??]<p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">7. ${outras_informacoes_necessarias!}</p>[/#if]
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">[#if outras_informacoes_necessarias??]8[#else]7[/#if].&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Assim, nos termos d${documento_termos!} da NI ${termo_ni!}, de ${termo_ni_data!}, encaminhamos o presente procedimento licitatório à essa área Jurídica, para proceder ao exame, aprovação e rubrica na minuta do Edital e seus anexos, se for o caso, conforme dispõe o ${artigo_ni!} da citada NI.</p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">[#if outras_informacoes_necessarias??]8[#else]7[/#if].&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Assim, nos termos ${termos!}, encaminhamos o presente procedimento licitatório à essa área Jurídica, para proceder ao exame, aprovação e rubrica na minuta do Edital e seus anexos, se for o caso, conforme dispõe o ${artigo_ni!} da citada NI.</p>
 
 
                     <!-- Fim - Corpo do conteudo -->
