@@ -9,7 +9,7 @@
 [#assign _endereco_dest=""  /]
 [#assign _tamanho_letra=""  /]
 [#assign _autoridade={}  /]
-[#assign _tipo="DESPACHO"  /]
+[#assign _tipo="MEMORANDO"  /]
 [#assign _tiposigilo="" /]
 [#assign _fecho=""  /]
 [#assign aDateTime = .now /]
@@ -35,16 +35,13 @@
     [/@grupo]
     [@grupo titulo="Dados gerais"]
         [@grupo]
-            [@texto titulo="Referência objeto" var="referencia_objeto" largura="50" obrigatorio="sim" /]
-        [/@grupo]
-        [@grupo]
             [@texto titulo="Objeto instauração" var="objeto_instauracao" largura="50" obrigatorio="sim" /]
         [/@grupo]
         [@grupo]
             [@texto titulo="Justificativa necessidade contratação" var="justificativa_necessidade_contratacao" largura="50" obrigatorio="sim" /]
         [/@grupo]
         [@grupo]
-            [@numero titulo="Prazo vigência (meses)" var="prazo_vigencia?number" largura="50" obrigatorio="sim" /]
+            [@numero titulo="Prazo vigência (meses)" var="prazo_vigencia" largura="50" obrigatorio="sim" /]
         [/@grupo]
         [@grupo]
             [@checkbox titulo="Orçamento Sigiloso" var="orcamento_sigiloso" reler=true /]
@@ -91,9 +88,11 @@
         [@grupo]
             [@checkbox titulo="Exigir Atestado de Capacidade Técnico-Profissional" var="exigir_atestado_capacidade_tecnico_profissional" reler=true /]
         [/@grupo]
-        [@grupo]
-            [@texto titulo="Justificativa da exigência dos atestados de capacidade" var="justificativa_exigencia_atestado_capacidade" largura="50" /]
-        [/@grupo]
+        [#if exigir_atestado_capacidade_tecnico_profissional??]
+            [@grupo]
+                [@texto titulo="Justificativa da exigência dos atestados de capacidade" var="justificativa_exigencia_atestado_capacidade" largura="50" /]
+            [/@grupo]
+        [/#if]
         [@grupo]
             [@editor titulo="Parcelas Subcontratação" var="parcelas_subcontratacao" /]
         [/@grupo]
@@ -283,10 +282,10 @@
                         DA NECESSIDADE DA CONTRATAÇÃO:</b> ${justificativa_necessidade_contratacao!}</p>
 
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">c) &nbsp;&nbsp; <b>PRAZO
-                        DE VIGÊNCIA CONTRATUAL:</b> o prazo inicial será de ${prazo_vigencia!} meses, podendo ser
+                        DE VIGÊNCIA CONTRATUAL:</b> o prazo inicial será de ${prazo_vigencia?number!} meses, podendo ser
                         prorrogado por até 60 (sessenta) meses;</p>
 
-                    [#if prazo_vigencia?? && prazo_vigencia > 12]
+                    [#if prazo_vigencia?? && prazo_vigencia?number > 12]
                         <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">d) &nbsp;&nbsp; <b>JUSTIFICATIVA
                             DO PRAZO DE VIGÊNCIA CONTRATUAL:</b> : Conforme previsto no ${documento_fundamentacao!},
                             de ${data_documento_fundamentacao!}, e Ato Administrativo n. ${numero_ato_administrativo!},
@@ -296,7 +295,7 @@
                             financeiras da contratação”.</p>
                     [/#if]
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia?number > 12]
                         e[#else]d[/#if]) &nbsp;&nbsp; <b>VALOR ESTIMADO DA CONTRATAÇÃO:</b>
                         [#if orcamento_sigiloso?? && orcamento_sigiloso == "Sim"]orçamento sigiloso[#else]o valor mensal máximo estimado para esta
                             licitação é de ${valor_licitacao!} e o global para o período de ${meses_periodo_global!}
@@ -308,49 +307,49 @@
                             e ${taxa_encargos_tributarios_valor_orcado!}% de Encargos Tributários, conforme estabelecido
                             na Planilha de Custos e Formação de Preços.[/#if]</p>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia?number > 12]
                         f[#else]e[/#if]) &nbsp;&nbsp; <b>JUSTIFICATIVA DO VALOR
                         ESTIMADO:</b> ${justificativa_valor_estimado!}</p>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia?number > 12]
                         g[#else]f[/#if]) &nbsp;&nbsp; <b>TIPO DE ORÇAMENTO:</b> ${tipo_orcamento!}</p>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia?number > 12]
                         h[#else]g[/#if]) &nbsp;&nbsp; <b>JUSTIFICATIVA DO TIPO DE
                         ORÇAMENTO:</b> ${justificativa_tipo_orcamento!}</p>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia?number > 12]
                         i[#else]h[/#if]) &nbsp;&nbsp; <b>INDICAÇÃO DA FONTE DE
                         RECURSOS:</b> ${indicacao_fonte_recursos!}</p>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia?number > 12]
                         j[#else]i[/#if]) &nbsp;&nbsp; <b>TIPO DE LICITAÇÃO:</b> ${tipo_licitacao!}</p>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia?number > 12]
                         k[#else]j[/#if]) &nbsp;&nbsp; <b>CRITÉRIO DE JULGAMENTO:</b> ${criterio_julgamento!}</p>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia?number > 12]
                         l[#else]k[/#if]) &nbsp;&nbsp; <b>LOCAL DA EXECUÇÃO DO OBJETO:</b> ${local_execucao_objeto!}</p>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia?number > 12]
                         m[#else]l[/#if]) &nbsp;&nbsp; <b>FORMA DE FORNECIMENTO OU DA PRESTAÇÃO DOS
                         SERVIÇOS:</b> ${forma_fornecimento_prestacao_servicos!}[#if forma_fornecimento_prestacao_servicos?? && forma_fornecimento_prestacao_servicos == "Parcelada" ] ${cronograma_entrega_execucao!}[/#if]
                         .</p>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia?number > 12]
                         n[#else]m[/#if]) &nbsp;&nbsp; <b>FORMA DE
                         PAGAMENTO:</b> [#if forma_pagamento??]${forma_pagamento}[#else]Sistemática padrão[/#if].</p>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia?number > 12]
                         o[#else]n[/#if]) &nbsp;&nbsp; <b style="text-align: justify">CRITÉRIO DE
                         REAJUSTE/REVISÃO/REEQUILÍBRIO/REPACTUAÇÃO:</b> conforme minuta do Termo de
                         Contrato. [#if criterio_reajuste??]${criterio_reajuste}[#else]Sistemática padrão[/#if].</p>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia?number > 12]
                         p[#else]o[/#if]) &nbsp;&nbsp; <b>INDICAÇÃO DOS MEMBROS DA EQUIPE
                         TÉCNICA:</b> ${membros_equipe_tecnica!}</p>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia?number > 12]
                         q[#else]p[/#if]) &nbsp;&nbsp; <b>VISITA TÉCNICA:</b> atestado de visita passado pela INFRAERO,
                         em nome da licitante, de que esta, por intermédio de seu representante, vistoriou as instalações
                         e os equipamentos que serão disponibilizados para a execução dos serviços objeto desta
@@ -372,7 +371,7 @@
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         3 &nbsp;&nbsp; ${justificativa_visita!}</p>
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia?number > 12]
                         r[#else]q[/#if]) &nbsp;&nbsp; <b>EXIGÊNCIA DE ATESTADO(S) DE CAPACIDADE TÉCNICO-PROFISSIONAL
                         E/OU OPERACIONAL:</b> [#if exigir_atestado_capacidade_tecnico_profissional?? && exigir_atestado_capacidade_tecnico_profissional == "Sim" ]Há
                         necessidade[#else]Não há necessidade.[/#if]</p>
@@ -397,13 +396,13 @@
                     [/#if]
 
                     [#if exigir_atestado_capacidade_tecnico_profissional??]
-                        <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                        <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia?number > 12]
                             s[#else]r[/#if]) &nbsp;&nbsp; <b>JUSTIFICATIVA DA EXIGÊNCIA DOS ATESTADOS DE
-                            CAPACIDADE:</b> [#if exigir_atestado_capacidade_tecnico_profissional??]Há necessidade[#else]
+                            CAPACIDADE:</b> [#if exigir_atestado_capacidade_tecnico_profissional??]${justificativa_exigencia_atestado_capacidade!}[#else]
                             Não há necessidade.[/#if]</p>
                     [/#if]
 
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia > 12]
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia?number > 12]
                         t[#else]s[/#if]) &nbsp;&nbsp; <b>PARCELAS DE SUBCONTRATAÇÃO:</b> ${parcelas_subcontratacao!}</p>
 
                     <!-- Fim - Corpo do conteudo -->

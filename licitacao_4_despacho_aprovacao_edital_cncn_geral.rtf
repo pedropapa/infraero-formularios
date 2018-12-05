@@ -44,26 +44,26 @@
             [@texto titulo="Referência NI" var="referencia_ni" largura="50" /]
         [/@grupo]
     [/@grupo]
-    [#--[@grupo titulo="Dados do destinatário" esconder=(_enderecamento_dest!="" && _nome_dest!="" && _cargo_dest!="" && _orgao_dest!="" && _endereco_dest!="")]--]
-                [#--<!-- Tratamento -->--]
-        [#--[#if _enderecamento_dest != ""]--]
-            [#--[@oculto var="enderecamento_dest" valor=_enderecamento_dest /]--]
-        [#--[#else]--]
-            [#--[#if tratamento??]--]
-                [#--[@grupo]--]
-                    [#--[@checkbox titulo="Especificar manualmente a forma de endereçamento" var="especificarEnderecamento" reler=true /]--]
-                [#--[/@grupo]--]
-            [#--[/#if]--]
-            [#--[#if !tratamento?? || (especificarEnderecamento?? && especificarEnderecamento == 'Sim')]--]
-                [#--[@grupo]--]
-                    [#--[@texto titulo="Forma de endereçamento" var="enderecamento_dest" largura="45" /]--]
-                [#--[/@grupo]--]
-            [#--[#else]--]
-                [#--[@oculto var="enderecamento_dest" valor="${(tratamento.formaDeEnderecamento)!}" /]--]
-            [#--[/#if]--]
-        [#--[/#if]--]
+[#--[@grupo titulo="Dados do destinatário" esconder=(_enderecamento_dest!="" && _nome_dest!="" && _cargo_dest!="" && _orgao_dest!="" && _endereco_dest!="")]--]
+[#--<!-- Tratamento -->--]
+[#--[#if _enderecamento_dest != ""]--]
+[#--[@oculto var="enderecamento_dest" valor=_enderecamento_dest /]--]
+[#--[#else]--]
+[#--[#if tratamento??]--]
+[#--[@grupo]--]
+[#--[@checkbox titulo="Especificar manualmente a forma de endereçamento" var="especificarEnderecamento" reler=true /]--]
+[#--[/@grupo]--]
+[#--[/#if]--]
+[#--[#if !tratamento?? || (especificarEnderecamento?? && especificarEnderecamento == 'Sim')]--]
+[#--[@grupo]--]
+[#--[@texto titulo="Forma de endereçamento" var="enderecamento_dest" largura="45" /]--]
+[#--[/@grupo]--]
+[#--[#else]--]
+[#--[@oculto var="enderecamento_dest" valor="${(tratamento.formaDeEnderecamento)!}" /]--]
+[#--[/#if]--]
+[#--[/#if]--]
 
-    [#--[/@grupo]--]
+[#--[/@grupo]--]
     [@grupo]
         [@grupo]
             [@memo colunas=50 linhas=5 titulo="Objeto instauração" var="objeto_instauracao" /]
@@ -84,7 +84,7 @@
             [@data titulo="Data ato administrativo" var="data_ato_administrativo" /]
         [/@grupo]
         [@grupo]
-            [@data titulo="Termos" var="termos" /]
+            [@texto titulo="Termos" var="termos" largura="50" /]
         [/@grupo]
     [/@grupo]
 
@@ -189,7 +189,7 @@
                         <tr>
                             <td width="50px" valign="top">2.</td>
                             <td>
-                                <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt;"> Cumpre-nos registrar que coube a ${nome_area_autora!}, por intermédio da ${area_intermediaria!}, atuar no sentido restrito da instauração do procedimento licitatório, de acordo com o arcabouço normativo da INFRAERO, especialmente o RLCI${referencia_ni!}, dentre os quais a elaboração da minuta do edital, na qual está refletida a utilização dos aplicativos legais e normativos atinentes ao tema, cabendo à área requisitante a responsabilidade pelas informações técnicas, financeiras e orçamentárias inseridas no Edital, pelas justificativas de sua aplicabilidade, as quais insertas no dossiê do processo, bem como pela responsabilidade de pareceres futuros em função de eventuais petições atinentes as exigências formuladas.</p>
+                                <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt;"> Cumpre-nos registrar que coube a ${nome_area_autora!}, por intermédio da ${area_intermediaria!}, atuar no sentido restrito da instauração do procedimento licitatório, de acordo com o arcabouço normativo da INFRAERO, especialmente o RLCI ${referencia_ni!}, dentre os quais a elaboração da minuta do edital, na qual está refletida a utilização dos aplicativos legais e normativos atinentes ao tema, cabendo à área requisitante a responsabilidade pelas informações técnicas, financeiras e orçamentárias inseridas no Edital, pelas justificativas de sua aplicabilidade, as quais insertas no dossiê do processo, bem como pela responsabilidade de pareceres futuros em função de eventuais petições atinentes as exigências formuladas.</p>
                             </td>
                         </tr>
                     </table>
@@ -267,8 +267,8 @@
         [#if _tiposigilo! == "2"]
             [@acessoRestrito /]
         [/#if]
-        [#--[@signatarioLicitacoes/]--]
+    [#--[@signatarioLicitacoes/]--]
     [/@estiloBrasaoAEsquerda]
 
-    [#--[@signatarioLicitacoes/]--]
+[#--[@signatarioLicitacoes/]--]
 [/@documento]
