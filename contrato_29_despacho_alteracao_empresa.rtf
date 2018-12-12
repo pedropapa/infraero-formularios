@@ -27,7 +27,7 @@
 [@entrevista]
     [@grupo titulo="Dados Gerais"]
         [@grupo]
-            [@selecao titulo="Destinatário" var="destinatario" opcoes="Consultoria Jurídica;Autoridade Competente" reler=true /]
+            [@selecao titulo="Destinatário" var="destinatario" opcoes="Consultoria Jurídica;LACC-2" reler=true /]
         [/@grupo]
         [@grupo]
             [@texto titulo="Número termo contrato" var="numero_termo_contrato" largura=50 /]
@@ -180,7 +180,7 @@
     [/#if]
 [/@entrevista]
 
-[@documento ]
+[@documento margemDireita="3cm"]
     [#if tamanhoLetra! == "Normal"]
         [#assign tl = "10pt" /]
     [#elseif tamanhoLetra! == "Pequeno"]
@@ -255,7 +255,7 @@
                     <!-- INICIO - Tagmeta -->
                     <!-- Inicio - Corpo do conteudo -->
                    	<p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">&nbsp;<b>I.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INSTRUÇÃO DO PROCESSO</b>
-					<p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trata-se da <b>ALTERAÇÃO</b>, referente ao contrato em tela, firmado junto à ${contratada!} , cujo objeto é a “${objeto_contrato!}”.</p>
+					<p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trata-se da <b>ALTERAÇÃO</b>, referente ao contrato em tela, firmado junto à ${contratada!} , cujo objeto é a "${objeto_contrato!}".</p>
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Para a instrução deste processo foram verificados os seguintes itens da NI 6.01/F (LCT) de 16/05/2016:</p>
 
 					<table width="100%" border="1" cellpadding=0 cellspacing=0 borderColor="#000" bgcolor="#FFFFFF">

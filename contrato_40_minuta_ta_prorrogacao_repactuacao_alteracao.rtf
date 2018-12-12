@@ -47,7 +47,7 @@
     [/@grupo]
     [@grupo titulo = "Dados Gerais"]
         [@grupo]
-            [@numero titulo="Número termo apostilamento" var="numero_termo" /]
+            [@numero titulo="Número do termo aditivo" var="numero_termo" /]
         [/@grupo]
         [@grupo]
             [@texto titulo="Ordem do Termo (Primeiro/Seguro/outro)" var="termo_ordem" largura=50 /]
@@ -81,7 +81,7 @@
     [/@grupo]
     [@grupo titulo = "Cláusula Primeira - 1.1"]
         [@grupo]
-            [@selecao titulo="Tipo cláusula" var="objeto_aditamento" opcoes="Supressão;Acréscimo;Alteração"/]
+            [@selecao titulo="Tipo cláusula" var="objeto_aditamento" opcoes="Prorrogação;Repactuação;Alteração"/]
         [/@grupo]
         [@grupo]
             [@data titulo="Data inicío" var="objeto_data_inicio" /]
@@ -444,7 +444,7 @@
                     <table border=1 cellpadding=5 cellspacing=0 style="text-align: right; margin: 0 0; float: right;"
                            borderColor=#000>
                         <tr>
-                            <td><span style="font-family: Times New Roman; font-size: 16pt; font-weight: bold;">REPACTUAÇÃO E ALTERAÇÃO</span>
+                            <td><span style="font-family: Times New Roman; font-size: 16pt; font-weight: bold;">PRORROGAÇÃO, REPACTUAÇÃO E ALTERAÇÃO</span>
                             </td>
                         </tr>
                     </table>
@@ -471,7 +471,7 @@
                         <p><u><b>TERMO ADITIVO N. </b></u></p>
                         <p>${numero_termo!}</p>
                         <p>&nbsp;</p>
-                        <p>${termo_ordem!} TERMO DE APOSTILAMENTO AO TERMO DE CONTRATO N. ${numero_contrato!}, FIRMADO
+                        <p>${termo_ordem!} TERMO ADITIVO AO TERMO DE CONTRATO N. ${numero_contrato!}, FIRMADO
                             ENTRE A EMPRESA BRASILEIRA DE INFRAESTRUTURA AEROPORTU&Aacute;RIA -
                             <strong>INFRAERO</strong>
                             E A EMPRESA ${empresa_contratada!}, NA FORMA A SEGUIR:</p>
@@ -479,23 +479,6 @@
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                    <div style="width: 250px; float: right; text-align: justify;">
-                        <p>TERMO DE APOSTILAMENTO</p>
-                        <p>&nbsp;</p>
-                        <p><strong>${termo_ordem!} TERMO ADITIVO AO TERMO DE CONTRATO N. ${numero_contrato!}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,
-                            FIRMADO ENTRE A EMPRESA BRASILEIRA DE INFRAESTRUTURA AEROPORTU&Aacute;RIA - INFRAERO E A
-                            EMPRESA
-                            ${empresa_contratada!}. &nbsp;</strong></p>
-                        <p>&nbsp;</p>
-                    </div>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
@@ -519,7 +502,7 @@
                             <strong>${cargo_representante!}</strong>, <strong>${nome_representante!} </strong>, portador
                             da
                             matr&iacute;cula n.
-                            <strong>${matricula_representante!}</strong>, registra por meio deste Termo de Apostilamento
+                            <strong>${matricula_representante!}</strong>, registra por meio deste Termo Aditivo
                             as
                             cl&aacute;usulas e condi&ccedil;&otilde;es
                             seguintes:
@@ -531,7 +514,7 @@
                         <tr>
                             <td width="10%" style="vertical-align: top;">1.1
                             </td>
-                            <td width="90%" style="vertical-align: top; text-align: justify">1.1 O primeiro objeto do
+                            <td width="90%" style="vertical-align: top; text-align: justify">O primeiro objeto do
                                 presente aditamento é a (o) [#if objeto_aditamento == "Supressão"]
                                     supressão[/#if] [#if objeto_aditamento == "Acréscimo"]
                                     acréscimo[/#if] [#if objeto_aditamento == "Alteração"]alteração
@@ -988,7 +971,7 @@
                             <td style="vertical-align: top; text-align: justify">A CONTRATADA dever&aacute; apresentar,
                                 no
                                 ato da assinatura deste
-                                Termo de Apostilamento, garantia complementar de execu&ccedil;&atilde;o de contrato no
+                                Termo Aditivo, garantia complementar de execu&ccedil;&atilde;o de contrato no
                                 valor de
                                 <strong>${valor_garantia!} </strong>,
                                 correspondente a 5% do valor deste aditamento, conforme subitem

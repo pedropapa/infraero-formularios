@@ -47,7 +47,7 @@
     [/@grupo]
     [@grupo titulo = "Dados Gerais"]
         [@grupo]
-            [@numero titulo="Número termo apostilamento" var="numero_termpo" /]
+            [@numero titulo="Número termo apostilamento" var="numero_termo" /]
         [/@grupo]
         [@grupo]
             [@texto titulo="Ordem do Termo (Primeiro/Seguro/outro)" var="termo_ordem" largura=50 /]
@@ -421,7 +421,7 @@
                     <table border=1 cellpadding=5 cellspacing=0 style="text-align: right; margin: 0 0; float: right;"
                            borderColor=#000>
                         <tr>
-                            <td><span style="font-family: Times New Roman; font-size: 16pt; font-weight: bold;">REPACTUAÇÃO E ALTERAÇÃO</span>
+                            <td><span style="font-family: Times New Roman; font-size: 16pt; font-weight: bold;">PRORROGAÇÃO E REPACTUAÇÃO</span>
                             </td>
                         </tr>
                     </table>
@@ -445,8 +445,8 @@
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <div style="width: 250px; float: right; text-align: justify;">
-                        <p><u><b>TERMO DE APOSTILAMENTO N. </b></u></p>
-                        <p>${numero_termpo!}</p>
+                        <p><u><b>TERMO ADITIVO N. </b></u></p>
+                        <p>${numero_termo!}</p>
                         <p>&nbsp;</p>
                         <p>${termo_ordem!} TERMO DE APOSTILAMENTO AO TERMO DE CONTRATO N. ${numero_contrato!}, FIRMADO
                             ENTRE A EMPRESA BRASILEIRA DE INFRAESTRUTURA AEROPORTU&Aacute;RIA -
@@ -504,7 +504,7 @@
                             </td>
                             <td width="90%" style="vertical-align: top; text-align: justify">Nos termos da cl&aacute;usula
                                 <strong>${clausula!}</strong> do Termo Contratual supracitado, o objeto do presente
-                                apostilamento é a repactua&ccedil;&aao contratual, conforme segue:
+                                apostilamento é a repactuação contratual, conforme segue:
                             </td>
                         </tr>
                         <tr>
@@ -790,31 +790,33 @@
                                 </table>
                             </td>
                         </tr>
-                        <tr>
-                            <td>&nbsp;
-                            </td>
-                            <td>&nbsp;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="15px">&nbsp;
-                            </td>
-                            <td>
-                                <table style="margin-left: 37px;" border=0 cellspacing=0 cellpadding=5 width="100%">
-                                    <tr>
-                                        <td width="10%" style="vertical-align: top;">d)
-                                        </td>
-                                        <td width="90%" style="vertical-align: top;">${clausula_primeira_itemd!}
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
+                        [#if clausula_primeira_itemd??]
+                          <tr>
+                              <td>&nbsp;
+                              </td>
+                              <td>&nbsp;
+                              </td>
+                          </tr>
+                          <tr>
+                              <td width="15px">&nbsp;
+                              </td>
+                              <td>
+                                  <table style="margin-left: 37px;" border=0 cellspacing=0 cellpadding=5 width="100%">
+                                      <tr>
+                                          <td width="10%" style="vertical-align: top;">d)
+                                          </td>
+                                          <td width="90%" style="vertical-align: top;">${clausula_primeira_itemd!}
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </td>
+                          </tr>
+                        [/#if]
                     </table>
                     <p><strong>CL&Aacute;USULA SEGUNDA </strong></p>
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
                         <td width="50px" style="vertical-align: top;">2.1</td>
-                        <td style="vertical-align: top; text-align: justify">Em decorrência da repactuação de valores e da retificação de que trata a cláusula anterior, o valor total do presente apostilamento é de ____.
+                        <td style="vertical-align: top; text-align: justify">Em decorrência da prorrogação e da repactuação de preços, o valor total do presente apostilamento é de ${valor_apostilamento!}.
                     </table>
                     <br>
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">

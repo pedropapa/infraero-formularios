@@ -157,7 +157,7 @@
     [/#if]
 [/@entrevista]
 
-[@documento  capa=true]
+[@documento margemDireita="3cm" capa=true]
     [#if tamanhoLetra! == "Normal"]
         [#assign tl = "10pt" /]
     [#elseif tamanhoLetra! == "Pequeno"]
@@ -282,12 +282,12 @@
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
-                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         A<strong> EMPRESA BRASILEIRA DE INFRAESTRUTURA AEROPORTU&Aacute;RIA - INFRAERO</strong>, Empresa P&uacute;blica
                         Federal, criada nos termos da Lei n. 5.862, de 12 de dezembro de 1972, CNPJ/MF n. 00.352.294/0001-10, com Sede em
                         Bras&iacute;lia-DF, na Estrada do Aeroporto, Setor de Concession&aacute;rias e Locadoras, Lote 5 &ndash; Edif&iacute;cio
                         Sede, CEP 71608-050 &ndash; Bras&iacute;lia &ndash; DF &ndash; Brasil, e depend&ecirc;ncia aeroportu&aacute;ria no
-                        <strong>${nome_dependencia!}</strong> &nbsp;NOME DA DEPEND&Ecirc;NCIA, em <strong>${cidade_dependencia!}</strong> Cidade/Estado, CNPJ N.
+                        <strong>${nome_dependencia!}</strong>, em <strong>${cidade_dependencia!}</strong> Cidade/Estado, CNPJ N.
                         <strong>${cnpj!}</strong>, neste ato representada pelo seu <strong>${cargo_representante!}</strong>, <strong>${nome_representante!} </strong>, portador da matr&iacute;cula n.
                         <strong>${matricula_representante!}</strong>, registra por meio deste Termo de Apostilamento as cl&aacute;usulas e condi&ccedil;&otilde;es
                         seguintes:</p>
@@ -297,9 +297,9 @@
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
                         <td width="50px" style="vertical-align: top;">1.1</td>
                         <td style="vertical-align: top; text-align: justify">Nos termos da cl&aacute;usula <strong>${clausula!}</strong> do Termo Contratual supracitado, o objeto do presente
-                            apostilamento &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &eacute; a prorroga&ccedil;&atilde;o
-                            do seu prazo de vig&ecirc;ncia por mais <strong>${prazo_prorrogacao!}</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            meses com in&iacute;cio em &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${inicio_prorrogacao!} e t&eacute;rmino previsto para ${fim_prorrogacao!}.</td>
+                            apostilamento &eacute; a prorroga&ccedil;&atilde;o
+                            do seu prazo de vig&ecirc;ncia por mais <strong>${prazo_prorrogacao!}</strong>
+                            meses com in&iacute;cio em ${inicio_prorrogacao!} e t&eacute;rmino previsto para ${fim_prorrogacao!}.</td>
                     </table>
                     <p>&nbsp;</p>
                     <p><strong>CL&Aacute;USULA SEGUNDA </strong></p>
@@ -312,7 +312,7 @@
                     <p>&nbsp;</p>
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
                         <td width="50px" style="vertical-align: top;">2.2</td>
-                        <td style="vertical-align: top; text-align: justify">O valor mensal, do Aviso Pr&eacute;vio de final de contrato <strong>${adicional_contrato!}</strong> permanecem inalterados na ordem de R$ <strong>${valor_aviso_previo!}</strong></td>
+                        <td style="vertical-align: top; text-align: justify">O valor do Aviso Prévio de Final de Contrato permanece inalterado na ordem de R$ <strong>${adicional_contrato!}</strong>.</td>
                     </table>
                     <p>&nbsp;</p>
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
@@ -344,24 +344,20 @@
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
                         <td width="50px" style="vertical-align: top;">3.1</td>
                         <td style="vertical-align: top; text-align: justify">A CONTRATADA dever&aacute; apresentar, no ato da assinatura deste
-                            Termo de Apostilamento, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; garantia
+                            Termo de Apostilamento, garantia
                             complementar de execu&ccedil;&atilde;o de contrato no valor de <strong>${valor_garantia!} </strong>,
-                            correspondente a 5% do valor deste aditamento, conforme subitem <strong>${termo_subitem!} </strong> do Termo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            correspondente a 5% do valor deste aditamento, conforme subitem <strong>${termo_subitem!} </strong> do Termo
                             Contratual.</td>
                     </table>
-                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                     [#if adicional_contrato??]
                         <p>&nbsp;</p>
                         <table border=0 cellspacing=0 cellpadding=0 width="100%">
                             <td width="50px"></td>
                             <td width="50px" style="vertical-align: top;">3.1.1</td>
                             <td style="vertical-align: top; text-align: justify">Considerando
-                                a prorroga&ccedil;&atilde;o de prazo de que trata a cl&aacute;usula primeira e a n&atilde;o utiliza&ccedil;&atilde;o
-                                &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; tanto do Aviso Pr&eacute;vio
-                                Final de Contrato, quanto do Adicional II na vig&ecirc;ncia anterior, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp; o valor referente aos mencionados adicionais dever&atilde;o compor a base de c&aacute;lculo
-                                da &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp; garantia de execu&ccedil;&atilde;o de contrato.</td>
+                                a prorroga&ccedil;&atilde;o de prazo de que trata a cl&aacute;usula primeira e a n&atilde;o utiliza&ccedil;&atilde;o tanto do Aviso Pr&eacute;vio
+                                Final de Contrato, quanto do Adicional II na vig&ecirc;ncia anterior, o valor referente aos mencionados adicionais dever&atilde;o compor a base de c&aacute;lculo
+                                da garantia de execu&ccedil;&atilde;o de contrato.</td>
                         </table>
                         <p>&nbsp;</p>
                     [#else]
@@ -369,11 +365,9 @@
                             <td width="50px"></td>
                             <td width="50px" style="vertical-align: top;">3.1.1</td>
                             <td style="vertical-align: top; text-align: justify">Considerando a prorroga&ccedil;&atilde;o de prazo de que trata a cl&aacute;usula primeira e a n&atilde;o utiliza&ccedil;&atilde;o
-                                &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; do Aviso Pr&eacute;vio
-                                Final de Contrato na vig&ecirc;ncia anterior, o valor referente ao &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mencionado adicional dever&aacute;
-                                compor a base de c&aacute;lculo da garantia de execu&ccedil;&atilde;o de &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; contrato.</td>
+                                do Aviso Pr&eacute;vio
+                                Final de Contrato na vig&ecirc;ncia anterior, o valor referente ao mencionado adicional dever&aacute;
+                                compor a base de c&aacute;lculo da garantia de execu&ccedil;&atilde;o de contrato.</td>
                         </table>
                         <p>&nbsp;</p>
                     [/#if]
@@ -381,10 +375,10 @@
                         <table border=0 cellspacing=0 cellpadding=0 width="100%">
                             <td width="50px" style="vertical-align: top;">3.2</td>
                             <td style="vertical-align: top; text-align: justify">A inobserv&acirc;ncia do prazo fixado para apresenta&ccedil;&atilde;o
-                                da garantia, na situa&ccedil;&atilde;o prevista no subitem &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                da garantia, na situa&ccedil;&atilde;o prevista no subitem
                                 precedente, acarretar&aacute; a aplica&ccedil;&atilde;o de multa de 0,1% (um d&eacute;cimo por cento) do valor do
-                                contrato &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; por dia de atraso, limitado
-                                at&eacute; o m&aacute;ximo de 2,5% (dois e meio por cento), conforme f&oacute;rmula &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                contrato por dia de atraso, limitado
+                                at&eacute; o m&aacute;ximo de 2,5% (dois e meio por cento), conforme f&oacute;rmula
                                 abaixo:</p>
                                 <p>&nbsp;</p>
                                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; M = V<sub>C</sub> x 0,1% x T</p>
@@ -399,10 +393,8 @@
                                 <table border=0 cellspacing=0 cellpadding=0 width="100%">
                                     <td width="50px" style="vertical-align: top;">3.2.1</td>
                                     <td style="vertical-align: top; text-align: justify">O
-                                        atraso superior a 15 (quinze) dias autoriza a Administra&ccedil;&atilde;o a promover a rescis&atilde;o &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        do contrato, por descumprimento ou cumprimento irregular das cl&aacute;usulas deste &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; contrato, conforme disp&otilde;em os
+                                        atraso superior a 15 (quinze) dias autoriza a Administra&ccedil;&atilde;o a promover a rescis&atilde;o
+                                        do contrato, por descumprimento ou cumprimento irregular das cl&aacute;usulas deste contrato, conforme disp&otilde;em os
                                         incisos I e II do art. 78 da Lei n. 8.666/93.</td>
                                 </table>
                             </td>
@@ -414,15 +406,14 @@
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
                         <td width="50px" style="vertical-align: top;">4.1</td>
                         <td style="vertical-align: top; text-align: justify">Este Instrumento tem respaldo legal no inciso II, do art. 57, da Lei 8.666,
-                            de 21 de junho de &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            1993, combinado com o artigo 65 do Regulamento Interno de Licita&ccedil;&otilde;es e Contratos da &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            &nbsp;&nbsp;&nbsp;&nbsp; INFRAERO &ndash; RILC.</td>
+                            de 21 de junho de
+                            1993, combinado com o artigo 65 do Regulamento Interno de Licita&ccedil;&otilde;es e Contratos da INFRAERO &ndash; RILC.</td>
                     </table>
                     <p>&nbsp;</p>
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
                         <td width="50px" style="vertical-align: top;">4.2</td>
                         <td style="vertical-align: top; text-align: justify">A contratada d&aacute; plena e rasa quita&ccedil;&atilde;o de todo e
-                            qualquer d&eacute;bito referente ao contrato ora &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            qualquer d&eacute;bito referente ao contrato ora
                             prorrogado.</td>
                     </table>
                     <p>&nbsp;</p>
@@ -446,8 +437,6 @@
                     <p>&nbsp;</p>
                     <p style="text-align: right;"><strong>${assinatura_cidade!} </strong>, <strong>${assinatura_dia!}</strong> de <strong>${assinatura_mes!}</strong> de 20 <strong>${assinatura_ano!}</strong>.</p>
                     <p>&nbsp;</p>
-                    <!-- Fim - Corpo do conteudo -->
-                    <!-- FIM - Tagmeta -->
 
                 [/@corpoBIE]
                 [#if fecho??]<p

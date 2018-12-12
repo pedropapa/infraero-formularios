@@ -47,7 +47,7 @@
     [/@grupo]
     [@grupo titulo = "Dados Gerais"]
         [@grupo]
-            [@numero titulo="Número termo apostilamento" var="numero_termpo" /]
+            [@numero titulo="Número do termo aditivo" var="numero_termpo" /]
         [/@grupo]
         [@grupo]
             [@texto titulo="Ordem do Termo (Primeiro/Seguro/outro)" var="termo_ordem" largura=50 /]
@@ -251,7 +251,7 @@
     [/#if]
 [/@entrevista]
 
-[@documento  capa=true]
+[@documento margemDireita="3cm" capa=true]
     [#if tamanhoLetra! == "Normal"]
         [#assign tl = "10pt" /]
     [#elseif tamanhoLetra! == "Pequeno"]
@@ -320,7 +320,7 @@
                     <table border=1 cellpadding=5 cellspacing=0 style="text-align: right; margin: 0 0; float: right;"
                            borderColor=#000>
                         <tr>
-                            <td><span style="font-family: Times New Roman; font-size: 16pt; font-weight: bold;">REPACTUAÇÃO E ALTERAÇÃO</span>
+                            <td><span style="font-family: Times New Roman; font-size: 16pt; font-weight: bold;">PRORROGAÇÃO E ALTERAÇÃO</span>
                             </td>
                         </tr>
                     </table>
@@ -344,7 +344,7 @@
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <div style="width: 250px; float: right; text-align: justify;">
-                        <p><u><b>TERMO DE APOSTILAMENTO N. </b></u></p>
+                        <p><u><b>TERMO ADITIVO N. </b></u></p>
                         <p>${numero_termpo!}</p>
                         <p>&nbsp;</p>
                         <p>${termo_ordem!} TERMO DE APOSTILAMENTO AO TERMO DE CONTRATO N. ${numero_contrato!}, FIRMADO

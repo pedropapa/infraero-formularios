@@ -332,7 +332,7 @@
     [/#if]
 [/@entrevista]
 
-[@documento  capa=true]
+[@documento margemDireita="3cm" capa=true]
     [#if tamanhoLetra! == "Normal"]
         [#assign tl = "10pt" /]
     [#elseif tamanhoLetra! == "Pequeno"]
@@ -564,234 +564,242 @@
                                 partir de ${data_inicio_repactuacao!}, conforme segue:
                             </td>
                         </tr>
-                        <tr>
-                            <td>&nbsp;
-                            </td>
-                            <td>&nbsp;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="15px">&nbsp;
-                            </td>
-                            <td>
-                                <table style="margin-left: 37px;" border=0 cellspacing=0 cellpadding=5 width="100%">
-                                    <tr>
-                                        <td width="10%" style="vertical-align: top;">a)
-                                        </td>
-                                        <td width="90%" style="vertical-align: top;">Salários - Piso Salarial,
-                                            considerando valores expressos na
-                                            Cláusula ${clausula_primeira_clausula_itema!} da referida Convenção Coletiva
-                                            de Trabalho da categoria, com indenização a partir
-                                            de ${clausula_primeira_clausula_data_itema!}, conforme segue:
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;
-                            </td>
-                            <td>&nbsp;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="15px">&nbsp;
-                            </td>
-                            <td>
-                                <table style="margin-left: 37px; border: 1px solid black" cellspacing=0 border=1
-                                       borderColor=#000 cellpadding=5 width="100%">
-                                    <tr>
-                                        <td width="23%" style="background-color: rgb(166,166,166); text-align: center">
-                                            <b>ITEM</b>
-                                        </td>
-                                        <td width="25%"
-                                            style="background-color: rgb(166,166,166); text-align: center; white-space: nowrap;">
-                                            <b>VALOR ATUAL</b>
-                                        </td>
-                                        <td width="32%"
-                                            style="background-color: rgb(166,166,166); text-align: center; white-space: nowrap;">
-                                            <b>VALOR REPACTUADO</b>
-                                        </td>
-                                        <td width="20%" style="background-color: rgb(166,166,166); text-align: center">
-                                            <b>VARIAÇÃO</b>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="23%"
-                                            style="white-space: nowrap;text-align: center;">${clausula_primeira_item_itema!}
-                                        </td>
-                                        <td width="25%" style="white-space: nowrap;text-align: center;">
-                                            R$${clausula_primeira_valor_atual_itema!}
-                                        </td>
-                                        <td width="32%" style="white-space: nowrap;text-align: center;">
-                                            R$${clausula_primeira_valor_repactuado_itema!}
-                                        </td>
-                                        <td width="20%"
-                                            style="white-space: nowrap;text-align: center;">${clausula_primeira_variacao_itema!}
-                                            %
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;
-                            </td>
-                            <td>&nbsp;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="15px">&nbsp;
-                            </td>
-                            <td>
-                                <table style="margin-left: 37px;" border=0 cellspacing=0 cellpadding=5 width="100%">
-                                    <tr>
-                                        <td width="10%" style="vertical-align: top;">b)
-                                        </td>
-                                        <td width="90%" style="vertical-align: top;">Vale Refeição - Do Vale Refeição,
-                                            considerando valores expressos na
-                                            Cláusula ${clausula_primeira_clausula_itemb!} da referida Convenção Coletiva
-                                            de Trabalho da categoria, com indenização a partir
-                                            de ${clausula_primeira_clausula_data_itemb!}, conforme segue:
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;
-                            </td>
-                            <td>&nbsp;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="15px">&nbsp;
-                            </td>
-                            <td>
-                                <table style="margin-left: 37px; border: 1px solid black" cellspacing=0 border=1
-                                       borderColor=#000 cellpadding=5 width="100%">
-                                    <tr>
-                                        <td width="23%" style="background-color: rgb(166,166,166); text-align: center">
-                                            <b>ITEM</b>
-                                        </td>
-                                        <td width="25%"
-                                            style="background-color: rgb(166,166,166); text-align: center; white-space: nowrap;">
-                                            <b>VALOR ATUAL</b>
-                                        </td>
-                                        <td width="32%"
-                                            style="background-color: rgb(166,166,166); text-align: center; white-space: nowrap;">
-                                            <b>VALOR REPACTUADO</b>
-                                        </td>
-                                        <td width="20%" style="background-color: rgb(166,166,166); text-align: center">
-                                            <b>VARIAÇÃO</b>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="23%" style="white-space: nowrap;text-align: center;">Vale Refeição
-                                        </td>
-                                        <td width="25%" style="white-space: nowrap;text-align: center;">
-                                            R$${clausula_primeira_valor_atual_itemb!}
-                                        </td>
-                                        <td width="32%" style="white-space: nowrap;text-align: center;">
-                                            R$${clausula_primeira_valor_repactuado_itemb!}
-                                        </td>
-                                        <td width="20%"
-                                            style="white-space: nowrap;text-align: center;">${clausula_primeira_variacao_itemb!}
-                                            %
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;
-                            </td>
-                            <td>&nbsp;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="15px">&nbsp;
-                            </td>
-                            <td>
-                                <table style="margin-left: 37px;" border=0 cellspacing=0 cellpadding=5 width="100%">
-                                    <tr>
-                                        <td width="10%" style="vertical-align: top;">c)
-                                        </td>
-                                        <td width="90%" style="vertical-align: top;">Vale Alimentação - Do Vale
-                                            Alimentação, considerando valores expressos na
-                                            Cláusula ${clausula_primeira_clausula_itemc!} da referida Convenção Coletiva
-                                            de Trabalho da categoria, com indenização a partir
-                                            de ${clausula_primeira_clausula_data_itemc!}, conforme segue:
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;
-                            </td>
-                            <td>&nbsp;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="15px">&nbsp;
-                            </td>
-                            <td>
-                                <table style="margin-left: 37px; border: 1px solid black" cellspacing=0 border=1
-                                       borderColor=#000 cellpadding=5 width="100%">
-                                    <tr>
-                                        <td width="23%" style="background-color: rgb(166,166,166); text-align: center">
-                                            <b>ITEM</b>
-                                        </td>
-                                        <td width="25%"
-                                            style="background-color: rgb(166,166,166); text-align: center; white-space: nowrap;">
-                                            <b>VALOR ATUAL</b>
-                                        </td>
-                                        <td width="32%"
-                                            style="background-color: rgb(166,166,166); text-align: center; white-space: nowrap;">
-                                            <b>VALOR REPACTUADO</b>
-                                        </td>
-                                        <td width="20%" style="background-color: rgb(166,166,166); text-align: center">
-                                            <b>VARIAÇÃO</b>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="23%" style="white-space: nowrap;text-align: center;">Vale Alimentação
-                                        </td>
-                                        <td width="25%" style="white-space: nowrap;text-align: center;">
-                                            R$${clausula_primeira_valor_atual_itemc!}
-                                        </td>
-                                        <td width="32%" style="white-space: nowrap;text-align: center;">
-                                            R$${clausula_primeira_valor_repactuado_itemc!}
-                                        </td>
-                                        <td width="20%"
-                                            style="white-space: nowrap;text-align: center;">${clausula_primeira_variacao_itemc!}
-                                            %
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;
-                            </td>
-                            <td>&nbsp;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="15px">&nbsp;
-                            </td>
-                            <td>
-                                <table style="margin-left: 37px;" border=0 cellspacing=0 cellpadding=5 width="100%">
-                                    <tr>
-                                        <td width="10%" style="vertical-align: top;">d)
-                                        </td>
-                                        <td width="90%" style="vertical-align: top;">${clausula_primeira_itemd!}
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
+                        [#if clausula_primeira_clausula_itema??]
+                          <tr>
+                              <td>&nbsp;
+                              </td>
+                              <td>&nbsp;
+                              </td>
+                          </tr>
+                          <tr>
+                              <td width="15px">&nbsp;
+                              </td>
+                              <td>
+                                  <table style="margin-left: 37px;" border=0 cellspacing=0 cellpadding=5 width="100%">
+                                      <tr>
+                                          <td width="10%" style="vertical-align: top;">a)
+                                          </td>
+                                          <td width="90%" style="vertical-align: top;">Salários - Piso Salarial,
+                                              considerando valores expressos na
+                                              Cláusula ${clausula_primeira_clausula_itema!} da referida Convenção Coletiva
+                                              de Trabalho da categoria, com indenização a partir
+                                              de ${clausula_primeira_clausula_data_itema!}, conforme segue:
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>&nbsp;
+                              </td>
+                              <td>&nbsp;
+                              </td>
+                          </tr>
+                          <tr>
+                              <td width="15px">&nbsp;
+                              </td>
+                              <td>
+                                  <table style="margin-left: 37px; border: 1px solid black" cellspacing=0 border=1
+                                         borderColor=#000 cellpadding=5 width="100%">
+                                      <tr>
+                                          <td width="23%" style="background-color: rgb(166,166,166); text-align: center">
+                                              <b>ITEM</b>
+                                          </td>
+                                          <td width="25%"
+                                              style="background-color: rgb(166,166,166); text-align: center; white-space: nowrap;">
+                                              <b>VALOR ATUAL</b>
+                                          </td>
+                                          <td width="32%"
+                                              style="background-color: rgb(166,166,166); text-align: center; white-space: nowrap;">
+                                              <b>VALOR REPACTUADO</b>
+                                          </td>
+                                          <td width="20%" style="background-color: rgb(166,166,166); text-align: center">
+                                              <b>VARIAÇÃO</b>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td width="23%"
+                                              style="white-space: nowrap;text-align: center;">${clausula_primeira_item_itema!}
+                                          </td>
+                                          <td width="25%" style="white-space: nowrap;text-align: center;">
+                                              R$${clausula_primeira_valor_atual_itema!}
+                                          </td>
+                                          <td width="32%" style="white-space: nowrap;text-align: center;">
+                                              R$${clausula_primeira_valor_repactuado_itema!}
+                                          </td>
+                                          <td width="20%"
+                                              style="white-space: nowrap;text-align: center;">${clausula_primeira_variacao_itema!}
+                                              %
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </td>
+                          </tr>
+                        [/#if]
+                        [#if clausula_primeira_clausula_itemb??]
+                          <tr>
+                              <td>&nbsp;
+                              </td>
+                              <td>&nbsp;
+                              </td>
+                          </tr>
+                          <tr>
+                              <td width="15px">&nbsp;
+                              </td>
+                              <td>
+                                  <table style="margin-left: 37px;" border=0 cellspacing=0 cellpadding=5 width="100%">
+                                      <tr>
+                                          <td width="10%" style="vertical-align: top;">b)
+                                          </td>
+                                          <td width="90%" style="vertical-align: top;">Vale Refeição - Do Vale Refeição,
+                                              considerando valores expressos na
+                                              Cláusula ${clausula_primeira_clausula_itemb!} da referida Convenção Coletiva
+                                              de Trabalho da categoria, com indenização a partir
+                                              de ${clausula_primeira_clausula_data_itemb!}, conforme segue:
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>&nbsp;
+                              </td>
+                              <td>&nbsp;
+                              </td>
+                          </tr>
+                          <tr>
+                              <td width="15px">&nbsp;
+                              </td>
+                              <td>
+                                  <table style="margin-left: 37px; border: 1px solid black" cellspacing=0 border=1
+                                         borderColor=#000 cellpadding=5 width="100%">
+                                      <tr>
+                                          <td width="23%" style="background-color: rgb(166,166,166); text-align: center">
+                                              <b>ITEM</b>
+                                          </td>
+                                          <td width="25%"
+                                              style="background-color: rgb(166,166,166); text-align: center; white-space: nowrap;">
+                                              <b>VALOR ATUAL</b>
+                                          </td>
+                                          <td width="32%"
+                                              style="background-color: rgb(166,166,166); text-align: center; white-space: nowrap;">
+                                              <b>VALOR REPACTUADO</b>
+                                          </td>
+                                          <td width="20%" style="background-color: rgb(166,166,166); text-align: center">
+                                              <b>VARIAÇÃO</b>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td width="23%" style="white-space: nowrap;text-align: center;">Vale Refeição
+                                          </td>
+                                          <td width="25%" style="white-space: nowrap;text-align: center;">
+                                              R$${clausula_primeira_valor_atual_itemb!}
+                                          </td>
+                                          <td width="32%" style="white-space: nowrap;text-align: center;">
+                                              R$${clausula_primeira_valor_repactuado_itemb!}
+                                          </td>
+                                          <td width="20%"
+                                              style="white-space: nowrap;text-align: center;">${clausula_primeira_variacao_itemb!}
+                                              %
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </td>
+                          </tr>
+                        [/#if]
+                        [#if clausula_primeira_clausula_itemc??]
+                          <tr>
+                              <td>&nbsp;
+                              </td>
+                              <td>&nbsp;
+                              </td>
+                          </tr>
+                          <tr>
+                              <td width="15px">&nbsp;
+                              </td>
+                              <td>
+                                  <table style="margin-left: 37px;" border=0 cellspacing=0 cellpadding=5 width="100%">
+                                      <tr>
+                                          <td width="10%" style="vertical-align: top;">c)
+                                          </td>
+                                          <td width="90%" style="vertical-align: top;">Vale Alimentação - Do Vale
+                                              Alimentação, considerando valores expressos na
+                                              Cláusula ${clausula_primeira_clausula_itemc!} da referida Convenção Coletiva
+                                              de Trabalho da categoria, com indenização a partir
+                                              de ${clausula_primeira_clausula_data_itemc!}, conforme segue:
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>&nbsp;
+                              </td>
+                              <td>&nbsp;
+                              </td>
+                          </tr>
+                          <tr>
+                              <td width="15px">&nbsp;
+                              </td>
+                              <td>
+                                  <table style="margin-left: 37px; border: 1px solid black" cellspacing=0 border=1
+                                         borderColor=#000 cellpadding=5 width="100%">
+                                      <tr>
+                                          <td width="23%" style="background-color: rgb(166,166,166); text-align: center">
+                                              <b>ITEM</b>
+                                          </td>
+                                          <td width="25%"
+                                              style="background-color: rgb(166,166,166); text-align: center; white-space: nowrap;">
+                                              <b>VALOR ATUAL</b>
+                                          </td>
+                                          <td width="32%"
+                                              style="background-color: rgb(166,166,166); text-align: center; white-space: nowrap;">
+                                              <b>VALOR REPACTUADO</b>
+                                          </td>
+                                          <td width="20%" style="background-color: rgb(166,166,166); text-align: center">
+                                              <b>VARIAÇÃO</b>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td width="23%" style="white-space: nowrap;text-align: center;">Vale Alimentação
+                                          </td>
+                                          <td width="25%" style="white-space: nowrap;text-align: center;">
+                                              R$${clausula_primeira_valor_atual_itemc!}
+                                          </td>
+                                          <td width="32%" style="white-space: nowrap;text-align: center;">
+                                              R$${clausula_primeira_valor_repactuado_itemc!}
+                                          </td>
+                                          <td width="20%"
+                                              style="white-space: nowrap;text-align: center;">${clausula_primeira_variacao_itemc!}
+                                              %
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </td>
+                          </tr>
+                        [/#if]
+                        [#if clausula_primeira_itemd??]
+                          <tr>
+                              <td>&nbsp;
+                              </td>
+                              <td>&nbsp;
+                              </td>
+                          </tr>
+                          <tr>
+                              <td width="15px">&nbsp;
+                              </td>
+                              <td>
+                                  <table style="margin-left: 37px;" border=0 cellspacing=0 cellpadding=5 width="100%">
+                                      <tr>
+                                          <td width="10%" style="vertical-align: top;">d)
+                                          </td>
+                                          <td width="90%" style="vertical-align: top;">${clausula_primeira_itemd!}
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </td>
+                          </tr>
+                        [/#if]
                         <br>
                         <tr>
                             <td width="10%" style="vertical-align: top;">1.2
@@ -854,7 +862,7 @@
                         <td width="50px" style="vertical-align: top;">2.6
                         </td>
                         <td style="vertical-align: top; text-align: justify">O valor global acumulado do contrato passa
-                            de R$ ${clausula_segunda_valor_anterior_item_26!}, para R$ ${clausula_segunda_valor_novo_item_26!}, já incluído o valor do Adicional I ${clausula_segunda_valor_adicional_i_item_26!} [#if possui_adicional_2?? && possui_adicional_2 == "Sim"]${clausula_segunda_adicional_item_26!}[/#if].
+                            de R$ ${clausula_segunda_valor_anterior_item_26!}, para R$ ${clausula_segunda_valor_novo_item_26!}[#if clausula_segunda_valor_adicional_i_item_26??], já incluído o valor do Adicional I ${clausula_segunda_valor_adicional_i_item_26!} [/#if][#if possui_adicional_2?? && possui_adicional_2 == "Sim"] e o Adicional II[/#if].
                         </td>
                     </table>
                     <br>
@@ -985,7 +993,7 @@
                         </td>
                         <td style="vertical-align: top; text-align: justify">A repactua&ccedil;&atilde;o de pre&ccedil;os
                             tem respaldo legal no disposto no artigo 40, inciso XI, art. 55, inciso III, e artigo 65,
-                            inciso II, al&iacute;nea “d”, todos da Lei 8.666/93, de 21 de junho de 1993.
+                            inciso II, al&iacute;nea "d", todos da Lei 8.666/93, de 21 de junho de 1993.
                         </td>
                     </table>
                     <p><strong>CL&Aacute;USULA SEXTA</strong></p>

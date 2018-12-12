@@ -27,7 +27,7 @@
 [@entrevista]
     [@grupo titulo="Dados Gerais"]
         [@grupo]
-            [@selecao titulo="Destinatário" var="destinatario" opcoes="Consultoria Jurídica;Autoridade Competente" reler=true /]
+            [@selecao titulo="Destinatário" var="destinatario" opcoes="Consultoria Jurídica;LACC-2" reler=true /]
         [/@grupo]
         [@grupo]
             [@texto titulo="Número termo contrato" var="numero_termo_contrato" largura=50 /]
@@ -171,7 +171,7 @@
     [/#if]
 [/@entrevista]
 
-[@documento ]
+[@documento margemDireita="3cm"]
     [#if tamanhoLetra! == "Normal"]
         [#assign tl = "10pt" /]
     [#elseif tamanhoLetra! == "Pequeno"]
@@ -246,7 +246,7 @@
                     <!-- INICIO - Tagmeta -->
                     <!-- Inicio - Corpo do conteudo -->
                    	<p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">&nbsp;<b>I.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INSTRUÇÃO DO PROCESSO</b>
-					<p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trata-se da <b>PRORROGAÇÃO CONTRATUAL</b>, referente ao contrato em tela, firmado junto à ${contratada!}, cujo objeto é a “${texto_ref!}”.</p>
+					<p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trata-se da <b>PRORROGAÇÃO CONTRATUAL</b>, referente ao contrato em tela, firmado junto à ${contratada!}, cujo objeto é a "${texto_ref!}".</p>
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Para a instrução deste processo foram verificados os seguintes itens da NI 6.01/F (LCT) de 16/05/2016:</p>
 
 					<table width="100%" border="1" cellpadding=5 cellspacing=0 borderColor="#000" bgcolor="#FFFFFF">
@@ -421,12 +421,12 @@
                     <br>
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">&nbsp;<b>II.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONCLUSÃO</b>
                     [#if destinatario == "Consultoria Jurídica"]
-                    	<p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Face ao exposto, propomos que o presente processo seja encaminhado à ${escritorio_juridico!}, para exame e parecer nos termos previstos no subitem 21.1 e 23.18 da NI – 6.01/F (LCT), de 16/05/2016, e posterior formalização.</p>
+                    	<p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Face ao exposto, propomos que o presente processo seja encaminhado à ${escritorio_juridico!}, para exame e parecer nos termos previstos no subitem 21.1 e 23.18 da NI – 6.01/F (LCT), de 16/05/2016, e posterior formalização.</p>
                     [#else]
-                    	<p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Face ao exposto, propomos que o presente processo seja encaminhado à ${escritorio_autoridade!}, para assinatura do presente termo de apostilamento e posterior devolução.</p>
+                    	<p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Face ao exposto, propomos que o presente processo seja encaminhado à ${escritorio_autoridade!}, para assinatura do presente termo de apostilamento e posterior devolução.</p>
                     [/#if]
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Informamos que o arquivo eletrônico do ${instrumento!}, o qual contém o detalhamento do ajuste em pauta (respectivos ajustes de prazos, valores e itens, conforme o caso) também está disponível no seguinte endereço da rede: ${caminho_rede!}.</p>
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Por fim, nos colocamos à disposição para possíveis esclarecimentos que se fizerem necessários.</p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Informamos que o arquivo eletrônico do ${instrumento!}, o qual contém o detalhamento do ajuste em pauta (respectivos ajustes de prazos, valores e itens, conforme o caso) também está disponível no seguinte endereço da rede: ${caminho_rede!}.</p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Por fim, nos colocamos à disposição para possíveis esclarecimentos que se fizerem necessários.</p>
                     <!-- Fim - Corpo do conteudo -->
 
                     <!-- FIM - Tagmeta -->
