@@ -1,0 +1,315 @@
+
+[#assign _texto=""  /]
+[#assign _tipo_autoridade=""  /]
+[#assign _genero=""  /]
+[#assign _vocativo=""  /]
+[#assign _enderecamento_dest=""  /]
+[#assign _nome_dest=""  /]
+[#assign _cargo_dest=""  /]
+[#assign _orgao_dest=""  /]
+[#assign _endereco_dest=""  /]
+[#assign _fecho=""  /]
+[#assign _tamanho_letra=""  /]
+[#assign _autoridade={}  /]
+[#assign _tipo="OFÍCIO"  /]
+[#assign _tiposigilo="" /]
+
+
+[#if _autoridade?size > 0]
+    [#assign _vocativo=_autoridade.vocativo /]
+    [#assign _enderecamento_dest=_autoridade.enderecamento /]
+    [#assign _nome_dest=_autoridade.nome /]
+    [#assign _cargo_dest=_autoridade.cargo /]
+    [#assign _orgao_dest=_autoridade.orgao /]
+    [#assign _endereco_dest=_autoridade.endereco /]
+        <br/><br/>
+[/#if]
+
+[@entrevista]
+    [@grupo]
+        [@texto titulo="Assunto" var="texto_assunto" largura=50 /]
+    [/@grupo]
+    [@grupo]
+        [@texto titulo="Referência" var="texto_ref" largura=50 /]
+    [/@grupo]
+
+    [#if _vocativo!="" && _enderecamento_dest!=""]
+    [#elseif (_tipo_autoridade != "" && _genero != "")]
+        [#assign tratamento = func.tratamento(_tipo_autoridade,_genero) /]
+    [#else]
+
+        [@grupo]
+            [@grupo]
+                [#assign tipoAutoridade = tipoAutoridade!"[Nenhum]" /]
+                [@selecao titulo="Tipo de Autoridade" var="tipoAutoridade" opcoes="[Nenhum];Auditor da Justiça Militar;Bispo e Arcebispo;Cardeal;Chefe de Gabinete Civil;Chefe de Gabinete Militar da Presidência da República;Consultor-Geral da República;Corregedor do Tribunal Regional Federal;Dirigente administrativo e Procurador;Embaixador;Governador de Estado e do Distrito Federal;Juiz Federal;Juiz em geral;Membro do Congresso Nacional;Membro do Supremo Tribunal Federal;Membro do Tribunal Superior;Membro do Tribunal de Contas da União;Membro do Tribunal Regional Federal;Membro do Tribunal de Justiça;Membro da Assembléia Legislativa;Ministro de Estado;Monsenhor, Cônego;Prefeito;Presidente da República;Presidente do Supremo Tribunal Federal;Presidente do Tribunal Superior;Presidente do Tribunal Regional Federal;Presidente do Tribunal de Justiça;Presidente da Assembléia Legislativa;Presidente do Tribunal de Contas da União;Procurador-Geral da República;Procurador-Geral junto ao Tribunal;Secretário de Estado do Governo Estadual;Reitor de Universidade;Vice-Presidente da República;Oficial General das Forças Armadas;[Outros]" reler=true /]
+                [#if tipoAutoridade == "[Nenhum]" || func.verificaGenero(tipoAutoridade) == 'F']
+                    [@selecao titulo="Gênero da Autoridade" var="genero" opcoes="M;F" reler=true /]
+                [#else]
+                    [#assign genero = func.verificaGenero(tipoAutoridade) /]
+                [/#if]
+
+                [#if tipoAutoridade != "[Nenhum]"]
+                    [#assign tratamento = func.tratamento(tipoAutoridade,genero) /]
+                    [#if tratamento??]
+                        [@grupo]
+                            [@mensagem titulo="Forma de tratamento" texto="${tratamento.formaDeTratamento} (${tratamento.abreviatura})" /]
+                        [/@grupo]
+                    [/#if]
+                [/#if]
+            [/@grupo]
+        [/@grupo]
+
+    [/#if]
+
+        <!-- Vocativo -->
+    [#if _vocativo != ""]
+        [@oculto var="vocativo" valor="${_vocativo}" /]
+    [#else]
+        [#if tratamento??]
+            [@grupo]
+                [@checkbox titulo="Especificar manualmente o vocativo" var="especificarVocativo" reler=true /]
+            [/@grupo]
+        [/#if]
+        [#if (!tratamento??) || (especificarVocativo?? && especificarVocativo == 'Sim')]
+            [@grupo]
+                [@texto titulo="Vocativo" var="vocativo" largura="45" /]
+            [/@grupo]
+        [#else]
+            [@oculto var="vocativo" valor="${tratamento.vocativo}" /]
+        [/#if]
+    [/#if]
+
+
+        <!-- Conteudo -->
+[#--
+[#if _texto!=""]
+    [@oculto var="texto_oficio" valor="${_texto}"/]
+[#else]
+    [@grupo titulo="Texto a ser inserido no corpo do ofício"]
+        [@grupo]
+            [@editor titulo="" var="texto_oficio" /]
+        [/@grupo]
+    [/@grupo]
+[/#if]
+--]
+
+        <!-- Fecho -->
+    [#if _fecho != ""]
+        [@oculto var="fecho" valor="${_fecho}"/]
+    [#else]
+        [@grupo]
+            [@texto titulo="Fecho (de acordo com o vocativo)" var="fecho" largura="50" /]
+        [/@grupo]
+    [/#if]
+    [@grupo titulo="Dados do destinatário" esconder=(_enderecamento_dest!="" && _nome_dest!="" && _cargo_dest!="" && _orgao_dest!="" && _endereco_dest!="")]
+                <!-- Tratamento -->
+        [#if _enderecamento_dest != ""]
+            [@oculto var="enderecamento_dest" valor=_enderecamento_dest /]
+        [#else]
+            [#if tratamento??]
+                [@grupo]
+                    [@checkbox titulo="Especificar manualmente a forma de endereçamento" var="especificarEnderecamento" reler=true /]
+                [/@grupo]
+            [/#if]
+            [#if !tratamento?? || (especificarEnderecamento?? && especificarEnderecamento == 'Sim')]
+                [@grupo]
+                    [@texto titulo="Forma de endereçamento" var="enderecamento_dest" largura="45" /]
+                [/@grupo]
+            [#else]
+                [@oculto var="enderecamento_dest" valor="${(tratamento.formaDeEnderecamento)!}" /]
+            [/#if]
+        [/#if]
+
+                <!-- Nome -->
+        [#if _nome_dest != ""]
+            [@oculto var="nome_dest" valor="${_nome_dest}"/]
+        [#else]
+            [#if (doc.destinatario.descricao)??]
+                [@grupo]
+                    [@checkbox titulo="Especificar manualmente o nome do destinatário" var="especificarNome" reler=true /]
+                [/@grupo]
+            [/#if]
+            [#if !(doc.destinatario.descricao)?? || (especificarNome?? && especificarNome == 'Sim')]
+                [@grupo]
+                    [@texto titulo="Nome" var="nome_dest" largura="60" default="${(doc.destinatario.descricao)!}"/]
+                [/@grupo]
+            [#else]
+                [@oculto var="nome_dest" valor="${(doc.destinatario.descricao)!}" /]
+            [/#if]
+        [/#if]
+
+        [@grupo]
+            [@texto titulo="Empresa contratada" var="TM_empresa_contratada" largura="60" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Endereço" var="TM_endereco" largura="60" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Telefone" var="TM_telefone" largura="30" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="E-mail" var="TM_email" largura="30" /]
+        [/@grupo]
+                <!-- Cargo -->
+        [#if _cargo_dest != ""]
+            [@oculto var="cargo_dest" valor="${_cargo_dest}"/]
+        [#else]
+            [#if (doc.destinatario.cargo.nomeCargo)??]
+                [@grupo]
+                    [@checkbox titulo="Especificar manualmente o cargo do destinatário" var="especificarCargo" reler=true /]
+                [/@grupo]
+            [/#if]
+            [#if !(doc.destinatario.cargo.nomeCargo)?? || (especificarCargo?? && especificarCargo == 'Sim')]
+                [@grupo]
+                    [@texto titulo="Cargo" var="cargo_dest" largura="60" default="${(doc.destinatario.cargo.nomeCargo)!}" /]
+                [/@grupo]
+            [#else]
+                [@oculto var="cargo_dest" valor="${(doc.destinatario.cargo.nomeCargo)!}" /]
+            [/#if]
+        [/#if]
+
+                <!-- Órgão -->
+        [#if _orgao_dest != ""]
+            [@oculto var="orgao_dest" valor="${_orgao_dest}"/]
+        [#else]
+            [#if (doc.lotaDestinatario.descricao)??]
+                [#assign orgaoAux = (doc.lotaDestinatario.descricao)! /]
+            [#else]
+                [#if (orgaoExternoDestinatarioSel.descricao)??]
+                    [#assign orgaoAux = orgaoExternoDestinatarioSel.descricao /]
+                [/#if]
+            [/#if]
+            [#if orgaoAux??]
+                [@grupo]
+                    [@checkbox titulo="Especificar manualmente o órgão do destinatário" var="especificarOrgao" reler=true /]
+                [/@grupo]
+            [/#if]
+            [#if !orgaoAux?? || (especificarOrgao?? && especificarOrgao == 'Sim')]
+                [@grupo]
+                    [@texto titulo="Órgão" var="orgao_dest" largura="60" default="${orgaoAux!}" /]
+                [/@grupo]
+            [#else]
+                [@oculto var="orgao_dest" valor="${orgaoAux}" /]
+            [/#if]
+        [/#if]
+
+    [/@grupo]
+
+
+
+        <!-- INICIO - Tagmeta -->
+    [@grupo titulo="Informações do documento"]
+        [@grupo]
+            [@texto titulo="Instrumento de formalização da repactuação" var="tm_instrumento_formalizacao" largura="100" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Número de contrato" var="tm_contrato" largura="100" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Período de apuração em meses" var="tm_periodo_apuracao" largura="100" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Valor em Reais" var="tm_valor" largura="100" /]
+        [/@grupo]
+        [@grupo]
+            [@texto titulo="Valor por extenso" var="tm_valor_extenso" largura="100" /]
+        [/@grupo]
+    [/@grupo]
+        <!-- FIM - Tagmeta -->
+    [#if _tamanho_letra != ""]
+        [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
+    [#else]
+        [@selecao titulo="Tamanho da letra" var="tamanhoLetra" opcoes="Normal;Pequeno;Grande" /]
+    [/#if]
+[/@entrevista]
+
+[@documento margemDireita="3cm"]
+    [#if tamanhoLetra! == "Normal"]
+        [#assign tl = "10pt" /]
+    [#elseif tamanhoLetra! == "Pequeno"]
+        [#assign tl = "9pt" /]
+    [#elseif tamanhoLetra! == "Grande"]
+        [#assign tl = "12pt" /]
+    [#else]
+        [#assign tl = "11pt"]
+    [/#if]
+
+    [#if !(func.contains(fecho!'','.')) && !(func.contains(fecho!'',','))]
+        [#assign virgula ="," /]
+    [/#if]
+
+    [#if _tiposigilo! == "1"]
+        [#assign _reservado = true /]
+    [#elseif _tiposigilo! == "2"]
+        [#assign _sigiloso = true /]
+    [#elseif _tiposigilo! == "3"]
+        [#assign _secreto = true /]
+    [/#if]
+
+    [@estiloBrasaoEsquerdaOficio tipo=_tipo tamanhoLetra=tl formatarOrgao=true]
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+                <tr>
+                    <td align="left">
+                        <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0">
+                            <tr><td>[@letra tamanho=tl]<p>${enderecamento_dest!} ${nome_dest!}</p>[/@letra]</td></tr>
+                            <tr><td>[@letra tamanho=tl]<p></p>[/@letra]</td></tr>
+                            [#if TM_empresa_contratada??]
+                                <tr><td>[@letra tamanho=tl]<p>${TM_empresa_contratada!}</p>[/@letra]</td></tr>
+                            [/#if]
+                            [#if TM_endereco??]
+                                <tr><td>[@letra tamanho=tl]<p>${TM_endereco!}</p>[/@letra]</td></tr>
+                            [/#if]
+                            [#if TM_telefone??]
+                                <tr><td>[@letra tamanho=tl]<p>${ TM_telefone! }</p>[/@letra]</td></tr>
+                            [/#if]
+                            [#if TM_email??]
+                                <tr><td>[@letra tamanho=tl]<p>${ TM_email! }</p>[/@letra]</td></tr>
+                            [/#if]
+                        [#-- COMENTARIO
+                        [#if (doc.exClassificacao.descrClassificacao)??]
+                            <tr><td>[@letra tamanho=tl]<p><br/>Assunto: ${(doc.exClassificacao.descrClassificacao)!}</p>[/@letra]</td></tr>
+                        [/#if]
+                        --]
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        [@mioloDJE]
+                <p align="left">
+                    <br>
+                    Assunto: ${texto_assunto!}
+                    [#if texto_ref??]
+                        <br/>Ref.: ${texto_ref!}
+                    [/#if]
+                </p>
+                  <p> <br/>
+                <div style="font-family: Times New Roman; font-size: 10pt;">
+            [@corpoBIE]
+                [#if vocativo??]
+                        <p align="left" style="font-size: ${tl}; TEXT-INDENT: 2.5cm">${enderecamento_dest!} ${nome_dest!},</p>
+                [/#if]
+
+
+                    <!-- INICIO - Tagmeta -->
+                    <!-- Inicio - Corpo do conteudo -->
+
+                    <p style="text-align: justify;">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Comunicamos a V.S.ª que após a comprovação dos repasses concedidos aos empregados em face da repactuação de preços conforme ${tm_instrumento_formalizacao!} relativo ao Contrato n. ${tm_contrato!}, autorizamos o pagamento do valor da diferença de repactuação apurada no período de ${tm_periodo_apuracao!}, no valor de R$ ${tm_valor!}(${tm_valor_extenso!}), conforme cálculo em anexo.</p>
+
+
+                    <!-- Fim - Corpo do conteudo -->
+
+                    <!-- FIM - Tagmeta -->
+
+
+
+
+                [@letra tamanho=tl]${texto_oficio!}[/@letra]
+            [/@corpoBIE]
+            [#if fecho??]<p style="font-size: ${tl}; TEXT-INDENT: 2.5cm">[@fechoBIE]${fecho!}${virgula!}[/@fechoBIE][/#if]</p>
+                </div>
+        [/@mioloDJE]
+    [/@estiloBrasaoEsquerdaOficio]
+    [#if _tiposigilo! == "2"]
+        [@acessoRestrito /]
+    [/#if]
+[/@documento]

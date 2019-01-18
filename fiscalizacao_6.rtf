@@ -1,0 +1,77 @@
+[@entrevista]
+    [@grupo]
+        [@grupo]
+            [@texto titulo="Número" var="tm_nr_oficio" largura="30" /]
+            [@texto titulo="Sigla" var="tm_of_sigla" largura="10" /]
+            [@texto titulo="Ano" var="tm_of_ano" largura="4" /]
+        [/@grupo]
+        [@grupo][@texto titulo="Cidade" var="tm_no_cidade" largura="60" /][/@grupo]
+    [/@grupo]
+    [@grupo titulo="Destinatário"]
+        [@grupo][@texto titulo="Nome" var="tm_destinatario" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="Contratada" var="tm_contratada" largura="100" /][/@grupo]
+        [@grupo][@memo titulo="Endereço" var="tm_endereco" colunas="1" linhas="2" /][/@grupo]
+        [@grupo][@texto titulo="Telefone" var="tm_telefone" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="E-mail" var="tm_email" largura="100" /][/@grupo]
+    [/@grupo]
+    [@grupo titulo="Informações da glosa"]
+        [@grupo][@texto titulo="Mês/Ano de competência" var="tm_mes_competencia" largura="10" /][/@grupo]
+        [@grupo][@texto titulo="Referência" var="tm_referencia" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="Número do contrato" var="tm_nr_contrato" largura="50" /][/@grupo]
+        [@grupo][@memo titulo="Ocorrências identificadas" var="tm_ocorrencias" colunas="1" linhas="6" /][/@grupo]
+        [@grupo][@texto titulo="Valor da glosa" var="tm_valor_glosa" largura="15" /][/@grupo]
+        [@grupo]
+            [@texto titulo="Valor por extenso" var="tm_valor_extenso" largura="100" /][/@grupo]
+    [/@grupo]
+[/@entrevista]
+[#assign tm_dtHoje = .now /]
+
+[@documento margemDireita="2cm" margemEsquerda="2cm"]
+    [@estiloBrasaoEsquerdaOficio tipo="" tamanhoLetra=tl ]
+
+
+	<div>Ao Senhor ${ tm_destinatario! }<br>
+        ${ tm_contratada! }.<br>
+		[#if tm_endereco??]
+            ${ tm_endereco! }<br>
+        [/#if]
+		[#if tm_telefone??]
+		Telefone: ${ tm_telefone! }<br>
+        [/#if]
+		[#if tm_email??]
+		E-mail: ${ tm_email! }<br>
+        [/#if]</div>
+
+
+	<p>Assunto: Comunicação de Glosa - ${ tm_mes_competencia! }<br>
+        Ref.: ${ tm_referencia! }</p>
+
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Senhor Representante,</p>
+
+	<p style="text-align:justify">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comunicamos à Vossa Senhoria que, procedida a fiscalização operacional do Termo de Contrato
+        n. ${ tm_nr_contrato! }, foram identificadas as seguintes ocorrências na frente
+        de trabalho:
+
+	[#if tm_ocorrencias??]
+        [#list tm_ocorrencias?trim?split("\r\n") as tm_ocorrencia]
+            [#if tm_ocorrencia?trim!=""]
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${ tm_ocorrencia! }
+            [/#if]
+        [/#list]
+    [/#if]
+    </p>
+
+	<p style="text-align:justify">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Em virtude dos apontamentos supracitados, intenciona-se a aplicação da glosa contratual no valor de
+        R$ ${ tm_valor_glosa! }(${tm_valor_extenso!}), conforme planilha demonstrativa em anexo, glosa esta que poderá ser
+        deduzida quando da emissão da próxima fatura, evitando a incidência de tributação sobre valores não
+        recebíveis.</div>
+
+	<p style="text-align:justify">3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Não obstante, será concedido o prazo de 05 (cinco) dias úteis, a contar do recebimento deste,
+        para que essa empresa apresente defesa formal em razão da glosa informada, caso entenda ser necessário,
+        estando o processo em epígrafe à disposição para análise nesta Coordenação de Fiscalização Documental.</p>
+
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Atenciosamente,</p>
+
+    [/@estiloBrasaoEsquerdaOficio]
+
+[/@documento]

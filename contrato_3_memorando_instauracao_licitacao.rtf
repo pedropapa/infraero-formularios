@@ -27,25 +27,68 @@
 [@entrevista]
     [@grupo titulo="Dados básicos"]
         [@grupo]
-            [@texto titulo="Número pregão eletrônico" var="numero_pregao_eletronico" largura=50 /]
-        [/@grupo]
-        [@grupo]
             [@texto titulo="Referência" var="texto_ref" largura=50 /]
         [/@grupo]
     [/@grupo]
     [@grupo titulo="Dados gerais"]
         [@grupo]
-            [@texto titulo="Objeto instauração" var="objeto_instauracao" largura="50" obrigatorio="sim" /]
+            [@texto titulo="Objeto" var="objeto_instauracao" largura="50" obrigatorio="sim" /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Justificativa necessidade contratação" var="justificativa_necessidade_contratacao" largura="50" obrigatorio="sim" /]
+            [@editor titulo="Justificativa da Necessidade da Contratação" var="justificativa_necessidade_contratacao" /]
         [/@grupo]
         [@grupo]
-            [@numero titulo="Prazo vigência (meses)" var="prazo_vigencia" largura="50" obrigatorio="sim" /]
+            [@numero titulo="Prazo vigência (meses)" var="prazo_vigencia" largura="50" obrigatorio="sim" reler="sim" /]
         [/@grupo]
         [@grupo]
             [@checkbox titulo="Orçamento Sigiloso" var="orcamento_sigiloso" reler=true /]
         [/@grupo]
+    [/@grupo]
+    [#if prazo_vigencia?? && prazo_vigencia != "" && prazo_vigencia?number > 12]
+        [@grupo titulo="Justificativa do Prazo de Vigência Contratual" ]
+            [@grupo]
+                [@texto titulo="Documento Fundamentação" var="documento_fundamentacao" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@data titulo="Data documento fundamentação" var="data_documento_fundamentacao" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Número Ato Administrativo" var="numero_ato_administrativo" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@data titulo="Data Ato Administrativo" var="data_ato_administrativo" /]
+            [/@grupo]
+        [/@grupo]
+    [/#if]
+    [#if orcamento_sigiloso?? && orcamento_sigiloso == "Nao"]
+        [@grupo titulo="Valor estimado da contratação" ]
+            [@grupo]
+                [@texto titulo="Valor mensal Licitação" var="valor_licitacao" obrigatorio="sim" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Meses do período global" var="meses_periodo_global" obrigatorio="sim" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Valor período global" var="valor_periodo_global" obrigatorio="sim" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Valor adicional I" var="valor_adicional_i" obrigatorio="sim"largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Valor estimado adicional II" var="valor_adicional_ii" obrigatorio="sim" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Taxa Encargos Sociais valor orçado" var="taxa_encargos_sociais_valor_orcado" obrigatorio="sim" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Taxa Margem Contribuição valor orçado" var="taxa_margem_contribuicao_valor_orcado" obrigatorio="sim" largura="50" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Taxa Encargos Tributários valor orçado" var="taxa_encargos_tributarios_valor_orcado" obrigatorio="sim" largura="50" /]
+            [/@grupo]
+        [/@grupo]
+    [/#if]
+    [@grupo titulo="Complemento"]
         [@grupo]
             [@texto titulo="Justificativa Valor Estimado" var="justificativa_valor_estimado" largura="50" obrigatorio="sim" /]
         [/@grupo]
@@ -97,52 +140,10 @@
             [@editor titulo="Parcelas Subcontratação" var="parcelas_subcontratacao" /]
         [/@grupo]
     [/@grupo]
-    [@grupo titulo="Justificativa do Prazo de Vigência Contratual" ]
-        [@grupo]
-            [@texto titulo="Documento Fundamentação" var="documento_fundamentacao" largura="50" /]
-        [/@grupo]
-        [@grupo]
-            [@data titulo="Data documento fundamentação" var="data_documento_fundamentacao" /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Número Ato Administrativo" var="numero_ato_administrativo" largura="50" /]
-        [/@grupo]
-        [@grupo]
-            [@data titulo="Data Ato Administrativo" var="data_ato_administrativo" /]
-        [/@grupo]
-    [/@grupo]
-    [#if orcamento_sigiloso?? && orcamento_sigiloso == "Sim"]
-        [@grupo titulo="Orçamento" ]
-            [@grupo]
-                [@texto titulo="Valor mensal Licitação" var="valor_licitacao" obrigatorio="sim" largura="50" /]
-            [/@grupo]
-            [@grupo]
-                [@texto titulo="Meses do período global" var="meses_periodo_global" obrigatorio="sim" largura="50" /]
-            [/@grupo]
-            [@grupo]
-                [@texto titulo="Valor período global" var="valor_periodo_global" obrigatorio="sim" largura="50" /]
-            [/@grupo]
-            [@grupo]
-                [@texto titulo="Valor adicional I" var="valor_adicional_i" obrigatorio="sim"largura="50" /]
-            [/@grupo]
-            [@grupo]
-                [@texto titulo="Valor estimado adicional II" var="valor_adicional_ii" obrigatorio="sim" largura="50" /]
-            [/@grupo]
-            [@grupo]
-                [@texto titulo="Taxa Encargos Sociais valor orçado" var="taxa_encargos_sociais_valor_orcado" obrigatorio="sim" largura="50" /]
-            [/@grupo]
-            [@grupo]
-                [@texto titulo="Taxa Margem Contribuição valor orçado" var="taxa_margem_contribuicao_valor_orcado" obrigatorio="sim" largura="50" /]
-            [/@grupo]
-            [@grupo]
-                [@texto titulo="Taxa Encargos Tributários valor orçado" var="taxa_encargos_tributarios_valor_orcado" obrigatorio="sim" largura="50" /]
-            [/@grupo]
-        [/@grupo]
-    [/#if]
     [#if forma_fornecimento_prestacao_servicos?? && forma_fornecimento_prestacao_servicos == "Parcelada"]
         [@grupo titulo="Cronograma de entrega/execução" ]
             [@grupo]
-                [@editor titulo="Cronograma de entrega/execução" var="cronograma_entrega_execucao" /]
+                [@editor var="cronograma_entrega_execucao" /]
             [/@grupo]
         [/@grupo]
     [/#if]
@@ -189,7 +190,7 @@
 
 [@documento ]
     [#if tamanhoLetra! == "Normal"]
-        [#assign tl = "10pt" /]
+        [#assign tl = "12pt" /]
     [#elseif tamanhoLetra! == "Pequeno"]
         [#assign tl = "9pt" /]
     [#elseif tamanhoLetra! == "Grande"]
@@ -282,7 +283,7 @@
                         DA NECESSIDADE DA CONTRATAÇÃO:</b> ${justificativa_necessidade_contratacao!}</p>
 
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">c) &nbsp;&nbsp; <b>PRAZO
-                        DE VIGÊNCIA CONTRATUAL:</b> o prazo inicial será de ${prazo_vigencia?number!} meses, podendo ser
+                        DE VIGÊNCIA CONTRATUAL:</b> o prazo inicial será de ${prazo_vigencia!} meses, podendo ser
                         prorrogado por até 60 (sessenta) meses;</p>
 
                     [#if prazo_vigencia?? && prazo_vigencia?number > 12]
@@ -290,14 +291,14 @@
                             DO PRAZO DE VIGÊNCIA CONTRATUAL:</b> : Conforme previsto no ${documento_fundamentacao!},
                             de ${data_documento_fundamentacao!}, e Ato Administrativo n. ${numero_ato_administrativo!},
                             de ${data_ato_administrativo!}, a contratação de serviços contínuos pode ser feita por prazo
-                            inicial superior a 12 meses, “devendo o gestor do processo apresentar justificativa, na
+                            inicial superior a 12 meses, "devendo o gestor do processo apresentar justificativa, na
                             razão direta do interesse do serviço, demonstrando as vantagens técnicas, econômicas e
-                            financeiras da contratação”.</p>
+                            financeiras da contratação".</p>
                     [/#if]
 
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">[#if prazo_vigencia?? && prazo_vigencia?number > 12]
                         e[#else]d[/#if]) &nbsp;&nbsp; <b>VALOR ESTIMADO DA CONTRATAÇÃO:</b>
-                        [#if orcamento_sigiloso?? && orcamento_sigiloso == "Sim"]orçamento sigiloso[#else]o valor mensal máximo estimado para esta
+                        [#if orcamento_sigiloso?? && orcamento_sigiloso == "Sim"]Orçamento sigiloso[#else]o valor mensal máximo estimado para esta
                             licitação é de ${valor_licitacao!} e o global para o período de ${meses_periodo_global!}
                             meses é de ${valor_periodo_global!}, já incluído o valor de ${valor_adicional_i!} referente
                             ao adicional I e o valor estimado de ${valor_adicional_ii!}, correspondente ao adicional II.
@@ -420,17 +421,4 @@
     [#if _tiposigilo! == "2"]
         [@acessoRestrito /]
     [/#if]
-
-      </p>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      Código Classificação
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
 [/@documento]

@@ -1,0 +1,164 @@
+[@entrevista]
+    [@grupo titulo="Informações do documento"]
+        [@grupo][@texto titulo="Cidade" var="tm_no_cidade" largura="60" /][/@grupo]
+    [/@grupo]
+    [@grupo titulo="I. DADOS DO CONTRATO"]
+        [@grupo][@texto titulo="Termo do contrato (0000-XX/0000/0000)" var="tm_tcn" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Contratada" var="tm_contratada" largura="100" /][/@grupo]
+        [@grupo][@memo titulo="Objeto" var="tm_objeto" colunas="1" linhas="2" /][/@grupo]
+        [@grupo][@data titulo="Início da vigência" var="tm_vigencia_inicio"  /][/@grupo]
+        [@grupo][@data titulo="Fim da vigência" var="tm_vigencia_fim"  /][/@grupo]
+        [@grupo][@texto titulo="Valor mensal" var="tm_valor_mensal" largura="15" /][/@grupo]
+        [@grupo][@texto titulo="Valor global" var="tm_valor_global" largura="15" /][/@grupo]
+    [/@grupo]
+    [@grupo titulo="II. HISTÓRICO DAS OCORRÊNCIAS"]
+        [@grupo][@data titulo="Documentação encaminhada em" var="tm_meses_doc_encaminhada"  /][/@grupo]
+        [@grupo][@memo titulo="Resumo da irregularidade encontrada" var="tm_resumo_irregularidade" colunas="1" linhas="2" /][/@grupo]
+        [@grupo][@memo titulo="Texto especificando detalhamento dos fatos que geraram a verificação da irregularidades" var="tm_detalhamento_irregularidade" colunas="1" linhas="2" /][/@grupo]
+        [@grupo][@memo titulo="Documentação não apresentada" var="tm_documentacao_nao_apresentada" colunas="1" linhas="2" /][/@grupo]
+
+        [@grupo][@memo titulo="Espaço de texto para complementação com ações já adotadas, notificações e respostas da contratada, caso exista" var="tm_acoes_adotadas" colunas="1" linhas="4" /][/@grupo]
+    [/@grupo]
+    [@grupo titulo="III. ANÁLISE"]
+        [@grupo][@memo titulo="Texto aberto para livre análise dos fatos (separar por quebra de linha)" var="tm_analise_fatos" colunas="1" linhas="6" /][/@grupo]
+    [/@grupo]
+    [@grupo titulo="IV. CONCLUSÃO"]
+        [@grupo][@memo titulo="Penalidades aplicadas (separar por quebra de linha)" var="tm_penalidades" colunas="1" linhas="6" /][/@grupo]
+        [@grupo][@texto titulo="Itens de sanções previstos em contrato" var="tm_itens_sancoes" largura="100" /][/@grupo]
+        [@grupo][@memo titulo="Descrição dos itens/subitens de descumprimento contratual" var="tm_subitens_sancoes" colunas="1" linhas="2" /][/@grupo]
+        [@grupo][@memo titulo="Subitem nº 3.2, item 3 do Manual de Procedimentos 25.06 CGO (observar se não houve atualização do MPP)" var="tm_subitem_3_2" colunas="1" linhas="2" /][/@grupo]
+        [@grupo][@texto titulo="Nome do fiscal documental" var="tm_nome_fiscal" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="Ato Normativo n." var="tm_ato_competencia" largura="50" /][/@grupo]
+        [@grupo][@texto titulo="Nome do gestor" var="tm_nome_gestor" largura="100" /][/@grupo]
+        [@grupo][@selecao titulo="Aprovação do relatório" var="tm_checkbox_aprovacao" opcoes="Aprovo o presente relatório; Não aprovo o presente relatório" /][/@grupo]
+        [@grupo][@texto titulo="Considerações finais" var="tm_consideracoes_finais" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="Nome da autoridade competente" var="tm_nome_autoridade" largura="100" /][/@grupo]
+    [/@grupo]
+[/@entrevista]
+[#assign tm_dtHoje = .now /]
+[#assign tm_ctd_topico=0 /]
+[@documento margemDireita="2cm" margemEsquerda="2cm"]
+    [@estiloBrasaoAEsquerda tipo="RELATÓRIO CIRCUNSTANCIADO" exibeData=true tamanhoLetra=tl obs="" omitirCodigo=false formatarOrgao=true ]
+
+
+
+        [#if doc.destinatario??]
+    Senhor (a) ${doc.destinatario.nomePessoa} <br/> ${doc.lotaDestinatario.descricao}
+        [#elseif doc.lotaDestinatario??]
+            ${doc.lotaDestinatario.descricao}
+        [#elseif doc.orgaoExternoDestinatario??]
+            ${doc.orgaoExternoDestinatario.nmOrgao}
+        [#elseif doc.nmOrgaoExterno??]
+            ${doc.nmOrgaoExterno}
+        [#elseif doc.nmDestinatario??]
+            ${doc.nmDestinatario}
+        [#else]
+    DESTINATÁRIO NÃO SELECIONADO
+        [/#if]
+    
+    <br><br>
+    
+    Assunto: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Intenção de aplicação de penalidade de rescisão do TC n. ${ tm_tcn! }
+    
+	<p><b>I. &nbsp;&nbsp;&nbsp; <u>DADOS DO CONTRATO</u></b></p>
+
+	<div>Termo de Contrato: TC n. ${ tm_tcn! }<br>
+        Contratada: ${ tm_contratada! }<br>
+        Objeto: ${ tm_objeto! }<br>
+        Vigência: ${ tm_vigencia_inicio! }  a ${ tm_vigencia_fim! }<br>
+        Valor Mensal: R$ ${ tm_valor_mensal! }<br>
+        Valor Global: R$ ${ tm_valor_global! }</div>
+	
+	
+	<p><b>II. &nbsp;&nbsp;&nbsp; <u>HISTÓRICO DAS OCORRÊNCIAS</u></b></p>
+        [#assign tm_ctd_topico = tm_ctd_topico + 1 /]
+	<p style="text-align:justify">${tm_ctd_topico}.	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Após análise da documentação mensal trabalhista encaminhada nos meses de ${ tm_meses_doc_encaminhada! },
+        observamos que a contratada ${ tm_resumo_irregularidade! } conforme tabela abaixo:</p>
+        [#if tm_detalhamento_irregularidade??]
+	<p style="text-align:justify">&raquo; Ocorrência: ${ tm_detalhamento_irregularidade! }</p>
+        [/#if]
+        [#if tm_documentacao_nao_apresentada??]
+	<p style="text-align:justify">&raquo; Documentação não apresentada: ${ tm_documentacao_nao_apresentada! }</p>
+        [/#if]
+
+        [#if tm_detalhamento_irregularidade??]
+            [#assign tm_ctd_topico = tm_ctd_topico + 1 /]
+	<p style="text-align:justify">${tm_ctd_topico}.	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${ tm_acoes_adotadas! }.</div>
+        [/#if]
+	
+	<p><b>III. &nbsp;&nbsp;&nbsp; <u>ANÁLISE</u></b></p>
+
+        [#if tm_analise_fatos??]
+            [#list tm_analise_fatos?trim?split("\r\n") as tm_analise_fato]
+                [#if tm_analise_fato?trim!=""]
+                    [#assign tm_ctd_topico = tm_ctd_topico + 1 /]
+		<p style="text-align:justify">${tm_ctd_topico}. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${ tm_analise_fato! }.</p>
+                [/#if]
+            [/#list]
+        [/#if]
+	
+	<p><b>IV. &nbsp;&nbsp;&nbsp; <u>CONCLUSÃO</u></b></p>
+
+        [#assign tm_ctd_topico = tm_ctd_topico + 1 /]
+	<p style="text-align:justify">${tm_ctd_topico}. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tendo em vista as questões tratadas neste relatório e os impactos que eventuais descumprimentos de obrigações
+        trabalhistas geram nesta Empresa Pública, decidimos aplicar à contratada ${tm_contratada!} as seguintes penalidades:</p>
+	
+	<ol type="a">
+		[#if tm_penalidades??]
+		[#list tm_penalidades?trim?split("\r\n") as tm_penalidade]
+            [#if tm_penalidade?trim!=""]
+		<li style="text-align:justify">${ tm_penalidade! }</li>
+            [/#if]
+        [/#list]
+        [/#if]
+    </ol>
+
+        [#assign tm_ctd_topico = tm_ctd_topico + 1 /]
+	<p style="text-align:justify">${tm_ctd_topico}. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O descumprimento de obrigações contratuais por parte da contratada traz prejuízos à gestão
+        administrativa do contrato, além de causar prejuízos aos direitos trabalhistas dos colaboradores alocados nessa
+        prestação de serviços. Assim, esta Comissão de Gestão e Fiscalização do Contrato entende que tais fatos
+        motivam a aplicação das sanções administrativas previstas ${ tm_itens_sancoes! },
+        do contrato celebrado entre as partes.</p>
+
+        [#assign tm_ctd_topico = tm_ctd_topico + 1 /]
+	<p style="text-align:justify">${tm_ctd_topico}. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sendo assim, a intenção da Comissão de Gestão e Fiscalização do Contrato é de aplicar à
+        contratada as penalidades descritas acima, em função das ocorrências descritas neste relatório, as quais caracterizaram descumprimento ${ tm_subitens_sancoes! }
+        do Termo de Contrato.</p>
+
+        [#assign tm_ctd_topico = tm_ctd_topico + 1 /]
+	<p style="text-align:justify">${tm_ctd_topico}. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posto isto, submetemos o presente relatório circunstanciado para ratificação da autoridade competente,
+        a fim de dar prosseguimento ao trâmite legal pertinente, conforme estabelecido
+        ${ tm_subitem_3_2! }.</p>
+        
+   
+
+	<p style="text-align:justify">De acordo, motivo pelo qual submeto processo para avaliação da Autoridade Competente conforme disciplina item 208 da
+        NI 6.01/F e Ato Normativo n. ${ tm_ato_competencia! }.</p>
+
+	<p align="center">
+        ${ tm_nome_gestor! }<br>
+        Gestor
+    </p>
+
+        [#if tm_checkbox_aprovacao == "Aprovo o presente relatório"]
+	<p><input type="checkbox" checked> Aprovo o presente relatório<br>
+        <input type="checkbox"> Não aprovo o presente relatório</p>
+        [#else]
+	<p><input type="checkbox"> Aprovo o presente relatório<br>
+        <input type="checkbox" checked> Não aprovo o presente relatório</p>
+        [/#if]
+
+        [#if tm_consideracoes_finais??]
+	<p>${ tm_consideracoes_finais! }</p>
+        [/#if]
+
+	<p align="center">
+        ${ tm_nome_autoridade! }<br>
+        Autoridade Competente
+    </p>
+
+
+
+
+    [/@estiloBrasaoAEsquerda]
+[/@documento]
