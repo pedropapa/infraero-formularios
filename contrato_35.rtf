@@ -1,0 +1,372 @@
+[#assign _tipo=""  /]
+
+[@entrevista]
+    [@grupo titulo="Informações do documento"]
+        [@grupo][@texto titulo="Cidade" var="tm_no_cidade" largura="60" /][/@grupo]
+    [/@grupo]
+    [@grupo titulo="Informações do termo aditivo"]
+        [@grupo][@texto titulo="Termo aditivo n." var="tm_nr_termo" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Nr. contrato" var="tm_nr_contrato" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Nr. cláusula" var="nr_clausula" largura="20" /][/@grupo]
+    [/@grupo]
+    [@grupo titulo="Informações da INFRAERO"]
+        [@grupo][@texto titulo="Nome da dependência" var="tm_no_dependencia" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="Cidade/Estado" var="tm_cidade_uf" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="CNPJ" var="tm_nr_cnpj" largura="19" /][/@grupo]
+        [@grupo][@texto titulo="Cargo do representante da Infraero" var="tm_cargo_rep_infraero" largura="60" /][/@grupo]
+        [@grupo][@texto titulo="Nome do representante da INFRAERO" var="tm_no_rep_infraero" largura="80" /][/@grupo]
+        [@grupo][@texto titulo="C.I. representante INFRAERO" var="tm_ci_rep_infraero" largura="80" /][/@grupo]
+        [@grupo][@texto titulo="UF C.I. do representante INFRAERO" var="tm_uf_ci_rep_infraero" largura="80" /][/@grupo]
+        [@grupo][@texto titulo="Orgão emitende da C.I. representante INFRAERO" var="tm_ci_rep_infraero" largura="50" /][/@grupo]
+        [@grupo][@texto titulo="CPF representante INFRAERO" var="tm_cpf_rep_infraero" largura="15" /][/@grupo]
+    [/@grupo]
+    [@grupo titulo="Informações da empresa CONTRATADA"]
+        [@grupo][@texto titulo="Nome da empresa contratada" var="tm_no_empresa" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="CNPJ/MF da empresa contratada" var="tm_cnpj_empresa" largura="19" /][/@grupo]
+        [@grupo][@texto titulo="Endereço da empresa contratada" var="tm_endereco_empresa" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="Cidade/estado da empresa contratada" var="tm_cidade_uf_empresa" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="CEP da empresa contratada" var="tm_cep_empresa" largura="10" /][/@grupo]
+        [@grupo][@texto titulo="Nome do representante da empresa contratada" var="tm_representante_empresa" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="C.I. do representante da empresa contratada" var="tm_ci_representante_empresa" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="UF C.I. do representante da empresa contratada" var="tm_uf_cirepresentante_empresa" largura="80" /][/@grupo]
+        [@grupo][@texto titulo="Orgão emitente do representante da empresa contratada" var="tm_orgaorepresentante_empresa" largura="50" /][/@grupo]
+        [@grupo][@texto titulo="CPF do representante da empresa contratada" var="tm_cpf_representante_empresa" largura="15" /][/@grupo]
+    [/@grupo]
+    [@grupo titulo="Auxilio Transporte"]
+        [@grupo][@texto titulo="Nr. Do decreto" var="tm_nr_decreto_vt" largura="20" /][/@grupo]
+        [@grupo][@data titulo="Data do decreto" var="tm_dt_decreto_vt"  /][/@grupo]
+        [@grupo][@data titulo="Data de início" var="tm_dt_inicio_vt"  /][/@grupo]
+        [@grupo][@texto titulo="Valor atual" var="tm_vl_atual_vt" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Valor repactuado" var="tm_vl_repactuado_vt" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Percentual de variação" var="tm_pc_variacao_vt" largura="6" /][/@grupo]
+    [/@grupo]
+    [@grupo titulo="Salários e benefícios"]
+        [@grupo][@texto titulo="CCT" var="tm_CCT" largura="10" /][/@grupo]
+        [@grupo][@texto titulo="Nr. De registro da CCT" var="tm_nr_registro_CCT" largura="15" /][/@grupo]
+        [@grupo][@data titulo="Data de inicio" var="tm_dt_inicio_cct"  /][/@grupo]
+    [/@grupo]
+    [@grupo titulo="Sálários"]
+        [@grupo][@texto titulo="Cláusula sobre piso salarial" var="tm_nr_clausula_piso_salarial" largura="20" /][/@grupo]
+        [@grupo][@data titulo="Data de inicio da indenização" var="tm_dt_inicio_indenizacao_salario"  /][/@grupo]
+        [@grupo][@editor titulo="Tabela - Piso Salarial" var="tm_ed_repac_piso_salarial" default="<table width='100%' border=1 cellpadding=2 cellspacing=0>
+    <tr>
+      <td style='background-color: #ccc; text-align:center; font-weight:bold;'><b>ITEM</b></td>
+      <td style='background-color: #ccc; text-align:center; font-weight:bold;'><b>VALOR ATUAL</b></td>
+      <td style='background-color: #ccc; text-align:center; font-weight:bold;'><b>VALOR REPACTUADO</b></td>
+      <td style='background-color: #ccc; text-align:center; font-weight:bold;'><b>VARIAÇÃO</b></td>
+    </tr>
+    <tr>
+      <td>Cargo</td>
+      <td>R$ </td>
+      <td>R$ </td>
+      <td> %</td>
+    </tr>
+</table>" /][/@grupo]
+    [/@grupo]
+    [@grupo titulo="Vale Refeição"]
+        [@grupo][@texto titulo="Cláusula sobre vale refeição" var="tm_nr_clausula_vr" largura="20" /][/@grupo]
+        [@grupo][@data titulo="Data de inicio da indenização" var="tm_dt_inicio_indenizacao_vr"  /][/@grupo]
+        [@grupo][@texto titulo="Valor atual" var="tm_vl_atual_vr" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Valor repactuado" var="tm_vl_repactuado_vr" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Percentual de variação" var="tm_pc_variacao_vr" largura="6" /][/@grupo]
+    [/@grupo]
+    [@grupo titulo="Vale Alimentação"]
+        [@grupo][@texto titulo="Cláusula sobre vale alimentação" var="tm_nr_clausula_va" largura="20" /][/@grupo]
+        [@grupo][@data titulo="Data de inicio da indenização" var="tm_dt_inicio_indenizacao_va"  /][/@grupo]
+        [@grupo][@texto titulo="Valor atual" var="tm_vl_atual_va" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Valor repactuado" var="tm_vl_repactuado_va" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Percentual de variação" var="tm_pc_variacao_va" largura="6" /][/@grupo]
+    [/@grupo]
+    [@grupo titulo="Demais benefícios"]
+        [@grupo][@memo titulo="Demais benefícios" var="tm_demais_beneficios" colunas="1" linhas="6" /][/@grupo]
+    [/@grupo]
+    [@grupo titulo="Valores da repactuação"]
+        [@grupo][@texto titulo="Valor total do aditamento" var="tm_vl_total" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Valor do atual mensal do contrato" var="tm_vl_atual_mensal" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Valor do atual mensal " var="tm_vl_atual_mensal_ext" largura="200" /][/@grupo]
+        [@grupo][@texto titulo="Valor repactuado mensal do contrato" var="tm_vl_repact_mensal" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Valor repactuado mensal " var="tm_vl_repact_mensal_ext" largura="200" /][/@grupo]
+        [@grupo][@texto titulo="Valor do atual mensal do contrato em função do vale transporte" var="tm_vl_atual_mensal_vt" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Valor repactuado mensal do contrato em função do vale transporte " var="tm_vl_repact_mensal_vt" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Valor repactuado mensal em função do vale transporte" var="tm_vl_repact_mensal_vt_ext" largura="200" /][/@grupo]
+        [@grupo][@texto titulo="Valor atual do aviso prévio final do contrato" var="tm_vl_aviso_previo" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Valor atual do aviso prévio final do contrato" var="tm_vl_aviso_previo" largura="200" /][/@grupo]
+        [@grupo][@texto titulo="Valor repactuado do aviso prévio final do contrato" var="tm_vl_repact_aviso_previo" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Valor repactuado do aviso prévio final do contrato" var="tm_vl_repact_aviso_previo" largura="200" /][/@grupo]
+    [/@grupo]
+    [@grupo titulo="Adicional II"]
+        [@grupo][@texto titulo="Valor atual do Adicional II " var="tm_vl_adicional_II" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Valor repactuado do Adicional II " var="tm_vl_repact_adicional_II" largura="20" /][/@grupo]
+    [/@grupo]
+    [@grupo titulo="Valor Global"]
+        [@grupo][@texto titulo="Valor atual global do contrato" var="tm_vl_global" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Valor repactuado global do contrato" var="tm_vl_repact_global" largura="20" /][/@grupo]
+    [/@grupo]
+    [@grupo titulo="Desembolso e orçamento"]
+        [@grupo][@texto titulo="Ano desembolso no exercício corrente" var="tm_ano_desembolso" largura="4" /][/@grupo]
+        [@grupo][@texto titulo="Valor desembolso no exercício corrente" var="tm_vl_desembolso" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Ano desembolso no exercício subsequente" var="tm_ano_desembolso_sub" largura="4" /][/@grupo]
+        [@grupo][@texto titulo="Valor desembolso no exercício subsequente" var="tm_vl_desembolso_sub" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Código orçamentário do recurso" var="tm_cd_orcamentario" largura="30" /][/@grupo]
+    [/@grupo]
+    [@grupo titulo="Garantia e multa"]
+        [@grupo][@texto titulo="Valor da garantia complementar" var="tm_vl_garantia" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Número do subitem do Termo contratual referente a garantia" var="tm_subitem_garantia" largura="20" /][/@grupo]
+        [@grupo][@checkbox titulo="Existe cláusula de multa" var="tm_existe_clausula_multa"  /][/@grupo]
+        [@grupo][@data titulo="Início do período para indenização" var="tm_dt_inicio_indenizacao"  /][/@grupo]
+    [/@grupo]
+    [@grupo titulo = "Cláusula Quinta"]
+        [@grupo]
+            [@editor titulo="Fundamentação Legal" var="subitem_clausula5" /]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo="Informações adicionais"]
+        [@grupo][@texto titulo="Nome do advogado da INFRAERO" var="tm_adv_infraero" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="Testemunha 1" var="tm_testemunha1" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="C.I. Testemunha 1" var="tm_ci_testemunha1" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="Testemunha 2" var="tm_testemunha2" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="C.I. Testemunha 2" var="tm_ci_testemunha2" largura="100" /][/@grupo]
+    [/@grupo]
+[/@entrevista]
+
+[#assign tm_dtHoje = .now /]
+[#assign tm_ctd_topico=0 /]
+
+[@documento ]
+    [#if tamanhoLetra! == "Normal"]
+        [#assign tl = "12pt" /]
+    [#elseif tamanhoLetra! == "Pequeno"]
+        [#assign tl = "9pt" /]
+    [#elseif tamanhoLetra! == "Grande"]
+        [#assign tl = "13pt" /]
+    [#else]
+        [#assign tl = "11pt"]
+    [/#if]
+
+    [#if !(func.contains(fecho!'','.')) && !(func.contains(fecho!'',','))]
+        [#assign virgula ="," /]
+    [/#if]
+
+    [#if tm_vl_total??]
+        [#assign tm_vl_total_extenso = func.reaisPorExtenso(tm_vl_total)/]
+    [#else]
+        [#assign tm_vl_total_extenso = ""/]
+    [/#if]
+
+    [#if tm_vl_atual_mensal_vt??]
+        [#assign tm_vl_atual_mensal_vt_ext = func.reaisPorExtenso(tm_vl_atual_mensal_vt)/]
+    [#else]
+        [#assign tm_vl_atual_mensal_vt_ext = ""/]
+    [/#if]
+
+    [#if tm_vl_adicional_II??]
+        [#assign tm_vl_adicional_II_ext = func.reaisPorExtenso(tm_vl_adicional_II)/]
+    [#else]
+        [#assign tm_vl_adicional_II_ext = ""/]
+    [/#if]
+
+    [#if tm_vl_global??]
+        [#assign tm_vl_global_ext = func.reaisPorExtenso(tm_vl_global)/]
+    [#else]
+        [#assign tm_vl_global_ext = ""/]
+    [/#if]
+
+    [#if tm_vl_repact_global??]
+        [#assign tm_vl_repact_global_ext = func.reaisPorExtenso(tm_vl_repact_global)/]
+    [#else]
+        [#assign tm_vl_repact_global_ext = ""/]
+    [/#if]
+
+    [#if tm_vl_desembolso??]
+        [#assign tm_vl_desembolso_extenso = func.reaisPorExtenso(tm_vl_desembolso)/]
+    [#else]
+        [#assign tm_vl_desembolso_extenso = ""/]
+    [/#if]
+
+    [#if tm_vl_desembolso_sub??]
+        [#assign tm_vl_desembolso_sub_extenso = func.reaisPorExtenso(tm_vl_desembolso_sub)/]
+    [#else]
+        [#assign tm_vl_desembolso_sub_extenso = ""/]
+    [/#if]
+
+    [#if tm_vl_garantia??]
+        [#assign tm_vl_garantia_extenso = func.reaisPorExtenso(tm_vl_garantia)/]
+    [#else]
+        [#assign tm_vl_garantia_extenso = ""/]
+    [/#if]
+
+    [#if _tiposigilo! == "1"]
+        [#assign _reservado = true /]
+    [#elseif _tiposigilo! == "2"]
+        [#assign _sigiloso = true /]
+    [#elseif _tiposigilo! == "3"]
+        [#assign _secreto = true /]
+    [/#if]
+
+    [@estiloBrasaoAEsquerda tipo=_tipo tamanhoLetra=tl formatarOrgao=true omitirCodigo=true]
+        [@mioloDJE]
+	<div style="font-family: AvantGarde Bk BT, Times New Roman; font-size: 12pt; text-align: justify;">
+		<div style="margin:0px; height:800px; border: solid 0px #000;">
+            <div style="text-align:right">
+                <h3 style="border: solid 1px #000; text-align: center; padding: 10px; margin-top: 100px; right: 40px; width: 300px">
+                    REPACTUAÇÃO</h3></div>
+            <div style="margin-top: 500px; margin-left: 200px;">
+                <div>${ tm_nr_termo! } TERMO ADITIVO AO TERMO DE CONTRATO N. ${ tm_nr_contrato! },
+                    FIRMADO ENTRE A EMPRESA BRASILEIRA DE INFRAESTRUTURA AEROPORTUÁRIA - <b>INFRAERO</b> E A
+                    ${ tm_no_empresa! }, NA FORMA A SEGUIR:</div>
+            </div>
+        </div>
+		<div>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                A <b>EMPRESA BRASILEIRA DE INFRAESTRUTURA AEROPORTUÁRIA - INFRAERO</b>, Empresa Pública Federal, criada nos termos da Lei n. 5.862, de 12 de dezembro de 1972, CNPJ/MF n. 00.352.294/0001-10, com Sede em Brasília-DF, na Estrada do Aeroporto, Setor de Concessionárias e Locadoras, Lote 5 - Edifício Sede, CEP 71608-050 - Brasília - DF - Brasil, e dependência no ${ tm_no_dependencia! }, em ${ tm_cidade_uf! }, CNPJ N. ${ tm_nr_cnpj! }, neste ato representada pelo seu ${ tm_cargo_rep_infraero! }, ${ tm_no_rep_infraero! }, portador da C.I. n. ${ tm_ci_rep_infraero! }, ${ tm_uf_ci_rep_infraero! }, ${ tm_ci_rep_infraero! } e do CPF  n. ${ tm_cpf_rep_infraero! }, doravante denominada simplesmente CONTRATANTE e a empresa ${ tm_no_empresa! }, CNPJ/MF n. ${ tm_cnpj_empresa! }, estabelecida no na ${ tm_endereco_empresa! }, ${ tm_cidade_uf_empresa! }, CEP N. ${ tm_cep_empresa! }, aqui representada por ${ tm_representante_empresa! }, portador da  C.I. n. ${ tm_ci_representante_empresa! } ${ tm_uf_cirepresentante_empresa! } ${ tm_orgaorepresentante_empresa! } e do CPF n. ${ tm_cpf_representante_empresa! }, doravante denominada simplesmente CONTRATADA, resolvem, de comum acordo, aditar o Termo de Contrato N. ${ tm_nr_contrato! }, conforme cláusulas a seguir.</p>
+
+			<h4>CLÁUSULA PRIMEIRA</h4>
+			<p>1.1	&nbsp;&nbsp;&nbsp; Nos termos da cláusula ${ nr_clausula! } do Termo Contratual supracitado, o objeto do presente aditamento é a repactuação contratual, conforme segue:</p>
+			<p style="padding-left: 30px">1.1.1	&nbsp;&nbsp;&nbsp; Auxílio Transporte - Auxílio Transporte, majoração a partir de ${ tm_dt_inicio_vt! }, considerando valores expressos no Decreto n. ${ tm_nr_decreto_vt! }, de ${ tm_dt_decreto_vt! }  de 	${ tm_dt_decreto_vt! } de ${ tm_dt_decreto_vt! }, conforme segue:</p>
+			<div style="padding-left: 30px; margin-bottom: 20px;">
+                <table width="100%" border=1 cellpadding=2 cellspacing=0>
+                    <tr>
+                        <td style="background-color: #ccc; text-align:center; font-weight:bold">ITEM</td>
+                        <td style="background-color: #ccc; text-align:center; font-weight:bold">VALOR ATUAL</td>
+                        <td style="background-color: #ccc; text-align:center; font-weight:bold">VALOR REPACTUADO</td>
+                        <td style="background-color: #ccc; text-align:center; font-weight:bold">VARIAÇÃO</td>
+                    </tr>
+                    <tr>
+                        <td>Auxílio Transporte</td>
+                        <td>R$ ${ tm_vl_atual_vt! }</td>
+                        <td>R$ ${ tm_vl_repactuado_vt! }</td>
+                        <td>${ tm_pc_variacao_vt! } %</td>
+                    </tr>
+                </table>
+            </div>
+			<p style="padding-left: 30px">1.1.2	&nbsp;&nbsp;&nbsp; Repactuação dos salários e benefícios de acordo com a CCT ${ tm_CCT! } registrada sob o n. ${ tm_nr_registro_CCT! }, a partir de ${ tm_dt_inicio_cct! }, conforme segue:</p>
+
+			<p style="padding-left: 60px">a)	Salários - Piso Salarial, considerando valores expressos na Cláusula ${ tm_nr_clausula_piso_salarial! } da referida Convenção Coletiva de Trabalho da categoria, com indenização a partir de ${ tm_dt_inicio_indenizacao_salario! }, conforme segue:</p>
+
+
+			<div style="padding-left: 60px; margin-bottom: 20px;">
+                ${ tm_ed_repac_piso_salarial! }
+            </div>
+
+			<p style="padding-left: 60px">b) Vale Refeição - Do Vale Refeição, considerando valores expressos na 	Cláusula ${ tm_nr_clausula_vr! } da referida Convenção Coletiva de Trabalho da categoria, com 	indenização a partir de ${ tm_dt_inicio_indenizacao_vr! }, conforme segue:</p>
+			<div style="padding-left: 60px; margin-bottom: 20px;">
+                <table width="100%" border=1 cellpadding=2 cellspacing=0>
+                    <tr>
+                        <td style="background-color: #ccc; text-align:center;  font-weight:bold">ITEM</td>
+                        <td style="background-color: #ccc; text-align:center;  font-weight:bold">VALOR ATUAL</td>
+                        <td style="background-color: #ccc; text-align:center;  font-weight:bold">VALOR REPACTUADO</td>
+                        <td style="background-color: #ccc; text-align:center;  font-weight:bold">VARIAÇÃO</td>
+                    </tr>
+                    <tr>
+                        <td>Vale refeição</td>
+                        <td>R$ ${ tm_vl_atual_vr! }</td>
+                        <td>R$ ${ tm_vl_repactuado_vr! }</td>
+                        <td>${ tm_pc_variacao_vr! } %</td>
+                    </tr>
+                </table>
+            </div>
+
+			<p style="padding-left: 60px">c) Vale Alimentação - Do Vale Alimentação, considerando valores expressos na 	Cláusula ${ tm_nr_clausula_va! } da referida Convenção Coletiva de Trabalho da categoria, com 	indenização a partir de ${ tm_dt_inicio_indenizacao_va! }, conforme segue:</p>
+			<div style="padding-left: 60px; margin-bottom: 20px;">
+                <table width="100%" border=1 cellpadding=2 cellspacing=0>
+                    <tr>
+                        <td style="background-color: #ccc; text-align:center;  font-weight:bold">ITEM</td>
+                        <td style="background-color: #ccc; text-align:center;  font-weight:bold">VALOR ATUAL</td>
+                        <td style="background-color: #ccc; text-align:center;  font-weight:bold">VALOR REPACTUADO</td>
+                        <td style="background-color: #ccc; text-align:center;  font-weight:bold">VARIAÇÃO</td>
+                    </tr>
+                    <tr>
+                        <td>Vale Alimentação</td>
+                        <td>R$ ${ tm_vl_atual_va! }</td>
+                        <td>R$ ${ tm_vl_repactuado_va! }</td>
+                        <td>${ tm_pc_variacao_va! } %</td>
+                    </tr>
+                </table>
+                &nbsp;
+            </div>
+
+            [#if tm_demais_beneficios?? ]
+			<p style="padding-left: 60px">${ tm_demais_beneficios! }</p>
+            [/#if]
+
+			<h4>CLÁUSULA SEGUNDA </h4>
+			<p>2.1 &nbsp;&nbsp;&nbsp; Em decorrência da repactuação de valores de que trata a cláusula anterior, o valor total do 	presente aditamento é de  R$ ${ tm_vl_total! } (${ tm_vl_total_extenso! }).</p>
+			<p>2.2 &nbsp;&nbsp;&nbsp; O valor mensal do contrato, em função da repactuação contratual, baseada na CCT ${ tm_CCT! }, a partir de ${ tm_dt_inicio_cct! }, passa de R$ ${ tm_vl_atual_mensal! } (${ tm_vl_atual_mensal_ext! }) para 	R$ ${ tm_vl_repact_mensal! } (${ tm_vl_repact_mensal_ext! }).</p>
+			<p>2.3 &nbsp;&nbsp;&nbsp; O valor mensal do contrato, em função da majoração no vale transporte, de acordo com o 	Decreto n. ${ tm_nr_decreto_vt! }, de ${ tm_dt_decreto_vt! }, a partir de ${ tm_dt_inicio_vt! }, passa 	de R$ ${ tm_vl_atual_mensal_vt! } (${ tm_vl_atual_mensal_vt_ext! }) para 	R$ ${ tm_vl_repact_mensal_vt! } (${ tm_vl_repact_mensal_vt_ext! })</p>
+			<p>2.4 &nbsp;&nbsp;&nbsp; O valor do Aviso Prévio final do contrato passa de R$ ${ tm_vl_aviso_previo! } (${ tm_vl_aviso_previo! })  para R$ ${ tm_vl_repact_aviso_previo! } (${ tm_vl_repact_aviso_previo! }). </p>
+
+
+            [#assign tm_ctd_topico = 4 /]
+            [#if tm_vl_adicional_II??]
+                [#assign tm_ctd_topico = tm_ctd_topico + 1 /]
+			<p>2.${tm_ctd_topico} &nbsp;&nbsp;&nbsp; O valor do Adicional II passa de R$ ${ tm_vl_adicional_II! } (${ tm_vl_adicional_II_ext! }) para R$ ${ tm_vl_repact_adicional_II! } (${ tm_vl_repact_adicional_II_ext! }).</p>
+            [/#if]
+
+            [#assign tm_ctd_topico = tm_ctd_topico + 1 /]
+			<p>2.${tm_ctd_topico}	&nbsp;&nbsp;&nbsp; O valor global acumulado do contrato passa de R$ ${ tm_vl_global! } (${ tm_vl_global_ext! }), para R$ ${ tm_vl_repact_global! } (${ tm_vl_repact_global_ext! }), já incluído o valor do Adicional I [#if tm_vl_adicional_II??] e do Adicional II [/#if]</p>
+
+            [#assign tm_ctd_topico = tm_ctd_topico + 1 /]
+			<p>2.${tm_ctd_topico} &nbsp;&nbsp;&nbsp; O cronograma anual de desembolso estimado deste contrato, incluindo o presente aditamento, 		para o exercício corrente e subsequente (s), é:</p>
+			<p style="padding-left: 60px">
+                Exercício de ${ tm_ano_desembolso! }: R$ ${ tm_vl_desembolso! } (${ tm_vl_desembolso_extenso! })<br>
+                Exercício de ${ tm_ano_desembolso_sub! } : R$ ${ tm_vl_desembolso_sub! } (${ tm_vl_desembolso_sub_extenso! })</p>
+
+            [#assign tm_ctd_topico = tm_ctd_topico + 1 /]
+			<p>2.${tm_ctd_topico} &nbsp;&nbsp;&nbsp; Tem-se como fonte de recurso, para atender o presente Aditamento, o código orçamentário 			de n.  ${ tm_cd_orcamentario! }.</p>
+
+
+			<h4>CLÁUSULA TERCEIRA </h4>
+			<p>3.1 &nbsp;&nbsp;&nbsp; A CONTRATADA deverá apresentar no prazo de até 15 dias consecutivos, após a assinatura 	deste Termo Aditivo, garantia complementar de execução de contrato no valor de R$ ${ tm_vl_garantia! } (${ tm_vl_garantia_extenso! }), orrespondente a 5% do valor deste aditamento, conforme subitem ${ tm_subitem_garantia! } do Termo 	Contratual.</p>
+
+            [#if tm_existe_clausula_multa!="Sim"]
+			<p>3.2. &nbsp;&nbsp;&nbsp; A inobservância do prazo fixado para apresentação da garantia, na situação prevista no subitem 	precedente, acarretará a aplicação de multa de 0,1% (um décimo por cento) do valor do contrato 	por dia de atraso, limitado até o máximo de 2,5% (dois e meio por cento), conforme fórmula 	abaixo:</p>
+
+			<p style="padding-left: 30px">M = VC x 0,1% x T <br>
+                Sendo: <br>
+                M = Valor da Multa por descumprimento de apresentação das garantias;<br>
+                VC = Valor do contrato;<br>
+                T = Tempo em dias</p>
+
+			<p>3.2.1 &nbsp;&nbsp;&nbsp; O atraso superior a 15 (quinze) dias autoriza a Administração a promover a rescisão 			do contrato, por descumprimento ou cumprimento irregular das cláusulas deste 			contrato, conforme dispõem os incisos I e II do art. 78 da Lei n. 8.666/93.</p>
+            [/#if]
+
+			<h4>CLÁUSULA QUARTA</h4>
+			<p>4.1. &nbsp;&nbsp;&nbsp; Conceder, a título de indenização por ocasião da repactuação de preços, a diferença entre o 				valor pago e o repactuado, no período de ${ tm_dt_inicio_indenizacao! } até a data de assinatura deste Termo Aditivo.</p>
+			<p>4.2. &nbsp;&nbsp;&nbsp; A indenização de repactuação deverá ser paga de forma proporcional aos serviços efetivamente 	executados.</p>
+
+			<h4>CLÁUSULA QUINTA</h4>
+			<table border=0 cellspacing=0 cellpadding=0 width="100%">
+                <td width="50px" style="vertical-align: top;">4.1</td>
+                <td style="vertical-align: top; text-align: justify">${subitem_clausula5!}</td>
+            </table>
+
+			<h4>CLÁUSULA SEXTA</h4>
+			<p>6.1 &nbsp;&nbsp;&nbsp; Ficam ratificadas as demais condições ajustadas no Termo de Contrato, no que não colidirem 	com os termos do presente Instrumento.</p>
+			<p>Por estarem as partes justas e acordadas, lavram e assinam este Termo Aditivo em 02 (duas) 	vias de igual teor e forma, na presença de duas testemunhas, para que produza seus efeitos 	jurídicos.
+            </p>
+			<p>As folhas do presente Instrumento são rubricadas por ${ tm_adv_infraero! } (a), advogado 	da INFRAERO, por autorização do Presidente desta.
+            </p>
+
+			<p>&nbsp;</p>
+        [/@mioloDJE]
+    [/@estiloBrasaoAEsquerda]
+        </br>
+        <div style="page-break-before: always;">
+            <br><br><br><br><br><br>
+            <table border=0 width="100%">
+                <tr>
+                    <td style="border-top: solid 1px #000; text-align:center"><br><p>CONTRATADA</p>${ tm_representante_empresa! }</td>
+                </tr>
+            </table>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <table border=0 width="100%">
+                <tr>
+                    <td width="40%" style="border-top: solid 1px #000; text-align:center"><br><p>TESTEMUNHA</p>${ tm_testemunha1! }</td>
+                    <td width="20%"></td>
+                    <td width="40%" style="border-top: solid 1px #000; text-align:center"><br><p>TESTEMUNHA</p>${ tm_testemunha2! }</td>
+                </tr>
+            </table>
+        </div>
+	</div>
+[/@documento]
