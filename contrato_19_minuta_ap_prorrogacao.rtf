@@ -21,33 +21,13 @@
     [#assign _cargo_dest=_autoridade.cargo /]
     [#assign _orgao_dest=_autoridade.orgao /]
     [#assign _endereco_dest=_autoridade.endereco /]
-        <br/><br/>
+    <br/><br/>
 [/#if]
 
 [@entrevista]
-    [@grupo titulo="Dados do destinatário" esconder=(_enderecamento_dest!="" && _nome_dest!="" && _cargo_dest!="" && _orgao_dest!="" && _endereco_dest!="")]
-                <!-- Tratamento -->
-        [#if _enderecamento_dest != ""]
-            [@oculto var="enderecamento_dest" valor=_enderecamento_dest /]
-        [#else]
-            [#if tratamento??]
-                [@grupo]
-                    [@checkbox titulo="Especificar manualmente a forma de endereçamento" var="especificarEnderecamento" reler=true /]
-                [/@grupo]
-            [/#if]
-            [#if !tratamento?? || (especificarEnderecamento?? && especificarEnderecamento == 'Sim')]
-                [@grupo]
-                    [@texto titulo="Forma de endereçamento" var="enderecamento_dest" largura="45" /]
-                [/@grupo]
-            [#else]
-                [@oculto var="enderecamento_dest" valor="${(tratamento.formaDeEnderecamento)!}" /]
-            [/#if]
-        [/#if]
-
-    [/@grupo]
     [@grupo titulo = "Dados Gerais"]
         [@grupo]
-            [@numero titulo="Número termo apostilamento" var="numero_termpo" /]
+            [@texto titulo="Número termo apostilamento" var="numero_termpo" largura=30 /]
         [/@grupo]
         [@grupo]
             [@texto titulo="Ordem do Termo (Primeiro/Seguro/outro)" var="termo_ordem" largura=50 /]
@@ -62,6 +42,7 @@
     [@grupo titulo = "Dados Infraero"]
         [@grupo]
             [@texto titulo="Nome da Dependência" var="nome_dependencia" largura=50 /]
+            [@texto titulo="UF" var="nome_uf" largura=50 /]
         [/@grupo]
         [@grupo]
             [@texto titulo="Cidade do local" var="cidade_dependencia" largura=50 /]
@@ -98,9 +79,6 @@
             [@texto titulo="Valor Apostilamento" var="valor_apostilamento" largura=50 /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Adicional Contrato" var="adicional_contrato" largura=50 /]
-        [/@grupo]
-        [@grupo]
             [@texto titulo="Valor aviso prévio" var="valor_aviso_previo" largura=50 /]
         [/@grupo]
         [@grupo]
@@ -111,9 +89,6 @@
         [/@grupo]
         [@grupo]
             [@texto titulo="Valor exercício 1" var="valor_exercicio_1" largura=50 /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Valor exercício 2" var="valor_exercicio_2" largura=50 /]
         [/@grupo]
         [@grupo]
             [@texto titulo="Código orçamentário" var="codigo_orcamentario" largura=50 /]
@@ -130,26 +105,18 @@
             [@selecao titulo="Possui cláusula multas" var="possui_clausula_multa" opcoes="Sim;Não" reler=true /]
         [/@grupo]
     [/@grupo]
+    [@grupo titulo = "Cláusula Quarta"]
+        [@grupo]
+            [@editor titulo="Fundamentação Legal" var="subitem_clausula4" /]
+        [/@grupo]
+    [/@grupo]
     [@grupo titulo = "Cláusula Quinta"]
         [@grupo]
             [@texto titulo="Subitem do Termo Contrato" var="subitem_termo_contrato" largura=50 /]
         [/@grupo]
     [/@grupo]
-    [@grupo titulo = "Assinatura"]
-        [@grupo]
-            [@texto titulo="Cidade" var="assinatura_cidade" largura=50 /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Dia" var="assinatura_dia" largura=50 /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Mês" var="assinatura_mes" largura=50 /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Ano" var="assinatura_ano" largura=50 /]
-        [/@grupo]
-    [/@grupo]
 
+    </br>
     [#if _tamanho_letra != ""]
         [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
     [#else]
@@ -157,9 +124,9 @@
     [/#if]
 [/@entrevista]
 
-[@documento margemDireita="3cm" capa=true]
+[@documento ]
     [#if tamanhoLetra! == "Normal"]
-        [#assign tl = "10pt" /]
+        [#assign tl = "12pt" /]
     [#elseif tamanhoLetra! == "Pequeno"]
         [#assign tl = "9pt" /]
     [#elseif tamanhoLetra! == "Grande"]
@@ -172,6 +139,35 @@
         [#assign virgula ="," /]
     [/#if]
 
+    [#if valor_aviso_previo??]
+        [#assign valor_aviso_previo_extenso = func.reaisPorExtenso(valor_aviso_previo)/]
+    [#else]
+        [#assign valor_aviso_previo_extenso = ""/]
+    [/#if]
+
+    [#if valor_global_contrato_antigo??]
+        [#assign valor_global_contrato_antigo_extenso = func.reaisPorExtenso(valor_global_contrato_antigo)/]
+    [#else]
+        [#assign valor_global_contrato_antigo_extenso = ""/]
+    [/#if]
+
+    [#if valor_global_contrato_novo??]
+        [#assign valor_global_contrato_novo_extenso = func.reaisPorExtenso(valor_global_contrato_novo)/]
+    [#else]
+        [#assign valor_global_contrato_novo_extenso = ""/]
+    [/#if]
+
+    [#if valor_apostilamento??]
+        [#assign valor_apostilamento_extenso = func.reaisPorExtenso(valor_apostilamento)/]
+    [#else]
+        [#assign valor_apostilamento_extenso = ""/]
+    [/#if]
+
+    [#if valor_exercicio_1??]
+        [#assign valor_exercicio_1_extenso = func.reaisPorExtenso(valor_exercicio_1)/]
+    [#else]
+        [#assign valor_exercicio_1_extenso = "" /]
+    [/#if]
 
     [#if _tiposigilo! == "1"]
         [#assign _reservado = true /]
@@ -181,43 +177,11 @@
         [#assign _secreto = true /]
     [/#if]
 
-    [@estiloBrasaoAEsquerda tipo=_tipo tamanhoLetra=tl formatarOrgao=true omitirCodigo=true]
-             <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
-                 <tr>
-                     <td align="left">
-                         <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0">
-                             <tr>
-                                 <td>[@letra tamanho=tl]<p>${enderecamento_dest!}</p>[/@letra]</td>
-                             </tr>
-                             <tr>
-                                 <td>[@letra tamanho=tl]<p>${nome_dest!}</p>[/@letra]</td>
-                             </tr>
-                            [#if cargo_dest??]
-                                <tr>
-                                    <td>[@letra tamanho=tl]<p>${cargo_dest!}</p>[/@letra]</td>
-                                </tr>
-                            [/#if]
-                         [#-- COMENTARIO
-                         [#if orgao_dest??]
-                             <tr><td>[@letra tamanho=tl]<p>${orgao_dest!}</p>[/@letra]</td></tr>
-                         [/#if]
-                         --]
-                            [#if endereco_dest??]
-                                <tr>
-                                    <td>[@letra tamanho=tl]<p>[@fixcrlf var=endereco_dest! /]</p>[/@letra]</td>
-                                </tr>
-                            [/#if]
-                         [#-- COMENTARIO
-                         [#if (doc.exClassificacao.descrClassificacao)??]
-                             <tr><td>[@letra tamanho=tl]<p><br/>Assunto: ${(doc.exClassificacao.descrClassificacao)!}</p>[/@letra]</td></tr>
-                         [/#if]
-                         --]
-                         </table>
-                     </td>
-                 </tr>
-             </table>
+[#--[#assign qqcoisa = doc.getDtYYYY()?string/]--]
+
+    [@estiloBrasaoAEsquerda tipo=_tipo exibeData=false tamanhoLetra=tl formatarOrgao=true omitirCodigo=true]
         [@mioloDJE]
-                <div style="font-family: Times New Roman; font-size: 12pt;">
+            <div style="font-family: Times New Roman; font-size: 12pt;">
                 [@corpoBIE]
 
                     <!-- INICIO - Tagmeta -->
@@ -235,22 +199,13 @@
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
-                    <p>&nbsp;</p>
                     <p>&nbsp;&nbsp;</p>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <div style="width: 250px; float: right; text-align: center">
-                        <p><u><b>TERMO DE APOSTILAMENTO N. </b></u></p>
-                        <p>${numero_termpo!}</p>
-                        <p>&nbsp;</p>
+                    <div style="width: 260px; float: right; text-align:justify">
+                        <u><b>TERMO DE APOSTILAMENTO N. </b></u>
+                        ${numero_termpo!}
                         <p>${termo_ordem!} TERMO DE APOSTILAMENTO AO TERMO DE CONTRATO N. ${numero_contrato!}, FIRMADO ENTRE A EMPRESA BRASILEIRA DE INFRAESTRUTURA AEROPORTU&Aacute;RIA - <strong>INFRAERO</strong>
                             E A EMPRESA ${empresa_contratada!}, NA FORMA A SEGUIR:</p>
                     </div>
@@ -258,119 +213,70 @@
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
+                    <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
                     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                    <div style="width: 250px; float: right;">
-                        <p>TERMO DE APOSTILAMENTO</p>
-                        <p>&nbsp;</p>
-                        <p><strong>${termo_ordem!} TERMO DE APOSTILAMENTO AO
-                            TERMO DE CONTRATO N. ${numero_contrato!}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;, FIRMADO ENTRE A EMPRESA BRASILEIRA DE INFRAESTRUTURA AEROPORTU&Aacute;RIA - INFRAERO E A EMPRESA
-                            ${empresa_contratada!}. &nbsp;</strong></p>
-                        <p>&nbsp;</p>
-                    </div>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        A<strong> EMPRESA BRASILEIRA DE INFRAESTRUTURA AEROPORTU&Aacute;RIA - INFRAERO</strong>, Empresa P&uacute;blica
-                        Federal, criada nos termos da Lei n. 5.862, de 12 de dezembro de 1972, CNPJ/MF n. 00.352.294/0001-10, com Sede em
+                        A<strong> EMPRESA BRASILEIRA DE INFRAESTRUTURA AEROPORTUÁRIA - INFRAERO</strong>, Empresa Pública Federal, criada nos termos da Lei n. 5.862, de 12 de dezembro de 1972, CNPJ/MF n. 00.352.294/0001-10, com Sede em
                         Bras&iacute;lia-DF, na Estrada do Aeroporto, Setor de Concession&aacute;rias e Locadoras, Lote 5 &ndash; Edif&iacute;cio
-                        Sede, CEP 71608-050 &ndash; Bras&iacute;lia &ndash; DF &ndash; Brasil, e depend&ecirc;ncia aeroportu&aacute;ria no
+                        Sede, CEP 71608-050 &ndash; Bras&iacute;lia &ndash; DF &ndash; Brasil, e dependência no
                         <strong>${nome_dependencia!}</strong>, em <strong>${cidade_dependencia!}</strong> Cidade/Estado, CNPJ N.
                         <strong>${cnpj!}</strong>, neste ato representada pelo seu <strong>${cargo_representante!}</strong>, <strong>${nome_representante!} </strong>, portador da matr&iacute;cula n.
                         <strong>${matricula_representante!}</strong>, registra por meio deste Termo de Apostilamento as cl&aacute;usulas e condi&ccedil;&otilde;es
                         seguintes:</p>
-                    <p>&nbsp;</p>
+                    </br>
                     <p><strong>CL&Aacute;USULA PRIMEIRA </strong></p>
-                    <p><strong>&nbsp;</strong></p>
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
                         <td width="50px" style="vertical-align: top;">1.1</td>
                         <td style="vertical-align: top; text-align: justify">Nos termos da cl&aacute;usula <strong>${clausula!}</strong> do Termo Contratual supracitado, o objeto do presente
-                            apostilamento &eacute; a prorroga&ccedil;&atilde;o
-                            do seu prazo de vig&ecirc;ncia por mais <strong>${prazo_prorrogacao!}</strong>
+                            apostilamento &eacute; a prorroga&ccedil;&atilde;o do seu prazo de vig&ecirc;ncia por mais <strong>${prazo_prorrogacao!}</strong>
                             meses com in&iacute;cio em ${inicio_prorrogacao!} e t&eacute;rmino previsto para ${fim_prorrogacao!}.</td>
                     </table>
-                    <p>&nbsp;</p>
+                    </br>
                     <p><strong>CL&Aacute;USULA SEGUNDA </strong></p>
-                    <p><strong><em>&nbsp;</em></strong></p>
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
                         <td width="50px" style="vertical-align: top;">2.1</td>
                         <td style="vertical-align: top; text-align: justify">Em decorr&ecirc;ncia da prorroga&ccedil;&atilde;o de prazo de que trata a cl&aacute;usula anterior, o valor
-                            total do presente apostilamento &eacute; de <strong>${valor_apostilamento!} </strong></td>.
+                            total do presente apostilamento &eacute; de R$ <strong>${valor_apostilamento!} (${valor_apostilamento_extenso!})</strong></td>.
                     </table>
-                    <p>&nbsp;</p>
+                    </br>
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
                         <td width="50px" style="vertical-align: top;">2.2</td>
-                        <td style="vertical-align: top; text-align: justify">O valor do Aviso Prévio de Final de Contrato permanece inalterado na ordem de R$ <strong>${adicional_contrato!}</strong>.</td>
+                        <td style="vertical-align: top; text-align: justify">O valor do Aviso Prévio de Final de Contrato permanece inalterado na ordem de R$ <strong>${valor_aviso_previo!} (${valor_aviso_previo_extenso!})</strong>.</td>
                     </table>
-                    <p>&nbsp;</p>
+                    </br>
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
                         <td width="50px" style="vertical-align: top;">2.3</td>
-                        <td style="vertical-align: top; text-align: justify">O valor global acumulado do contrato passa de R$ <strong>${valor_global_contrato_antigo!} </strong>, para R$
-                            <strong>${valor_global_contrato_novo!}</strong>, j&aacute; inclu&iacute;do o valor do Adicional I ${adicional_contrato!}.</td>
+                        <td style="vertical-align: top; text-align: justify">O valor global acumulado do contrato passa de R$ <strong>${valor_global_contrato_antigo!} (${valor_global_contrato_antigo_extenso!})</strong>, para R$
+                            <strong>${valor_global_contrato_novo!} (${valor_global_contrato_novo_extenso!})</strong>.</td>
                     </table>
-                    <p>&nbsp;</p>
+                    </br>
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
                         <td width="50px" style="vertical-align: top;">2.4</td>
-                        <td style="vertical-align: top; text-align: justify">O cronograma anual de desembolso estimado deste contrato, incluindo o presente apostilamento, para o exerc&iacute;cio
-                            corrente e subsequente (s), &eacute;:
-                            <p>&nbsp;</p>
-                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Exerc&iacute;cio de
-                                <strong>${valor_exercicio_1!} </strong></p>
-                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Exerc&iacute;cio de
-                                <strong>${valor_exercicio_2!}</strong></p></td>
+                        <td style="vertical-align: top; text-align: justify">O cronograma anual de desembolso estimado deste contrato, incluindo o presente apostilamento, para o exerc&iacute;cio corrente e subsequente (s), &eacute;:
+                            </br>
+                            Exercício de 2019 <strong>${valor_exercicio_1!} (${valor_exercicio_1_extenso!})</strong></br>
                     </table>
-                    <p>&nbsp;</p>
+                    </br>
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
                         <td width="50px" style="vertical-align: top;">2.5</td>
-                        <td style="vertical-align: top; text-align: justify">Tem-se como fonte de recurso, para atender o presente Apostilamento, o c&oacute;digo or&ccedil;ament&aacute;rio
-                            de n.<strong> ${codigo_orcamentario!}</strong>.</td>
+                        <td style="vertical-align: top; text-align: justify">Tem-se como fonte de recurso, para atender o presente Apostilamento, o c&oacute;digo or&ccedil;ament&aacute;rio de n.<strong> ${codigo_orcamentario!}</strong>.</td>
                     </table>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
+                    </br>
                     <h4>CL&Aacute;USULA TERCEIRA</h4>
-                    <p>&nbsp;</p>
+                    </br>
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
                         <td width="50px" style="vertical-align: top;">3.1</td>
-                        <td style="vertical-align: top; text-align: justify">A CONTRATADA dever&aacute; apresentar, no ato da assinatura deste
-                            Termo de Apostilamento, garantia
-                            complementar de execu&ccedil;&atilde;o de contrato no valor de <strong>${valor_garantia!} </strong>,
-                            correspondente a 5% do valor deste aditamento, conforme subitem <strong>${termo_subitem!} </strong> do Termo
-                            Contratual.</td>
+                        <td style="vertical-align: top; text-align: justify"> A Contratada deverá apresentar, no prazo de 15 (quinze) dias consecutivos, após a assinatura deste Termo Aditivo, garantia complementar de execução de contrato, no valor de <strong>${valor_garantia!} </strong>,
+                            correspondente a 5% (cinco por cento) do valor deste Apostilamento.</td>
                     </table>
-                    [#if adicional_contrato??]
-                        <p>&nbsp;</p>
-                        <table border=0 cellspacing=0 cellpadding=0 width="100%">
-                            <td width="50px"></td>
-                            <td width="50px" style="vertical-align: top;">3.1.1</td>
-                            <td style="vertical-align: top; text-align: justify">Considerando
-                                a prorroga&ccedil;&atilde;o de prazo de que trata a cl&aacute;usula primeira e a n&atilde;o utiliza&ccedil;&atilde;o tanto do Aviso Pr&eacute;vio
-                                Final de Contrato, quanto do Adicional II na vig&ecirc;ncia anterior, o valor referente aos mencionados adicionais dever&atilde;o compor a base de c&aacute;lculo
-                                da garantia de execu&ccedil;&atilde;o de contrato.</td>
-                        </table>
-                        <p>&nbsp;</p>
-                    [#else]
-                        <table border=0 cellspacing=0 cellpadding=0 width="100%">
-                            <td width="50px"></td>
-                            <td width="50px" style="vertical-align: top;">3.1.1</td>
-                            <td style="vertical-align: top; text-align: justify">Considerando a prorroga&ccedil;&atilde;o de prazo de que trata a cl&aacute;usula primeira e a n&atilde;o utiliza&ccedil;&atilde;o
-                                do Aviso Pr&eacute;vio
-                                Final de Contrato na vig&ecirc;ncia anterior, o valor referente ao mencionado adicional dever&aacute;
-                                compor a base de c&aacute;lculo da garantia de execu&ccedil;&atilde;o de contrato.</td>
-                        </table>
-                        <p>&nbsp;</p>
-                    [/#if]
+                    </br>
+                    <table border=0 cellspacing=0 cellpadding=0 width="100%">
+                        <td width="50px"></td>
+                        <td width="50px" style="vertical-align: top;">3.1.1</td>
+                        <td style="vertical-align: top; text-align: justify">Considerando a prorrogação de prazo de que trata a cláusula primeira e a não utilização do Aviso Prévio Final de Contrato (ADI) e do ADII na vigência anterior, se houver. O valor referente aos mencionados adicionais deverão compor a base de cálculo da garantia de execução de contrato.</td>
+                    </table>
+                    </br>
                     [#if possui_clausula_multa?? && possui_clausula_multa == "Sim"]
                         <table border=0 cellspacing=0 cellpadding=0 width="100%">
                             <td width="50px" style="vertical-align: top;">3.2</td>
@@ -378,71 +284,52 @@
                                 da garantia, na situa&ccedil;&atilde;o prevista no subitem
                                 precedente, acarretar&aacute; a aplica&ccedil;&atilde;o de multa de 0,1% (um d&eacute;cimo por cento) do valor do
                                 contrato por dia de atraso, limitado
-                                at&eacute; o m&aacute;ximo de 2,5% (dois e meio por cento), conforme f&oacute;rmula
-                                abaixo:</p>
-                                <p>&nbsp;</p>
+                                at&eacute; o m&aacute;ximo de 2,5% (dois e meio por cento), conforme f&oacute;rmula abaixo:</p>
                                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; M = V<sub>C</sub> x 0,1% x T</p>
-                                <p>&nbsp;</p>
                                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sendo:</p>
-                                <p>&nbsp;</p>
-                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; M = Valor da Multa por descumprimento de apresenta&ccedil;&atilde;o
-                                    das garantias;</p>
+                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; M = Valor da Multa por descumprimento de apresenta&ccedil;&atilde;o das garantias;</p>
                                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; V<sub>C </sub>= Valor do contrato;</p>
                                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; T = Tempo em dias</p>
-                                <p>&nbsp;</p>
                                 <table border=0 cellspacing=0 cellpadding=0 width="100%">
                                     <td width="50px" style="vertical-align: top;">3.2.1</td>
-                                    <td style="vertical-align: top; text-align: justify">O
-                                        atraso superior a 15 (quinze) dias autoriza a Administra&ccedil;&atilde;o a promover a rescis&atilde;o
-                                        do contrato, por descumprimento ou cumprimento irregular das cl&aacute;usulas deste contrato, conforme disp&otilde;em os
-                                        incisos I e II do art. 78 da Lei n. 8.666/93.</td>
+                                    <td style="vertical-align: top; text-align: justify">O atraso superior a 15 (quinze) dias autoriza a Administra&ccedil;&atilde;o a promover a rescis&atilde;o
+                                        do contrato, por descumprimento ou cumprimento irregular das cl&aacute;usulas deste contrato, conforme disp&otilde;em os incisos I e II do art. 78 da Lei n. 8.666/93.</td>
                                 </table>
                             </td>
                         </table>
-                        <p>&nbsp;</p>
+                        </br>
                     [/#if]
                     <p><strong>CL&Aacute;USULA QUARTA</strong></p>
-                    <p><strong>&nbsp;</strong></p>
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
                         <td width="50px" style="vertical-align: top;">4.1</td>
-                        <td style="vertical-align: top; text-align: justify">Este Instrumento tem respaldo legal no inciso II, do art. 57, da Lei 8.666,
-                            de 21 de junho de
-                            1993, combinado com o artigo 65 do Regulamento Interno de Licita&ccedil;&otilde;es e Contratos da INFRAERO &ndash; RILC.</td>
+                        <td style="vertical-align: top; text-align: justify">${subitem_clausula4!}</td>
                     </table>
-                    <p>&nbsp;</p>
+                    </br>
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
                         <td width="50px" style="vertical-align: top;">4.2</td>
                         <td style="vertical-align: top; text-align: justify">A contratada d&aacute; plena e rasa quita&ccedil;&atilde;o de todo e
                             qualquer d&eacute;bito referente ao contrato ora
                             prorrogado.</td>
                     </table>
-                    <p>&nbsp;</p>
+                    </br>
                     <p><strong>CL&Aacute;USULA QUINTA</strong></p>
-                    <p><strong>&nbsp;</strong></p>
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
                         <td width="50px" style="vertical-align: top;">5.1</td>
                         <td style="vertical-align: top; text-align: justify">Fica resguardado, &agrave; contratante, o direito &agrave; an&aacute;lise
                             do pedido de repactua&ccedil;&atilde;o, com base no subitem <strong>${subitem_termo_contrato!}</strong> do Termo de Contrato.</td>
                     </table>
-                    <p>&nbsp;</p>
+                    </br>
                     <p><strong>CL&Aacute;USULA SEXTA</strong></p>
-                    <p><strong>&nbsp;</strong></p>
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
                         <td width="50px" style="vertical-align: top;">6.1</td>
-                        <td style="vertical-align: top; text-align: justify">O presente apostilamento n&atilde;o altera as demais condi&ccedil;&otilde;es
-                            contratuais pactuadas.</td>
+                        <td style="vertical-align: top; text-align: justify">O presente apostilamento n&atilde;o altera as demais condi&ccedil;&otilde;es contratuais pactuadas.</td>
                     </table>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p style="text-align: right;"><strong>${assinatura_cidade!} </strong>, <strong>${assinatura_dia!}</strong> de <strong>${assinatura_mes!}</strong> de 20 <strong>${assinatura_ano!}</strong>.</p>
-                    <p>&nbsp;</p>
 
                 [/@corpoBIE]
                 [#if fecho??]<p
                         style="font-size: ${tl}; TEXT-INDENT: 2.5cm">[@fechoBIE]${fecho!}${virgula!}[/@fechoBIE][/#if]</p>
 
-                </div>
+            </div>
         [/@mioloDJE]
     [/@estiloBrasaoAEsquerda]
 
