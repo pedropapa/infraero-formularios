@@ -88,7 +88,14 @@
             [@texto titulo="Valor global contrato novo" var="valor_global_contrato_novo" largura=50 /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Valor exercício 1" var="valor_exercicio_1" largura=50 /]
+            [@grupo]
+                [@texto titulo="Ano desembolso no exercício corrente" var="tm_ano_desembolso" largura="4" /]
+                [@texto titulo="Valor desembolso no exercício corrente" var="tm_vl_desembolso" largura="20" /]
+            [/@grupo]
+            [@grupo]
+                [@texto titulo="Ano desembolso no exercício subsequente" var="tm_ano_desembolso_sub" largura="4" /]
+                [@texto titulo="Valor desembolso no exercício subsequente" var="tm_vl_desembolso_sub" largura="20" /]
+            [/@grupo]
         [/@grupo]
         [@grupo]
             [@texto titulo="Código orçamentário" var="codigo_orcamentario" largura=50 /]
@@ -97,9 +104,6 @@
     [@grupo titulo = "Cláusula Terceira"]
         [@grupo]
             [@texto titulo="Valor garantia" var="valor_garantia" largura=50 /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Subitem do Termo Contratual" var="termo_subitem" largura=50 /]
         [/@grupo]
         [@grupo]
             [@selecao titulo="Possui cláusula multas" var="possui_clausula_multa" opcoes="Sim;Não" reler=true /]
@@ -112,7 +116,7 @@
     [/@grupo]
     [@grupo titulo = "Cláusula Quinta"]
         [@grupo]
-            [@texto titulo="Subitem do Termo Contrato" var="subitem_termo_contrato" largura=50 /]
+            [@texto titulo="N° do subitem do TC referente ao direito de resguardar a Repactuação" var="subitem_termo_contrato" largura=50 /]
         [/@grupo]
     [/@grupo]
 
@@ -163,10 +167,22 @@
         [#assign valor_apostilamento_extenso = ""/]
     [/#if]
 
-    [#if valor_exercicio_1??]
-        [#assign valor_exercicio_1_extenso = func.reaisPorExtenso(valor_exercicio_1)/]
+    [#if tm_vl_desembolso??]
+        [#assign tm_vl_desembolso_extenso = func.reaisPorExtenso(tm_vl_desembolso)/]
     [#else]
-        [#assign valor_exercicio_1_extenso = "" /]
+        [#assign tm_vl_desembolso_extenso = "" /]
+    [/#if]
+
+    [#if tm_vl_desembolso_sub??]
+        [#assign tm_vl_desembolso_sub_extenso = func.reaisPorExtenso(tm_vl_desembolso_sub)/]
+    [#else]
+        [#assign tm_vl_desembolso_sub_extenso = "" /]
+    [/#if]
+
+    [#if prazo_prorrogacao??]
+        [#assign prazo_prorrogacao_extenso = func.replace(func.reaisPorExtenso(prazo_prorrogacao), ' reais', '')/]
+    [#else]
+        [#assign prazo_prorrogacao_extenso = "" /]
     [/#if]
 
     [#if _tiposigilo! == "1"]
@@ -219,8 +235,8 @@
                     <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         A<strong> EMPRESA BRASILEIRA DE INFRAESTRUTURA AEROPORTUÁRIA - INFRAERO</strong>, Empresa Pública Federal, criada nos termos da Lei n. 5.862, de 12 de dezembro de 1972, CNPJ/MF n. 00.352.294/0001-10, com Sede em
                         Bras&iacute;lia-DF, na Estrada do Aeroporto, Setor de Concession&aacute;rias e Locadoras, Lote 5 &ndash; Edif&iacute;cio
-                        Sede, CEP 71608-050 &ndash; Bras&iacute;lia &ndash; DF &ndash; Brasil, e dependência no
-                        <strong>${nome_dependencia!}</strong>, em <strong>${cidade_dependencia!}</strong> Cidade/Estado, CNPJ N.
+                        Sede, CEP 71608-050, e dependência no
+                        <strong>${nome_dependencia!}</strong>, em <strong>${cidade_dependencia!}-${nome_uf!}</strong>, CNPJ N.
                         <strong>${cnpj!}</strong>, neste ato representada pelo seu <strong>${cargo_representante!}</strong>, <strong>${nome_representante!} </strong>, portador da matr&iacute;cula n.
                         <strong>${matricula_representante!}</strong>, registra por meio deste Termo de Apostilamento as cl&aacute;usulas e condi&ccedil;&otilde;es
                         seguintes:</p>
@@ -229,7 +245,7 @@
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
                         <td width="50px" style="vertical-align: top;">1.1</td>
                         <td style="vertical-align: top; text-align: justify">Nos termos da cl&aacute;usula <strong>${clausula!}</strong> do Termo Contratual supracitado, o objeto do presente
-                            apostilamento &eacute; a prorroga&ccedil;&atilde;o do seu prazo de vig&ecirc;ncia por mais <strong>${prazo_prorrogacao!}</strong>
+                            apostilamento &eacute; a prorroga&ccedil;&atilde;o do seu prazo de vig&ecirc;ncia por mais <strong>${prazo_prorrogacao!} (${prazo_prorrogacao_extenso!})</strong>
                             meses com in&iacute;cio em ${inicio_prorrogacao!} e t&eacute;rmino previsto para ${fim_prorrogacao!}.</td>
                     </table>
                     </br>
@@ -254,8 +270,10 @@
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
                         <td width="50px" style="vertical-align: top;">2.4</td>
                         <td style="vertical-align: top; text-align: justify">O cronograma anual de desembolso estimado deste contrato, incluindo o presente apostilamento, para o exerc&iacute;cio corrente e subsequente (s), &eacute;:
-                            </br>
-                            Exercício de 2019 <strong>${valor_exercicio_1!} (${valor_exercicio_1_extenso!})</strong></br>
+                            <p>
+                                [#if tm_ano_desembolso??]Exercício de ${ tm_ano_desembolso! }: R$ ${ tm_vl_desembolso! } (${ tm_vl_desembolso_extenso! })<br>[/#if]
+                                [#if tm_ano_desembolso_sub??]Exercício de ${ tm_ano_desembolso_sub! }: R$ ${ tm_vl_desembolso_sub! } (${ tm_vl_desembolso_sub_extenso! })[/#if]
+                            </p>
                     </table>
                     </br>
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
@@ -312,14 +330,16 @@
                             prorrogado.</td>
                     </table>
                     </br>
-                    <p><strong>CL&Aacute;USULA QUINTA</strong></p>
-                    <table border=0 cellspacing=0 cellpadding=0 width="100%">
-                        <td width="50px" style="vertical-align: top;">5.1</td>
-                        <td style="vertical-align: top; text-align: justify">Fica resguardado, &agrave; contratante, o direito &agrave; an&aacute;lise
-                            do pedido de repactua&ccedil;&atilde;o, com base no subitem <strong>${subitem_termo_contrato!}</strong> do Termo de Contrato.</td>
-                    </table>
-                    </br>
-                    <p><strong>CL&Aacute;USULA SEXTA</strong></p>
+                    [#if subitem_termo_contrato??]
+                        <p><strong>CL&Aacute;USULA QUINTA</strong></p>
+                        <table border=0 cellspacing=0 cellpadding=0 width="100%">
+                            <td width="50px" style="vertical-align: top;">5.1</td>
+                            <td style="vertical-align: top; text-align: justify">Fica resguardado, &agrave; contratante, o direito &agrave; an&aacute;lise
+                                do pedido de repactua&ccedil;&atilde;o, com base no subitem <strong>${subitem_termo_contrato!}</strong> do Termo de Contrato.</td>
+                        </table>
+                        </br>
+                    [/#if]
+                    <p><strong>[#if subitem_termo_contrato??]CL&Aacute;USULA SEXTA[#else]CL&Aacute;USULA QUINTA[/#if]</strong></p>
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
                         <td width="50px" style="vertical-align: top;">6.1</td>
                         <td style="vertical-align: top; text-align: justify">O presente apostilamento n&atilde;o altera as demais condi&ccedil;&otilde;es contratuais pactuadas.</td>

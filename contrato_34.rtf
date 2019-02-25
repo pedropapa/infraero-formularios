@@ -1,0 +1,252 @@
+[#assign _tipo="Formulário"  /]
+
+[@entrevista]
+    [@grupo titulo="Informações do contrato"]
+        [@grupo][@texto titulo="Termo aditivo n." var="tm_nr_termo" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Nr. contrato" var="tm_nr_contrato" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Sequencial do aditamento" var="tm_sequencial" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Fundamentação contratual para prorrogação" var="tm_nr_clausula" largura="20" /][/@grupo]
+    [/@grupo]
+    [@grupo titulo="Informações da INFRAERO"]
+        [@grupo][@texto titulo="Nome da dependência" var="tm_no_dependencia" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="Cidade/Estado" var="tm_cidade_uf" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="CNPJ" var="tm_nr_cnpj" largura="19" /][/@grupo]
+        [@grupo][@texto titulo="Cargo do representante da Infraero" var="tm_cargo_rep_infraero" largura="60" /][/@grupo]
+        [@grupo][@texto titulo="Nome do representante da INFRAERO" var="tm_no_rep_infraero" largura="80" /][/@grupo]
+        [@grupo][@texto titulo="C.I. representante INFRAERO" var="tm_ci_rep_infraero" largura="80" /][/@grupo]
+        [@grupo][@texto titulo="UF C.I. do representante INFRAERO" var="tm_uf_ci_rep_infraero" largura="80" /][/@grupo]
+        [@grupo][@texto titulo="Orgão emitende da C.I. representante INFRAERO" var="tm_ci_rep_infraero" largura="50" /][/@grupo]
+        [@grupo][@texto titulo="CPF representante INFRAERO" var="tm_cpf_rep_infraero" largura="15" /][/@grupo]
+    [/@grupo]
+    [@grupo titulo="Informações da empresa CONTRATADA"]
+        [@grupo][@texto titulo="Nome da empresa contratada" var="tm_no_empresa" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="CNPJ/MF da empresa contratada" var="tm_cnpj_empresa" largura="19" /][/@grupo]
+        [@grupo][@texto titulo="Endereço da empresa contratada" var="tm_endereco_empresa" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="Cidade/estado da empresa contratada" var="tm_cidade_uf_empresa" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="CEP da empresa contratada" var="tm_cep_empresa" largura="10" /][/@grupo]
+        [@grupo][@texto titulo="Nome do representante da empresa contratada" var="tm_representante_empresa" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="C.I. do representante da empresa contratada" var="tm_ci_representante_empresa" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="UF C.I. do representante da empresa contratada" var="tm_uf_cireprpreesentante_empresa" largura="80" /][/@grupo]
+        [@grupo][@texto titulo="Orgão emitente do representante da empresa contratada" var="tm_orgaorepresentante_empresa" largura="50" /][/@grupo]
+        [@grupo][@texto titulo="CPF do representante da empresa contratada" var="tm_cpf_representante_empresa" largura="15" /][/@grupo]
+    [/@grupo]
+    [@grupo titulo="Informações sobre a prorrogação"]
+        [@grupo][@texto titulo="Número de meses para prorrogação (por extenso)" var="tm_nr_meses_prorrogacao" largura="80" /][/@grupo]
+        [@grupo][@data titulo="Data de início da prorrogação" var="tm_dt_inicio_prorrogacao"  /][/@grupo]
+        [@grupo][@data titulo="Data prevista para término da prorrogação" var="tm_dt_fim_prorrogacao"  /][/@grupo]
+        [@grupo][@texto titulo="Valor total do aditamento" var="tm_vl_total" largura="20" /][/@grupo]
+        [@grupo][@checkbox titulo="Existe Adicional II" var="tm_adicional_II" /][/@grupo]
+        [@grupo][@texto titulo="Valor do aviso prévio de final de contrato" var="tm_vl_aviso" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Valor global acumulado do contrato" var="tm_vl_global" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Novo valor global acumulado do contrato" var="tm_vl_global_novo" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Ano desembolso no exercício corrente" var="tm_ano_desembolso" largura="4" /][/@grupo]
+        [@grupo][@texto titulo="Valor desembolso no exercício corrente" var="tm_vl_desembolso" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Ano desembolso no exercício subsequente" var="tm_ano_desembolso_sub" largura="4" /][/@grupo]
+        [@grupo][@texto titulo="Valor desembolso no exercício subsequente" var="tm_vl_desembolso_sub" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Código orçamentário do recurso" var="tm_cd_orcamentario" largura="30" /][/@grupo]
+        [@grupo][@texto titulo="Valor da garantia complementar" var="tm_vl_garantia" largura="20" /][/@grupo]
+        [@grupo][@texto titulo="Número do subitem do Termo contratual referente a garantia" var="tm_subitem_garantia" largura="20" /][/@grupo]
+        [@grupo][@checkbox titulo="Existe clausula específica para aplicação de multas" var="tm_existe_clausula_multa"  /][/@grupo]
+        [@grupo][@texto titulo="Número do subitem do Termo contratual referente a repactuação" var="tm_subitem_repactuacao" largura="20" /][/@grupo]
+    [/@grupo]
+    [@grupo titulo = "Cláusula Quarta"]
+        [@grupo]
+            [@editor titulo="Fundamentação Legal - Item 4.1" var="subitem_clausula4" /]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo = "Cláusula Quinta"]
+        [@grupo]
+            [@editor titulo="Fundamentação Legal" var="subitem_clausula5" /]
+        [/@grupo]
+    [/@grupo]
+    [@grupo titulo="Informações adicionais"]
+        [@grupo][@texto titulo="Nome do advogado da INFRAERO" var="tm_adv_infraero" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="Testemunha 1" var="tm_testemunha1" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="C.I. Testemunha 1" var="tm_ci_testemunha1" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="Testemunha 2" var="tm_testemunha2" largura="100" /][/@grupo]
+        [@grupo][@texto titulo="C.I. Testemunha 2" var="tm_ci_testemunha2" largura="100" /][/@grupo]
+    [/@grupo]
+[/@entrevista]
+[#assign tm_dtHoje = .now /]
+[@documento ]
+
+    [#if tamanhoLetra! == "Normal"]
+        [#assign tl = "12pt" /]
+    [#elseif tamanhoLetra! == "Pequeno"]
+        [#assign tl = "9pt" /]
+    [#elseif tamanhoLetra! == "Grande"]
+        [#assign tl = "13pt" /]
+    [#else]
+        [#assign tl = "11pt"]
+    [/#if]
+
+    [#if !(func.contains(fecho!'','.')) && !(func.contains(fecho!'',','))]
+        [#assign virgula ="," /]
+    [/#if]
+
+    [#if tm_vl_global??]
+        [#assign tm_vl_global_extenso = func.reaisPorExtenso(tm_vl_global)/]
+    [#else]
+        [#assign tm_vl_global_extenso = ""/]
+    [/#if]
+
+    [#if tm_vl_global_novo??]
+        [#assign tm_vl_global_novo_extenso = func.reaisPorExtenso(tm_vl_global_novo)/]
+    [#else]
+        [#assign tm_vl_global_novo_extenso = ""/]
+    [/#if]
+
+    [#if tm_vl_total??]
+        [#assign tm_vl_total_extenso = func.reaisPorExtenso(tm_vl_total)/]
+    [#else]
+        [#assign tm_vl_total_extenso = ""/]
+    [/#if]
+
+    [#if tm_vl_aviso??]
+        [#assign tm_vl_aviso_extenso = func.reaisPorExtenso(tm_vl_aviso)/]
+    [#else]
+        [#assign tm_vl_aviso_extenso = ""/]
+    [/#if]
+
+    [#if tm_vl_desembolso??]
+        [#assign tm_vl_desembolso_extenso = func.reaisPorExtenso(tm_vl_desembolso)/]
+    [#else]
+        [#assign tm_vl_desembolso_extenso = ""/]
+    [/#if]
+
+    [#if tm_vl_desembolso_sub??]
+        [#assign tm_vl_desembolso_sub_extenso = func.reaisPorExtenso(tm_vl_desembolso_sub)/]
+    [#else]
+        [#assign tm_vl_desembolso_sub_extenso = ""/]
+    [/#if]
+
+    [#if tm_vl_garantia??]
+        [#assign tm_vl_garantia_extenso = func.reaisPorExtenso(tm_vl_garantia)/]
+    [#else]
+        [#assign tm_vl_garantia_extenso = ""/]
+    [/#if]
+
+    [#if tm_nr_meses_prorrogacao??]
+        [#assign tm_nr_meses_prorrogacao_extenso = func.replace(func.reaisPorExtenso(tm_nr_meses_prorrogacao), ' reais', '')/]
+    [#else]
+        [#assign tm_nr_meses_prorrogacao_extenso = "" /]
+    [/#if]
+
+    [#if _tiposigilo! == "1"]
+        [#assign _reservado = true /]
+    [#elseif _tiposigilo! == "2"]
+        [#assign _sigiloso = true /]
+    [#elseif _tiposigilo! == "3"]
+        [#assign _secreto = true /]
+    [/#if]
+
+    [@estiloBrasaoAEsquerda tipo=_tipo exibeData=false tamanhoLetra=tl formatarOrgao=true omitirCodigo=true]
+        [@mioloDJE]
+
+            <div style="font-family: AvantGarde Bk BT, Times New Roman; font-size: 12pt; text-align: justify;">
+                <div style="margin:0px; height:720px; border: solid 0px #000;">
+                    <div style="text-align:right">
+                        <h3 style="border: solid 1px #000; text-align: center; padding: 10px; margin-top: 100px; right: 40px; width: 300px">
+                            PRORROGAÇÃO</h3></div>
+                    <div style="margin-top: 400px; margin-left: 300px;">
+                        <div style="text-align:center"><b><u>TERMO ADITIVO N. ${ tm_nr_termo! }</u></b></div>
+                        <div>${ tm_sequencial! } TERMO ADITIVO AO TERMO DE CONTRATO N. ${ tm_nr_contrato! },
+                            FIRMADO ENTRE A EMPRESA BRASILEIRA DE INFRAESTRUTURA AEROPORTUÁRIA - INFRAERO E A
+                            ${ tm_no_empresa! }, NA FORMA A SEGUIR:</div>
+                    </div>
+
+                </div>
+                <div>
+                    <br>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        A <b>EMPRESA BRASILEIRA DE INFRAESTRUTURA AEROPORTUÁRIA - INFRAERO</b>, Empresa Pública Federal, criada nos termos da Lei n. 5.862, de 12 de dezembro de 1972, CNPJ/MF n. 00.352.294/0001-10, com Sede em Brasília-DF, na Estrada do Aeroporto, Setor de Concessionárias e Locadoras, Lote 5 - Edifício Sede, CEP 71608-050 - Brasília - DF - Brasil, e dependência no ${ tm_no_dependencia! }, em ${ tm_cidade_uf! }, CNPJ N. ${ tm_nr_cnpj! }, neste ato representada pelo seu ${ tm_cargo_rep_infraero! }, ${ tm_no_rep_infraero! }, portador da C.I. n. ${ tm_ci_rep_infraero! }, ${ tm_uf_ci_rep_infraero! }, ${ tm_ci_rep_infraero! } e do CPF  n. ${ tm_cpf_rep_infraero! }, doravante denominada simplesmente CONTRATANTE e a empresa ${ tm_no_empresa! }, CNPJ/MF n. ${ tm_cnpj_empresa! }, estabelecida no na ${ tm_endereco_empresa! }, ${ tm_cidade_uf_empresa! }, CEP N. ${ tm_cep_empresa! }, aqui representada por ${ tm_representante_empresa! }, portador da  C.I. n. ${ tm_ci_representante_empresa! } ${ tm_uf_cirepresentante_empresa! } ${ tm_orgaorepresentante_empresa! } e do CPF n. ${ tm_cpf_representante_empresa! }, doravante denominada simplesmente CONTRATADA, resolvem, de comum acordo, aditar o Termo de Contrato N. ${ tm_nr_contrato! }, conforme cláusulas a seguir.</p>
+
+                    <h4>CLÁUSULA PRIMEIRA</h4>
+                    <p>1.1 &nbsp;&nbsp;&nbsp; Nos termos da cláusula ${ tm_nr_clausula! } do Termo Contratual supracitado, o objeto do presente 	aditamento 	é a prorrogação do seu prazo de vigência por mais ${ tm_nr_meses_prorrogacao! } (${tm_nr_meses_prorrogacao_extenso!}) com início em 	${ tm_dt_inicio_prorrogacao! } e término previsto para ${ tm_dt_fim_prorrogacao! }.</p>
+
+                    <h4>CLÁUSULA SEGUNDA </h4>
+                    <p>2.1 &nbsp;&nbsp;&nbsp; Em decorrência da prorrogação de prazo de que trata a cláusula anterior, o valor total do presente aditamento é de R$ ${ tm_vl_total! } (${ tm_vl_total_extenso! }).</p>
+                    <p>2.2 &nbsp;&nbsp;&nbsp; O valor do Aviso Prévio de final de contrato
+                        [#if tm_adicional_II=="Sim"]
+                            e do Adicional II
+                        [/#if]
+                        [#if tm_adicional_II=="Sim"]permanecem inalterados[#else]permanece inalterado[/#if] na ordem de R$ ${ tm_vl_aviso! } (${ tm_vl_aviso_extenso! }).</p>
+                    <p>2.3 &nbsp;&nbsp;&nbsp; O valor global acumulado do contrato passa de R$ ${ tm_vl_global! } (${ tm_vl_global_extenso! }), para 	R$ ${ tm_vl_global_novo! } (${ tm_vl_global_novo_extenso! }), já incluído o valor do Adicional I
+                        [#if tm_adicional_II=="Sim"]
+                            e do Adicional II
+                        [/#if]</p>
+                    <p>2.4 &nbsp;&nbsp;&nbsp; O cronograma anual de desembolso estimado deste contrato, incluindo o presente 	aditamento, para o exercício corrente e subsequente (s), é:</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Exercício de ${ tm_ano_desembolso! }: R$ ${ tm_vl_desembolso! } (${ tm_vl_desembolso_extenso! })<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Exercício de ${ tm_ano_desembolso_sub! } : R$ ${ tm_vl_desembolso_sub! } (${ tm_vl_desembolso_sub_extenso! })
+                    </p>
+                    <p>2.5 &nbsp;&nbsp;&nbsp; Tem-se como fonte de recurso, para atender o presente Aditamento, o código orçamentário 	de n. ${ tm_cd_orcamentario! }.</p>
+
+                    <h4>CLÁUSULA TERCEIRA </h4>
+                    <p>3.1 &nbsp;&nbsp;&nbsp; A Contratada deverá apresentar, no prazo de 15 (quinze) dias consecutivos, após a assinatura deste Termo Aditivo, garantia complementar de execução de contrato, no valor de R$ ${ tm_vl_garantia! } (${ tm_vl_garantia_extenso! }), correspondente a 5% (cinco por cento) do valor deste Aditamento.</p>
+                    <p style="padding-left: 30px">
+                        [#if tm_adicional_II=="Sim"]
+                            3.1.1. &nbsp;&nbsp;&nbsp; Considerando a prorrogação de prazo de que trata a cláusula primeira e a não utilização 			tanto do Aviso Prévio Final de Contrato, quanto do Adicional II na vigência anterior, 			o valor referente aos mencionados adicionais deverão compor a base de cálculo da garantia de execução de contrato.
+                        [#else]
+                            3.1.1 &nbsp;&nbsp;&nbsp; Considerando a prorrogação de prazo de que trata a cláusula primeira e a não utilização 		do Aviso Prévio Final de Contrato na vigência anterior, o valor referente ao 				mencionado adicional deverá compor a base de cálculo da garantia de execução de 	contrato.
+                        [/#if]
+                    </p>
+
+                    [#if tm_existe_clausula_multa!="Sim"]
+                        <p>3.2. &nbsp;&nbsp;&nbsp; A inobservância do prazo fixado para apresentação da garantia, na situação prevista no subitem precedente, acarretará a aplicação de multa de 0,1% (um décimo por cento) do valor do contrato por dia de atraso, limitado até o máximo de 2,5% (dois e meio por cento), conforme fórmula abaixo:</p>
+
+                        <p style="padding-left: 30px">M = VC x 0,1% x T<br>
+                            Sendo: <br>
+                            M = Valor da Multa por descumprimento de apresentação das garantias;<br>
+                            VC = Valor do contrato;<br>
+                            T = Tempo em dias</p>
+
+                        <p>3.2.1 &nbsp;&nbsp;&nbsp; O atraso superior a 15 (quinze) dias autoriza a Administração a promover a rescisão do contrato, por descumprimento ou cumprimento irregular das cláusulas deste contrato, conforme dispõem os incisos I e II do art. 78 da Lei n.º 8.666/93.
+                        </p>
+                    [/#if]
+
+                    <h4>CLÁUSULA QUARTA</h4>
+                    <table border=0 cellspacing=0 cellpadding=0 width="100%">
+                        <td width="50px" style="vertical-align: top;">4.1</td>
+                        <td style="vertical-align: top; text-align: justify">${subitem_clausula4!}</td>
+                    </table>
+                    <p>4.2. &nbsp;&nbsp;&nbsp; A contratada dá plena e rasa quitação de todo e qualquer débito referente ao contrato ora 	prorrogado.</p>
+
+                    [#if subitem_clausula5??]
+                        <h4>CLÁUSULA QUINTA</h4>
+                        <table border=0 cellspacing=0 cellpadding=0 width="100%">
+                            <td width="50px" style="vertical-align: top;">5.</td>
+                            <td style="vertical-align: top; text-align: justify">${subitem_clausula5!}</td>
+                        </table>
+                    [/#if]
+                    <h4>[#if subitem_clausula5??]CLÁUSULA SEXTA[#else]CLÁUSULA QUINTA[/#if]</h4>
+                    <p>6.1 &nbsp;&nbsp;&nbsp; Ficam ratificadas as demais condições ajustadas no Termo de Contrato, no que não colidirem 	com os termos do presente Instrumento.
+                    <p>Por estarem as partes justas e acordadas, lavram e assinam este Termo Aditivo em 02 (duas) 	vias de igual teor e forma, na presença de duas testemunhas, para que produza seus efeitos 	jurídicos.
+                    </p>
+                    <p>As folhas do presente Instrumento são rubricadas por ${ tm_adv_infraero! } (a), advogado 	da INFRAERO, por autorização do Presidente desta.
+                    </p>
+
+                    <p>&nbsp;</p>
+                    <div>
+                        <br><br><br><br><br><br><br><br><br><br><br><br><br>
+                        <table border=0 width="100%">
+                            <tr>
+                                <td style="border-top: solid 1px #000; text-align:center"><br><p>CONTRATADA</p>${ tm_representante_empresa! }</td>
+                            </tr>
+                        </table>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <table border=0 width="100%">
+                            <tr>
+                                <td width="40%" style="border-top: solid 1px #000; text-align:center"><br><p>TESTEMUNHA</p>${ tm_testemunha1! }<br>${tm_ci_testemunha1!}</td>
+                                <td width="20%"></td>
+                                <td width="40%" style="border-top: solid 1px #000; text-align:center"><br><p>TESTEMUNHA</p>${ tm_testemunha2! }<br>${tm_ci_testemunha2!}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        [/@mioloDJE]
+    [/@estiloBrasaoAEsquerda]
+[/@documento]

@@ -21,33 +21,13 @@
     [#assign _cargo_dest=_autoridade.cargo /]
     [#assign _orgao_dest=_autoridade.orgao /]
     [#assign _endereco_dest=_autoridade.endereco /]
-        <br/><br/>
+    <br/><br/>
 [/#if]
 
 [@entrevista]
-    [@grupo titulo="Dados do destinatário" esconder=(_enderecamento_dest!="" && _nome_dest!="" && _cargo_dest!="" && _orgao_dest!="" && _endereco_dest!="")]
-                <!-- Tratamento -->
-        [#if _enderecamento_dest != ""]
-            [@oculto var="enderecamento_dest" valor=_enderecamento_dest /]
-        [#else]
-            [#if tratamento??]
-                [@grupo]
-                    [@checkbox titulo="Especificar manualmente a forma de endereçamento" var="especificarEnderecamento" reler=true /]
-                [/@grupo]
-            [/#if]
-            [#if !tratamento?? || (especificarEnderecamento?? && especificarEnderecamento == 'Sim')]
-                [@grupo]
-                    [@texto titulo="Forma de endereçamento" var="enderecamento_dest" largura="45" /]
-                [/@grupo]
-            [#else]
-                [@oculto var="enderecamento_dest" valor="${(tratamento.formaDeEnderecamento)!}" /]
-            [/#if]
-        [/#if]
-
-    [/@grupo]
     [@grupo titulo = "Dados Gerais"]
         [@grupo]
-            [@numero titulo="Número termo apostilamento" var="numero_termpo" /]
+            [@texto titulo="Número termo apostilamento" var="numero_termpo" largura=50 /]
         [/@grupo]
         [@grupo]
             [@texto titulo="Ordem do Termo (Primeiro/Seguro/outro)" var="termo_ordem" largura=50 /]
@@ -62,6 +42,7 @@
     [@grupo titulo = "Dados Infraero"]
         [@grupo]
             [@texto titulo="Nome da Dependência" var="nome_dependencia" largura=50 /]
+            [@texto titulo="UF" var="nome_uf" largura=50 /]
         [/@grupo]
         [@grupo]
             [@texto titulo="Cidade do local" var="cidade_dependencia" largura=50 /]
@@ -110,21 +91,7 @@
             [/@grupo]
         [/@grupo]
     [/#if]
-    [@grupo titulo = "Assinatura"]
-        [@grupo]
-            [@texto titulo="Cidade" var="assinatura_cidade" largura=50 /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Dia" var="assinatura_dia" largura=50 /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Mês" var="assinatura_mes" largura=50 /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Ano" var="assinatura_ano" largura=50 /]
-        [/@grupo]
-    [/@grupo]
-
+    </br>
     [#if _tamanho_letra != ""]
         [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
     [#else]
@@ -132,9 +99,9 @@
     [/#if]
 [/@entrevista]
 
-[@documento margemDireita="3cm" capa=true]
+[@documento]
     [#if tamanhoLetra! == "Normal"]
-        [#assign tl = "10pt" /]
+        [#assign tl = "12pt" /]
     [#elseif tamanhoLetra! == "Pequeno"]
         [#assign tl = "9pt" /]
     [#elseif tamanhoLetra! == "Grande"]
@@ -156,43 +123,9 @@
         [#assign _secreto = true /]
     [/#if]
 
-    [@estiloBrasaoAEsquerda tipo=_tipo tamanhoLetra=tl formatarOrgao=true omitirCodigo=true]
-             <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
-                 <tr>
-                     <td align="left">
-                         <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0">
-                             <tr>
-                                 <td>[@letra tamanho=tl]<p>${enderecamento_dest!}</p>[/@letra]</td>
-                             </tr>
-                             <tr>
-                                 <td>[@letra tamanho=tl]<p>${nome_dest!}</p>[/@letra]</td>
-                             </tr>
-                            [#if cargo_dest??]
-                                <tr>
-                                    <td>[@letra tamanho=tl]<p>${cargo_dest!}</p>[/@letra]</td>
-                                </tr>
-                            [/#if]
-                         [#-- COMENTARIO
-                         [#if orgao_dest??]
-                             <tr><td>[@letra tamanho=tl]<p>${orgao_dest!}</p>[/@letra]</td></tr>
-                         [/#if]
-                         --]
-                            [#if endereco_dest??]
-                                <tr>
-                                    <td>[@letra tamanho=tl]<p>[@fixcrlf var=endereco_dest! /]</p>[/@letra]</td>
-                                </tr>
-                            [/#if]
-                         [#-- COMENTARIO
-                         [#if (doc.exClassificacao.descrClassificacao)??]
-                             <tr><td>[@letra tamanho=tl]<p><br/>Assunto: ${(doc.exClassificacao.descrClassificacao)!}</p>[/@letra]</td></tr>
-                         [/#if]
-                         --]
-                         </table>
-                     </td>
-                 </tr>
-             </table>
+    [@estiloBrasaoAEsquerda tipo=_tipo exibeData=false tamanhoLetra=tl formatarOrgao=true omitirCodigo=true]
         [@mioloDJE]
-                <div style="font-family: Times New Roman; font-size: 12pt;">
+            <div style="font-family: Times New Roman; font-size: 12pt;">
                 [@corpoBIE]
 
                     <!-- INICIO - Tagmeta -->
@@ -211,21 +144,15 @@
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
-                    <p>&nbsp;&nbsp;</p>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <div style="width: 250px; float: right; text-align: justify;">
-                        <p><u><b>TERMO DE APOSTILAMENTO N. </b></u></p>
-                        <p>${numero_termpo!}</p>
-                        <p>&nbsp;</p>
+                    <div style="width: 260px; float: right; text-align: justify;">
+                        <u><b>TERMO DE APOSTILAMENTO N. </b></u>
+                        </br>
+                        ${numero_termpo!}
                         <p>${termo_ordem!} TERMO DE APOSTILAMENTO AO TERMO DE CONTRATO N. ${numero_contrato!}, FIRMADO ENTRE A EMPRESA BRASILEIRA DE INFRAESTRUTURA AEROPORTU&Aacute;RIA - <strong>INFRAERO</strong>
                             E A EMPRESA ${empresa_contratada!}, NA FORMA A SEGUIR:</p>
                     </div>
@@ -235,33 +162,15 @@
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
                     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                    <div style="width: 250px; float: right;text-align: justify; ">
-                        <p>TERMO DE APOSTILAMENTO</p>
-                        <p>&nbsp;</p>
-                        <p><strong>${termo_ordem!} TERMO DE APOSTILAMENTO AO
-                            TERMO DE CONTRATO N. ${numero_contrato!}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;, FIRMADO ENTRE A EMPRESA BRASILEIRA DE INFRAESTRUTURA AEROPORTU&Aacute;RIA - INFRAERO E A EMPRESA
-                            ${empresa_contratada!}. &nbsp;</strong></p>
-                        <p>&nbsp;</p>
-                    </div>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
+
                     <div style="text-align:justify;">
                         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            A<strong> EMPRESA BRASILEIRA DE INFRAESTRUTURA AEROPORTU&Aacute;RIA - INFRAERO</strong>, Empresa P&uacute;blica
+                            A<strong> EMPRESA BRASILEIRA DE INFRAESTRUTURA AEROPORTUÁRIA - INFRAERO</strong>, Empresa Pública
                             Federal, criada nos termos da Lei n. 5.862, de 12 de dezembro de 1972, CNPJ/MF n. 00.352.294/0001-10, com Sede em
-                            Bras&iacute;lia-DF, na Estrada do Aeroporto, Setor de Concession&aacute;rias e Locadoras, Lote 5 &ndash; Edif&iacute;cio
-                            Sede, CEP 71608-050 &ndash; Bras&iacute;lia &ndash; DF &ndash; Brasil, e depend&ecirc;ncia aeroportu&aacute;ria no
-                            <strong>${nome_dependencia!}</strong>, em <strong>${cidade_dependencia!}</strong>, CNPJ N.
+                            Brasília-DF, na Estrada do Aeroporto, Setor de Concessionárias e Locadoras, Lote 5 - Edifício
+                            Sede, CEP 71608-050, e dependência no
+                            <strong>${nome_dependencia!}</strong>, em <strong>${cidade_dependencia!}-${nome_uf!}</strong>, CNPJ N.
                             <strong>${cnpj!}</strong>, neste ato representada pelo seu <strong>${cargo_representante!}</strong>, <strong>${nome_representante!} </strong>, portador da matr&iacute;cula n.
                             <strong>${matricula_representante!}</strong>, registra por meio deste Termo de Apostilamento as cl&aacute;usulas e condi&ccedil;&otilde;es
                             seguintes:
@@ -270,30 +179,30 @@
                     <p><strong>CL&Aacute;USULA PRIMEIRA </strong>
                     </p>
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
-                    [#if tipo_alteracao?? && tipo_alteracao == "Conta Orçamentária"]
-                        <tr>
-                            <td width="10%" style="vertical-align: top;">1.1
-                            </td>
-                            <td width ="90%"style="vertical-align: top; text-align: justify">O objeto do presente Termo de Apostilamento é a alteração da conta orçamentária ${numero_conta_atual!} para a conta ${numero_conta_novo!}.
-                            </td>
-                        </tr>
-                    [/#if]
-                    [#if tipo_alteracao?? && tipo_alteracao == "CNPJ"]
-                        <tr>
-                            <td width="10%" style="vertical-align: top;">1.1
-                            </td>
-                            <td width ="90%"style="vertical-align: top; text-align: justify">O objeto do presente Termo de Apostilamento é a alteração do CNPJ n. ${numero_cnpj_atual!}, referente à empresa ${empresa_referenciada!}, situada à: ${endereco_empresa!}, para o CNPJ n. ${numero_cnpj_novo!}.
-                            </td>
-                        </tr>
-                    [/#if]
-                    [#if tipo_alteracao?? && tipo_alteracao == "Conta Orçamentária e CNPJ"]
-                        <tr>
-                            <td width="10%" style="vertical-align: top;">1.1
-                            </td>
-                            <td width ="90%"style="vertical-align: top; text-align: justify">O objeto do presente Termo de Apostilamento é a alteração da conta orçamentária ${numero_conta_atual!} para a conta ${numero_conta_novo!} e do CNPJ n. ${numero_cnpj_atual!}, referente à empresa ${empresa_referenciada!}, situada à ${endereco_empresa!}, para o CNPJ n. ${numero_cnpj_novo!}.
-                            </td>
-                        </tr>
-                    [/#if]
+                        [#if tipo_alteracao?? && tipo_alteracao == "Conta Orçamentária"]
+                            <tr>
+                                <td width="10%" style="vertical-align: top;">1.1
+                                </td>
+                                <td width ="90%"style="vertical-align: top; text-align: justify">O objeto do presente Termo de Apostilamento é a alteração da conta orçamentária ${numero_conta_atual!} para a conta ${numero_conta_novo!}.
+                                </td>
+                            </tr>
+                        [/#if]
+                        [#if tipo_alteracao?? && tipo_alteracao == "CNPJ"]
+                            <tr>
+                                <td width="10%" style="vertical-align: top;">1.1
+                                </td>
+                                <td width ="90%"style="vertical-align: top; text-align: justify">O objeto do presente Termo de Apostilamento é a alteração do CNPJ n. ${numero_cnpj_atual!}, referente à empresa ${empresa_referenciada!}, situada à: ${endereco_empresa!}, para o CNPJ n. ${numero_cnpj_novo!}.
+                                </td>
+                            </tr>
+                        [/#if]
+                        [#if tipo_alteracao?? && tipo_alteracao == "Conta Orçamentária e CNPJ"]
+                            <tr>
+                                <td width="10%" style="vertical-align: top;">1.1
+                                </td>
+                                <td width ="90%"style="vertical-align: top; text-align: justify">O objeto do presente Termo de Apostilamento é a alteração da conta orçamentária ${numero_conta_atual!} para a conta ${numero_conta_novo!} e do CNPJ n. ${numero_cnpj_atual!}, referente à empresa ${empresa_referenciada!}, situada à ${endereco_empresa!}, para o CNPJ n. ${numero_cnpj_novo!}.
+                                </td>
+                            </tr>
+                        [/#if]
                     </table>
                     <p><strong>CL&Aacute;USULA SEGUNDA </strong></p>
                     <table border=0 cellspacing=0 cellpadding=0 width="100%">
@@ -308,16 +217,12 @@
                         <td style="vertical-align: top; text-align: justify">O presente apostilamento não altera as condições contratuais pactuadas.
                         </td>
                     </table>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p style="text-align: right;"><strong>${assinatura_cidade!} </strong>, <strong>${assinatura_dia!}</strong> de <strong>${assinatura_mes!}</strong> de 20 <strong>${assinatura_ano!}</strong>.</p>
-                    <p>&nbsp;</p>
 
                 [/@corpoBIE]
                 [#if fecho??]<p
                         style="font-size: ${tl}; TEXT-INDENT: 2.5cm">[@fechoBIE]${fecho!}${virgula!}[/@fechoBIE][/#if]</p>
 
-                </div>
+            </div>
         [/@mioloDJE]
     [/@estiloBrasaoAEsquerda]
 

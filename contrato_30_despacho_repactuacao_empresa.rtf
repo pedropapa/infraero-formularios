@@ -21,7 +21,7 @@
     [#assign _cargo_dest=_autoridade.cargo /]
     [#assign _orgao_dest=_autoridade.orgao /]
     [#assign _endereco_dest=_autoridade.endereco /]
-        <br/><br/>
+    <br/><br/>
 [/#if]
 
 [@entrevista]
@@ -29,9 +29,9 @@
         [@grupo]
             [@selecao titulo="Destinatário" var="destinatario" opcoes="Consultoria Jurídica;LACC-2" reler=true /]
         [/@grupo]
-        [@grupo]
+        <!--[@grupo]
             [@selecao titulo="Assunto" var="assunto" opcoes="Reajuste;Revisão;Reajuste, Revisão"/]
-        [/@grupo]
+        [/@grupo]-->
         [@grupo]
             [@texto titulo="Número termo contrato" var="numero_termo_contrato" largura=50 /]
         [/@grupo]
@@ -190,20 +190,8 @@
         [/@grupo]
     [/@grupo]
     [@grupo titulo="Conclusão"]
-        [#if destinatario?? && destinatario == "Consultoria Jurídica"]
-            [@grupo]
-                [@texto titulo="Escritório jurídico" var="escritorio_juridico" largura=50 /]
-            [/@grupo]
-        [#else]
-            [@grupo]
-                [@texto titulo="Escritório autoridade competente" var="escritorio_autoridade" largura=50 /]
-            [/@grupo]
-        [/#if]
         [@grupo]
-            [@texto titulo="Instrumento" var="instrumento" largura=50 /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Caminho de rede" var="caminho_rede" largura=50 /]
+            [@editor var="clausula_conclusao"/]
         [/@grupo]
     [/@grupo]
 
@@ -216,7 +204,7 @@
 
 [@documento margemDireita="3cm"]
     [#if tamanhoLetra! == "Normal"]
-        [#assign tl = "10pt" /]
+        [#assign tl = "12pt" /]
     [#elseif tamanhoLetra! == "Pequeno"]
         [#assign tl = "9pt" /]
     [#elseif tamanhoLetra! == "Grande"]
@@ -239,60 +227,35 @@
     [/#if]
 
     [@estiloBrasaoEsquerdaOficio tipo=_tipo tamanhoLetra=tl formatarOrgao=true]
-             <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
-                 <tr>
-                     <td align="left">
-                         <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0">
-                             <tr>
-                                 <td>[@letra tamanho=tl]<p>${enderecamento_dest!}</p>[/@letra]</td>
-                             </tr>
-                             <tr>
-                                 <td>[@letra tamanho=tl]<p>${nome_dest!}</p>[/@letra]</td>
-                             </tr>
-                            [#if cargo_dest??]
-                                <tr>
-                                    <td>[@letra tamanho=tl]<p>${cargo_dest!}</p>[/@letra]</td>
-                                </tr>
-                            [/#if]
-                         [#-- COMENTARIO
-                         [#if orgao_dest??]
-                             <tr><td>[@letra tamanho=tl]<p>${orgao_dest!}</p>[/@letra]</td></tr>
-                         [/#if]
-                         --]
-                            [#if endereco_dest??]
-                                <tr>
-                                    <td>[@letra tamanho=tl]<p>[@fixcrlf var=endereco_dest! /]</p>[/@letra]</td>
-                                </tr>
-                            [/#if]
-                         [#-- COMENTARIO
-                         [#if (doc.exClassificacao.descrClassificacao)??]
-                             <tr><td>[@letra tamanho=tl]<p><br/>Assunto: ${(doc.exClassificacao.descrClassificacao)!}</p>[/@letra]</td></tr>
-                         [/#if]
-                         --]
-                         </table>
-                     </td>
-                 </tr>
-             </table>
+        [#if doc.destinatario??]
+            Senhor (a) ${doc.destinatario.nomePessoa} <br/> ${doc.lotaDestinatario.descricao}
+        [#elseif doc.lotaDestinatario??]
+            ${doc.lotaDestinatario.descricao}
+        [#elseif doc.orgaoExternoDestinatario??]
+            ${doc.orgaoExternoDestinatario.nmOrgao}
+        [#elseif doc.nmOrgaoExterno??]
+            ${doc.nmOrgaoExterno}
+        [#elseif doc.nmDestinatario??]
+            ${doc.nmDestinatario}
+        [#else]
+            DESTINATÁRIO NÃO SELECIONADO
+        [/#if]
         [@mioloDJE]
-                <div style="font-family: Calibri; font-size: 11pt;">
-                <p align="right">${doc.getEditor().getOrgaoUsuario().getMunicipioOrgaoUsu()}, ${aDateTime?string["dd"]} de ${aDateTime?string["MMMM"]} de ${aDateTime?string["yyyy"]}</p>
-                Senhor ${destinatario!}
-                <br>
-                <br>
-                Assunto: Prorrogação e Repactuação - TC N. ${numero_termo_contrato!} - ${contratada!}
-                <br>
-                Ref.: ${texto_ref!}
-                <p> <br> </p>
-                <div style="font-family: Times New Roman; font-size: 12pt;">
+            <br><br>
+            Assunto: Prorrogação e Repactuação - TC N. ${numero_termo_contrato!} - ${contratada!}
+            <br>
+            Ref.: ${texto_ref!}
+            <p> <br> </p>
+            <div style="font-family: Times New Roman; font-size: 12pt;">
                 [@corpoBIE]
 
                     <!-- INICIO - Tagmeta -->
                     <!-- Inicio - Corpo do conteudo -->
-                   	<p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">&nbsp;<b>I.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INSTRUÇÃO DO PROCESSO</b>
-					<p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trata-se da <b>PRORROGAÇÃO CONTRATUAL E REPACTUAÇÃO ${assunto!} DE PREÇOS</b>, referente ao contrato em tela, firmado junto à ${contratada!}, cujo objeto é a "${objeto_contrato!}".</p>
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Para a instrução deste processo foram verificados os seguintes itens da NI 6.01/F (LCT) de 16/05/2016:</p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">&nbsp;<b>I.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INSTRUÇÃO DO PROCESSO</b>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trata-se da <b>PRORROGAÇÃO E REPACTUAÇÃO CONTRATUAL</b>, referente ao contrato em tela, firmado junto à ${contratada!}, cujo objeto é a "${objeto_contrato!}".</p>
+                    <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Para a instrução deste processo foram verificados os seguintes itens da NI 6.01/F (LCT) de 16/05/2016:</p>
 
-					<table width="100%" border="1" cellpadding=0 cellspacing=0 borderColor="#000" bgcolor="#FFFFFF">
+                    <table width="100%" border="1" cellpadding=0 cellspacing=0 borderColor="#000" bgcolor="#FFFFFF">
                         <tr>
                             <td align="center" colspan=5 width="100%"> <b>Requisitos essenciais para instrução do processo, conforme (NI 6.01/F):</b>
                             </td>
@@ -312,9 +275,9 @@
                             </td>
                             <td align="left" valing="middle" width="25%" style="border-right: 1px solid black">a) crédito orçamentário para o exercício corrente;
                             </td>
-                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black; [#if requisito165_itema?? && requisito165_itema == "Sim"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black;">[#if requisito165_itema?? && requisito165_itema == "Sim"]X[/#if]&nbsp;
                             </td>
-                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black; [#if requisito165_itema?? && requisito165_itema == "Não"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black;">[#if requisito165_itema?? && requisito165_itema == "Não"]X[/#if]&nbsp;
                             </td>
                             <td align="center" valing="middle" width="35%" style="font-size: 9pt;"> &nbsp;${requisito165_itema_observacao!}
                             </td>
@@ -322,9 +285,9 @@
                         <tr>
                             <td align="left" valing="middle" width="25%" style="border-right: 1px solid black">b) CADIN;
                             </td>
-                            <td align="center" valing="middle" width="15%" style="vertical-align: middle;border-right: 1px solid black; [#if requisito165_itemb?? && requisito165_itemb == "Sim"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="15%" style="vertical-align: middle;border-right: 1px solid black;">[#if requisito165_itemb?? && requisito165_itemb == "Sim"]X[/#if]&nbsp;
                             </td>
-                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black; [#if requisito165_itemb?? && requisito165_itemb == "Não"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black;">[#if requisito165_itemb?? && requisito165_itemb == "Não"]X[/#if]&nbsp;
                             </td>
                             <td align="center" valing="middle" width="35%" style="font-size: 9pt;">&nbsp;${requisito165_itemb_observacao!}
                             </td>
@@ -332,29 +295,29 @@
                         <tr>
                             <td align="left" valing="middle" width="25%" style="border-right: 1px solid black">c) SICAF ou certidões;
                             </td>
-                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black; [#if requisito165_itemc?? && requisito165_itemc == "Sim"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black;">[#if requisito165_itemc?? && requisito165_itemc == "Sim"]X[/#if]&nbsp;
                             </td>
-                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black; [#if requisito165_itemc?? && requisito165_itemc == "Não"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black;">[#if requisito165_itemc?? && requisito165_itemc == "Não"]X[/#if]&nbsp;
                             </td>
-                            <td align="center" valing="middle" width="35%" style="border-right: 1px solid black">; &nbsp;${requisito165_itemc_observacao!}
+                            <td align="center" valing="middle" width="35%" style="border-right: 1px solid black">&nbsp;${requisito165_itemc_observacao!}
                             </td>
                         </tr>
                         <tr>
                             <td align="left" valing="middle" width="25%" style="border-right: 1px solid black">d) Justiça do Trabalho;
                             </td>
-                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black; [#if requisito165_itemd?? && requisito165_itemd == "Sim"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black;">[#if requisito165_itemd?? && requisito165_itemd == "Sim"]X[/#if]&nbsp;
                             </td>
-                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black; [#if requisito165_itemd?? && requisito165_itemd == "Não"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black;">[#if requisito165_itemd?? && requisito165_itemd == "Não"]X[/#if]&nbsp;
                             </td>
-                            <td align="center" valing="middle" width="35%" style="font-size: 9pt;">; &nbsp;${requisito165_itemd_observacao!}
+                            <td align="center" valing="middle" width="35%" style="font-size: 9pt;">&nbsp;${requisito165_itemd_observacao!}
                             </td>
                         </tr>
                         <tr>
                             <td align="left" valing="middle" width="25%" style="border-right: 1px solid black">e) habilitação jurídica
                             </td>
-                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black; [#if requisito165_iteme?? && requisito165_iteme == "Sim"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black;">[#if requisito165_iteme?? && requisito165_iteme == "Sim"]X[/#if]&nbsp;
                             </td>
-                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black; [#if requisito165_iteme?? && requisito165_iteme == "Não"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black;">[#if requisito165_iteme?? && requisito165_iteme == "Não"]X[/#if]&nbsp;
                             </td>
                             <td align="center" valing="middle" width="35%" style="font-size: 9pt;"> &nbsp;${requisito165_iteme_observacao!}
                             </td>
@@ -381,9 +344,9 @@
                             </td>
                             <td align="left" valing="middle" width="25%" style="border-right: 1px solid black">a) o prazo de vigência total não pode exceder aquele estipulado no edital da licitação e no contrato;
                             </td>
-                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black; [#if requisito166_itema?? && requisito166_itema == "Sim"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black;">[#if requisito166_itema?? && requisito166_itema == "Sim"]X[/#if]&nbsp;
                             </td>
-                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black; [#if requisito166_itema?? && requisito166_itema == "Não"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black;">[#if requisito166_itema?? && requisito166_itema == "Não"]X[/#if]&nbsp;
                             </td>
                             <td align="center" valing="middle" width="35%" style="font-size: 9pt;">&nbsp; ${requisito166_itema_observacao!}
                             </td>
@@ -391,9 +354,9 @@
                         <tr>
                             <td align="left" valing="middle" width="25%" style="border-right: 1px solid black">b) os efeitos financeiros do aditamento contratual não podem ser retroativos;
                             </td>
-                            <td align="center" valing="middle" width="15%" style="vertical-align: middle;border-right: 1px solid black; [#if requisito166_itemb?? && requisito166_itemb == "Sim"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="15%" style="vertical-align: middle;border-right: 1px solid black;">[#if requisito166_itemb?? && requisito166_itemb == "Sim"]X[/#if]&nbsp;
                             </td>
-                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black; [#if requisito166_itemb?? && requisito166_itemb == "Não"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black;">[#if requisito166_itemb?? && requisito166_itemb == "Não"]X[/#if]&nbsp;
                             </td>
                             <td align="center" valing="middle" width="35%" style="font-size: 9pt;">&nbsp; ${requisito166_itemb_observacao!}
                             </td>
@@ -401,9 +364,9 @@
                         <tr>
                             <td align="left" valing="middle" width="25%" style="border-right: 1px solid black">c) a avaliação de desempenho satisfatório da contratada; e
                             </td>
-                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black; [#if requisito166_itemc?? && requisito166_itemc == "Sim"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black;">[#if requisito166_itemc?? && requisito166_itemc == "Sim"]X[/#if]&nbsp;
                             </td>
-                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black; [#if requisito166_itemc?? && requisito166_itemc == "Não"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black;">[#if requisito166_itemc?? && requisito166_itemc == "Não"]X[/#if]&nbsp;
                             </td>
                             <td align="center" valing="middle" width="35%" style="border-right: 1px solid black">&nbsp; ${requisito166_itemc_observacao!}
                             </td>
@@ -411,9 +374,9 @@
                         <tr>
                             <td align="left" valing="middle" width="25%" style="border-right: 1px solid black">d) Pesquisa de preço, ou, dispensa, por ser contrato com características descritas nos itens 1 e 2 da alínea.
                             </td>
-                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black; [#if requisito166_itemd?? && requisito166_itemd == "Sim"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black;">[#if requisito166_itemd?? && requisito166_itemd == "Sim"]X[/#if]&nbsp;
                             </td>
-                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black; [#if requisito166_itemd?? && requisito166_itemd == "Não"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black;">[#if requisito166_itemd?? && requisito166_itemd == "Não"]X[/#if]&nbsp;
                             </td>
                             <td align="center" valing="middle" width="35%" style="font-size: 9pt;">&nbsp; ${requisito166_itemd_observacao!}
                             </td>
@@ -423,9 +386,9 @@
                             </td>
                             <td align="left" valing="middle" width="25%" style="border-right: 1px solid black">a) consulta formalizada pela área de contratos à área interessada sobre o interesse na continuidade do contrato;
                             </td>
-                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black; [#if requisito167_itema?? && requisito167_itema == "Sim"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black;">[#if requisito167_itema?? && requisito167_itema == "Sim"]X[/#if]&nbsp;
                             </td>
-                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black; [#if requisito167_itema?? && requisito167_itema == "Não"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black;">[#if requisito167_itema?? && requisito167_itema == "Não"]X[/#if]&nbsp;
                             </td>
                             <td align="center" valing="middle" width="35%" style="font-size: 9pt;">&nbsp; ${requisito167_itema_observacao!}
                             </td>
@@ -433,9 +396,9 @@
                         <tr>
                             <td align="left" valing="middle" width="25%" style="border-right: 1px solid black">b) manifestação da área interessada, com a aprovação da autoridade competente, à área de contratos sobre a decisão quanto à continuidade da contratação;
                             </td>
-                            <td align="center" valing="middle" width="15%" style="vertical-align: middle;border-right: 1px solid black; [#if requisito167_itemb?? && requisito167_itemb == "Sim"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="15%" style="vertical-align: middle;border-right: 1px solid black;">[#if requisito167_itemb?? && requisito167_itemb == "Sim"]X[/#if]&nbsp;
                             </td>
-                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black; [#if requisito167_itemb?? && requisito167_itemb == "Não"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black;">[#if requisito167_itemb?? && requisito167_itemb == "Não"]X[/#if]&nbsp;
                             </td>
                             <td align="center" valing="middle" width="35%" style="font-size: 9pt;">&nbsp; ${requisito167_itemb_observacao!}
                             </td>
@@ -443,9 +406,9 @@
                         <tr>
                             <td align="left" valing="middle" width="25%" style="border-right: 1px solid black">c.1) consulta à contratada quanto ao seu interesse na continuidade do contrato
                             </td>
-                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black; [#if requisito167_itemc?? && requisito167_itemc == "Sim"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black;">[#if requisito167_itemc?? && requisito167_itemc == "Sim"]X[/#if]&nbsp;
                             </td>
-                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black; [#if requisito167_itemc?? && requisito167_itemc == "Não"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black;">[#if requisito167_itemc?? && requisito167_itemc == "Não"]X[/#if]&nbsp;
                             </td>
                             <td align="center" valing="middle" width="35%" style="border-right: 1px solid black">&nbsp; ${requisito167_itemc_observacao!}
                             </td>
@@ -453,9 +416,9 @@
                         <tr>
                             <td align="left" valing="middle" width="25%" style="border-right: 1px solid black">d) instrução do processo, pela área de contratos, com a minuta do aditivo e envio ao órgão jurídico de consultoria para análise.
                             </td>
-                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black; [#if requisito167_itemd?? && requisito167_itemd == "Sim"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black;">[#if requisito167_itemd?? && requisito167_itemd == "Sim"]X[/#if]&nbsp;
                             </td>&nbsp;
-                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black; [#if requisito167_itemd?? && requisito167_itemd == "Não"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black;">[#if requisito167_itemd?? && requisito167_itemd == "Não"]X[/#if]&nbsp;
                             </td>
                             <td align="center" valing="middle" width="35%" style="font-size: 9pt;">&nbsp; ${requisito167_itemd_observacao!}
                             </td>
@@ -482,9 +445,9 @@
                             </td>
                             <td align="left" valing="middle" width="25%" style="border-right: 1px solid black">Interregno de 1 (um) ano
                             </td>
-                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black; [#if requisito177?? && requisito177 == "Sim"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black;">[#if requisito177?? && requisito177 == "Sim"]X[/#if]&nbsp;
                             </td>
-                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black; [#if requisito177?? && requisito177 == "Não"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black;">[#if requisito177?? && requisito177 == "Não"]X[/#if]&nbsp;
                             </td>
                             <td align="center" valing="middle" width="35%" style="font-size: 9pt;">&nbsp;${requisito177_observacao!}
                             </td>
@@ -494,9 +457,9 @@
                             </td>
                             <td align="left" valing="middle" width="25%" style="border-right: 1px solid black">Pedido formal da contratada acompanhada dos documentos elencados no instrumento contratual.
                             </td>
-                            <td align="center" valing="middle" width="15%" style="vertical-align: middle;border-right: 1px solid black; [#if requisito180?? && requisito180 == "Sim"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="15%" style="vertical-align: middle;border-right: 1px solid black;">[#if requisito180?? && requisito180 == "Sim"]X[/#if]&nbsp;
                             </td>
-                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black; [#if requisito180?? && requisito180 == "Não"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black;">[#if requisito180?? && requisito180 == "Não"]X[/#if]&nbsp;
                             </td>
                             <td align="center" valing="middle" width="35%" style="font-size: 9pt;">&nbsp;${requisito180_observacao!}
                             </td>
@@ -506,9 +469,9 @@
                             </td>
                             <td align="left" valing="middle" width="25%" style="border-right: 1px solid black">Comprovação, pela contratada, do aumento dos custos;
                             </td>
-                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black; [#if requisito182?? && requisito182 == "Sim"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black;">[#if requisito182?? && requisito182 == "Sim"]X[/#if]&nbsp;
                             </td>
-                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black; [#if requisito182?? && requisito182 == "Não"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black;">[#if requisito182?? && requisito182 == "Não"]X[/#if]&nbsp;
                             </td>
                             <td align="center" valing="middle" width="35%" style="border-right: 1px solid black">&nbsp;${requisito182_observacao!}
                             </td>
@@ -518,9 +481,9 @@
                             </td>
                             <td align="left" valing="middle" width="25%" style="border-right: 1px solid black">Diligências para conferência da variação de custos alegada pela contratada.
                             </td>
-                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black; [#if requisito182_1?? && requisito182_1 == "Sim"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black;">[#if requisito182_1?? && requisito182_1 == "Sim"]X[/#if]&nbsp;
                             </td>
-                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black; [#if requisito182_1?? && requisito182_1 == "Não"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black;">[#if requisito182_1?? && requisito182_1 == "Não"]X[/#if]&nbsp;
                             </td>
                             <td align="center" valing="middle" width="35%" style="font-size: 9pt;">&nbsp;${requisito182_1_observacao!}
                             </td>
@@ -530,9 +493,9 @@
                             </td>
                             <td align="left" valing="middle" width="25%" style="border-right: 1px solid black">Na revisão de preços (se for o caso), observar a motivação e a data de início de seus efeitos
                             </td>
-                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black; [#if requisito195?? && requisito195 == "Sim"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="15%" style="border-right: 1px solid black;">[#if requisito195?? && requisito195 == "Sim"]X[/#if]&nbsp;
                             </td>
-                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black; [#if requisito195?? && requisito195 == "Não"]background-color: #000[/#if]">&nbsp;
+                            <td align="center" valing="middle" width="20%" style="border-right: 1px solid black;">[#if requisito195?? && requisito195 == "Não"]X[/#if]&nbsp;
                             </td>
                             <td align="center" valing="middle" width="35%" style="font-size: 9pt;">&nbsp;${requisito195_observacao!}
                             </td>
@@ -540,13 +503,8 @@
                     </table>
                     <br>
                     <p style="text-align: justify;font-family: Times New Roman; font-size: 12pt">&nbsp;<b>II.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONCLUSÃO</b>
-                    [#if destinatario == "Consultoria Jurídica"]
-                    	<p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Face ao exposto, propomos que o presente processo seja encaminhado à ${escritorio_juridico!}, para exame e parecer nos termos previstos no subitem 21.1 e 23.18 da NI – 6.01/F (LCT), de 16/05/2016, e posterior formalização.</p>
-                    [#else]
-                    	<p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Face ao exposto, propomos que o presente processo seja encaminhado à ${escritorio_autoridade!}, para assinatura do presente termo de apostilamento e posterior devolução.</p>
-                    [/#if]
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Informamos que o arquivo eletrônico do ${instrumento!}, o qual contém o detalhamento do ajuste em pauta (respectivos ajustes de prazos, valores e itens, conforme o caso) também está disponível no seguinte endereço da rede: ${caminho_rede!}.</p>
-                    <p style="text-align: justify;font-family: Times New Roman; font-size: 10pt">5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Por fim, nos colocamos à disposição para possíveis esclarecimentos que se fizerem necessários.</p>
+                        ${clausula_conclusao!}
+                    </p>
                     <!-- Fim - Corpo do conteudo -->
 
                     <!-- FIM - Tagmeta -->
@@ -554,13 +512,12 @@
 
                 [/@corpoBIE]
                 [#if fecho??]
-                	<p style="font-size: ${tl}; TEXT-INDENT: 2.5cm">[@fechoBIE]${fecho!}${virgula!}[/@fechoBIE][/#if]</p>
-                </div>
+                <p style="font-size: ${tl}; TEXT-INDENT: 2.5cm">[@fechoBIE]${fecho!}${virgula!}[/@fechoBIE][/#if]</p>
+            </div>
         [/@mioloDJE]
     [/@estiloBrasaoEsquerdaOficio]
     [#if _tiposigilo! == "2"]
         [@acessoRestrito /]
     [/#if]
-        <p style="text-align: center;font-family: Times New Roman; font-size: 10pt">De acordo. Encaminhe-se à ${escritorio_autoridade!}</p>
-        <p style="text-align: center;font-family: Times New Roman; font-size: 10pt">${doc.getEditor().getOrgaoUsuario().getMunicipioOrgaoUsu()}, ${aDateTime?string["dd"]} de ${aDateTime?string["MMMM"]} de ${aDateTime?string["yyyy"]}</p>
+
 [/@documento]
