@@ -25,82 +25,102 @@
 [/#if]
 
 [@entrevista]
-    [@grupo titulo="Dados do destinatário" esconder=(_enderecamento_dest!="" && _nome_dest!="" && _cargo_dest!="" && _orgao_dest!="" && _endereco_dest!="")]
-        <!-- Tratamento -->
-        [#if _enderecamento_dest != ""]
-            [@oculto var="enderecamento_dest" valor=_enderecamento_dest /]
-        [#else]
-            [#if tratamento??]
-                [@grupo]
-                    [@checkbox titulo="Especificar manualmente a forma de endereçamento" var="especificarEnderecamento" reler=true /]
-                [/@grupo]
-            [/#if]
-            [#if !tratamento?? || (especificarEnderecamento?? && especificarEnderecamento == 'Sim')]
-                [@grupo]
-                    [@texto titulo="Forma de endereçamento" var="enderecamento_dest" largura="45" /]
-                [/@grupo]
-            [#else]
-                [@oculto var="enderecamento_dest" valor="${(tratamento.formaDeEnderecamento)!}" /]
-            [/#if]
-        [/#if]
-    [/@grupo]
     [@grupo titulo = "Dados Gerais"]
         [@grupo]
-            [@texto titulo="Infraero CNPJ" var="infraero_cnpj" /]
+            [@texto titulo="Razão Social" var="razao_social" /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Infraero Endereço" var="infraero_endereco" largura=50 /]
+            [@texto titulo="Endereço" var="endereco" largura=50 /]
         [/@grupo]
         [@grupo]
-            [@numero titulo="Número SMS" var="numero_sms" /]
+            [@texto titulo="CNPJ" var="cnpj" largura=50/]
         [/@grupo]
         [@grupo]
-            [@numero titulo="Número RC/CI" var="numero_rcci" /]
+            [@numero titulo="Telefone" var="telefone" /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Valor NP" var="valor_np" largura=50/]
+            [@texto titulo="Contato" var="contato" largura=50/]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Fornecedor" var="fornecedor" largura=50 /]
+            [@texto titulo="E-mail" var="email" largura=50 /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Orçamento" var="orcamento" largura=50 /]
+            [@texto titulo="Área Responsável" var="area_responsavel" largura=50 /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Fornecedor Endereço" var="fornecedor_endereco" largura=50 /]
+            [@texto titulo="Código Orçamentário" var="codigo_orcamentario" largura=50 /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Número Compromisso" var="numero_compromisso" largura=50 /]
+            [@texto titulo="Processo" var="processo_orcamentario" largura=50 /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Documento Condições" var="documento_condicoes" largura=50 /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Conta-Subconta" var="conta_subconta" largura=50 /]
+            [@data titulo="Data da proposta" var="data_proposta" /]
         [/@grupo]
     [/@grupo]
-    [@grupo titulo = "Informações do produto ou execução"]
+
+    [@grupo titulo = "Produtos"]
         [@grupo]
-            [@numero titulo="Quantidade" var="produto_quantidade"/]
+            [@selecao titulo="Número de produtos" var="qt_produtos" opcoes="1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20" reler=true /]
+        [/@grupo]
+        [#if qt_produtos?? && qt_produtos?number > 0]
+            [#list 1..qt_produtos?number as produto]
+                [@grupo titulo = "Produto ${produto!}"]
+                    [@texto titulo="ITEM" var="produto${produto!}_item" largura="30" /]
+                    [@numero titulo="QTD." var="produto${produto!}_qtd" largura="15" /]
+                    [@texto titulo="UND." var="produto${produto!}_und" largura="15" /]
+                    [@texto titulo="DESCRIÇÃO" var="produto${produto!}_descricao" largura="50" /]
+                    [@numero titulo="PREÇO UNITÁRIO" var="produto${produto!}_preco" largura="20" /]
+                [/@grupo]
+            [/#list]
+        [/#if]
+    [/@grupo]
+
+    [@grupo titulo = "Cláusula 1"]
+        [@grupo]
+            [@texto titulo="Dia do pagamento" var="dia_pagamento" /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Unidade" var="produto_unidade" largura=50 /]
+            [@texto titulo="Meio de pagamento" var="meio_pagamento" /]
+        [/@grupo]
+    [/@grupo]
+
+    [@grupo titulo = "Cláusula 4"]
+        [@grupo]
+            [@texto titulo="Dados para faturamento" var="dados_faturamento" /]
+        [/@grupo]
+    [/@grupo]
+
+    [@grupo titulo = "Cláusula 5"]
+        [@grupo]
+            [@texto titulo="Local de entrega/execução" var="local_entrega_execucaao" /]
+        [/@grupo]
+    [/@grupo]
+
+    [@grupo titulo = "Cláusula 6"]
+        [@grupo]
+            [@texto titulo="Prazo de execução (em dias)" var="prazo_execucao" /]
+        [/@grupo]
+    [/@grupo]
+
+    [@grupo titulo = "Cláusula 7"]
+        [@grupo]
+            [@texto titulo="Forma de execução" var="forma_execucao" /]
+        [/@grupo]
+    [/@grupo]
+
+    [@grupo titulo = "Cláusula 8"]
+        [@grupo]
+            [@texto titulo="Contato" var="clausula_8_contato" /]
         [/@grupo]
         [@grupo]
-            [@texto titulo="Especificação" var="produto_especificacao" largura=50 /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Valor Unitário" var="produto_valor_unitario" largura=50 /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Valor Total" var="produto_valor_total" largura=50 /]
+            [@texto titulo="Telefone" var="clausula_8_telefone" /]
         [/@grupo]
     [/@grupo]
 
     [#if _tamanho_letra != ""]
         [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
     [#else]
-        [@selecao titulo="Tamanho da letra" var="tamanhoLetra" opcoes="Normal;Pequeno;Grande" /]
+        [@oculto var="tamanhoLetra" valor="${_tamanho_letra}"/]
     [/#if]
 [/@entrevista]
 
@@ -128,148 +148,203 @@
         [#assign _secreto = true /]
     [/#if]
 
+    [#assign produtos_total = 0 /]
+
+    [#if qt_produtos?? && qt_produtos?number > 0]
+        [#list 1..qt_produtos?number as produto]
+            [@"[#assign ${'produto' + produto + '_total'} = .vars['produto' + produto + '_preco']?number * .vars['produto' + produto + '_qtd']?number /]"?interpret /]
+            [#assign produtos_total = produtos_total + .vars['produto' + produto + '_total']?number /]
+        [/#list]
+    [/#if]
+
+    [#if dia_pagamento??]
+        [#assign dia_pagamento_extenso = func.replace(func.reaisPorExtenso(dia_pagamento), ' reais', '')/]
+    [#else]
+        [#assign dia_pagamento_extenso = "" /]
+    [/#if]
+
+    [#if prazo_execucao??]
+        [#assign prazo_execucao_extenso = func.replace(func.reaisPorExtenso(prazo_execucao), ' reais', '')/]
+    [#else]
+        [#assign prazo_execucao_extenso = "" /]
+    [/#if]
+
     [@estiloBrasaoAEsquerda tipo=_tipo tamanhoLetra=tl formatarOrgao=true omitirCodigo=true]
         [@mioloDJE]
-            <div style="font-family: Times New Roman; font-size: 12pt;">
+            <div style="font-family: Times New Roman; font-size: 10pt;">
                 [@corpoBIE]
 
                     <!-- INICIO - Tagmeta -->
                     <!-- Inicio - Corpo do conteudo -->
-                    <p style="text-align: center"><strong><u>SMS/EMPENHO</u></strong></p>
-                    <br>
-                    <table width="100%" border="1" borderColor="#000" cellpadding=4 cellspacing=0>
-                        <tbody>
+                    <table width="100%">
                         <tr>
-                            <td colspan="3" width="181" style="text-align: center">
-                                <p>SOLICITA&Ccedil;&Atilde;O DE MATERIAL E SERVI&Ccedil;OS- SMS</p>
-                            </td>
-                            <td colspan="3" width="323">
-                                <p>INFRAERO</p>
-                                <p>C.N.P.J ${infraero_cnpj!}</p>
-                                <p>ENDERE&Ccedil;O ${infraero_endereco!}</p>
-                            </td>
-                            <td colspan="2" width="65" style="text-align: center; vertical-align: top">
-                                <p><sup>SMS N.</sup></p>
-                                <p>${numero_sms!}</p>
-                            </td>
-                            <td colspan="3" width="80" style="text-align: center; vertical-align: top">
-                                <p><sup>RC/CI N.</sup></p>
-                                <h1>${numero_rcci!}</h1>
-                            </td>
-                            <td width="118" style="text-align: center; vertical-align: top">
-                                <p><sup>NP</sup></p>
-                                <h1>${valor_np!}</h1>
+                            <td>RAZÃO SOCIAL:</td>
+                            <td colspan=2>
+                                ${razao_social!}
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="9" width="613">
-                                <p><sup>FORNECEDOR</sup></p>
-                                <p>${fornecedor!}</p>
+                            <td>ENDEREÇO:</td>
+                            <td colspan="5">
+                                ${endereco!}
                             </td>
-                            <td colspan="3" width="154">
-                                <p><sup>OR&Ccedil;AMENTO</sup></p>
-                                <p>${orcamento!}</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="9" width="613">
-                                <p><sup>ENDERE&Ccedil;O</sup></p>
-                                <p>${fornecedor_endereco!}</p>
-                            </td>
-                            <td colspan="3" width="154">
-                                <p><sup>N. COMPROMISSO</sup></p>
-                                <p>${numero_compromisso!}</p>
+                            <td>CONTATO:</td>
+                            <td colspan="5">
+                                ${contato!}
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="9" width="613">
-                                <p>Solicitamos o fornecimento do produto ou a execu&ccedil;&atilde;o do servi&ccedil;o abaixo especificado, respeitadas as condi&ccedil;&otilde;es contidas no(a) ${documento_condicoes!} e aceitas em sua proposta</p>
+                            <td>CNPJ N.:</td>
+                            <td colspan="5">
+                                ${cnpj!}
                             </td>
-                            <td colspan="3" width="154">
-                                <p><sup>CONTA-SUBCONTA</sup></p>
-                                <p>${conta_subconta!}</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td rowspan="2" width="44">
-                                <p>QUANT</p>
-                            </td>
-                            <td rowspan="2" width="35">
-                                <p>UNID.</p>
-                            </td>
-                            <td colspan="5" rowspan="2" width="475">
-                                <p>ESPECIFICA&Ccedil;&Atilde;O</p>
-                            </td>
-                            <td colspan="5" width="212" style="text-align: center">
-                                <p>VALOR</p>
+                            <td>E-MAIL:</td>
+                            <td colspan="5">
+                                ${email!}
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="3" width="80">
-                                <p>UNIT&Aacute;RIO</p>
-                            </td>
-                            <td colspan="2" width="133">
-                                <p>TOTAL</p>
+                            <td>TELEFONE:</td>
+                            <td>
+                                ${telefone!}
                             </td>
                         </tr>
-                        <tr>
-                            <td width="44">
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                                <p>${produto_quantidade!}</p>
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                            </td>
-                            <td width="35">
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                                <p>${produto_unidade!}</p>
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                            </td>
-                            <td colspan="5" width="475">
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                                <p>${produto_especificacao!}</p>
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                            </td>
-                            <td colspan="3" width="80">
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                                <p>${produto_valor_unitario!}</p>
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                            </td>
-                            <td colspan="2" width="133">
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                                <p>${produto_valor_total!}</p>
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="12">
-                                <p>NOTAS:</p>
-                                <p>1 &ndash; DEVOLVER ESTE ORIGINAL ANEXO &Agrave; NOTA FISCAL OU DOCUMENTO EQUIVALENTE.</p>
-                                <p>2 &ndash;&nbsp;&nbsp;&nbsp; O PAGAMENTO SER&Aacute; EFETUADO SOMENTE ATRAV&Eacute;S DE OPB -ORDEM DE PAGAMENTO BANC&Aacute;RIA, INFORMAR NO DOCUMENTO DE COBRAN&Ccedil;A:&nbsp; BANCO/N. AG&Ecirc;NCIA/N. C/CORRENTE.</p>
-                            </td>
-                        </tr>
-                        </tbody>
                     </table>
+                    <hr/>
+                    <table width="100%">
+                        <td>
+                            ÁREA RESPONSÁVEL:<br />
+                            ${area_responsavel!}
+                        </td>
+                        <td>
+                            CÓDIGO ORÇAMENTÁRIO:<br />
+                            ${codigo_orcamentario!}
+                        </td>
+                    </table>
+                    <hr />
+                    <p style="text-align: justify; font-size: 10pt;">
+                        SOLICITAMOS O FORNECIMENTO DO MATERIAL OU A EXECUÇÃO DO SERVIÇO ABAIXO
+                        especificado, respeitadas as condições do processo ${processo_orcamentario!}
+                        e aceitas em sua proposta ${data_proposta!}.
+                    </p>
+                    <hr/>
+                    <table width="100%" border="1" cellpadding="1" cellspacing="0" borderColor="#000">
+                        <tr>
+                            <td align="center">ITEM</td>
+                            <td align="center">QTD.</td>
+                            <td align="center">UND.</td>
+                            <td align="center">DESCRIÇÃO</td>
+                            <td align="center">PREÇO UNITÁRIO</td>
+                            <td align="center">TOTAL</td>
+                        </tr>
+                        [#if qt_produtos?? && qt_produtos?number > 0]
+                            [#list 1..qt_produtos?number as produto]
+                                <tr [#if produto % 2 != 0]style="background-color: #ccc"[/#if]>
+                                    <td>${.vars['produto' + produto + '_item']}</td>
+                                    <td>${.vars['produto' + produto + '_qtd']}</td>
+                                    <td>${.vars['produto' + produto + '_und']}</td>
+                                    <td>${.vars['produto' + produto + '_descricao']}</td>
+                                    <td>R$ ${.vars['produto' + produto + '_preco']},00</td>
+                                    <td>R$ ${.vars['produto' + produto + '_total']},00</td>
+                                </tr>
+                            [/#list]
+                        [/#if]
+                        <tr>
+                            <td colspan="5">
+                                <strong>TOTAL</strong>
+                            </td>
+                            <td>
+                                <strong>R$ ${produtos_total!},00&nbsp;</strong>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <p>
+                        <strong><u>OBSERVAÇÕES:</u></strong>
+                    </p>
+
+                    <p style="text-align: justify; font-size: 10pt;">
+                        <strong>1.</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>FORMA DE
+                            PAGAMENTO:</strong> O pagamento será efetuado no ${dia_pagamento!}º dia útil, após a
+                        conferência e aceitação do serviço/material pela INFRAERO, mediante a apresentação do correspondente
+                        documento de cobrança (Nota Fiscal/ Fatura / Nota Fiscal Eletrônica - NF-e).
+                    </p>
+
+                    <p style="text-align: justify; font-size: 10pt;">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        [#if meio_pagamento??]
+                            <strong>1.1</strong> O pagamento será feito por meio de ${meio_pagamento!}.
+                        [#else]
+                            <strong>1.1</strong> O pagamento será efetuado somente por meio de OPB-ordem de Pagto. Bancário.
+                            Informar no documento de cobrança: banco/nº, agência/nº, conta corrente.
+                        [/#if]
+                    </p>
+
+                    <p style="text-align: justify; font-size: 10pt;">
+                        <strong>2.</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        A <strong>INFRAERO</strong> fará a retenção, com repasse ao Órgão Arrecadador, de qualquer tributo ou contribuição determinada
+                        por legislação específica, sendo que, a <strong>INFRAERO</strong> se reserva o direito de efetuá-lo ou não, nos casos em que for
+                        facultativo.
+
+                    </p>
+
+                    <p style="text-align: justify; font-size: 10pt;">
+                        <strong>3.</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <strong>INFORMAÇÕES FISCAIS:</strong> "De acordo com os serviços prestados e ou o emprego de mercadorias, a
+                        INFRAERO aplicará no ato do pagamento as legislações vigentes (federal, estadual e municipal)
+                        com relação à retenção de impostos/tributos".
+                    </p>
+
+                    <p style="text-align: justify; font-size: 10pt;">
+                        <strong>4.</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <strong>DADOS PARA FATURAMENTO:</strong> ${dados_faturamento!}
+                    </p>
+
+                    <p style="text-align: justify; font-size: 10pt;">
+                        <strong>5.</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <strong>LOCAL DE ENTREGA/EXECUÇÃO:</strong> ${local_entrega_execucaao!}
+                    </p>
+
+                    <p style="text-align: justify; font-size: 10pt;">
+                        <strong>6.</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <strong>PRAZO DE EXECUÇÃO:</strong> O prazo de entrega/execução será de ${prazo_execucao!} (${prazo_execucao_extenso!}),
+                        a contar da assinatura.
+                    </p>
+
+                    <p style="text-align: justify; font-size: 10pt;">
+                        <strong>7.</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <strong>FORMA DE EXECUÇÃO:</strong> ${forma_execucao!}
+                    </p>
+
+                    <p style="text-align: justify; font-size: 10pt;">
+                        <strong>8.</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <strong>CONTATO:</strong> ${clausula_8_contato!}, telefone: ${clausula_8_telefone!}
+                    </p>
+
+                    <p style="text-align: justify; font-size: 10pt;">
+                        <strong>9.</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <strong>ESPECIFICAÇÕES:</strong> Deverão ser respeitadas todas as especificações contidas em
+                        sua proposta de ${data_proposta!}.
+                    </p>
+
+                    <p style="text-align: justify; font-size: 10pt;">
+                        <strong>10.</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <strong>Encaminhar cópia  anexa à nota fiscal ou documento equivalente.</strong>
+                    </p>
+
+                    <p style="text-align: justify; font-size: 10pt;">
+                        <strong>11.</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        O não cumprimento de qualquer uma das exigências estabelecidas nesta SMS ensejará a aplicação
+                        das penalidades previstas no Normativo Interno da Infraero, vigente, que disciplina o tema.
+                    </p>
                     <!-- Fim - Corpo do conteudo -->
 
                     <!-- FIM - Tagmeta -->
 
 
                 [/@corpoBIE]
-                [#if fecho??]<p style="font-size: ${tl}; TEXT-INDENT: 2.5cm">[@fechoBIE]${fecho!}${virgula!}[/@fechoBIE][/#if]</p>
+                [#if fecho??]<p
+                        style="font-size: ${tl}; TEXT-INDENT: 2.5cm">[@fechoBIE]${fecho!}${virgula!}[/@fechoBIE][/#if]</p>
 
             </div>
         [/@mioloDJE]
