@@ -21,12 +21,12 @@
     [#assign _cargo_dest=_autoridade.cargo /]
     [#assign _orgao_dest=_autoridade.orgao /]
     [#assign _endereco_dest=_autoridade.endereco /]
-        <br/><br/>
+    <br/><br/>
 [/#if]
 
 [@entrevista]
     [@grupo titulo="Dados do destinatário" esconder=(_enderecamento_dest!="" && _nome_dest!="" && _cargo_dest!="" && _orgao_dest!="" && _endereco_dest!="")]
-                <!-- Tratamento -->
+        <!-- Tratamento -->
         [#if _enderecamento_dest != ""]
             [@oculto var="enderecamento_dest" valor=_enderecamento_dest /]
         [#else]
@@ -46,7 +46,7 @@
     [/@grupo]
     [@grupo titulo = "Dados Gerais"]
         [@grupo]
-            [@numero titulo="Infraero CNPJ" var="infraero_cnpj" /]
+            [@texto titulo="Infraero CNPJ" var="infraero_cnpj" /]
         [/@grupo]
         [@grupo]
             [@texto titulo="Infraero Endereço" var="infraero_endereco" largura=50 /]
@@ -104,9 +104,9 @@
     [/#if]
 [/@entrevista]
 
-[@documento ]
+[@documento orientacao="paisagem"]
     [#if tamanhoLetra! == "Normal"]
-        [#assign tl = "10pt" /]
+        [#assign tl = "12pt" /]
     [#elseif tamanhoLetra! == "Pequeno"]
         [#assign tl = "9pt" /]
     [#elseif tamanhoLetra! == "Grande"]
@@ -129,40 +129,13 @@
     [/#if]
 
     [@estiloBrasaoAEsquerda tipo=_tipo tamanhoLetra=tl formatarOrgao=true omitirCodigo=true]
-             <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
-                 <tr>
-                     <td align="left">
-                         <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0">
-                             <tr><td>[@letra tamanho=tl]<p>${enderecamento_dest!}</p>[/@letra]</td></tr>
-                             <tr><td>[@letra tamanho=tl]<p>${nome_dest!}</p>[/@letra]</td></tr>
-                            [#if cargo_dest??]
-                                <tr><td>[@letra tamanho=tl]<p>${cargo_dest!}</p>[/@letra]</td></tr>
-                            [/#if]
-                         [#-- COMENTARIO
-                         [#if orgao_dest??]
-                             <tr><td>[@letra tamanho=tl]<p>${orgao_dest!}</p>[/@letra]</td></tr>
-                         [/#if]
-                         --]
-                            [#if endereco_dest??]
-                                <tr><td>[@letra tamanho=tl]<p>[@fixcrlf var=endereco_dest! /]</p>[/@letra]</td></tr>
-                            [/#if]
-                         [#-- COMENTARIO
-                         [#if (doc.exClassificacao.descrClassificacao)??]
-                             <tr><td>[@letra tamanho=tl]<p><br/>Assunto: ${(doc.exClassificacao.descrClassificacao)!}</p>[/@letra]</td></tr>
-                         [/#if]
-                         --]
-                         </table>
-                     </td>
-                 </tr>
-             </table>
         [@mioloDJE]
-                <div style="font-family: Times New Roman; font-size: 10pt;">
+            <div style="font-family: Times New Roman; font-size: 12pt;">
                 [@corpoBIE]
 
                     <!-- INICIO - Tagmeta -->
                     <!-- Inicio - Corpo do conteudo -->
-                    <p><strong>&nbsp;&nbsp; </strong></p>
-                    <p style="text-align: center"><strong><u>&nbsp; </u></strong><strong><u>SMS/EMPENHO</u></strong></p>
+                    <p style="text-align: center"><strong><u>SMS/EMPENHO</u></strong></p>
                     <br>
                     <table width="100%" border="1" borderColor="#000" cellpadding=4 cellspacing=0>
                         <tbody>
@@ -282,31 +255,10 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" width="333">
+                            <td colspan="12">
                                 <p>NOTAS:</p>
                                 <p>1 &ndash; DEVOLVER ESTE ORIGINAL ANEXO &Agrave; NOTA FISCAL OU DOCUMENTO EQUIVALENTE.</p>
                                 <p>2 &ndash;&nbsp;&nbsp;&nbsp; O PAGAMENTO SER&Aacute; EFETUADO SOMENTE ATRAV&Eacute;S DE OPB -ORDEM DE PAGAMENTO BANC&Aacute;RIA, INFORMAR NO DOCUMENTO DE COBRAN&Ccedil;A:&nbsp; BANCO/N. AG&Ecirc;NCIA/N. C/CORRENTE.</p>
-                            </td>
-                            <td width="135">
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                                <p>Local e Data</p>
-                            </td>
-                            <td colspan="4" width="145">
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                                <p>Assinatura/Carimbo - Gestor do Programa</p>
-                            </td>
-                            <td colspan="3" width="154">
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                                <p>____________________________</p>
-                                <p>Assinatura e Carimbo</p>
                             </td>
                         </tr>
                         </tbody>
@@ -319,7 +271,7 @@
                 [/@corpoBIE]
                 [#if fecho??]<p style="font-size: ${tl}; TEXT-INDENT: 2.5cm">[@fechoBIE]${fecho!}${virgula!}[/@fechoBIE][/#if]</p>
 
-                </div>
+            </div>
         [/@mioloDJE]
     [/@estiloBrasaoAEsquerda]
 
