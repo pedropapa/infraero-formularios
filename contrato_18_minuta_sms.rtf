@@ -69,7 +69,7 @@
                     [@numero titulo="QTD." var="produto${produto!}_qtd" largura="15" /]
                     [@texto titulo="UND." var="produto${produto!}_und" largura="15" /]
                     [@texto titulo="DESCRIÇÃO" var="produto${produto!}_descricao" largura="50" /]
-                    [@numero titulo="PREÇO UNITÁRIO" var="produto${produto!}_preco" largura="20" /]
+                    [@texto titulo="PREÇO UNITÁRIO" var="produto${produto!}_preco" largura="20" /]
                 [/@grupo]
             [/#list]
         [/#if]
@@ -148,12 +148,12 @@
         [#assign _secreto = true /]
     [/#if]
 
-    [#assign produtos_total = 0 /]
+    [#assign produtos_total = 0.0 /]
 
     [#if qt_produtos?? && qt_produtos?number > 0]
         [#list 1..qt_produtos?number as produto]
-            [@"[#assign ${'produto' + produto + '_total'} = .vars['produto' + produto + '_preco']?number * .vars['produto' + produto + '_qtd']?number /]"?interpret /]
-            [#assign produtos_total = produtos_total + .vars['produto' + produto + '_total']?number /]
+            [@"[#assign ${'produto' + produto + '_total'} = func.replace(.vars['produto' + produto + '_preco'], ',', '.')?number * .vars['produto' + produto + '_qtd']?number /]"?interpret /]
+            [#assign produtos_total = produtos_total + .vars['produto' + produto + '_total'] /]
         [/#list]
     [/#if]
 
@@ -178,7 +178,7 @@
                     <!-- Inicio - Corpo do conteudo -->
                     <table width="100%">
                         <tr>
-                            <td>RAZÃO SOCIAL:</td>
+                            <td>RAZÃO SOCIAL: ${teste!}</td>
                             <td colspan=2>
                                 ${razao_social!}
                             </td>
@@ -244,8 +244,8 @@
                                     <td>${.vars['produto' + produto + '_qtd']}</td>
                                     <td>${.vars['produto' + produto + '_und']}</td>
                                     <td>${.vars['produto' + produto + '_descricao']}</td>
-                                    <td>R$ ${.vars['produto' + produto + '_preco']},00</td>
-                                    <td>R$ ${.vars['produto' + produto + '_total']},00</td>
+                                    <td>R$ ${func.replace(.vars['produto' + produto + '_preco'], ',', '.')?number?string(",##0.00")}</td>
+                                    <td>R$ ${func.replace(.vars['produto' + produto + '_total']?c, ',', '.')?number?string(",##0.00")}</td>
                                 </tr>
                             [/#list]
                         [/#if]
@@ -254,7 +254,7 @@
                                 <strong>TOTAL</strong>
                             </td>
                             <td>
-                                <strong>R$ ${produtos_total!},00&nbsp;</strong>
+                                <strong>R$ ${func.replace(produtos_total?c, ',', '.')?number?string(",##0.00")}&nbsp;</strong>
                             </td>
                         </tr>
                     </table>

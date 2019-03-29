@@ -133,22 +133,6 @@
             [@texto titulo="Valor total apostilamento" var="valor_total_apostilamento" largura=50 /]
         [/@grupo]
     [/@grupo]
-    [@grupo titulo = "Cláusula Segunda - 2.2"]
-        [@grupo]
-            [@texto titulo="Valor mensal" var="valor_mensal" largura=50 /]
-        [/@grupo]
-        [@grupo]
-            [@texto titulo="Valor do aviso prévio" var="valor_mensal_aviso_previo" largura=50 /]
-        [/@grupo]
-        [@grupo]
-            [@checkbox titulo="Possui Adicional II?" var="possui_adicional_2" reler=true /]
-        [/@grupo]
-        [#if possui_adicional_2?? && possui_adicional_2 == "Sim"]
-            [@grupo]
-                [@texto titulo="Valor adicional II" var="valor_adicional_2" largura=50 /]
-            [/@grupo]
-        [/#if]
-    [/@grupo]
     [@grupo titulo = "Cláusula Segunda - 2.3"]
         [@grupo]
             [@texto titulo="Valor global contrato anterior" var="valor_global_contrato_anterior" largura=50/]
@@ -187,7 +171,7 @@
     [/@grupo]
     [@grupo titulo = "Cláusula Quinta"]
         [@grupo]
-            [@editor titulo="Fundamentação Legal" var="clausula_quinta_fundamentacao"/]
+            [@texto titulo="N° do subitem do TC referente ao direito de resguardar a Repactuação" var="subitem_termo_contrato" largura=50 /]
         [/@grupo]
     [/@grupo]
     </br>
@@ -247,24 +231,6 @@
         [#assign prazo_prorrogacao_extenso = func.replace(func.reaisPorExtenso(prazo_prorrogacao), ' reais', '')/]
     [#else]
         [#assign prazo_prorrogacao_extenso = "" /]
-    [/#if]
-
-    [#if valor_mensal_aviso_previo??]
-        [#assign valor_mensal_aviso_previo_extenso = func.reaisPorExtenso(valor_mensal_aviso_previo)/]
-    [#else]
-        [#assign valor_mensal_aviso_previo_extenso = "" /]
-    [/#if]
-
-    [#if valor_adicional_2??]
-        [#assign valor_adicional_2_extenso = func.reaisPorExtenso(valor_adicional_2)/]
-    [#else]
-        [#assign valor_adicional_2_extenso = "" /]
-    [/#if]
-
-    [#if valor_mensal??]
-        [#assign valor_mensal_extenso = func.reaisPorExtenso(valor_mensal)/]
-    [#else]
-        [#assign valor_mensal_extenso = "" /]
     [/#if]
 
     [#if _tiposigilo! == "1"]
@@ -368,7 +334,7 @@
                         <p>2.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Em decorr&ecirc;ncia da prorroga&ccedil;&atilde;o de prazo, <strong>${detalhe_prorrogacao!}</strong> de que trata a cl&aacute;usula anterior, o valor total do presente apostilamento &eacute; de <strong>${valor_total_apostilamento!} </strong>.</p>
                     </div>
                     <div>
-                        <p>2.2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O valor mensal, do Aviso Prévio de final de contrato[#if possui_adicional_2?? && possui_adicional_2 == "Sim"] e do Adicional II[/#if] permanecem inalterados na ordem de R$ ${valor_mensal!} (${valor_mensal_extenso!})[#if possui_adicional_2?? && possui_adicional_2 == "Sim"],[#else] e[/#if] R$ ${valor_mensal_aviso_previo!} (${valor_mensal_aviso_previo_extenso!})[#if possui_adicional_2?? && possui_adicional_2 == "Sim"] e R$ ${valor_adicional_2!} (${valor_adicional_2_extenso!})[/#if], respectivamente.</p>
+                        <p>2.2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O valor mensal, do Aviso Prévio de final de contrato permanecerá inalterados.</p>
                     </div>
                     <div>
                         <p>2.3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O valor global acumulado do contrato passa de R$ <strong>${valor_global_contrato_anterior!} (${valor_global_contrato_novo_extenso!})</strong>, para R$ <strong>${valor_global_contrato_novo!} (${valor_global_contrato_novo_extenso!})</strong>, j&aacute; inclu&iacute;do o valor do Adicional I[#if possui_adicional_2?? && possui_adicional_2 == "Sim"] e do Adicional II[/#if].</p>
@@ -402,17 +368,10 @@
                     <p><strong>CL&Aacute;USULA QUARTA</strong></p>
                     <p>4.1. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Este Instrumento tem respaldo legal no inciso II, do art. 57, da Lei 8.666, de 21 de junho de 1993, combinado com o artigo 65 do Regulamento Interno de Licita&ccedil;&otilde;es e Contratos da INFRAERO &ndash; RILC.</p>
                     <p>4.2. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A contratada d&aacute; plena e rasa quita&ccedil;&atilde;o de todo e qualquer d&eacute;bito referente ao contrato ora &nbsp;&nbsp; prorrogado.</p>
-                    [#if clausula_quinta_fundamentacao??]
-                        <p><strong>CL&Aacute;USULA QUINTA</strong></p>
-                        <table border=0 cellspacing=0 cellpadding=0 width="100%">
-                            <td width="50px" style="vertical-align: top;">5.1
-                            </td>
-                            <td style="vertical-align: top; text-align: justify">${clausula_quinta_fundamentacao!}
-                            </td>
-                        </table>
-                    [/#if]
-                    <p><strong>[#if subitem_termo_contrato??]CL&Aacute;USULA SEXTA[#else]CL&Aacute;USULA QUINTA[/#if]</strong></p>
-                    <p>[#if subitem_termo_contrato??]6[#else]5[/#if].1&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; O presente apostilamento n&atilde;o altera as demais condi&ccedil;&otilde;es contratuais pactuadas.</p>
+                    <p><strong>CL&Aacute;USULA QUINTA</strong></p>
+                    <p>5.1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Fica resguardado, &agrave; contratante, o direito &agrave; an&aacute;lise do pedido de repactua&ccedil;&atilde;o, com base no subitem <strong>${subitem_termo_contrato!}</strong> do Termo de Contrato.</p>
+                    <p><strong>CL&Aacute;USULA SEXTA</strong></p>
+                    <p>6.1&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; O presente apostilamento n&atilde;o altera as demais condi&ccedil;&otilde;es contratuais pactuadas.</p>
 
                 [/@corpoBIE]
                 [#if fecho??]<p
